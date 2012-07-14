@@ -9,10 +9,11 @@ gem 'rails_kindeditor', '~> 0.3.0'
 gem 'redcarpet'
 gem 'sqlite3'
 gem 'mini_magick'
-gem 'sequel'
+gem 'resque'
 gem 'pg'
-gem 'haml'
-gem 'cells'
+gem 'i18n-js'
+gem 'rails_autolink'
+gem 'social_cheesecake'
 gem 'awesome_nested_set'
 gem 'the_sortable_tree', '~> 1.9.3'
 gem 'nokogiri' , '~> 1.5.2'
@@ -25,29 +26,31 @@ gem 'devise', '~> 2.1.2'
 gem 'foreigner'
 #gem 'devise_invitable', '~> 1.0.0'
 gem 'coletivo'
-gem 'linkser'
+gem 'deep_merge'
 gem "recaptcha", :require => "recaptcha/rails"
 gem 'whenever'
 gem 'inherited_resources'
 gem "thinking-sphinx", :require => 'thinking_sphinx'
-gem 'chronic'
 #gem 'ajaxful_rating'
 gem 'lazybox'
-gem 'sunspot_rails', '1.2.1'
+gem 'modernizr-rails'
 gem 'inherited_resources'
-gem "sass"
+gem "omniauth"
+gem 'omniauth-facebook'
+gem 'omniauth-linkedin'
+gem 'thin'
 gem "friendly_id"
-gem "sanitize"
-gem "bluecloth"
+gem "avatars_for_rails"
+gem "cancan"
 gem "escape"
 gem 'kaminari'
-gem 'acts_as_amico'
-gem 'coderay'
+gem 'mailboxer'
+gem 'stringex'
 gem 'rails3-jquery-autocomplete'
 gem 'simple_form', '~> 2.0.1'
-gem 'amico'
+gem 'formtastic'
 gem 'likeable'
-gem 'linkser'
+gem 'paperclip'
 gem "annotate"
 gem 'redis_voteable'
 gem "bcrypt-ruby", :require => "bcrypt"

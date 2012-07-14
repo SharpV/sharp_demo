@@ -1,5 +1,4 @@
 # Gem's dependencies
-require 'social_stream/base/dependencies'
 
 # Provides your Rails application with social network and activity stream support
 module SocialStream
@@ -132,4 +131,4 @@ module SocialStream
   end
 end
 
-require 'social_stream/base/engine'
+#require 'social_stream/base/engine'

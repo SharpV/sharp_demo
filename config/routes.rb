@@ -1,60 +1,95 @@
 SharpLink::Application.routes.draw do
   devise_for :users
+  root :to => "frontpage#index"
+  
+  match 'home' => 'home#index', :as => :home
+  match 'home' => 'home#index', :as => :user_root # devise after_sign_in_path_for
 
-  # The priority is based upon order of creation:
-  # first created -> highest priority.
+  match 'search' => 'search#index', :as => :search
 
-  # Sample of regular route:
-  #   match 'products/:id' => 'catalog#view'
-  # Keep in mind you can assign values other than :controller and :action
+  resources :users do
+    resource :like
+    resource :profile
+    resources :activities
+  end
 
-  # Sample of named route:
-  #   match 'products/:id/purchase' => 'catalog#purchase', :as => :purchase
-  # This route can be invoked with purchase_url(:id => product.id)
+  resources :comments
 
-  # Sample resource route (maps HTTP verbs to controller actions automatically):
-  #   resources :products
+  constraints SocialStream::Routing::Constraints::Custom.new do
+    resources :contacts do
+      collection do
+        get 'pending'
+      end
+    end
 
-  # Sample resource route with options:
-  #   resources :products do
-  #     member do
-  #       get 'short'
-  #       post 'toggle'
-  #     end
-  #
-  #     collection do
-  #       get 'sold'
-  #     end
-  #   end
+    namespace "relation" do
+      resources :customs
+    end
 
-  # Sample resource route with sub-resources:
-  #   resources :products do
-  #     resources :comments, :sales
-  #     resource :seller
-  #   end
+    resources :permissions
+  end
 
-  # Sample resource route with more complex sub-resources
-  #   resources :products do
-  #     resources :comments
-  #     resources :sales do
-  #       get 'recent', :on => :collection
-  #     end
-  #   end
+  constraints SocialStream::Routing::Constraints::Follow.new do
+    match 'followings' => 'followers#index', :as => :followings, :defaults => { :direction => 'sent' }
+    match 'followers' => 'followers#index', :as => :followers, :defaults => { :direction => 'received' }
+    resources :followers
 
-  # Sample resource route within a namespace:
-  #   namespace :admin do
-  #     # Directs /admin/products/* to Admin::ProductsController
-  #     # (app/controllers/admin/products_controller.rb)
-  #     resources :products
-  #   end
+    resources :contacts do
+      collection do
+        get 'pending'
+      end
+    end
+  end
 
-  # You can have the root of your site routed with "root"
-  # just remember to delete public/index.html.
-  # root :to => 'welcome#index'
+  resources :activity_actions
 
-  # See how all your routes lay out with "rake routes"
+  resource :representation
+  
+  resources :settings do
+    collection do
+      put 'update_all'
+    end
+  end
 
-  # This is a legacy wild controller route that's not recommended for RESTful applications.
-  # Note: This route will make all actions in every controller accessible via GET requests.
-  # match ':controller(/:action(/:id))(.:format)'
+  resources :messages
+
+  resources :conversations
+
+  resources :invitations
+  
+  resources :notifications do
+    collection do
+      put 'update_all'
+    end
+  end
+
+  resources :activities do
+    resource :like
+  end
+
+  get 'audience/index', :as => :audience
+  
+  match 'cheesecake' => 'cheesecake#index', :as => :cheesecake  
+  match 'update_cheesecake' => 'cheesecake#update', :as => :update_cheesecake  
+  
+  match 'ties' => 'ties#index', :as => :ties
+  
+  match 'tags' => 'tags#index', :as => 'tags'
+  
+  ##API###
+  match 'api/keygen' => 'api#create_key', :as => :api_keygen
+  match 'api/user/:id' => 'api#users', :as => :api_user
+  match 'api/me' => 'api#users', :as => :api_me
+  match 'api/me/home/' => 'api#activity_atom_feed', :format => 'atom', :as => :api_my_home
+  match 'api/user/:id/public' => 'api#activity_atom_feed', :format => 'atom', :as => :api_user_activities
+
+  match 'api/me/contacts' => 'contacts#index', :format => 'json', :as => :api_contacts
+  match 'api/subjects/:s/contacts' => 'contacts#index', :format => 'json', :as => :api_subject_contacts
+
+
+  # Webfinger
+  match '.well-known/host-meta',:to => 'frontpage#host_meta'
+
+  # Find subjects by slug
+  match 'subjects/lrdd/:id' => 'subjects#lrdd', :as => 'subject_lrdd'
 end

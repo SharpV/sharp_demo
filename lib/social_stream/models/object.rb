@@ -5,8 +5,7 @@ module SocialStream
       extend ActiveSupport::Concern
 
       included do
-        subtype_of :activity_object,
-                   :build => { :object_type => to_s }
+        subtype_of :activity_object, :build => { :object_type => to_s }
 
         has_many :received_actions,
                  :through => :activity_object

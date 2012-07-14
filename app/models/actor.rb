@@ -18,11 +18,16 @@
 # must added to +config/initializers/social_stream.rb+
 #
 #
+require 'sharp_link'
+
 class Actor < ActiveRecord::Base
   # Actor is a supertype of all subjects defined in SocialStream.subjects
-  supertype_of :subject
 
+  include SocialStream::Models::Subtype::ActiveRecord
+  include SocialStream::Models::Supertype::ActiveRecord
   include SocialStream::Models::Object
+  
+  supertype_of :subject
   
   validates_presence_of :name, :message => ''
   validates_presence_of :subject_type

@@ -16,11 +16,11 @@ module SocialStream
     # liked:: sort by most likes
     #
     module Subject
+      
       extend ActiveSupport::Concern
       
       included do
-        subtype_of :actor,
-                   :build => { :subject_type => to_s }
+        #subtype_of :actor, :build => { :subject_type => to_s }
         
         has_one :activity_object, :through => :actor
         has_one :profile, :through => :actor
