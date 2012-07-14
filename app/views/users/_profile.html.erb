@@ -1,0 +1,13 @@
+<div id='profile_info' class='thumbnail'>
+	<table>
+		<tr>
+			<td><%= image_tag @user.avatar_url(:b) || "http://placehold.it/125x125" %></td>
+			<td>
+				<p><%= @user.login %></p>
+				<% if current_user and current_user.login === @user.login %>
+					<p><%# link_to raw("<i class='icon icon-plus'></i> 新建"), :new_my_post, :class => "btn" %></p>
+				<% end %>
+			</td>
+		</tr>
+	</table>
+</div>

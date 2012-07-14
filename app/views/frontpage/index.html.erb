@@ -1,69 +1,19 @@
-<% content_for :title do%>
-  <%= t('welcome', :site => t('site.name')) %>
-<%end%>
+<div class='span-left'>
+	<%= simple_form_for(resource, :as => resource_name, :url => registration_path(resource_name), :html => {:class => 'form-horizontal span-form'}) do |f| %>
+	<h3>注册海学网</h3><br />
 
-<div class="banner_busqueda">
-  <div id="espacio_busqueda">    
-  </div>
-    <%= render :partial => 'layouts/search' %>
-</div>
+	<%= render 'shared/error_messages', :object => f.object %>
+	<%= f.input :email, :required => true, :autofocus => true, :label => '邮箱' %>
+	<%= f.input :login, :required => true, :label => '登录名', :hint => "只允许5-15个字母、数字或者下划线 " %>
+	<%= f.input :password, :required => true, :label => '密码', :hint => "最少6位 " %>
+	<%= f.input :password_confirmation, :required => true, :label => '重复密码' %>
+	<%= render "shared/city_select", :f => f %>
 
-<div id="wrapper_left">
-  <div id="frontpage_title">
-      <%= t('frontpage.main_title') %>
-      <span id="text_bottom_title">
-          <br/>
-          <%= t('frontpage.stats', :users => User.count, :groups => Group.count) %>
-      </span>
-  </div>
-  <div class="espacio"></div>
-  <div class="espacio"></div>
-  <div id="share">
-    <div class="icon">
-      <div id="icon_share"></div>
-      <div class="icon_text"><%= t('frontpage.share.default')%>  </div>
-    </div>
-    <div class="sentences">
-      <ul>
-        <li class="purple"><%= t('frontpage.share.sentence1') %></li>
-        <li class="purple"><%= t('frontpage.share.sentence2') %></li>
-      </ul>
-    </div>
-  </div>
-  <div class="espacio"></div>
-  <div id="meet">
-    <div class="icon">
-      <div id="icon_meet"></div>
-      <div class="icon_text"><%= t('frontpage.meet.default')%>  </div>
-    </div>
-    <div class="sentences">
-      <ul>
-        <li class="green"><%= t('frontpage.meet.sentence1') %></li>
-        <li class="green"><%= t('frontpage.meet.sentence2') %></li>
-      </ul>
-    </div>
-  </div>
-  <div class="espacio"></div>
-  <div id="collaborate">
-    <div class="icon">
-      <div id="icon_collaborate"></div>
-      <div class="icon_text"><%= t('frontpage.collaborate.default')%>  </div>
-    </div>
-    <div class="sentences">
-      <ul>
-        <li class="yellow"><%= t('frontpage.collaborate.sentence1') %></li>
-        <li class="yellow"><%= t('frontpage.collaborate.sentence2') %></li>
-      </ul>
-    </div>
-  </div>
-  <div class="espacio"></div>
+	<div class="form-actions">
+		<%= f.button :submit, "注册", :class => "btn-primary" %>
+	</div>
+	<% end %>
 </div>
-
-<div id="wrapper_right">
-  <%= render :partial => 'frontpage/caracteristics' %>
+<div class='span-right'>
+	<%= link_to '已有帐号， 立即去登录', new_user_session_path, :class=>'btn' %>
 </div>
-
-<div id="join_form">
-  <%= button_to t('frontpage.register'), new_user_registration_path, :method=> :get %>
-</div>
-<div id="espacio_body_bottom"></div>

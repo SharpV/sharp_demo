@@ -1,44 +1,19 @@
-<% content_for :headers do%>
-  <%= render :partial => 'layouts/devise_style' %>
-<%end%>
+<div class='span-left'>
+	<%= simple_form_for(resource, :as => resource_name, :url => registration_path(resource_name), :html => {:class => 'form-horizontal span-form'}) do |f| %>
+	<h3>注册海学网</h3><br />
 
-<div id="welcome">
-  <div id="login" class="block">
-  <h2><%= t('sign_up').capitalize %></h2>
-  <div class="space_center"></div>
-  <div class="space_center"></div>
-  <%= form_for(resource, :as => resource_name, :url => registration_path(resource_name)) do |f| %>
-    <%= devise_error_messages! %>
-    <div class="form_row">
-      <div class="form_label"><%= f.label :name %></div>
-      <div class="form_field"><%= f.text_field :name, :class =>"form_tag"  %></div>
-    </div>
-    <div class="form_row">
-      <div class="form_label"><%= f.label :email %></div>
-      <div class="form_field"><%= f.text_field :email, :class =>"form_tag"  %></div>
-    </div>
-    <div class="form_row">
-      <div class="form_label"><%= f.label :password %></div>
-      <div class="form_field"><%= f.password_field :password, :class =>"form_tag", :id => "password"  %></div>
-    </div>
-    <div class="form_row">
-      <div class="form_label" id="user_password_confirmation_label">
-        <%= f.label :password_confirmation %>
-      </div>
-      <div class="form_field"><%= f.password_field :password_confirmation, :class =>"form_tag"  %></div>
-    </div>
-    <div class="form_row center">
-      <%- if devise_mapping.confirmable? && controller_name != 'confirmations' %>
-        <%= link_to t('confirmation.not_received.long'), new_confirmation_path(resource_name) %><br />
-      <% end -%>
-    </div>
-    <div id="devise_links">
-      <%= render :partial => "devise/shared/links" %>
-    </div>
-    <div class="form_row center">
-      <div class="btn_login"><%= f.submit t('action.accept').capitalize,:class=>"button storePass"%></div>
-    </div>
-  <% end %>
+	<%= render 'shared/error_messages', :object => f.object %>
+	<%= f.input :email, :required => true, :autofocus => true, :label => '邮箱' %>
+	<%= f.input :login, :required => true, :label => '登录名', :hint => "只允许5-15个字母、数字或者下划线 " %>
+	<%= f.input :password, :required => true, :label => '密码', :hint => "最少6位 " %>
+	<%= f.input :password_confirmation, :required => true, :label => '重复密码' %>
+	<%= render "shared/city_select", :f => f %>
+
+	<div class="form-actions">
+		<%= f.button :submit, "注册", :class => "btn-primary" %>
+	</div>
+	<% end %>
 </div>
-
-
+<div class='span-right'>
+	<%= link_to '已有帐号， 立即去登录', new_user_session_path, :class=>'btn' %>
+</div>

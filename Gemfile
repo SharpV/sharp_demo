@@ -25,7 +25,7 @@ gem 'flash_cookie_session'
 gem 'devise', '~> 2.1.2'
 gem 'foreigner'
 #gem 'devise_invitable', '~> 1.0.0'
-gem 'coletivo'
+gem 'sequel'
 gem 'deep_merge'
 gem "recaptcha", :require => "recaptcha/rails"
 gem 'whenever'

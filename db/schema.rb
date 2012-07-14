@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120714113058) do
+ActiveRecord::Schema.define(:version => 20120714125310) do
 
   create_table "activities", :force => true do |t|
     t.integer  "activity_verb_id"
@@ -142,6 +142,12 @@ ActiveRecord::Schema.define(:version => 20120714113058) do
   add_index "channels", ["owner_id"], :name => "index_channels_on_owner_id"
   add_index "channels", ["user_author_id"], :name => "index_channels_on_user_author_id"
 
+  create_table "cities", :force => true do |t|
+    t.integer "province_code"
+    t.integer "code",          :null => false
+    t.string  "name"
+  end
+
   create_table "comments", :force => true do |t|
     t.integer  "activity_object_id"
     t.datetime "created_at"
@@ -254,6 +260,12 @@ ActiveRecord::Schema.define(:version => 20120714113058) do
 
   add_index "profiles", ["actor_id"], :name => "index_profiles_on_actor_id"
 
+  create_table "provinces", :force => true do |t|
+    t.string  "name"
+    t.string  "mark"
+    t.integer "code", :null => false
+  end
+
   create_table "relation_permissions", :force => true do |t|
     t.integer  "relation_id"
     t.integer  "permission_id"
@@ -334,6 +346,16 @@ ActiveRecord::Schema.define(:version => 20120714113058) do
   add_index "users", ["email"], :name => "index_users_on_email", :unique => true
   add_index "users", ["reset_password_token"], :name => "index_users_on_reset_password_token", :unique => true
   add_index "users", ["unlock_token"], :name => "index_users_on_unlock_token", :unique => true
+
+  create_table "zones", :force => true do |t|
+    t.integer  "code",       :null => false
+    t.string   "name",       :null => false
+    t.integer  "city_code",  :null => false
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
+  end
+
+  add_index "zones", ["city_code"], :name => "index_zones_on_city_code"
 
   add_foreign_key "activities", "activity_verbs", :name => "index_activities_on_activity_verb_id"
   add_foreign_key "activities", "channels", :name => "index_activities_on_channel_id"

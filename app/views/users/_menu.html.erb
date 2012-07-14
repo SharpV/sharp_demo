@@ -1,0 +1,13 @@
+<%= tabs_tag(:namespace => :user_menus, :open_tabs => { :id => "user_menus", :class => "nav nav-tabs" }, :builder => MenuTabBuilder) do |tab| %>
+  <%= tab.home raw("<i class='icon icon-comments'></i> 关注"), user_path(@user.login) %>
+  <%= tab.post raw("<i class='icon icon-edit'></i> 分享"), user_posts_path(@user.login) %>
+  <%= tab.question raw("<i class='icon icon-question-sign'></i> 问答"), user_questions_path(@user.login) %>
+	<%= tab.group raw("<i class='icon icon-group'></i> 群组"), user_groups_path(@user.login) %>
+	<%= tab.event raw("<i class='icon icon-facetime-video'></i> 课程"), user_events_path(@user.login) %>
+	<%= tab.like raw("<i class='icon icon-heart'></i> 收藏"), user_likes_path(@user.login) %>
+	<% if current_user and current_user.login === @user.login %>
+		<%= tab.notification raw("<i class='icon icon-bullhorn'></i> 提醒"), user_notifications_path(@user.login) %>
+		<%= tab.profile raw("<i class='icon icon-cog'></i> 个人设置"), user_profiles_path(@user.login) %>
+		<%= tab.create raw("<i class='icon icon-plus'></i> 新建"), new_user_post_path(@user.login) %>
+	<% end %>
+<% end %>

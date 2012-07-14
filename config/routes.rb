@@ -1,5 +1,5 @@
 SharpLink::Application.routes.draw do
-  devise_for :users
+  devise_for :users, :controllers => { :registrations => "registrations", :passwords => "passwords", :sessions => "sessions" }
   resources :pages
   
   root :to => "frontpage#index"
@@ -8,6 +8,8 @@ SharpLink::Application.routes.draw do
   match 'home' => 'home#index', :as => :user_root # devise after_sign_in_path_for
 
   match 'search' => 'search#index', :as => :search
+  match "/ajax/get_cities_by_province/:province_code", :to => "ajax#get_cities_by_province"
+  
   
    resources :posts
    resources :pages

@@ -1,12 +1,18 @@
+#encoding: utf-8
+  
 class User < ActiveRecord::Base
   # Include default devise modules. Others available are:
   # :token_authenticatable, :confirmable,
   # :lockable, :timeoutable and :omniauthable
+  #include SocialStream::Models::Subject
+  
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :trackable, :validatable
 
+  mount_uploader :avatar,  ImageUploader
+
   # Setup accessible (or protected) attributes for your model
-  attr_accessible :email, :password, :password_confirmation, :remember_me
+  attr_accessible :email, :password, :password_confirmation, :remember_me, :login, :province_code, :city_code
   # Include default devise modules. Others available are:
   # :token_authenticatable, :confirmable,
   # :lockable, :timeoutable and :omniauthable
@@ -14,24 +20,18 @@ class User < ActiveRecord::Base
   :recoverable, :rememberable, :trackable, :validatable
   has_many :authentications, :dependent => :destroy
 
-  has_many :user_authored_objects,
-  :class_name => "ActivityObject",
-  :foreign_key => :user_author_id
+  has_many :user_authored_objects, :class_name => "ActivityObject", :foreign_key => :user_author_id
 
   # Setup accessible (or protected) attributes for your model
   attr_accessible :name, :email, :password, :password_confirmation, :language, :remember_me, :profile_attributes
 
-  validates_presence_of :email
-
-  validates_format_of :email, :with => Devise.email_regexp, :allow_blank => true
-
-  validate :email_must_be_uniq
-
-  with_options :if => :password_required? do |v|
-    v.validates_presence_of     :password
-    v.validates_confirmation_of :password
-    v.validates_length_of       :password, :within => Devise.password_length, :allow_blank => true
-  end
+  # Validations
+  validates_presence_of :password
+  validates_presence_of :email, :presence => true, :uniqueness => true
+  validates_presence_of :password, :presence => true, :length => {:within => 6..50}
+  validates :login, :presence => true, :length => {:within => 5..15}, :uniqueness => true, 
+    :format => {:with => /\A\w+\z/, :message => '只允许数字、大小写字母和下划线'}
+  
 
   def recent_groups
     contact_subjects(:type => :group, :direction => :sent) do |q|
@@ -153,4 +153,4 @@ class User < ActiveRecord::Base
   end
 end
 
-ActiveSupport.run_load_hooks(:user, User)
+#ActiveSupport.run_load_hooks(:user, User)
