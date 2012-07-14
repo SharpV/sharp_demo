@@ -1,16 +1,16 @@
-<div id="footerFront">
-	<div id="footer">
-    <div class="rowfooter">
-      <%= link_to(image_tag('HTML5.png'), 'http://validator.w3.org/check?uri=referer') %>
-      <%= link_to(image_tag('HTML5_Styling.png'),'http://jigsaw.w3.org/css-validator/check/referer') %>
-      <%= link_to(image_tag('HTML5_Semantics.png'),'http://jigsaw.w3.org/css-validator/check/referer') %>
-    </div>
-	  <ul>
-                <li><%= Date.today.year %> © </li>
-		<li id="trade_mark"><%= link_to t('site.name'), 'http://social-stream.dit.upm.es/' %></li>
-	  </ul>
-	</div>
+<div id="footer" class='row'>
+	<span class="fleft gray-link" id="icp">
+		&copy; 2012－2013 51team.net, all rights reserved &nbsp;&nbsp;
+		<a href="http://www.miibeian.gov.cn/"></a>
+	</span>
+
+	<span class="fright">
+		· <%= link_to "关于海学网", page_path("about") %>
+		· <%= link_to "开发手记", page_path("note") %>
+		· <%= link_to "广告服务", page_path("ads") %>
+		· <%= link_to "帮助中心", page_path("help") %>
+		· <%= link_to "问题反馈", page_path("feedback") %>
+		· <%= link_to "联系我们", page_path("contact") %>
+	</span>
+
 </div>
-
-
-

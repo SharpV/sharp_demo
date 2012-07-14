@@ -1,13 +1,68 @@
 /*
- * This is a manifest file that'll be compiled into application.css, which will include all the files
- * listed below.
- *
- * Any CSS and SCSS file within this directory, lib/assets/stylesheets, vendor/assets/stylesheets,
- * or vendor/assets/stylesheets of plugins, if any, can be referenced here using a relative path.
- *
- * You're free to add application-wide styles to this file and they'll appear at the top of the
- * compiled file, but it's generally better to create a new file per style scope.
- *
- *= require_self
- *= require_tree .
- */
+* This is a manifest file that'll automatically include all the stylesheets available in this directory
+* and any sub-directories. You're free to add application-wide styles to this file and they'll appear at
+* the top of the compiled file, but it's generally better to create a new file per style scope.
+*= require_self
+*= require 'font-awesome'
+*= require lazybox
+*= require_tree .
+*/
+
+.simple_form textarea{
+	width: 500px;
+	height: 200px;
+
+}
+
+#category_select.radio{
+	float: left;
+	margin-left: 18px;
+}
+
+#profile_info{
+	clear:both;
+}
+
+#profile_info td{
+  padding: 5px;
+	vertical-align: top;
+ }
+
+.span-right .nav{
+ width: 240px
+}
+
+.marketing h3{
+	color: #336699;
+}
+
+.icon, .icon-large{
+	color: #577BF2;
+}
+
+.marketing p {
+	color: #444;
+	margin-top:5px;
+	margin-right: 5px;
+}
+.marketing{
+	float:left;
+	margin-left:15px;
+	width: 310px;
+}
+
+#footer {
+	border-top: 1px dashed #DDDDDD;
+	color: #999999;
+	margin-top: 10px;
+	overflow: hidden;
+	padding-top: 6px;
+	margin-bottom: 25px;
+}
+.fleft {
+	float: left;
+}
+.fright {
+	float: right;
+}
+

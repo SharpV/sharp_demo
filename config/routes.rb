@@ -1,11 +1,21 @@
 SharpLink::Application.routes.draw do
   devise_for :users
+  resources :pages
+  
   root :to => "frontpage#index"
   
   match 'home' => 'home#index', :as => :home
   match 'home' => 'home#index', :as => :user_root # devise after_sign_in_path_for
 
   match 'search' => 'search#index', :as => :search
+  
+   resources :posts
+   resources :pages
+   resources :events
+   resources :groups
+   resources :events
+   resources :tags
+   resources :apps
 
   resources :users do
     resource :like

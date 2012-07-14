@@ -20,14 +20,6 @@ module SocialStream #:nodoc:
                     :dependent => :destroy                    #   :dependent => :destroy
                   }.merge(supertype_options[:belongs] || {})  #   }.merge(supertype_options[:belongs] || {})
 
-        class_eval <<-EOS
-          def #{ supertype_name }!                                              # def actor!
-            #{ supertype_name } ||                                              #   actor ||
-              # FIXME: ruby1.9 remove .inspect
-              build_#{ supertype_name }(#{ supertype_options[:build].inspect }) #     build_actor(:subject_type => "User")
-          end                                                                   # end
-
-        EOS
 
         alias_method :supertype!, "#{ supertype_name }!" # alias_method :supertype!, :actor!
 

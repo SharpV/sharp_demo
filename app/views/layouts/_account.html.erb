@@ -1,18 +1,21 @@
-<div id="account_menu">
-    <ul class="sf-menu" >
-        <li class="current" id="account">
-            <a href="#" class="sf-with-ul" id="btn_menu_account">
-            <%= t('account.one') %>
-            <span class="sf-sub-indicator"> »</span>
-            </a>
-            <ul>
-                <li>
-                    <%= link_to t('account.edit'), edit_user_registration_path %>
-                </li>
-                <li class="btn_menu_exit">
-                <%= link_to t('sign_out'), destroy_user_session_path, :method => :delete, :id => "btn_menu_account_logout"  %>
-                </li>
-            </ul>
-        </li>
-    </ul>
-</div>
+<ul id="account" class="nav pull-right">
+	<%-if user_signed_in? %>
+	<li>
+		<%=link_to "我的主页", root_path %>
+	</li>
+	<li>
+		<%= link_to '个人设置', edit_user_registration_path %>
+	</li>
+	<li class='divider'></li>
+	<li>
+		<%= link_to '退出', destroy_user_session_path, :method => delete %>
+	</li>
+	<%- else %>
+	<li>
+		<%= link_to '注册', new_user_registration_path %>
+	</li>
+	<li>
+		<%= link_to '登录', new_user_session_path %>
+	</li>
+	<% end %>
+</ul>

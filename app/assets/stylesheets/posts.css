@@ -1,0 +1,118 @@
+.post-kind{
+	margin-bottom:30px; loat:left; 
+	width: 570px;
+	margin-left: 125px; margin-top: 20px;
+}
+
+.post_tag {
+	clear: both;
+	display: block;
+	line-height: 18px;
+	margin: 10px 0 5px;
+}
+
+
+.post{
+	overflow: hidden;
+	padding: 6 12 6 12px;
+	width: 100%;
+	margin-bottom: 8px;
+	width: 660px;
+	border-bottom: 1px dashed #ccc;
+	
+}
+.post .header, .post .footer{
+	margin-top: 6px;
+	margin-bottom: 3px;
+	width: 660px;
+	line-height: 22px;
+}
+
+.post .footer .left{
+	float: left;
+	width: 350px;
+	padding-top: 8px;
+}
+
+.post .footer .right{
+	width: 300px;
+	float: right;
+	text-align: right;
+}
+
+.post .footer .right .btn-group{
+	float: right;
+}
+
+.post .footer .right .btn-group	.btn {
+	    border-style: solid;
+	    color: #333333;
+	    cursor: pointer;
+	    font-size: 11px;
+
+}
+	
+.post .body {
+    margin-top: 10px;
+    padding: 0 10px;
+		color: #333;
+}
+
+.clearfix {
+	clear:both;
+	display: block;
+}
+
+a, a:visited {
+    color: #222222;
+    text-decoration: none;
+}
+
+.new_post_label .new_post_label_icon {
+
+}
+
+.meta ul{
+  list-style: none;
+  margin: 0px;
+  padding-left: 0em;
+  padding-bottom: 7px;
+  display: inline;
+  color: #666;
+	font-size: 9pt;
+	border-bottom: 1px dashed #ccc;
+	color: #999999;
+	width: 100%;
+}
+
+.post-list .star {
+    display: inline;
+    float: left;
+    margin-top: 20px;
+    text-align: right;
+    width: 100px;
+}
+
+.post-list .content {
+    display: inline;
+    float: left;
+    font-size: 12px;
+    padding: 10px 20px;
+    width: 500px;
+}
+
+.post-list .date {
+    display: inline;
+    float: left;
+    font-size: 12px;
+    margin-top: 50px;
+    width: 80px;
+}
+.post-list .user {
+    display: inline;
+    float: left;
+    margin-top: 40px;
+    width: 50px;
+    text-align: center;
+
+}
