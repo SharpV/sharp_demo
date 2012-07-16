@@ -7,7 +7,7 @@ require 'sequel'
 $LOAD_PATH << File.join(File.dirname(__FILE__), './', 'lib')
 
 namespace :db do
-  task :init => :environment do
+  task :init => :seed do
     Province.delete_all
     City.delete_all
     Zone.delete_all

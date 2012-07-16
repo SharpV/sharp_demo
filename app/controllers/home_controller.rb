@@ -7,6 +7,7 @@ class HomeController < ApplicationController
     redirect_to new_session_path(resource_name) unless current_user
     @user = current_user 
     @user.count_view! unless current_user == @user
+    @activity = Activity.new
   end
   
   def posts

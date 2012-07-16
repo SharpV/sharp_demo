@@ -1,9 +1,9 @@
 <%= tabs_tag(:namespace => :site_menus, :open_tabs => {:id => "user_menus", :class => "nav" }, :builder => MenuTabBuilder) do |tab| %>
   <%= tab.home '首页', root_path %>
-	<%= tab.user '邻居', users_path %>
-  <%= tab.post '分享', posts_path %>
-  <%= tab.question  '问答', questions_path %>
+	<%= tab.contact '好友', contacts_path %>
+  <%= tab.post '笔记', posts_path %>
 	<%= tab.group '群组', groups_path %>
-	<%= tab.event '课程', events_path %>
-	<%= tab.app '应用', apps_path %>
+	<%= tab.event '课程', events_path %>	
+  <%= tab.question '问答', questions_path %>
+	<%= tab.user '知识库', users_path %>
 <% end %>

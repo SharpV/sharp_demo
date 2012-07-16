@@ -1,5 +1,7 @@
 #encoding: utf-8
-  
+
+require 'digest/sha1'
+
 class User < ActiveRecord::Base
   # Include default devise modules. Others available are:
   # :token_authenticatable, :confirmable,
@@ -11,28 +13,20 @@ class User < ActiveRecord::Base
   mount_uploader :avatar,  ImageUploader
 
   # Setup accessible (or protected) attributes for your model
-  attr_accessible :email, :password, :password_confirmation, :remember_me, :login, :province_code, :city_code
-  # Include default devise modules. Others available are:
-  # :token_authenticatable, :confirmable,
-  # :lockable, :timeoutable and :omniauthable
-  devise :database_authenticatable, :registerable,
-  :recoverable, :rememberable, :trackable, :validatable
-  has_many :authentications, :dependent => :destroy
-
-  has_many :user_authored_objects, :class_name => "ActivityObject", :foreign_key => :user_author_id
-
-  # Setup accessible (or protected) attributes for your model
-  attr_accessible :name, :email, :password, :password_confirmation, :language, :remember_me, :profile_attributes
-
+  attr_accessible :email, :password, :password_confirmation, :remember_me, :login, 
+    :province_code, :city_code, :name, :domain_id
+  
   # Validations
   validates_presence_of :password
   validates_presence_of :email, :presence => true, :uniqueness => true
   validates_presence_of :password, :presence => true, :length => {:within => 6..50}
-  validates :login, :presence => true, :length => {:within => 5..15}, :uniqueness => true, 
+  validates :login, :presence => true, :length => {:within => 5..50}, :uniqueness => true, 
     :format => {:with => /\A\w+\z/, :message => '只允许数字、大小写字母和下划线'}
     
-  def actor!
-    actor || raise("Unknown Actor for ActivityObject: #{ inspect }")
+  before_validation :update_login
+    
+  def update_login
+    self.login = Digest::SHA1.hexdigest("#{email}#{Time.now}") unless self.login
   end
   
   def recent_groups
@@ -154,5 +148,3 @@ class User < ActiveRecord::Base
 
   end
 end
-
-#ActiveSupport.run_load_hooks(:user, User)

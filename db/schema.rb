@@ -20,7 +20,7 @@ ActiveRecord::Schema.define(:version => 20120716091045) do
   end
 
   add_index "activities", ["actor_id"], :name => "index_activities_on_actor_id"
-  add_index "activities", ["actor_type", "actor_id"], :name => "index_activities_on_actor_type_and_actor_id", :unique => true
+  add_index "activities", ["actor_type", "actor_id"], :name => "index_activities_on_actor_type_and_actor_id"
   add_index "activities", ["actor_type"], :name => "index_activities_on_actor_type"
 
   create_table "cities", :force => true do |t|
@@ -41,6 +41,18 @@ ActiveRecord::Schema.define(:version => 20120716091045) do
   add_index "contacts", ["inverse_id"], :name => "index_contacts_on_inverse_id"
   add_index "contacts", ["receiver_id"], :name => "index_contacts_on_receiver_id"
   add_index "contacts", ["sender_id"], :name => "index_contacts_on_sender_id"
+
+  create_table "domains", :force => true do |t|
+    t.integer "parent_id"
+    t.string  "name"
+    t.integer "lft"
+    t.integer "rgt"
+    t.integer "users_count",    :default => 0
+    t.integer "posts_count",    :default => 0
+    t.integer "subjects_count", :default => 0
+  end
+
+  add_index "domains", ["parent_id"], :name => "index_grades_on_parent_id"
 
   create_table "posts", :force => true do |t|
     t.string   "title",                                              :null => false
@@ -128,6 +140,7 @@ ActiveRecord::Schema.define(:version => 20120716091045) do
     t.string   "login"
     t.integer  "views_count",            :default => 0,  :null => false
     t.integer  "reputation",             :default => 0
+    t.integer  "domain_id"
     t.string   "avatar"
     t.integer  "city_code"
     t.integer  "zone_code"

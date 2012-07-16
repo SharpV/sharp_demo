@@ -4,12 +4,10 @@
 
 	<%= render 'shared/error_messages', :object => f.object %>
 	<%= f.input :email, :required => true, :autofocus => true, :label => '邮箱' %>
-	<%= f.input :login, :required => true, :label => '登录名', :hint => "只允许5-15个字母、数字或者下划线 " %>
+	<%= f.input :name, :required => true, :label => '显示名', :hint => "只允许5-15个字母、数字或者下划线 " %>
 	<%= f.input :password, :required => true, :label => '密码', :hint => "最少6位 " %>
 	<%= f.input :password_confirmation, :required => true, :label => '重复密码' %>
 	<%= f.input :domain_id, :label => "领域", :collection => Domain.all.collect{|d|[d.name, d.id]}, :include_blank => false, :required => true, :hint => "选择您所关注的领域，将会结识更多同行业的朋友  "  %>
-	<%= render "shared/city_select", :f => f %>
-
 	<div class="form-actions">
 		<%= f.button :submit, "注册", :class => "btn-primary" %>
 	</div>

@@ -5,10 +5,23 @@ class Install < ActiveRecord::Migration
       t.integer  "actor_type"
       t.integer  "actor_id"
     end
+    
+    create_table "domains", :force => true do |t|
+      t.integer "parent_id"
+      t.string  "name"
+      t.integer "lft"
+      t.integer "rgt"
+      t.integer "users_count",    :default => 0
+      t.integer "posts_count",    :default => 0
+      t.integer "subjects_count", :default => 0
+    end
+
+    add_index "domains", ["parent_id"], :name => "index_grades_on_parent_id"
+    
 
     add_index "activities", :actor_type
     add_index "activities", :actor_id
-    add_index :activities, [:actor_type, :actor_id], :unique => true
+    add_index :activities, [:actor_type, :actor_id]
 
     create_table "contacts", :force => true do |t|
       t.integer  "sender_id"
@@ -52,6 +65,7 @@ class Install < ActiveRecord::Migration
       t.string   "login"        
       t.integer  "views_count",          :default => 0,     :null => false
       t.integer  "reputation",           :default => 0
+      t.integer  "domain_id"
       t.string   "avatar"
       t.integer  "city_code"
       t.integer  "zone_code"
