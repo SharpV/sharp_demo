@@ -1,8 +1,23 @@
 class CommentsController < ApplicationController
-  include SocialStream::Controllers::Objects
+  include TheSortableTreeController::Rebuild
 
-  def show    
-    parent = resource.post_activity.parent
-    redirect_to polymorphic_path(parent.direct_object,:anchor => dom_id(parent))
+  def index
+    @comments = Comment.nested_set.all
+  end
+
+  def manage
+    @comments = Comment.nested_set.all
+  end
+
+  def comments
+    @comments = Comment.nested_set.all
+  end
+
+  def create
+    @comment = Comment.new params[:comment]
+    @comment.user = current_user
+    @comment.name = current_user.login
+    @comment.save!
+    redirect_to(request.referer || '/')
   end
 end

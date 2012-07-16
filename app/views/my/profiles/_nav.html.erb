@@ -1,0 +1,11 @@
+<br />
+<%= tabs_tag(:namespace => :user_profiles, :open_tabs => { :id => "user_profiles", :class => "nav nav-tabs nav-stacked" }, :builder => MenuTabBuilder) do |tab| %>
+  <%= tab.profile '基本信息', user_profiles_path(current_user.login) %>
+	<%= tab.education '教育信息', user_educations_path(current_user.login) %>
+	<%= tab.profession '职业信息', user_professions_path(current_user.login) %>
+	<%= tab.password '修改密码', user_passwords_path(current_user.login) %>
+	<%= tab.avatar '修改头像', user_avatars_path(current_user.login) %>
+	<%= tab.notification '绑定手机', user_notifications_path(current_user.login) %>
+	<%= tab.privacy "隐私设置", user_profiles_path(current_user.login) %>
+	<%= tab.approve  "个人认证", user_profiles_path(current_user.login) %>
+<% end %>

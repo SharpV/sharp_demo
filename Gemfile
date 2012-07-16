@@ -1,7 +1,6 @@
 source 'http://ruby.taobao.org/'  
 #source 'https://rubygems.org'
-gem 'rails', '3.2.6'
-#gem 'social_stream'
+gem 'rails', '3.2.3'
 gem 'therubyracer'
 gem 'mobile-fu'
 gem 'hz2py'
@@ -26,7 +25,6 @@ gem 'devise', '~> 2.1.2'
 gem 'foreigner'
 #gem 'devise_invitable', '~> 1.0.0'
 gem 'sequel'
-gem 'deep_merge'
 gem "recaptcha", :require => "recaptcha/rails"
 gem 'whenever'
 gem 'inherited_resources'
@@ -40,7 +38,6 @@ gem 'omniauth-facebook'
 gem 'omniauth-linkedin'
 gem 'thin'
 gem "friendly_id"
-gem "avatars_for_rails"
 gem "cancan"
 gem "escape"
 gem 'kaminari'

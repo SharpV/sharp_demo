@@ -1,0 +1,20 @@
+<div class="raw">
+	<div class='span11'>
+		<%= render "nav" %>
+		<h2><%= t("question.latest")%><%= raw "<span class='tagged'>##{params[:tag]}</span>" if params[:tag].present? %></h2>
+		<span style="float: right">
+			<%# page_entries_info @questions %>
+		</span>
+	</div>
+
+	<div class="span4">
+		<br class="clear" />
+		<%= render "profile" %>
+		<p>
+			<%= link_to "关注TA", new_question_path, :class => "btn primary"%>
+		</p>
+		<br class="clear" />
+		<h4>分类</h4>
+		<h4>标签</h4>
+	</div>
+</div>

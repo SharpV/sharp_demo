@@ -1,0 +1,50 @@
+<div class='clearfix post-list'>
+	<div class='star'>
+		<table width='99%'>
+			<tr>
+				<td>
+					支持
+				</td>
+				<td>
+					<span class="label label-success"><%= question.vote_points %></span> 
+				</td>
+			</tr>
+			<tr>
+				<td>
+					回答
+				</td>
+				<td>
+					<span class="label label-warning"><%= question.answers_count %></span>
+				</td>
+			</tr>
+			<tr>
+				<td>
+					评论
+				</td>
+				<td>
+					<span class="label label-info"><%= question.comments_count %></span>
+				</td>
+			</tr>
+			<tr>
+				<td>
+					时间
+				</td>
+				<td>
+					<span class="label">1小时前</span>
+				</td>
+			</tr>
+		</table>
+		<p></p>
+	</div>
+	<div class='content'>
+		<h4><%= link_to(question.title, question_path(question)) %></h4>
+		<div class="entrybody">
+			<%= truncate(question.body, :length => 180, :omission => '......') %>
+		</div>
+	</div>
+
+	<div class='user'>
+		<%= image_tag question.user.avatar_url(:s) if question.user %>
+		<p><%= question.user.login %></p>
+	</div>
+</div>

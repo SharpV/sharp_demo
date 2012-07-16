@@ -1,0 +1,33 @@
+<div class='span9'>
+	<div class='entry'>
+		<div class='left'>
+			<p>
+				<%= image_tag @question.user.avatar_url(:s) || "http://placehold.it/50x50" %>
+			</p>
+			<p>
+				<%= h @question.user.login %>
+			</p>
+			<br />
+			<p>
+				<%= linked_tag_list(@question.tags) %> 
+			</p>
+		</div>
+
+		<div class="right">
+			<h4><%= link_to(@question.title, question_path(@question)) %></h4>	
+			<%= render 'meta' %>
+			<div id='question' class='question'>
+				<%= @question.body %>
+			</div>
+		</div>
+	</div>
+	<div class='clearfix'></div>
+	<br />
+	<%= render @answers %>
+	<div class='clearfix'></div>
+	<br />
+	<%= render 'answers/form' %>
+</div>
+
+<div class='span3'>
+</div>

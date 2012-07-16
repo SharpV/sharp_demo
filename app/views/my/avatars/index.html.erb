@@ -1,0 +1,14 @@
+<div class='span-left'>
+	<%= render "users/menu" %>
+	<%= simple_form_for @user, :url => user_avatar_path(@user.login, @user.login), :html => {:id => "new_post_form", :class => 'form-horizontal', :multipart => true} do |f| -%>	
+	<%= render 'shared/error_messages', :object => f.object %>
+	<%= f.input :avatar, :class=>'xlarge', :label => '文件' %>
+	<div class="form-actions">
+		<%= f.submit "上传", :class=>'btn btn-primary' %>&nbsp;
+	</div>
+<% end %>
+</div>
+<div class='span-right'>
+	<%= render "users/profile" %>
+	<%= render "my/profiles/nav" %>	
+</div>

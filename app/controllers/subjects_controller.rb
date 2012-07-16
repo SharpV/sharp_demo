@@ -1,7 +1,6 @@
 class SubjectsController < ApplicationController
-  def lrdd
-    actor = Actor.find_by_webfinger!(params[:id])
-
-    redirect_to polymorphic_path(actor.subject, :format => :xrd)
+  def ajax
+    @subjects = Subject.find_by_grade_id params[:grade_id]
+    render :partial => "subjects_list"
   end
 end

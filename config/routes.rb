@@ -1,107 +1,91 @@
 SharpLink::Application.routes.draw do
-  devise_for :users, :controllers => { :registrations => "registrations", :passwords => "passwords", :sessions => "sessions" }
-  resources :pages
-  
-  root :to => "frontpage#index"
-  
-  match 'home' => 'home#index', :as => :home
-  match 'home' => 'home#index', :as => :user_root # devise after_sign_in_path_for
-
-  match 'search' => 'search#index', :as => :search
+  devise_for :users, :controllers => {:registrations => "registrations", :passwords => "passwords", :sessions => "sessions"}
+  match "/my", :to => "home#index"                                    
+  match '/new/:type', :to => 'my/posts#new', :as => :new_post
+  match '/categories/:parent_id/new', :to => 'my/post_categories#new', :as => :add_post_category
+  match "errors/routing", :to => "errors#routing"
+  match "tags/:tag/posts",  :to => "posts#show",:as => "tag_posts"
+  match "/ajax/get_subjects_by_grade/:grade_id", :to => "ajax#get_subjects_by_grade"
   match "/ajax/get_cities_by_province/:province_code", :to => "ajax#get_cities_by_province"
-  
-  
-   resources :posts
-   resources :pages
-   resources :events
-   resources :groups
-   resources :events
-   resources :tags
-   resources :apps
 
-  resources :users do
-    resource :like
-    resource :profile
-    resources :activities
-  end
+  match "/admin", :to => "admin#index"                                     
+  namespace :admin do
+    resources :comments
+    resources :answers
+    resources :questions
+    resources :users
+    resource :session
 
-  resources :comments
-
-  constraints SocialStream::Routing::Constraints::Custom.new do
-    resources :contacts do
-      collection do
-        get 'pending'
-      end
+    resources :posts, :pages do
+      post 'preview', :on => :collection
     end
 
-    namespace "relation" do
-      resources :customs
-    end
-
-    resources :permissions
+    root :to => 'dashboard#show'
   end
-
-  constraints SocialStream::Routing::Constraints::Follow.new do
-    match 'followings' => 'followers#index', :as => :followings, :defaults => { :direction => 'sent' }
-    match 'followers' => 'followers#index', :as => :followers, :defaults => { :direction => 'received' }
-    resources :followers
-
-    resources :contacts do
-      collection do
-        get 'pending'
+  
+  delete 'likes/:resource_name/:resource_id' => "my/likes#destroy", :as => 'like'
+  post 'likes/:resource_name/:resource_id' => "my/likes#create",  :as => 'like'
+    
+  scope :module => "my" do
+    resources :users do 
+      resources :profiles
+      resources :avatars
+      resources :groups
+      resources :events
+      resources :comments
+      resources :passwords
+      resources :likes
+      resources :questions
+      resources :collections
+      resources :notifications
+      resources :professions
+      resources :educations
+      resources :posts do
+        resources :comments
       end
     end
   end
 
-  resources :activity_actions
-
-  resource :representation
-  
-  resources :settings do
+  resources :questions do
+    resources :answers
+    resources :votes, :only => [:create, :destroy]
+    resources :comments, :only => :create
     collection do
-      put 'update_all'
+      get :hot
+      get :active
+      get :unanswered
+      get :search
+    end
+  end
+  resources :answers do
+    resources :votes, :only => [:create, :destroy]
+    resources :comments, :only => :create
+  end
+  
+  
+  resources :tags, :only => [:index] do
+    get :subscribe, :on => :member
+  end
+  
+  resources :posts
+  resources :pages
+  resources :events
+  resources :groups
+  resources :events
+  resources :tags
+  resources :apps
+  resources :post_categories, :controller=>"my/post_categories" do
+    collection do
+      get :manage
+      post :rebuild
+    end
+  end
+  resources :comments do
+    collection do
+      get :manage
+      post :rebuild
     end
   end
 
-  resources :messages
-
-  resources :conversations
-
-  resources :invitations
-  
-  resources :notifications do
-    collection do
-      put 'update_all'
-    end
-  end
-
-  resources :activities do
-    resource :like
-  end
-
-  get 'audience/index', :as => :audience
-  
-  match 'cheesecake' => 'cheesecake#index', :as => :cheesecake  
-  match 'update_cheesecake' => 'cheesecake#update', :as => :update_cheesecake  
-  
-  match 'ties' => 'ties#index', :as => :ties
-  
-  match 'tags' => 'tags#index', :as => 'tags'
-  
-  ##API###
-  match 'api/keygen' => 'api#create_key', :as => :api_keygen
-  match 'api/user/:id' => 'api#users', :as => :api_user
-  match 'api/me' => 'api#users', :as => :api_me
-  match 'api/me/home/' => 'api#activity_atom_feed', :format => 'atom', :as => :api_my_home
-  match 'api/user/:id/public' => 'api#activity_atom_feed', :format => 'atom', :as => :api_user_activities
-
-  match 'api/me/contacts' => 'contacts#index', :format => 'json', :as => :api_contacts
-  match 'api/subjects/:s/contacts' => 'contacts#index', :format => 'json', :as => :api_subject_contacts
-
-
-  # Webfinger
-  match '.well-known/host-meta',:to => 'frontpage#host_meta'
-
-  # Find subjects by slug
-  match 'subjects/lrdd/:id' => 'subjects#lrdd', :as => 'subject_lrdd'
+  root :to => "home#index"
 end

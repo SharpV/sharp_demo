@@ -1,42 +1,61 @@
 class Comment < ActiveRecord::Base
-  include SocialStream::Models::Object
+ 
+  validates_presence_of :user_id, :raw_content
+  
+  acts_as_nested_set
+  include TheSortableTree::Scopes
+  before_save :prepare_content
+  
+  belongs_to :user
 
-  alias_attribute :text, :description
-  validates_presence_of :text
+ 
 
-  after_create :increment_comment_count
-  before_destroy :decrement_comment_count
-
-  define_index do
-    activity_object_index
+  def trusted_user?
+    false
   end
 
-  def parent_post
-    self.post_activity.parent.direct_object
+  def user_logged_in?
+    false
   end
 
-  def title
-    description.truncate(30, :separator =>' ')
+  # Delegates
+  def post_title
+    post.title
   end
 
+  class << self
+    def protected_attribute?(attribute)
+      [:author, :body].include?(attribute.to_sym)
+    end
+
+    def new_with_filter(params)
+      comment = Comment.new(params)
+      comment.created_at = Time.now
+      comment.apply_filter
+      comment
+    end
+
+    def build_for_preview(params)
+      comment = Comment.new_with_filter(params)
+      if comment.requires_openid_authentication?
+        comment.author_url = comment.author
+        comment.author     = "Your OpenID Name"
+      end
+      comment
+    end
+
+    def find_recent(options = {})
+      find(:all, {
+        :limit => DEFAULT_LIMIT,
+        :order => 'created_at DESC'
+      }.merge(options))
+    end
+  end
+  
   private
 
-  # after_create callback 
-  # 
-  # Increment comment counter in parent's activity_object with a comment
-  def increment_comment_count 
-    return if self.post_activity.parent.blank?
- 
-    self.post_activity.parent.direct_activity_object.increment!(:comment_count) 
-  end 
- 
-  # before_destroy callback 
-  # 
-  # Decrement comment counter in parent's activity_object when comment is destroyed 
-  def decrement_comment_count 
-    return if self.post_activity.blank? || self.post_activity.parent.blank?
- 
-    self.post_activity.parent.direct_activity_object.decrement!(:comment_count) 
-  end 
-
+   def prepare_content
+     # Any content filters here
+     self.content = "<b>#{self.raw_content}</b>"
+   end
 end

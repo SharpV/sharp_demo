@@ -1,0 +1,12 @@
+<% simple_form_for(@document, :html => { :multipart => true }) do |f| %>
+  <div class="clearfix">
+    <label for="xlInput">文件</label>
+    <div class="input">
+      <%= f.file_field :file, :class => "xlarge" %>
+    </div>
+  </div>
+  <p>
+  <%= f.submit '创建' %>
+  </p>
+<% end %>
+

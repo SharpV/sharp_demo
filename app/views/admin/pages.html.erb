@@ -1,0 +1,38 @@
+<style>
+	table#pages th, table#pages td, table#widgets th, table#widgets td, 
+	table#layouts th, table#layouts td,
+	table#contents th, table#contents td {
+		text-align: left;
+	}
+	
+	#content {
+		width: 900px;
+	}	
+</style>
+
+<h2 class="ic-db">Pages</h2>
+<%= link_to 'Add Page', '/admin/page_new' %>
+<table id="pages">
+	<thead>
+		<th width="50px">ID</th>
+		<th width="140px">Title</th>
+		<th width="140px">Name</th>
+		<th width="300px">Actions</th>
+	</thead>
+	<tbody>
+		<% @pages.each do |page| %>
+			<tr>
+				<td><%= page.id %></td>
+				<td><%= page.title %></td>
+				<td><%= page.name %></td>
+				<td>
+					<%= link_to 'Edit', '/admin/page_edit?id=' + page.id.to_s %> |
+					<%= link_to 'Delete', '/admin/page_delete?id=' + page.id.to_s, :confirm => 'Are you sure you want to delete this page?' %> |
+					<%= link_to 'View', "/pages/show/#{page.title}" %>
+				</td>
+			</tr>
+		<% end %>
+	</tbody>
+</table>
+
+

@@ -1,5 +1,5 @@
 class RegistrationsController < Devise::RegistrationsController
   def destroy
-    redirect_to root_path
+    redirect_to user_path
   end
 end

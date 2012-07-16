@@ -1,0 +1,36 @@
+<div class="raw">
+	<div class='span11'>
+		<ul class="tabs">
+			<li class="active">
+				<%= link_to "我的关注", questions_path %>
+			</li>
+			<li>
+				<%= link_to "我的问题", questions_path %>
+			</li>
+			<li>
+				<%= link_to "我的收藏", collect_questions_path %>
+			</li>
+			<li>
+				<%= link_to "所有问题", questions_path %>
+			</li>
+			<li>
+				<%= link_to "热点问题", hot_questions_path %>
+			</li>
+		</ul>
+		<%= will_paginate @questions %>
+		<h2><%= t("question.latest")%><%= raw "<span class='tagged'>##{params[:tag]}</span>" if params[:tag].present? %></h2>
+		<span style="float: right">
+			<%# page_entries_info @questions %>
+		</span>
+	</div>
+
+	<div class="span4">
+		<br class="clear" />
+		<p>
+			<%= link_to "我要提问", new_question_path, :class => "btn primary"%>
+		</p>
+		<br class="clear" />
+		<h4>分类</h4>
+		<h4>标签</h4>
+	</div>
+</div>

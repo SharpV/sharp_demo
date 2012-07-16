@@ -1,0 +1,8 @@
+<ul class='thumbnails'>
+	<% User.order("created_at desc").each do |user| %>
+		<li class="span1">
+			<%= link_to(image_tag(user.avatar.url(:s) || "http://placehold.it/50x50"),  user_path(user), :class => 'thumbnail') %>
+			<p><%= link_to user.login, user_path(user) %></p>
+		</li>
+	<% end -%>
+</ul>

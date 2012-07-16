@@ -1,5 +1,4 @@
 #encoding: utf-8
-
 module ApplicationHelper
   include ActsAsTaggableOn::TagsHelper
   def resource_name
@@ -29,6 +28,7 @@ module ApplicationHelper
     flash_messages.join("\n").html_safe
   end
   
+
   def title_block(text, more_url=nil, more_text="更多")
     more_link = more_url ? link_to(more_text, more_url, :class=>'RouterLink') : ''
     block = <<-EOS 
@@ -40,5 +40,24 @@ module ApplicationHelper
     </div>
     EOS
   end
-  
-end
+
+  def markdown(text)
+    options = {   
+      :autolink => true, 
+      :space_after_headers => true,
+      :fenced_code_blocks => true,
+      :no_intra_emphasis => true,
+      :hard_wrap => true
+    }
+    markdown = Redcarpet::Markdown.new(HTMLwithAlbino, options)
+    markdown.render(text).html_safe
+  end
+
+  def format_comment_error(error)
+    {
+      'body'   => 'Please comment',
+      'author' => 'Please provide your name or OpenID identity URL',
+      'base'   => error.last
+      }[error.first.to_s]
+    end
+  end
