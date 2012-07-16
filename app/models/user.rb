@@ -4,7 +4,7 @@ class User < ActiveRecord::Base
   # Include default devise modules. Others available are:
   # :token_authenticatable, :confirmable,
   # :lockable, :timeoutable and :omniauthable
-  #include SocialStream::Models::Subject
+  include SocialStream::Models::Subject
   
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :trackable, :validatable
@@ -31,8 +31,11 @@ class User < ActiveRecord::Base
   validates_presence_of :password, :presence => true, :length => {:within => 6..50}
   validates :login, :presence => true, :length => {:within => 5..15}, :uniqueness => true, 
     :format => {:with => /\A\w+\z/, :message => '只允许数字、大小写字母和下划线'}
+    
+  def actor!
+    actor || raise("Unknown Actor for ActivityObject: #{ inspect }")
+  end
   
-
   def recent_groups
     contact_subjects(:type => :group, :direction => :sent) do |q|
       q.select("contacts.created_at").

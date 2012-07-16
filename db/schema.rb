@@ -14,147 +14,20 @@
 ActiveRecord::Schema.define(:version => 20120714125310) do
 
   create_table "activities", :force => true do |t|
-    t.integer  "activity_verb_id"
-    t.datetime "created_at"
-    t.datetime "updated_at"
-    t.string   "ancestry"
-    t.integer  "channel_id"
-    t.integer  "author_id"
-    t.integer  "user_author_id"
-    t.integer  "owner_id"
+    t.text    "content"
+    t.integer "actor_type"
+    t.integer "actor_id"
   end
 
-  add_index "activities", ["activity_verb_id"], :name => "index_activities_on_activity_verb_id"
-  add_index "activities", ["channel_id"], :name => "index_activities_on_channel_id"
-
-  create_table "activity_actions", :force => true do |t|
-    t.integer  "actor_id"
-    t.integer  "activity_object_id"
-    t.datetime "created_at",                            :null => false
-    t.datetime "updated_at",                            :null => false
-    t.boolean  "follow",             :default => false
-    t.boolean  "author",             :default => false
-    t.boolean  "user_author",        :default => false
-    t.boolean  "owner",              :default => false
-  end
-
-  add_index "activity_actions", ["activity_object_id"], :name => "index_activity_actions_on_activity_object_id"
-  add_index "activity_actions", ["actor_id"], :name => "index_activity_actions_on_actor_id"
-
-  create_table "activity_object_activities", :force => true do |t|
-    t.integer  "activity_id"
-    t.integer  "activity_object_id"
-    t.datetime "created_at"
-    t.datetime "updated_at"
-    t.string   "object_type"
-  end
-
-  add_index "activity_object_activities", ["activity_id"], :name => "index_activity_object_activities_on_activity_id"
-  add_index "activity_object_activities", ["activity_object_id"], :name => "index_activity_object_activities_on_activity_object_id"
-
-  create_table "activity_object_audiences", :force => true do |t|
-    t.integer  "activity_object_id"
-    t.integer  "relation_id"
-    t.datetime "created_at",         :null => false
-    t.datetime "updated_at",         :null => false
-  end
-
-  create_table "activity_object_properties", :force => true do |t|
-    t.integer "activity_object_id"
-    t.integer "property_id"
-    t.string  "type"
-  end
-
-  add_index "activity_object_properties", ["activity_object_id"], :name => "index_activity_object_properties_on_activity_object_id"
-  add_index "activity_object_properties", ["property_id"], :name => "index_activity_object_properties_on_property_id"
-
-  create_table "activity_objects", :force => true do |t|
-    t.datetime "created_at"
-    t.datetime "updated_at"
-    t.string   "object_type",    :limit => 45
-    t.integer  "like_count",                   :default => 0
-    t.string   "title",                        :default => ""
-    t.text     "description"
-    t.integer  "follower_count",               :default => 0
-    t.integer  "visit_count",                  :default => 0
-    t.integer  "comment_count",                :default => 0
-  end
-
-  create_table "activity_verbs", :force => true do |t|
-    t.string   "name",       :limit => 45
-    t.datetime "created_at"
-    t.datetime "updated_at"
-  end
-
-  create_table "actors", :force => true do |t|
-    t.string   "name"
-    t.string   "email",              :default => "",   :null => false
-    t.string   "slug"
-    t.string   "subject_type"
-    t.boolean  "notify_by_email",    :default => true
-    t.datetime "created_at"
-    t.datetime "updated_at"
-    t.integer  "activity_object_id"
-  end
-
-  add_index "actors", ["activity_object_id"], :name => "index_actors_on_activity_object_id"
-  add_index "actors", ["email"], :name => "index_actors_on_email"
-  add_index "actors", ["slug"], :name => "index_actors_on_slug", :unique => true
-
-  create_table "audiences", :force => true do |t|
-    t.integer "relation_id"
-    t.integer "activity_id"
-  end
-
-  add_index "audiences", ["activity_id"], :name => "index_audiences_on_activity_id"
-  add_index "audiences", ["relation_id"], :name => "index_audiences_on_relation_id"
-
-  create_table "authentications", :force => true do |t|
-    t.integer  "user_id"
-    t.string   "provider"
-    t.string   "uid"
-    t.datetime "created_at", :null => false
-    t.datetime "updated_at", :null => false
-  end
-
-  add_index "authentications", ["user_id"], :name => "index_authentications_on_user_id"
-
-  create_table "avatars", :force => true do |t|
-    t.integer  "actor_id"
-    t.string   "logo_file_name"
-    t.string   "logo_content_type"
-    t.integer  "logo_file_size"
-    t.datetime "logo_updated_at"
-    t.boolean  "active",            :default => true
-  end
-
-  add_index "avatars", ["actor_id"], :name => "index_avatars_on_actor_id"
-
-  create_table "channels", :force => true do |t|
-    t.integer  "author_id"
-    t.integer  "owner_id"
-    t.integer  "user_author_id"
-    t.datetime "created_at",     :null => false
-    t.datetime "updated_at",     :null => false
-  end
-
-  add_index "channels", ["author_id"], :name => "index_channels_on_author_id"
-  add_index "channels", ["owner_id"], :name => "index_channels_on_owner_id"
-  add_index "channels", ["user_author_id"], :name => "index_channels_on_user_author_id"
+  add_index "activities", ["actor_id"], :name => "index_activities_on_actor_id"
+  add_index "activities", ["actor_type", "actor_id"], :name => "index_activities_on_actor_type_and_actor_id", :unique => true
+  add_index "activities", ["actor_type"], :name => "index_activities_on_actor_type"
 
   create_table "cities", :force => true do |t|
     t.integer "province_code"
     t.integer "code",          :null => false
     t.string  "name"
   end
-
-  create_table "comments", :force => true do |t|
-    t.integer  "activity_object_id"
-    t.datetime "created_at"
-    t.datetime "updated_at"
-  end
-
-  add_index "comments", ["activity_object_id"], :name => "index_comments_on_activity_object_id"
 
   create_table "contacts", :force => true do |t|
     t.integer  "sender_id"
@@ -169,75 +42,42 @@ ActiveRecord::Schema.define(:version => 20120714125310) do
   add_index "contacts", ["receiver_id"], :name => "index_contacts_on_receiver_id"
   add_index "contacts", ["sender_id"], :name => "index_contacts_on_sender_id"
 
-  create_table "documents", :force => true do |t|
-    t.string   "type"
-    t.integer  "activity_object_id"
-    t.datetime "created_at"
-    t.datetime "updated_at"
-    t.string   "file_file_name"
-    t.string   "file_content_type"
-    t.string   "file_file_size"
-    t.boolean  "file_processing"
-  end
-
-  add_index "documents", ["activity_object_id"], :name => "index_documents_on_activity_object_id"
-
-  create_table "events", :force => true do |t|
-    t.integer  "activity_object_id"
-    t.datetime "start_at"
-    t.datetime "end_at"
-    t.boolean  "all_day"
-    t.datetime "created_at",                        :null => false
-    t.datetime "updated_at",                        :null => false
-    t.integer  "room_id"
-    t.date     "start_date"
-    t.date     "end_date"
-    t.integer  "frequency",          :default => 0
-    t.integer  "interval"
-    t.integer  "days",               :default => 0
-    t.integer  "interval_flag",      :default => 0
-  end
-
-  add_index "events", ["room_id"], :name => "index_events_on_room_id"
-
-  create_table "groups", :force => true do |t|
-    t.integer  "actor_id"
-    t.datetime "created_at"
-    t.datetime "updated_at"
-  end
-
-  add_index "groups", ["actor_id"], :name => "index_groups_on_actor_id"
-
-  create_table "links", :force => true do |t|
-    t.integer  "activity_object_id"
-    t.datetime "created_at"
-    t.datetime "updated_at"
-    t.string   "url"
-    t.string   "callback_url"
-    t.string   "image"
-    t.integer  "width",              :default => 470
-    t.integer  "height",             :default => 353
-  end
-
-  add_index "links", ["activity_object_id"], :name => "index_links_on_activity_object_id"
-
-  create_table "permissions", :force => true do |t|
-    t.string   "action"
-    t.string   "object"
-    t.datetime "created_at"
-    t.datetime "updated_at"
-  end
-
   create_table "posts", :force => true do |t|
-    t.integer  "activity_object_id"
+    t.string   "title",                                              :null => false
+    t.string   "slug",                                               :null => false
+    t.text     "body",                                               :null => false
+    t.text     "summary"
+    t.boolean  "active",                          :default => true
+    t.integer  "post_category_id"
+    t.string   "cached_tag_list"
+    t.datetime "published_at"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.string   "kind",              :limit => 10,                    :null => false
+    t.datetime "edited_at"
+    t.integer  "views_count",                     :default => 0
+    t.integer  "comments_count",                  :default => 0
+    t.integer  "likes_count",                     :default => 0
+    t.integer  "collections_count",               :default => 0
+    t.string   "file"
+    t.string   "link"
+    t.integer  "user_id"
+    t.string   "image"
+    t.boolean  "published",                       :default => false
+    t.integer  "grade_id"
+    t.integer  "subject_id"
+    t.integer  "domain_id"
   end
 
-  add_index "posts", ["activity_object_id"], :name => "index_posts_on_activity_object_id"
+  add_index "posts", ["domain_id"], :name => "index_posts_on_domain_id"
+  add_index "posts", ["grade_id"], :name => "index_posts_on_grade_id"
+  add_index "posts", ["kind"], :name => "index_posts_on_kind"
+  add_index "posts", ["post_category_id"], :name => "index_posts_on_post_category_id"
+  add_index "posts", ["subject_id"], :name => "index_posts_on_subject_id"
+  add_index "posts", ["user_id"], :name => "index_posts_on_user_id"
 
   create_table "profiles", :force => true do |t|
-    t.integer  "actor_id"
+    t.integer  "user_id"
     t.date     "birthday"
     t.datetime "created_at"
     t.datetime "updated_at"
@@ -258,7 +98,7 @@ ActiveRecord::Schema.define(:version => 20120714125310) do
     t.string   "im",           :limit => 45
   end
 
-  add_index "profiles", ["actor_id"], :name => "index_profiles_on_actor_id"
+  add_index "profiles", ["user_id"], :name => "index_profiles_on_user_id"
 
   create_table "provinces", :force => true do |t|
     t.string  "name"
@@ -266,52 +106,9 @@ ActiveRecord::Schema.define(:version => 20120714125310) do
     t.integer "code", :null => false
   end
 
-  create_table "relation_permissions", :force => true do |t|
-    t.integer  "relation_id"
-    t.integer  "permission_id"
-    t.datetime "created_at"
-    t.datetime "updated_at"
-  end
-
-  add_index "relation_permissions", ["permission_id"], :name => "index_relation_permissions_on_permission_id"
-  add_index "relation_permissions", ["relation_id"], :name => "index_relation_permissions_on_relation_id"
-
-  create_table "relations", :force => true do |t|
-    t.integer  "actor_id"
-    t.string   "type"
-    t.string   "name"
-    t.datetime "created_at"
-    t.datetime "updated_at"
-    t.string   "sender_type"
-    t.string   "receiver_type"
-    t.string   "ancestry"
-  end
-
-  add_index "relations", ["actor_id"], :name => "index_relations_on_actor_id"
-  add_index "relations", ["ancestry"], :name => "index_relations_on_ancestry"
-
-  create_table "rooms", :force => true do |t|
-    t.integer  "actor_id"
-    t.string   "name"
-    t.datetime "created_at", :null => false
-    t.datetime "updated_at", :null => false
-  end
-
-  add_index "rooms", ["actor_id"], :name => "index_rooms_on_actor_id"
-
-  create_table "ties", :force => true do |t|
-    t.integer  "contact_id"
-    t.integer  "relation_id"
-    t.datetime "created_at"
-    t.datetime "updated_at"
-  end
-
-  add_index "ties", ["contact_id"], :name => "index_ties_on_contact_id"
-  add_index "ties", ["relation_id"], :name => "index_ties_on_relation_id"
-
   create_table "users", :force => true do |t|
+    t.string   "name"
     t.string   "login"
-    t.integer  "actor_id"
     t.integer  "views_count",            :default => 0,  :null => false
     t.integer  "reputation",             :default => 0
     t.string   "avatar"
@@ -340,10 +137,11 @@ ActiveRecord::Schema.define(:version => 20120714125310) do
     t.datetime "updated_at"
   end
 
-  add_index "users", ["actor_id"], :name => "index_users_on_actor_id"
   add_index "users", ["authentication_token"], :name => "index_users_on_authentication_token", :unique => true
+  add_index "users", ["city_code"], :name => "index_users_on_city_code"
   add_index "users", ["confirmation_token"], :name => "index_users_on_confirmation_token", :unique => true
   add_index "users", ["email"], :name => "index_users_on_email", :unique => true
+  add_index "users", ["province_code"], :name => "index_users_on_province_code"
   add_index "users", ["reset_password_token"], :name => "index_users_on_reset_password_token", :unique => true
   add_index "users", ["unlock_token"], :name => "index_users_on_unlock_token", :unique => true
 
@@ -356,59 +154,5 @@ ActiveRecord::Schema.define(:version => 20120714125310) do
   end
 
   add_index "zones", ["city_code"], :name => "index_zones_on_city_code"
-
-  add_foreign_key "activities", "activity_verbs", :name => "index_activities_on_activity_verb_id"
-  add_foreign_key "activities", "channels", :name => "index_activities_on_channel_id"
-
-  add_foreign_key "activity_actions", "activity_objects", :name => "index_activity_actions_on_activity_object_id"
-  add_foreign_key "activity_actions", "actors", :name => "index_activity_actions_on_actor_id"
-
-  add_foreign_key "activity_object_activities", "activities", :name => "index_activity_object_activities_on_activity_id"
-  add_foreign_key "activity_object_activities", "activity_objects", :name => "activity_object_activities_on_activity_object_id"
-
-  add_foreign_key "activity_object_audiences", "activity_objects", :name => "activity_object_audiences_on_activity_object_id"
-  add_foreign_key "activity_object_audiences", "relations", :name => "activity_object_audiences_on_relation_id"
-
-  add_foreign_key "activity_object_properties", "activity_objects", :name => "index_activity_object_properties_on_activity_object_id"
-  add_foreign_key "activity_object_properties", "activity_objects", :name => "index_activity_object_properties_on_property_id", :column => "property_id"
-
-  add_foreign_key "actors", "activity_objects", :name => "actors_on_activity_object_id"
-
-  add_foreign_key "audiences", "activities", :name => "audiences_on_activity_id"
-  add_foreign_key "audiences", "relations", :name => "audiences_on_relation_id"
-
-  add_foreign_key "authentications", "users", :name => "authentications_on_user_id"
-
-  add_foreign_key "avatars", "actors", :name => "avatars_on_actor_id"
-
-  add_foreign_key "channels", "actors", :name => "index_channels_on_author_id", :column => "author_id"
-  add_foreign_key "channels", "actors", :name => "index_channels_on_owner_id", :column => "owner_id"
-  add_foreign_key "channels", "actors", :name => "index_channels_on_user_author_id", :column => "user_author_id"
-
-  add_foreign_key "comments", "activity_objects", :name => "comments_on_activity_object_id"
-
-  add_foreign_key "contacts", "actors", :name => "contacts_on_receiver_id", :column => "receiver_id"
-  add_foreign_key "contacts", "actors", :name => "contacts_on_sender_id", :column => "sender_id"
-
-  add_foreign_key "events", "activity_objects", :name => "events_on_activity_object_id"
-  add_foreign_key "events", "rooms", :name => "index_events_on_room_id"
-
-  add_foreign_key "groups", "actors", :name => "groups_on_actor_id"
-
-  add_foreign_key "links", "activity_objects", :name => "links_on_activity_object_id"
-
-  add_foreign_key "posts", "activity_objects", :name => "posts_on_activity_object_id"
-
-  add_foreign_key "profiles", "actors", :name => "profiles_on_actor_id"
-
-  add_foreign_key "relation_permissions", "permissions", :name => "relation_permissions_on_permission_id"
-  add_foreign_key "relation_permissions", "relations", :name => "relation_permissions_on_relation_id"
-
-  add_foreign_key "relations", "actors", :name => "relations_on_actor_id"
-
-  add_foreign_key "ties", "contacts", :name => "ties_on_contact_id"
-  add_foreign_key "ties", "relations", :name => "ties_on_relation_id"
-
-  add_foreign_key "users", "actors", :name => "users_on_actor_id"
 
 end

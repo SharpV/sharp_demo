@@ -21,7 +21,7 @@ module SocialStream #:nodoc:
                   }.merge(supertype_options[:belongs] || {})  #   }.merge(supertype_options[:belongs] || {})
 
 
-        alias_method :supertype!, "#{ supertype_name }!" # alias_method :supertype!, :actor!
+        #alias_method :supertype!, "#{ supertype_name }!" # alias_method :supertype!, :actor!
 
         # Load the supertype to ensure it is saved along with this instance
         before_validation :supertype! # before_validation :actor!
