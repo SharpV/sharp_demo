@@ -1,0 +1,9 @@
+<div class='entry'>
+	<div class='left'>
+	</div>
+
+	<div class="right">
+		<%= sortable_tree @comments, :path => 'comments/comments/base', :title => :name, :commentable_id => @post.id, 
+		:commentable_type => 'Post', :max_levels => 5 %>
+	</div>
+</div>

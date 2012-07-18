@@ -1,0 +1,8 @@
+<div class='span-left'>
+  <%= "您还没有任何笔记" if @notes.empty? %>
+  <%= render :partial => 'note', :collection => @notes %>
+</div>
+<div class='span-right'>
+  <%= raw title_block "我的分类", note_categories_path, "管理" %>
+  <%= render "categories" %>
+</div>

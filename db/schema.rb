@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120716091045) do
+ActiveRecord::Schema.define(:version => 20120718080942) do
 
   create_table "activities", :force => true do |t|
     t.text    "content"
@@ -51,6 +51,47 @@ ActiveRecord::Schema.define(:version => 20120716091045) do
     t.integer "posts_count",    :default => 0
     t.integer "subjects_count", :default => 0
   end
+
+  create_table "note_categories", :force => true do |t|
+    t.integer "parent_id"
+    t.string  "name"
+    t.integer "lft"
+    t.integer "rgt"
+    t.integer "user_id"
+    t.integer "notes_count", :default => 0
+  end
+
+  add_index "note_categories", ["user_id"], :name => "index_note_categories_on_user_id"
+
+  create_table "notes", :force => true do |t|
+    t.string   "title",                                              :null => false
+    t.string   "slug",                                               :null => false
+    t.text     "body",                                               :null => false
+    t.text     "summary"
+    t.boolean  "active",                          :default => true
+    t.integer  "note_category_id"
+    t.string   "cached_tag_list"
+    t.datetime "published_at"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+    t.string   "kind",              :limit => 10,                    :null => false
+    t.datetime "edited_at"
+    t.integer  "views_count",                     :default => 0
+    t.integer  "comments_count",                  :default => 0
+    t.integer  "likes_count",                     :default => 0
+    t.integer  "collections_count",               :default => 0
+    t.string   "file"
+    t.string   "link"
+    t.integer  "user_id"
+    t.string   "image"
+    t.boolean  "published",                       :default => false
+    t.integer  "subject_id"
+  end
+
+  add_index "notes", ["kind"], :name => "index_notes_on_kind"
+  add_index "notes", ["note_category_id"], :name => "index_notes_on_note_category_id"
+  add_index "notes", ["subject_id"], :name => "index_notes_on_subject_id"
+  add_index "notes", ["user_id"], :name => "index_notes_on_user_id"
 
   create_table "organizations", :force => true do |t|
     t.string   "name"

@@ -1,14 +1,13 @@
 #encoding: utf-8
-class My::PostsController < MyController
+class NotesController < ApplicationController
   
-  before_filter :find_user
+  #before_filter :find_user
     
-  set_tab :post, :user_menus, :only => [:index, :show]
-  set_tab :create, :user_menus, :only => [:new, :edit]
+  set_tab :note, :site_menus, :only => [:index, :show]
 
   def index
-    @posts = @user.posts.page(params[:page])
-    @post_categories = current_user.post_categories.nested_set.all
+    @notes = current_user.notes.page(params[:page])
+    @note_categories = current_user.note_categories.nested_set.all
   end
 
   def new

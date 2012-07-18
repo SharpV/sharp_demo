@@ -1,0 +1,21 @@
+<div class='left'>
+	作者 <span class=""><%= link_to post.user.login, post.user %></span>
+	阅读 <span class="label label-warning"><%= post.views_count %></span>
+	评论 <span class="label label-info"><%= post.comments_count %></span>
+	时间 <span class="label"><%= format_post_date(post.published_at) %></span>
+</div>
+<div class='right'>
+	<span class='tag'><%# linked_tag_list(post.tags) %></span>
+	<div class="btn-group">
+		<%- if current_user and current_user.likes? post -%>
+		<%= link_to raw("<i class='icon-heart'>取消收藏</i>"), like_path(:resource_name => post.class, :resource_id => post.id), :method => :delete, :remote => true, :class => "btn"  %>
+		<%- else -%>
+		<%= link_to raw("<i class='icon-heart'>收藏</i>"), like_path(:resource_name => post.class, :resource_id => post.id), :method => :post, :remote => true, :class => "btn" %>
+		<%- end -%>
+		<% if current_user and current_user.login === post.user.login%>
+		<%= link_to raw("<i class='icon-pencil'>编辑</i>"), edit_user_post_path(post.user, post), :class => "btn" %>
+		<%= link_to raw("<i class='icon-remove-sign'>删除</i>"), user_post_path(post.user, post), :method => :delete, :confirm => "是否确定删除 ? ", :class => "btn" %>
+		<% end %>
+	</div>
+
+</div>

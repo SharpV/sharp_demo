@@ -90,9 +90,9 @@ SharpLink::Application.routes.draw do
   resources :events
   resources :groups
   resources :events
-  resources :tags
+  resources :notes
   resources :contacts
-  resources :post_categories, :controller=>"my/post_categories" do
+  resources :note_categories do
     collection do
       get :manage
       post :rebuild
