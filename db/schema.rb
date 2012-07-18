@@ -42,7 +42,7 @@ ActiveRecord::Schema.define(:version => 20120716091045) do
   add_index "contacts", ["receiver_id"], :name => "index_contacts_on_receiver_id"
   add_index "contacts", ["sender_id"], :name => "index_contacts_on_sender_id"
 
-  create_table "domains", :force => true do |t|
+  create_table "fields", :force => true do |t|
     t.integer "parent_id"
     t.string  "name"
     t.integer "lft"
@@ -52,7 +52,23 @@ ActiveRecord::Schema.define(:version => 20120716091045) do
     t.integer "subjects_count", :default => 0
   end
 
-  add_index "domains", ["parent_id"], :name => "index_grades_on_parent_id"
+  create_table "organizations", :force => true do |t|
+    t.string   "name"
+    t.string   "permalink",                                             :null => false
+    t.string   "language",    :default => "en"
+    t.string   "time_zone",   :default => "Eastern Time (US & Canada)"
+    t.string   "domain"
+    t.text     "description"
+    t.string   "logo"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+    t.text     "settings"
+    t.boolean  "deleted",     :default => false,                        :null => false
+  end
+
+  add_index "organizations", ["deleted"], :name => "index_organizations_on_deleted"
+  add_index "organizations", ["domain"], :name => "index_organizations_on_domain"
+  add_index "organizations", ["permalink"], :name => "index_organizations_on_permalink"
 
   create_table "posts", :force => true do |t|
     t.string   "title",                                              :null => false
@@ -140,7 +156,7 @@ ActiveRecord::Schema.define(:version => 20120716091045) do
     t.string   "login"
     t.integer  "views_count",            :default => 0,  :null => false
     t.integer  "reputation",             :default => 0
-    t.integer  "domain_id"
+    t.integer  "field_id"
     t.string   "avatar"
     t.integer  "city_code"
     t.integer  "zone_code"
@@ -171,6 +187,7 @@ ActiveRecord::Schema.define(:version => 20120716091045) do
   add_index "users", ["city_code"], :name => "index_users_on_city_code"
   add_index "users", ["confirmation_token"], :name => "index_users_on_confirmation_token", :unique => true
   add_index "users", ["email"], :name => "index_users_on_email", :unique => true
+  add_index "users", ["field_id"], :name => "index_users_on_field_id"
   add_index "users", ["province_code"], :name => "index_users_on_province_code"
   add_index "users", ["reset_password_token"], :name => "index_users_on_reset_password_token", :unique => true
   add_index "users", ["unlock_token"], :name => "index_users_on_unlock_token", :unique => true

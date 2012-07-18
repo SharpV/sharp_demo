@@ -1,5 +1,5 @@
 #encoding: utf-8
-class Domain < ActiveRecord::Base
+class Field < ActiveRecord::Base
   acts_as_nested_set
   acts_as_taggable_on :tags
   attr_accessible :name, :parent_id
