@@ -1,33 +1,3 @@
-<script type="text/javascript">
-$(document).ready(function($){
-	$( "input[name='post_kind']" ).bind( "click", function() {
-		$('[id*="post-"]').hide();
-		$('#' + 'post-' + this.value).show();
-	});
-});
-</script>
 <div class='span-left'>
-	<%= render "users/menu" %>		
-	<%- if @post.kind %>
-		<script type="text/javascript">
-			$(document).ready(function($){
-				$('#' + 'post-<%= @post.kind %>').show();
-			});
-			</script>
-		<%= render "my/posts/" + @post.kind %>
-	<% else %>
-		<div class='post-kind clearfix'>
-			<%- [['文章', 'article'], ['图片', 'pic'], ['链接', 'link'], ['文档', 'doc'], ['视频', 'video'], ['音频', 'audio']].each do |kind| %>
-				<%= radio_button_tag :post_kind,  kind.last, kind.last == 'article' %> <%= kind.first %>  &nbsp; &nbsp;
-			<% end %>
-		</div>
-		<%- ['article', 'pic', 'doc', 'link', 'video', 'audio'].each do |type| %>
-			<%= render type %>
-			<script type="text/javascript">
-				$(document).ready(function($){
-					$('#post-article').show();
-				});
-			</script>
-		<% end %>
-	<% end %>
+	<%= render "form" %>
 </div>

@@ -41,6 +41,8 @@ a:active {
 	line-height: 40px;
 }
 .navbar-inner {
+	background-color: #5B94BC;
+	background-image: -moz-linear-gradient(center top , #5B94BC, #5B94BC);
 	min-height: 50px;
 }
 
@@ -87,7 +89,7 @@ a:active {
 	font-size: 12px;
 }
 .navbar .nav .active > a, .navbar .nav .active > a:hover {
-	background-color: #336699;
+	background-color: #388CC4;
 	color: #fff;
 }
 .navbar .nav > li > a {
@@ -108,8 +110,8 @@ a:active {
 	-moz-border-left-colors: none;
 	-moz-border-right-colors: none;
 	-moz-border-top-colors: none;
-	background-color: #CCE4FC;
-	border-color: #CCE4FC #CCE4FC transparent;
+	background-color: #388CC4;
+	border-color: #388CC4 #388CC4 transparent;
 	border-style: solid;
 	border-width: 1px;
 	color: #444;
@@ -127,7 +129,7 @@ a:active {
 	color: #eee;
 }
 .nav-list > .active > a, .nav-list > .active > a:hover {
-	background-color: #ABE8D2;
+	background-color: #388CC4;
 	color: #FFFFFF;
 	text-shadow: none;
 }

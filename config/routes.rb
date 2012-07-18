@@ -64,21 +64,7 @@ SharpLink::Application.routes.draw do
     end
   end
 
-  resources :questions do
-    resources :answers
-    resources :votes, :only => [:create, :destroy]
-    resources :comments, :only => :create
-    collection do
-      get :hot
-      get :active
-      get :unanswered
-      get :search
-    end
-  end
-  resources :answers do
-    resources :votes, :only => [:create, :destroy]
-    resources :comments, :only => :create
-  end
+  resources :organizations
   
   
   resources :tags, :only => [:index] do

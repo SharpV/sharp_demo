@@ -11,8 +11,7 @@ class NotesController < ApplicationController
   end
 
   def new
-    @post = Post.new
-    @user = current_user
+    @note = Note.new
   end
 
   def edit
@@ -21,20 +20,19 @@ class NotesController < ApplicationController
   end
 
   def show
-    @user = current_user
-    @post = Post.find(params[:id])
-    @post.update_attribute :views_count, @post.views_count+1 unless session[:logged_in]
+    @note = Note.find(params[:id])
+    #@note.update_attribute :views_count, @note.views_count+1 unless session[:logged_in]
     @comment = Comment.new
-    @comments = @post.comments.nested_set.all
+    @comments = @note.comments.all#nested_set.all
   end
 
   def create
-    @post = Post.new(params[:post])
-    @post.tag_list = params[:item][:tag].join(",") if params[:item] and params[:item][:tag]
-    @post.user = current_user
+    @note = Note.new(params[:note])
+    #@note.tag_list = params[:item][:tag].join(",") if params[:item] and params[:item][:tag]
+    @note.user = current_user
     respond_to do |format|
-      if @post.save 
-        format.html  { redirect_to([@user, @post]) }
+      if @note.save 
+        format.html  { redirect_to([@note]) }
       else
         format.html  { render :action => "new" }
       end

@@ -39,17 +39,20 @@ class User < ActiveRecord::Base
     end
   end
 
-  # Subjects this user can acts as
-  def represented
-    candidates = contact_actors(:direction => :sent).map(&:id)
-
-    contact_subjects(:direction => :received) do |q|
-      q.joins(:sent_ties => { :relation => :permissions }).
-      merge(Permission.represent).
-      where(:id => candidates)
+  def init_category!
+    if note_categories.empty?
+      NoteCategory.create :name => "所有分类", :user => self
     end
   end
 
+  def root_category
+    NoteCategory.where("user_id=? and parent_id=?", id, nil).first
+  end
+
+  def to_param
+    "#{login}"
+  end
+  
   protected
 
   # From devise
