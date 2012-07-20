@@ -1,13 +1,19 @@
-body{
-	height: 100%;
-	width: 100%;
-	font: 12px/162% Arial,Helvetica,sans-serif;
-	padding-top: 70px;
-	font-family: Tahoma,Verdana;
+body {
+    padding-top: 70px;
+    font-family: Tahoma,Verdana;
+    font: 12px/162% Arial,Helvetica,sans-serif;
+    background-attachment: scroll;
+    background-clip: border-box;
+    background-color: #F0F0F0;
+    background-image: url("/assets/backend.gif");
+    background-origin: padding-box;
+    background-position: -70% 0;
+    background-repeat: repeat;
+    background-size: auto auto;
 }
 
 a.btn-primary{
-	color: #fff;
+    color: #fff;
 }
 
 a {
@@ -16,153 +22,128 @@ a {
     text-decoration: none;
 }
 a:active {
-	background: none repeat scroll 0 50% transparent;
-	color: #999999;
+    background: none repeat scroll 0 50% transparent;
+    color: #999999;
 }
 
 .container, .navbar-fixed-top .container, .navbar-fixed-bottom .container {
     width: 960px;
 }
 .container .span-left{
-	width: 675px
+    width: 675px
 }
 .container .span-right{
-	width: 245px
+    width: 245px
 }
 
 
 .nav-tabs > .active > a, .nav-tabs > .active > a:hover {
-	cursor: pointer;
+    cursor: pointer;
 }
 .navbar .brand {
-	margin-right: 10px;
-	margin-left: 0px;
-	padding: 0px;
-	line-height: 40px;
+    margin-right: 10px;
+    margin-left: 0px;
+    padding: 0px;
+    line-height: 40px;
 }
 .navbar-inner {
-	background-color: #5B94BC;
-	background-image: -moz-linear-gradient(center top , #5B94BC, #5B94BC);
-	min-height: 50px;
+    min-height: 50px;
 }
 
 #user_menus, #account, #search-form{
-	line-height:40px;
+    line-height:40px;
 }
 #search-form{
-	margin-top: 10px;
+    margin-top: 10px;
 }
 
 .form-horizontal .control-label {
-	float: left;
-	margin-right: 10px;
-	text-align: right;
-	width: 80px;
-	padding-top: 2px;
+    float: left;
+    margin-right: 10px;
+    text-align: right;
+    width: 80px;
+    padding-top: 2px;
 }
 
 .form-horizontal .controls {
-	margin-left: 120px;
+    margin-left: 120px;
 }
 
 .radio input[type="radio"], .checkbox input[type="checkbox"] {
-	margin: 0px;
+    margin: 0px;
 }
 
 .hero-unit {
-	-moz-border-radius: 6px 6px 6px 6px;
-	background-color: #EEEEEE;
-	margin-bottom: 20px;
-	padding: 20px;
+    -moz-border-radius: 6px 6px 6px 6px;
+    background-color: #EEEEEE;
+    margin-bottom: 20px;
+    padding: 20px;
 }
 .hero-unit p {
-	color: inherit;
-	font-size: 14px;
-	font-weight: 230;
-	line-height: 15px;
+    color: inherit;
+    font-size: 14px;
+    font-weight: 230;
+    line-height: 15px;
 }
 .navbar-search .search-query{
-	background-color: #eee;
+    background-color: #eee;
 }
 .navbar-search .search-query:-moz-placeholder {
-	color: #999999;
-	font-size: 12px;
+    color: #999999;
+    font-size: 12px;
 }
 .navbar .nav .active > a, .navbar .nav .active > a:hover {
-	background-color: #388CC4;
-	color: #fff;
+    color: #fff;
 }
 .navbar .nav > li > a {
-	color: #eee;
-	float: none;
-	font-size: 14px;
-	line-height: 28px;
-	padding-bottom: 11px;
-	padding-left: 10px;
-	padding-right: 10px;
-	padding-top: 11px;
-	cursor: pointer;
+    color: #eee;
+    float: none;
+    font-size: 14px;
+    line-height: 28px;
+    padding-bottom: 11px;
+    padding-left: 10px;
+    padding-right: 10px;
+    padding-top: 11px;
+    cursor: pointer;
 }
 
 .nav-tabs > .active > a, .nav-tabs > .active > a:hover {
-	-moz-border-bottom-colors: none;
-	-moz-border-image: none;
-	-moz-border-left-colors: none;
-	-moz-border-right-colors: none;
-	-moz-border-top-colors: none;
-	background-color: #388CC4;
-	border-color: #388CC4 #388CC4 transparent;
-	border-style: solid;
-	border-width: 1px;
-	color: #444;
-	cursor: pointer;
+    border-style: solid;
+    border-width: 1px;
+    color: #444;
+    cursor: pointer;
 }
 
-.nav-tabs {
-	border-bottom: 1px solid #CCE4FC;
-}
-
-.nav-list > li > a {
-	background-color: #E0ECFC;
-}
-.nav-list > .active > a {
-	color: #eee;
-}
-.nav-list > .active > a, .nav-list > .active > a:hover {
-	background-color: #388CC4;
-	color: #FFFFFF;
-	text-shadow: none;
-}
 .nav-list .nav-header {
-	margin-left: -15px;
-	font-size: 14px;
-	text-shadow: none;	
-	color: #fff;
-	background-color: #0088CC;
+    margin-left: -15px;
+    font-size: 14px;
+    text-shadow: none;	
+    color: #fff;
+    background-color: #0088CC;
 }
 
 .nav-list > .active > a:active {
-	background-color: #eee;
-	color: #FFFFFF;
+    background-color: #eee;
+    color: #FFFFFF;
 }
 .controls > .radio:first-child, .controls > .checkbox:first-child {
-	float: left;
-	padding-top: 3px;	
+    float: left;
+    padding-top: 3px;	
 }
 
 .controls > .radio, .controls > .checkbox{
-	padding-top: 3px;
+    padding-top: 3px;
 }
 
 #new_post{
-	width: 450px;
+    width: 450px;
 }
 
 label.radio{
-	float:left;
-	height:20px;
-	padding-left:10px;
-	margin-left:5px;
+    float:left;
+    height:20px;
+    padding-left:10px;
+    margin-left:5px;
 }
 .btn-success span {
     color: #fff;

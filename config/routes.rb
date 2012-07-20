@@ -31,7 +31,7 @@ SharpLink::Application.routes.draw do
     resources :comments
     resources :passwords
     resources :likes
-    resources :questions
+
     resources :collections
     resources :notifications
     resources :professions
@@ -65,7 +65,7 @@ SharpLink::Application.routes.draw do
   end
 
   resources :organizations
-  
+  resources :apps  
   
   resources :tags, :only => [:index] do
     get :subscribe, :on => :member
