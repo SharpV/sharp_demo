@@ -11,9 +11,7 @@ SharpLink::Application.routes.draw do
   match "/admin", :to => "admin#index"                                     
   namespace :admin do
     resources :comments
-    resources :answers
-    resources :questions
-    resources :users
+
     resource :session
 
     resources :posts, :pages do
@@ -70,6 +68,9 @@ SharpLink::Application.routes.draw do
   resources :tags, :only => [:index] do
     get :subscribe, :on => :member
   end
+  resources :documents
+  resources :plans
+  resources :users
   
   resources :posts
   resources :pages
@@ -78,7 +79,7 @@ SharpLink::Application.routes.draw do
   resources :events
   resources :notes
   resources :contacts
-  resources :note_categories do
+  resources :doc_categories do
     collection do
       get :manage
       post :rebuild
