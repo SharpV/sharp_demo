@@ -1,4 +1,6 @@
 class HomeController < ApplicationController
+  
+  
   #set_tab :home, :user_menus
   #set_tab :home, :site_menus
   #set_tab :timeline, :user_timeline_menus
@@ -6,7 +8,8 @@ class HomeController < ApplicationController
   def index
     redirect_to new_session_path(resource_name) unless current_user
     @user = current_user 
-    @user.count_view! unless current_user == @user
+    @post = Post.new
+    @posts = Post.all
   end
   
   def posts

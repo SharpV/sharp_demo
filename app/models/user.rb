@@ -15,6 +15,8 @@ class User < ActiveRecord::Base
   has_many :note_categories
   has_many :notes
   
+  has_many :posts
+  
   # Setup accessible (or protected) attributes for your model
   attr_accessible :email, :password, :password_confirmation, :remember_me, :login, 
     :province_code, :city_code, :name, :field_id

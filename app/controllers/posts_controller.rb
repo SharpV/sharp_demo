@@ -1,13 +1,13 @@
 class PostsController < ApplicationController
 
-  set_tab :post, :site_menus
+  respond_to :html, :js  
   
-  def index
-    @tags = Post.tag_counts_on(:tags)
-    @posts = Post.order("created_at desc").page(params[:page])
-    respond_to do |format|
-      format.html
-      format.atom { render :layout => false }
+  layout false
+  
+  def create 
+    @post = current_user.posts.build params[:post] 
+    respond_with do |format|
+      format.js {}
     end
   end
   

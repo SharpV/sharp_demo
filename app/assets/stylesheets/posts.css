@@ -1,16 +1,35 @@
-.post-kind{
-	margin-bottom:30px; loat:left; 
-	width: 570px;
-	margin-left: 125px; margin-top: 20px;
+#new_post, #posts{
+	width: 600px;
 }
 
-.post_tag {
-	clear: both;
-	display: block;
-	line-height: 18px;
-	margin: 10px 0 5px;
+#posts .post{
+	width: 600px;
 }
 
+#new_post .avatar{
+	margin-bottom:10px; 
+	float:left; 
+	width: 100px;
+}
+
+#new_post .post_form{
+	margin-bottom:10px; 
+	float:left; 
+	width: 480px;
+}
+
+#new_post .post_form textarea{
+	width: 480px;
+	height: 60px;
+}
+
+
+#new_post .post_form .actions{
+	margin-bottom:10px; 
+	float:left; 
+	width: 480px;
+	margin-top: 10px;
+}
 
 .post{
 	overflow: hidden;

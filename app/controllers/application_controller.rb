@@ -1,4 +1,7 @@
 class ApplicationController < ActionController::Base
+  
+  before_filter :authenticate_user!
+  
   protect_from_forgery
   after_filter :set_content_type
 
