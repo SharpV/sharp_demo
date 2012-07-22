@@ -1,0 +1,18 @@
+-# EDIT
+-new = link_to '添加子分类', add_post_category_path(node), :title => '添加子分类', :class => 'button new', :remote => true, :data => {:type=>"script", :"method"=>"get"} 
+
+- edit = link_to '编辑', polymorphic_url(opts[:namespace] + [node], :action => :edit), :title => '编辑', :class => 'button edit', :remote => true, :data => {:type=>"script", :"method"=>"get"} 
+-# DELETE
+- if opts[:has_children]
+  - delete =  link_to('删除', url_for(opts[:namespace] + [node]),
+    :title    =>  '删除',
+    :method   =>  :delete,
+    :confirm  =>  '是否确定删除该分类?',
+    :class    =>  'button delete')
+- else
+  - delete =  link_to('删除', '#',
+    :title    =>  '删除',
+    :onclick  =>  "alert('是否确定删除该分类?')}')",
+    :class    =>  'button undeleted')
+-# OUTPUT
+= edit + delete + new

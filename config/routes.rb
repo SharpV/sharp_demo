@@ -21,6 +21,9 @@ SharpLink::Application.routes.draw do
     root :to => 'dashboard#show'
   end
   
+  resources :groups
+  
+  
   resources :users do 
     resources :activities
     resources :avatars
@@ -42,11 +45,11 @@ SharpLink::Application.routes.draw do
   delete 'likes/:resource_name/:resource_id' => "my/likes#destroy", :as => 'like'
   post 'likes/:resource_name/:resource_id' => "my/likes#create",  :as => 'like'
     
-  scope :module => "my" do
-    resources :users do 
-      resources :profiles
-      resources :avatars
-      resources :groups
+  scope :module => "group" do
+    resources :groups do 
+      resources :posts
+      resources :topics
+      resources :documents
       resources :events
       resources :comments
       resources :passwords
@@ -74,9 +77,8 @@ SharpLink::Application.routes.draw do
   
   resources :posts
   resources :pages
-  resources :events
-  resources :groups
-  resources :events
+  resources :messages
+  resources :likes
   resources :notes
   resources :contacts
   resources :doc_categories do
@@ -92,5 +94,5 @@ SharpLink::Application.routes.draw do
     end
   end
 
-  root :to => "home#index"
+  root :to => 'home#index'
 end

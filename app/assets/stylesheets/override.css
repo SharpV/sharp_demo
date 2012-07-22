@@ -70,6 +70,7 @@ a:active {
 }
 
 .hero-unit {
+	-moz-border-radius: 6px 6px 6px 6px;
 	background-color: #EEEEEE;
 	margin-bottom: 20px;
 	padding: 20px;
@@ -94,6 +95,26 @@ a:active {
 	padding-right: 10px;
 	padding-top: 11px;
 	cursor: pointer;
+}
+
+
+.nav-list > li > a {
+	background-color: #E0ECFC;
+}
+.nav-list > .active > a {
+	color: #eee;
+}
+.nav-list > .active > a, .nav-list > .active > a:hover {
+	background-color: #388CC4;
+	color: #FFFFFF;
+	text-shadow: none;
+}
+.nav-list .nav-header {
+	margin-left: -15px;
+	font-size: 14px;
+	text-shadow: none;	
+	color: #fff;
+	background-color: #0088CC;
 }
 
 .nav-list > .active > a:active {

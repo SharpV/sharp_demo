@@ -1,16 +1,20 @@
-class GroupsController < ApplicationController
-  set_tab :new, :group_nav
+class GroupsController < GroupController
+  set_tab :index, :group_nav
 
   def index
-
+    @user = current_user 
+    @post = Post.new
+    @posts = Post.all
   end
   
   def show
-    @group = Group.find params[:id]
-    self.try "set_tab", "group_#{@group.id}", :group_nav
+    @current_group = Group.find params[:id]
+    self.try "set_tab", "group_#{@current_group.id}", :group_nav
   end
   
   def new
+    self.try "set_tab", "new", :group_nav
+    
     @group = Group.new
   end
 
@@ -25,26 +29,11 @@ class GroupsController < ApplicationController
 
   def destroy
     destroy! do |success, failure|
-      success.html {
+      success.html do
         self.current_subject = current_user
         redirect_to :home
-      }
+      end
     end
   end
 
-  protected
-
-  # Overwrite resource method to support slug
-  # See InheritedResources::BaseHelpers#resource
-  def resource
-    @group ||= end_of_association_chain.find_by_slug!(params[:id])
-  end
-
-  private
-
-  def set_founder
-    params[:group]                  ||= {}
-    params[:group][:author_id]      ||= current_subject.try(:actor_id)
-    params[:group][:user_author_id] ||= current_user.try(:actor_id)
-  end
 end

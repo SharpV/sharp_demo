@@ -1,7 +1,4 @@
-<div class='span-left'> 
-	栏目正在建设中...
-</div>
-
-<div class='span-right'>
-
+<%= render "posts/form" %>
+<div id="posts" class='clearfix'>
+	<%= render :partial => 'posts/post', :collection => @posts %>
 </div>

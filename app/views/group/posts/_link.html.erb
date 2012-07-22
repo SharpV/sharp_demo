@@ -1,0 +1,14 @@
+<div id='post-link' style='display:none'>
+	<%= simple_form_for [@user, @post], :html => {:id => "new_post_form", :class => 'form-horizontal'} do |f| -%>	
+		<%= render 'shared/error_messages', :object => f.object %>
+		<%= f.hidden_field(:kind, :value => 'link') %>
+		<%= f.input :link, :class=>'input-xlarge', :label => '链接' %>
+		<%= f.input :body, :class=>'input-xlarge', :label => '描述' %>
+		<%= f.input :tag_list, :class=>'input_field', :label => "标签" %>
+		<div class="form-actions">
+			<%= f.submit "发布", :class=>'btn btn-primary' %>&nbsp;
+			<button class="btn" type="reset">保存为草稿</button>
+		</div>
+	<% end %>
+</div>
+
