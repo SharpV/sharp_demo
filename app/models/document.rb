@@ -2,7 +2,7 @@ require 'pathname'
 require 'carrierwave/orm/activerecord'
 
 class Document < ActiveRecord::Base
-  mount_uploader :file, DocumentUploader
+  mount_uploader :file, FileUploader
   belongs_to :user
   belongs_to :group
 

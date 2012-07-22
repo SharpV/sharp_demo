@@ -1,0 +1,9 @@
+<%= simple_form_for @group, :html => {:class => 'form-stacked, new-share'} do |f| -%>	
+	<%= f.error_notification %>
+	<%= f.input :name, :class=>'xlarge', :label => '名称' %>
+	<%= f.input :logo, :label => "图标" %>
+	<%= f.input :description, :label => '简介' %>
+	<div class="actions">
+		<%= f.submit "Save", :class=>'btn btn-primary' %>&nbsp;<button class="btn" type="reset">Cancel</button>
+	</div>
+<% end %>

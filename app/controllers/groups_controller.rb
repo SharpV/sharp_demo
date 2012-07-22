@@ -1,26 +1,25 @@
 class GroupsController < ApplicationController
-
-  before_filter :authenticate_user!, :except => [ :index, :show ]
-
-  # Set group founder to current_subject
-  # Must do before authorization
-  before_filter :set_founder, :only => [ :new, :create ]
-
-  load_and_authorize_resource
-
-  respond_to :html, :js
+  set_tab :new, :group_nav
 
   def index
 
-
+  end
+  
+  def show
+    @group = Group.find params[:id]
+    self.try "set_tab", "group_#{@group.id}", :group_nav
+  end
+  
+  def new
+    @group = Group.new
   end
 
   def create
-    create! do |success, failure|
-      success.html {
-        self.current_subject = @group
-        redirect_to :home
-      }
+    @group = current_user.groups.build(params[:group])
+    if @group.save
+      redirect_to @group  
+    else
+      render :action => :new
     end
   end
 

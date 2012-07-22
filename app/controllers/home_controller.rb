@@ -1,7 +1,5 @@
 class HomeController < ApplicationController
-  
-  
-  #set_tab :home, :user_menus
+  set_tab :index, :group_nav
   #set_tab :home, :site_menus
   #set_tab :timeline, :user_timeline_menus
   

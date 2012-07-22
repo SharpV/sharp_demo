@@ -1,16 +1,15 @@
-# {Group Groups} are the other kind of social entities supported in SocialStream::Base
-#
-# As with {User}, almost all the interaction with other classes in Social Stream is done
-# through {Actor}. The glue between {Group} and {Actor} is in {SocialStream::Models::Subject}
-#
+require 'pathname'
+require 'carrierwave/orm/activerecord'
 
 class Group < ActiveRecord::Base
 
-  attr_accessor :_participants
+  mount_uploader :logo, ImageUploader
+  
+  belongs_to :user
+  
+  before_validation  :generate_permalink
+  
 
-  delegate :description, :description=, :to => :profile!
-
-  after_create :create_ties
 
   def profile!
     actor!.profile || actor!.build_profile
@@ -24,38 +23,9 @@ class Group < ActiveRecord::Base
   end
 
   private
-
-  # Creates ties from founder to the group, based on _relation_ids,
-  # and ties from the group to founder and participants.
-  def create_ties
-    create_ties_from_founder
-    create_ties_to_participants
-  end
-
-  # Creates the ties from the founder to the group
-  def create_ties_from_founder
-=begin
-    # FIXME: need to define a proper relation for this case. Maybe a system defined relation
-    author.sent_contacts.create! :receiver_id  => actor_id,
-                                 :relation_ids => _relation_ids
-
-    if represented_author?
-      user_author.sent_contacts.create! :receiver_id  => actor_id,
-                                        :relation_ids => _relation_ids
-    end
-=end
-  end
   
-  # Creates the ties from the group to the participants
-  def create_ties_to_participants
-    participant_ids = ([ author_id, user_author_id ] | Array.wrap(@_participants)).uniq
-
-    participant_ids.each do |a|
-      sent_contacts.create! :receiver_id  => a,
-                            :user_author  => user_author,
-                            :relation_ids => Array(relation_customs.sort.first.id)
-    end
+  
+  def generate_permalink
+    self.permalink = Hz2py.do(self.name, :join_with => '-', :to_simplified => true).gsub(/\W/, "-").gsub(/(-){2,}/, '-').to_s
   end
 end
-
-ActiveSupport.run_load_hooks(:group, Group)

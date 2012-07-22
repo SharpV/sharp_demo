@@ -14,7 +14,7 @@ class User < ActiveRecord::Base
 
   has_many :note_categories
   has_many :notes
-  
+  has_many :groups
   has_many :posts
   
   # Setup accessible (or protected) attributes for your model

@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120718133211) do
+ActiveRecord::Schema.define(:version => 20120721091814) do
 
   create_table "cities", :force => true do |t|
     t.integer "province_code"
@@ -71,12 +71,15 @@ ActiveRecord::Schema.define(:version => 20120718133211) do
     t.integer "owner_id"
     t.string  "owner_type"
     t.integer "readings_count",     :default => 0
+    t.integer "user_id"
+    t.string  "file"
   end
 
   add_index "documents", ["doc_category_id"], :name => "index_documents_on_doc_category_id"
   add_index "documents", ["owner_id", "owner_type"], :name => "index_documents_on_owner_id_and_owner_type"
   add_index "documents", ["owner_id"], :name => "index_documents_on_owner_id"
   add_index "documents", ["owner_type"], :name => "index_documents_on_owner_type"
+  add_index "documents", ["user_id"], :name => "index_documents_on_user_id"
 
   create_table "fields", :force => true do |t|
     t.integer "parent_id"
@@ -151,6 +154,16 @@ ActiveRecord::Schema.define(:version => 20120718133211) do
   end
 
   add_index "plans", ["user_id"], :name => "index_plans_on_user_id"
+
+  create_table "post_assets", :force => true do |t|
+    t.integer  "user_id"
+    t.integer  "post_id"
+    t.datetime "created_at"
+    t.string   "file"
+  end
+
+  add_index "post_assets", ["post_id"], :name => "index_post_assets_on_post_id"
+  add_index "post_assets", ["user_id"], :name => "index_post_assets_on_user_id"
 
   create_table "posts", :force => true do |t|
     t.string   "title",                                              :null => false
