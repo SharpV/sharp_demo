@@ -1,0 +1,9 @@
+<div class='span-left'>
+	<%= render "users/menu" %>
+	<%= "您还没有任何分享" if @posts.empty? %>
+	<%= render :partial => 'my/posts/post', :collection => @posts %>
+</div>
+<div class='span-right'>
+	<%= raw title_block "我的分类", post_categories_path, "管理" %>
+	<%= render "categories" %>
+</div>

@@ -11,17 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120718133211) do
-
-  create_table "activities", :force => true do |t|
-    t.text    "content"
-    t.integer "actor_type"
-    t.integer "actor_id"
-  end
-
-  add_index "activities", ["actor_id"], :name => "index_activities_on_actor_id"
-  add_index "activities", ["actor_type", "actor_id"], :name => "index_activities_on_actor_type_and_actor_id"
-  add_index "activities", ["actor_type"], :name => "index_activities_on_actor_type"
+ActiveRecord::Schema.define(:version => 20120721091814) do
 
   create_table "cities", :force => true do |t|
     t.integer "province_code"
@@ -56,6 +46,41 @@ ActiveRecord::Schema.define(:version => 20120718133211) do
   add_index "contacts", ["receiver_id"], :name => "index_contacts_on_receiver_id"
   add_index "contacts", ["sender_id"], :name => "index_contacts_on_sender_id"
 
+  create_table "doc_categories", :force => true do |t|
+    t.integer "parent_id"
+    t.string  "name"
+    t.integer "lft"
+    t.integer "rgt"
+    t.integer "user_id"
+    t.integer "owner_id"
+    t.string  "owner_type"
+    t.integer "documents_count", :default => 0
+  end
+
+  add_index "doc_categories", ["owner_id", "owner_type"], :name => "index_doc_categories_on_owner_id_and_owner_type"
+  add_index "doc_categories", ["owner_id"], :name => "index_doc_categories_on_owner_id"
+  add_index "doc_categories", ["owner_type"], :name => "index_doc_categories_on_owner_type"
+  add_index "doc_categories", ["parent_id"], :name => "index_doc_categories_on_parent_id"
+
+  create_table "documents", :force => true do |t|
+    t.integer "likes_count",        :default => 0
+    t.string  "name"
+    t.text    "summary"
+    t.integer "downloadings_count", :default => 0
+    t.integer "doc_category_id"
+    t.integer "owner_id"
+    t.string  "owner_type"
+    t.integer "readings_count",     :default => 0
+    t.integer "user_id"
+    t.string  "file"
+  end
+
+  add_index "documents", ["doc_category_id"], :name => "index_documents_on_doc_category_id"
+  add_index "documents", ["owner_id", "owner_type"], :name => "index_documents_on_owner_id_and_owner_type"
+  add_index "documents", ["owner_id"], :name => "index_documents_on_owner_id"
+  add_index "documents", ["owner_type"], :name => "index_documents_on_owner_type"
+  add_index "documents", ["user_id"], :name => "index_documents_on_user_id"
+
   create_table "fields", :force => true do |t|
     t.integer "parent_id"
     t.string  "name"
@@ -66,97 +91,100 @@ ActiveRecord::Schema.define(:version => 20120718133211) do
     t.integer "subjects_count", :default => 0
   end
 
-  create_table "note_categories", :force => true do |t|
-    t.integer "parent_id"
-    t.string  "name"
-    t.integer "lft"
-    t.integer "rgt"
-    t.integer "user_id"
-    t.integer "notes_count", :default => 0
-  end
-
-  add_index "note_categories", ["user_id"], :name => "index_note_categories_on_user_id"
-
-  create_table "notes", :force => true do |t|
-    t.string   "title",                                              :null => false
-    t.string   "slug",                                               :null => false
-    t.text     "body",                                               :null => false
-    t.text     "summary"
-    t.boolean  "active",                          :default => true
-    t.integer  "note_category_id"
-    t.string   "cached_tag_list"
-    t.datetime "published_at"
+  create_table "group_members", :force => true do |t|
+    t.boolean  "admin",      :default => false
+    t.boolean  "active",     :default => false
+    t.integer  "user_id",                       :null => false
+    t.integer  "group_id",                      :null => false
+    t.string   "note"
     t.datetime "created_at"
     t.datetime "updated_at"
-    t.string   "kind",              :limit => 10,                    :null => false
-    t.datetime "edited_at"
-    t.integer  "views_count",                     :default => 0
-    t.integer  "comments_count",                  :default => 0
-    t.integer  "likes_count",                     :default => 0
-    t.integer  "collections_count",               :default => 0
-    t.string   "file"
-    t.string   "link"
-    t.integer  "user_id"
-    t.string   "image"
-    t.boolean  "published",                       :default => false
-    t.integer  "subject_id"
   end
 
-  add_index "notes", ["kind"], :name => "index_notes_on_kind"
-  add_index "notes", ["note_category_id"], :name => "index_notes_on_note_category_id"
-  add_index "notes", ["subject_id"], :name => "index_notes_on_subject_id"
-  add_index "notes", ["user_id"], :name => "index_notes_on_user_id"
+  add_index "group_members", ["active"], :name => "index_group_members_on_active"
+  add_index "group_members", ["group_id"], :name => "index_group_members_on_group_id"
+  add_index "group_members", ["user_id", "group_id"], :name => "index_group_members_on_user_id_and_group_id"
+  add_index "group_members", ["user_id"], :name => "index_group_members_on_user_id"
 
-  create_table "organizations", :force => true do |t|
+  create_table "groups", :force => true do |t|
     t.string   "name"
-    t.string   "permalink",                                             :null => false
-    t.string   "language",    :default => "en"
-    t.string   "time_zone",   :default => "Eastern Time (US & Canada)"
-    t.string   "domain"
+    t.string   "permalink",                              :null => false
+    t.boolean  "public",              :default => false
+    t.integer  "user_id",                                :null => false
+    t.integer  "group_members_count", :default => 0
     t.text     "description"
     t.string   "logo"
     t.datetime "created_at"
     t.datetime "updated_at"
     t.text     "settings"
-    t.boolean  "deleted",     :default => false,                        :null => false
+    t.boolean  "deleted",             :default => false, :null => false
   end
 
-  add_index "organizations", ["deleted"], :name => "index_organizations_on_deleted"
-  add_index "organizations", ["domain"], :name => "index_organizations_on_domain"
-  add_index "organizations", ["permalink"], :name => "index_organizations_on_permalink"
+  add_index "groups", ["deleted"], :name => "index_groups_on_deleted"
+  add_index "groups", ["permalink"], :name => "index_groups_on_permalink"
+  add_index "groups", ["user_id"], :name => "index_groups_on_user_id"
 
-  create_table "posts", :force => true do |t|
-    t.string   "title",                                              :null => false
-    t.string   "slug",                                               :null => false
-    t.text     "body",                                               :null => false
-    t.text     "summary"
-    t.boolean  "active",                          :default => true
-    t.integer  "post_category_id"
-    t.string   "cached_tag_list"
+  create_table "notes", :force => true do |t|
+    t.text     "body",                                 :null => false
+    t.boolean  "active",            :default => true
+    t.integer  "plan_id"
     t.datetime "published_at"
     t.datetime "created_at"
     t.datetime "updated_at"
-    t.string   "kind",              :limit => 10,                    :null => false
     t.datetime "edited_at"
-    t.integer  "views_count",                     :default => 0
+    t.integer  "views_count",       :default => 0
+    t.integer  "comments_count",    :default => 0
+    t.integer  "likes_count",       :default => 0
+    t.integer  "collections_count", :default => 0
+    t.integer  "user_id"
+    t.boolean  "published",         :default => false
+  end
+
+  add_index "notes", ["plan_id"], :name => "index_notes_on_plan_id"
+  add_index "notes", ["user_id"], :name => "index_notes_on_user_id"
+
+  create_table "plans", :force => true do |t|
+    t.integer  "user_id"
+    t.string   "goal"
+    t.integer  "done",        :default => 0
+    t.integer  "notes_count", :default => 0
+    t.datetime "done_at"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "plans", ["user_id"], :name => "index_plans_on_user_id"
+
+  create_table "post_assets", :force => true do |t|
+    t.integer  "user_id"
+    t.integer  "post_id"
+    t.datetime "created_at"
+    t.string   "file"
+  end
+
+  add_index "post_assets", ["post_id"], :name => "index_post_assets_on_post_id"
+  add_index "post_assets", ["user_id"], :name => "index_post_assets_on_user_id"
+
+  create_table "posts", :force => true do |t|
+    t.string   "title",                                              :null => false
+    t.text     "body",                                               :null => false
+    t.string   "url"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+    t.string   "kind",              :limit => 10,                    :null => false
     t.integer  "comments_count",                  :default => 0
     t.integer  "likes_count",                     :default => 0
     t.integer  "collections_count",               :default => 0
-    t.string   "file"
-    t.string   "link"
+    t.string   "avatar"
     t.integer  "user_id"
-    t.string   "image"
+    t.integer  "owner_id"
+    t.string   "owner_type"
     t.boolean  "published",                       :default => false
-    t.integer  "grade_id"
-    t.integer  "subject_id"
-    t.integer  "domain_id"
   end
 
-  add_index "posts", ["domain_id"], :name => "index_posts_on_domain_id"
-  add_index "posts", ["grade_id"], :name => "index_posts_on_grade_id"
   add_index "posts", ["kind"], :name => "index_posts_on_kind"
-  add_index "posts", ["post_category_id"], :name => "index_posts_on_post_category_id"
-  add_index "posts", ["subject_id"], :name => "index_posts_on_subject_id"
+  add_index "posts", ["owner_id", "owner_type"], :name => "index_posts_on_owner_id_and_owner_type"
+  add_index "posts", ["owner_type"], :name => "index_posts_on_owner_type"
   add_index "posts", ["user_id"], :name => "index_posts_on_user_id"
 
   create_table "profiles", :force => true do |t|

@@ -47,7 +47,7 @@ gem 'rails3-jquery-autocomplete'
 gem 'simple_form', '~> 2.0.1'
 gem 'formtastic'
 gem 'likeable'
-gem 'paperclip'
+gem 'hz2py'
 gem "annotate"
 gem 'redis_voteable'
 gem "bcrypt-ruby", :require => "bcrypt"
