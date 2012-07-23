@@ -47,18 +47,16 @@ SharpLink::Application.routes.draw do
     
   scope :module => "group" do
     resources :groups do 
-      resources :posts
-      resources :topics
       resources :documents
       resources :events
       resources :comments
       resources :passwords
       resources :likes
       resources :questions
-      resources :collections
+      resources :links
       resources :notifications
-      resources :professions
-      resources :educations
+      resources :photos
+      resources :tasks
       resources :posts do
         resources :comments
       end

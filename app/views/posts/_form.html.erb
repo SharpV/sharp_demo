@@ -5,10 +5,9 @@ $(document).ready(function() {
 </script>
 <div id='new_post'>
 	<div class="avatar">
-		<%= image_tag current_user.avatar_url(:m) || "http://placehold.it/75x75" %>
 	</div>
 	<div class="post_form">
-		<%= simple_form_for @post, :remote => true, :html => {:id => "post_form", :class => 'form-horizontal', :data => {:type=>"script", :"method"=>"post"}} do |f| -%>	
+		<%= simple_form_for Post.new, :remote => true, :html => {:id => "post_form", :class => 'form-horizontal', :data => {:type=>"script", :"method"=>"post"}} do |f| -%>	
 			<%= render 'shared/error_messages', :object => f.object %>
 			<%= f.input :body, :label => "和好友分享学习体会、问题以及最近的发现吧 ：）", :input_html => { :width => 120, :height => 50, :id => "input_post" } %>
 			<div class="actions">

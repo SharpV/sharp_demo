@@ -1,17 +1,16 @@
-<%= form_for(@my_post) do |f| %>
-  <% if @my_post.errors.any? %>
-    <div id="error_explanation">
-      <h2><%= pluralize(@my_post.errors.count, "error") %> prohibited this my_post from being saved:</h2>
-
-      <ul>
-      <% @my_post.errors.full_messages.each do |msg| %>
-        <li><%= msg %></li>
-      <% end %>
-      </ul>
-    </div>
-  <% end %>
-
-  <div class="actions">
-    <%= f.submit %>
-  </div>
-<% end %>
+<script>
+$(document).ready(function() {
+	$('#input_post').elastic();
+});
+</script>
+<div class="post_form">
+	<%= simple_form_for [@current_group, @post], :remote => true, :html => {:id => "post_form", :class => 'form-horizontal', :data => {:type=>"script", :"method"=>"post"}} do |f| -%>	
+	<%= render 'shared/error_messages', :object => f.object %>
+	<%= f.input :body, :label => "Body", :input_html => { :width => 120, :height => 30, :id => "input_post" } %>
+	<div class="actions">
+		<%= f.submit "发布", :class=>'btn btn-primary'%>
+		&nbsp;
+		<button class="btn" type="reset">保存为草稿</button>
+	</div>
+	<% end %>
+</div>

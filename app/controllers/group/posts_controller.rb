@@ -1,9 +1,8 @@
-class My::PostCategoriesController < ApplicationController
-  respond_to :html, :js
-  set_tab :post, :user_menus
-  set_tab :home, :site_menus
-  include TheSortableTreeController::Rebuild
-
+class Group::PostsController < GroupController
+  respond_to :html, :js  
+  
+  layout false
+  
   def index
     @user = current_user
     @post_category = PostCategory.new
@@ -23,8 +22,8 @@ class My::PostCategoriesController < ApplicationController
   end
 
   def new
-    @post_category = PostCategory.new
-    respond_to do |format|
+    @post = Post.new
+    respond_with do |format|
       format.js
     end
   end

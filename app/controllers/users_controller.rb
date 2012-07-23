@@ -1,5 +1,5 @@
 class UsersController < ApplicationController
-
+  
   def search
     if params[:q].present?
       @users = User.search(params[:q])

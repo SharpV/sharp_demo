@@ -83,49 +83,6 @@ class User < ActiveRecord::Base
       EOS
     end
 
-    # Overwrite devise default find method to support login with email,
-    # presence ID and login
-    def find_for_authentication(conditions)
-      if ( login = conditions[:email] ).present?
-        if login =~ /@/
-          find_by_email(login)
-        else
-          find_by_slug(login)
-        end
-      else
-        super
-      end
-    end
-
-    def find_or_initialize_with_errors(required_attributes, attributes, error=:invalid)
-      if required_attributes == [:email]
-        find_or_initialize_with_error_by_email(attributes[:email], error)
-      else
-        super
-      end
-    end
-
-    # Overwrite devise default method to support finding with actor.email
-    def find_or_initialize_with_error_by_email(value, error)
-      if value.present?
-        record = find_by_email(value)
-      end
-
-      unless record
-        record = new
-
-        if value.present?
-          record.email = value
-        else
-          error = :blank
-        end
-
-        record.errors.add(:email, error)
-      end
-
-      record
-    end
-
     def find_or_create_for_facebook_oauth(hash, signed_in_resource = nil)
       puts hash.inspect
       auth = Authentication.find_by_provider_and_uid(hash["provider"], hash["uid"])

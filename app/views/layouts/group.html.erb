@@ -16,7 +16,7 @@
 <body>
 	<%= render "layouts/header" %>
 	<div class="container">
-		<div class="content">
+		<div id='content' class="content">
 			<%= notice_message %>
 			<div class='row'>
 				<div class='span2'>	
@@ -24,6 +24,7 @@
 				</div>
 
 				<div class='span10'>
+					<%= render 'groups/profile' %>
 					<%= render 'groups/menu' if @current_group %>
 					<%= yield %>
 				</div>
