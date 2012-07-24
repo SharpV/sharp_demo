@@ -7,6 +7,8 @@ class Group < ActiveRecord::Base
   
   belongs_to :user
   
+  has_many :activities
+  
   before_validation  :generate_permalink
   
 

@@ -24,8 +24,10 @@
 				</div>
 
 				<div class='span10'>
-					<%= render 'groups/profile' %>
-					<%= render 'groups/menu' if @current_group %>
+					<%- if @current_group %>
+						<%= render 'groups/profile' %>
+						<%= render 'groups/menu' %>
+					<% end %>
 					<%= yield %>
 				</div>
 				

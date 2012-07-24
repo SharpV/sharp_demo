@@ -4,7 +4,7 @@ class GroupsController < GroupController
   def index
     @user = current_user 
     @post = Post.new
-    @posts = Post.all
+    @activities = Activity.all
   end
   
   def show

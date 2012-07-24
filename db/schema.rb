@@ -11,7 +11,34 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120721091814) do
+ActiveRecord::Schema.define(:version => 20120724123507) do
+
+  create_table "activities", :force => true do |t|
+    t.string   "title",                         :null => false
+    t.string   "body"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+    t.integer  "comments_count", :default => 0
+    t.string   "user_avatar"
+    t.string   "group_logo"
+    t.integer  "user_id"
+    t.integer  "group_id"
+  end
+
+  add_index "activities", ["group_id"], :name => "index_activities_on_group_id"
+  add_index "activities", ["user_id"], :name => "index_activities_on_user_id"
+
+  create_table "categories", :force => true do |t|
+    t.integer "parent_id"
+    t.string  "name"
+    t.integer "lft"
+    t.integer "rgt"
+    t.integer "user_id"
+    t.integer "group_id"
+  end
+
+  add_index "categories", ["group_id"], :name => "index_categories_on_group_id"
+  add_index "categories", ["parent_id"], :name => "index_categories_on_parent_id"
 
   create_table "cities", :force => true do |t|
     t.integer "province_code"
@@ -33,52 +60,20 @@ ActiveRecord::Schema.define(:version => 20120721091814) do
   add_index "comments", ["commentable_type"], :name => "index_comments_on_commentable_type"
   add_index "comments", ["user_id"], :name => "index_comments_on_user_id"
 
-  create_table "contacts", :force => true do |t|
-    t.integer  "sender_id"
-    t.integer  "receiver_id"
-    t.datetime "created_at"
-    t.datetime "updated_at"
-    t.integer  "inverse_id"
-    t.integer  "ties_count",  :default => 0
-  end
-
-  add_index "contacts", ["inverse_id"], :name => "index_contacts_on_inverse_id"
-  add_index "contacts", ["receiver_id"], :name => "index_contacts_on_receiver_id"
-  add_index "contacts", ["sender_id"], :name => "index_contacts_on_sender_id"
-
-  create_table "doc_categories", :force => true do |t|
-    t.integer "parent_id"
-    t.string  "name"
-    t.integer "lft"
-    t.integer "rgt"
-    t.integer "user_id"
-    t.integer "owner_id"
-    t.string  "owner_type"
-    t.integer "documents_count", :default => 0
-  end
-
-  add_index "doc_categories", ["owner_id", "owner_type"], :name => "index_doc_categories_on_owner_id_and_owner_type"
-  add_index "doc_categories", ["owner_id"], :name => "index_doc_categories_on_owner_id"
-  add_index "doc_categories", ["owner_type"], :name => "index_doc_categories_on_owner_type"
-  add_index "doc_categories", ["parent_id"], :name => "index_doc_categories_on_parent_id"
-
   create_table "documents", :force => true do |t|
     t.integer "likes_count",        :default => 0
     t.string  "name"
     t.text    "summary"
     t.integer "downloadings_count", :default => 0
-    t.integer "doc_category_id"
-    t.integer "owner_id"
-    t.string  "owner_type"
-    t.integer "readings_count",     :default => 0
+    t.integer "category_id"
+    t.integer "group_id"
     t.integer "user_id"
+    t.integer "readings_count",     :default => 0
     t.string  "file"
   end
 
-  add_index "documents", ["doc_category_id"], :name => "index_documents_on_doc_category_id"
-  add_index "documents", ["owner_id", "owner_type"], :name => "index_documents_on_owner_id_and_owner_type"
-  add_index "documents", ["owner_id"], :name => "index_documents_on_owner_id"
-  add_index "documents", ["owner_type"], :name => "index_documents_on_owner_type"
+  add_index "documents", ["category_id"], :name => "index_documents_on_category_id"
+  add_index "documents", ["group_id"], :name => "index_documents_on_group_id"
   add_index "documents", ["user_id"], :name => "index_documents_on_user_id"
 
   create_table "fields", :force => true do |t|
@@ -118,16 +113,19 @@ ActiveRecord::Schema.define(:version => 20120721091814) do
     t.datetime "updated_at"
     t.text     "settings"
     t.boolean  "deleted",             :default => false, :null => false
+    t.string   "kind"
   end
 
   add_index "groups", ["deleted"], :name => "index_groups_on_deleted"
+  add_index "groups", ["kind"], :name => "index_groups_on_kind"
   add_index "groups", ["permalink"], :name => "index_groups_on_permalink"
   add_index "groups", ["user_id"], :name => "index_groups_on_user_id"
 
   create_table "notes", :force => true do |t|
-    t.text     "body",                                 :null => false
+    t.text     "body"
     t.boolean  "active",            :default => true
     t.integer  "plan_id"
+    t.integer  "group_id"
     t.datetime "published_at"
     t.datetime "created_at"
     t.datetime "updated_at"
@@ -137,22 +135,45 @@ ActiveRecord::Schema.define(:version => 20120721091814) do
     t.integer  "likes_count",       :default => 0
     t.integer  "collections_count", :default => 0
     t.integer  "user_id"
-    t.boolean  "published",         :default => false
+    t.integer  "category_id"
   end
 
+  add_index "notes", ["group_id"], :name => "index_notes_on_group_id"
   add_index "notes", ["plan_id"], :name => "index_notes_on_plan_id"
   add_index "notes", ["user_id"], :name => "index_notes_on_user_id"
 
+  create_table "pictures", :force => true do |t|
+    t.string   "title",                            :null => false
+    t.string   "note"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+    t.integer  "comments_count",    :default => 0
+    t.integer  "likes_count",       :default => 0
+    t.integer  "collections_count", :default => 0
+    t.string   "image"
+    t.integer  "user_id"
+    t.integer  "group_id"
+    t.integer  "category_id"
+  end
+
+  add_index "pictures", ["category_id"], :name => "index_pictures_on_category_id"
+  add_index "pictures", ["group_id"], :name => "index_pictures_on_group_id"
+  add_index "pictures", ["user_id"], :name => "index_pictures_on_user_id"
+
   create_table "plans", :force => true do |t|
     t.integer  "user_id"
+    t.integer  "group_id",                       :null => false
     t.string   "goal"
-    t.integer  "done",        :default => 0
+    t.boolean  "done",        :default => false
     t.integer  "notes_count", :default => 0
     t.datetime "done_at"
+    t.integer  "category_id"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
 
+  add_index "plans", ["category_id"], :name => "index_plans_on_category_id"
+  add_index "plans", ["group_id"], :name => "index_plans_on_group_id"
   add_index "plans", ["user_id"], :name => "index_plans_on_user_id"
 
   create_table "post_assets", :force => true do |t|
@@ -166,25 +187,21 @@ ActiveRecord::Schema.define(:version => 20120721091814) do
   add_index "post_assets", ["user_id"], :name => "index_post_assets_on_user_id"
 
   create_table "posts", :force => true do |t|
-    t.string   "title",                                              :null => false
-    t.text     "body",                                               :null => false
-    t.string   "url"
+    t.string   "title",                            :null => false
+    t.text     "body",                             :null => false
     t.datetime "created_at"
     t.datetime "updated_at"
-    t.string   "kind",              :limit => 10,                    :null => false
-    t.integer  "comments_count",                  :default => 0
-    t.integer  "likes_count",                     :default => 0
-    t.integer  "collections_count",               :default => 0
+    t.integer  "comments_count",    :default => 0
+    t.integer  "likes_count",       :default => 0
+    t.integer  "collections_count", :default => 0
     t.string   "avatar"
     t.integer  "user_id"
-    t.integer  "owner_id"
-    t.string   "owner_type"
-    t.boolean  "published",                       :default => false
+    t.integer  "group_id"
+    t.integer  "category_id"
   end
 
-  add_index "posts", ["kind"], :name => "index_posts_on_kind"
-  add_index "posts", ["owner_id", "owner_type"], :name => "index_posts_on_owner_id_and_owner_type"
-  add_index "posts", ["owner_type"], :name => "index_posts_on_owner_type"
+  add_index "posts", ["category_id"], :name => "index_posts_on_category_id"
+  add_index "posts", ["group_id"], :name => "index_posts_on_group_id"
   add_index "posts", ["user_id"], :name => "index_posts_on_user_id"
 
   create_table "profiles", :force => true do |t|
@@ -217,6 +234,24 @@ ActiveRecord::Schema.define(:version => 20120721091814) do
     t.integer "code", :null => false
   end
 
+  create_table "questions", :force => true do |t|
+    t.string   "title",                            :null => false
+    t.string   "note"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+    t.integer  "comments_count",    :default => 0
+    t.integer  "likes_count",       :default => 0
+    t.integer  "collections_count", :default => 0
+    t.string   "image"
+    t.integer  "user_id"
+    t.integer  "group_id"
+    t.integer  "category_id"
+  end
+
+  add_index "questions", ["category_id"], :name => "index_questions_on_category_id"
+  add_index "questions", ["group_id"], :name => "index_questions_on_group_id"
+  add_index "questions", ["user_id"], :name => "index_questions_on_user_id"
+
   create_table "taggings", :force => true do |t|
     t.integer  "tag_id"
     t.integer  "taggable_id"
@@ -233,6 +268,25 @@ ActiveRecord::Schema.define(:version => 20120721091814) do
   create_table "tags", :force => true do |t|
     t.string "name"
   end
+
+  create_table "topics", :force => true do |t|
+    t.string   "title",                            :null => false
+    t.text     "body",                             :null => false
+    t.string   "url"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+    t.integer  "comments_count",    :default => 0
+    t.integer  "likes_count",       :default => 0
+    t.integer  "collections_count", :default => 0
+    t.string   "avatar"
+    t.integer  "user_id"
+    t.integer  "group_id"
+    t.integer  "category_id"
+  end
+
+  add_index "topics", ["category_id"], :name => "index_topics_on_category_id"
+  add_index "topics", ["group_id"], :name => "index_topics_on_group_id"
+  add_index "topics", ["user_id"], :name => "index_topics_on_user_id"
 
   create_table "users", :force => true do |t|
     t.string   "name"

@@ -1,38 +1,33 @@
 class Install < ActiveRecord::Migration
   def self.up
     
-    create_table "doc_categories", :force => true do |t|
+    create_table "categories", :force => true do |t|
       t.integer "parent_id"
       t.string  "name"
       t.integer "lft"
       t.integer "rgt"
       t.integer "user_id"
-      t.integer "owner_id"
-      t.string  "owner_type"
-      t.integer "documents_count", :default => 0
+      t.integer "group_id"
     end
     
-    add_index :doc_categories, :parent_id
-    add_index :doc_categories, :owner_id
-    add_index :doc_categories, :owner_type
-    add_index :doc_categories, [:owner_id, :owner_type]
+    add_index :categories, :parent_id
+    add_index :categories, :group_id
+
     
     create_table "documents", :force => true do |t|
       t.integer "likes_count", :default => 0
       t.string  "name"
       t.text  "summary"
       t.integer "downloadings_count", :default => 0
-      t.integer "doc_category_id"
-      t.integer "owner_id"
-      t.string  "owner_type"
+      t.integer "category_id"
+      t.integer  "group_id"
+      t.integer "user_id"
       t.integer "readings_count", :default => 0
     end
     
-    add_index :documents, :doc_category_id
-    add_index :documents, :owner_id
-    add_index :documents, :owner_type
-    add_index :documents, [:owner_id, :owner_type]
-    
+    add_index :documents, :category_id
+    add_index :documents, :group_id    
+    add_index :documents, :user_id
     
     create_table "groups", :force => true do |t|
       t.string   "name"
@@ -77,20 +72,6 @@ class Install < ActiveRecord::Migration
       t.integer "posts_count",    :default => 0
       t.integer "subjects_count", :default => 0
     end
-
-    create_table "contacts", :force => true do |t|
-      t.integer  "sender_id"
-      t.integer  "receiver_id"
-      t.datetime "created_at"
-      t.datetime "updated_at"
-      t.integer  "inverse_id"
-      t.integer  "ties_count",  :default => 0
-    end
-
-    add_index "contacts", ["inverse_id"], :name => "index_contacts_on_inverse_id"
-    add_index "contacts", ["receiver_id"], :name => "index_contacts_on_receiver_id"
-    add_index "contacts", ["sender_id"], :name => "index_contacts_on_sender_id"
-
    
     create_table "profiles", :force => true do |t|
       t.integer  "user_id"
@@ -133,24 +114,40 @@ class Install < ActiveRecord::Migration
     create_table "posts", :force => true do |t|
       t.string   "title",                                              :null => false
       t.text     "body",                                               :null => false
-      t.string   "url"
       t.datetime "created_at"
       t.datetime "updated_at"
-      t.string   "kind",              :limit => 10,                    :null => false
       t.integer  "comments_count",                  :default => 0
       t.integer  "likes_count",                     :default => 0
       t.integer  "collections_count",               :default => 0
       t.string   "avatar"
       t.integer  "user_id"
-      t.integer "owner_id"
-      t.string  "owner_type"
-      t.boolean  "published",                       :default => false
+      t.integer "group_id"
+      t.integer "category_id"
     end
     
-    add_index "posts", :owner_type
-    add_index "posts", [:owner_id, :owner_type]
-    add_index "posts", ["kind"]
-    add_index "posts", ["user_id"]
+    add_index "posts", :category_id
+    add_index "posts", :group_id
+    add_index "posts", :user_id
+    
+    create_table "topics", :force => true do |t|
+      t.string   "title",                                              :null => false
+      t.text     "body",                                               :null => false
+      t.string   "url"
+      t.datetime "created_at"
+      t.datetime "updated_at"
+      t.integer  "comments_count",                  :default => 0
+      t.integer  "likes_count",                     :default => 0
+      t.integer  "collections_count",               :default => 0
+      t.string   "avatar"
+      t.integer  "user_id"
+      t.integer "group_id"
+      t.integer "category_id"
+    end
+    
+    add_index "topics", :category_id
+    add_index "topics", :group_id
+    add_index "topics", :user_id
+    
 
   end
 
