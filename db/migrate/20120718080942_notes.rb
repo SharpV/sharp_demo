@@ -1,23 +1,19 @@
 class Notes < ActiveRecord::Migration
   def up
     
-    create_table "plans", :force => true do |t|
+    create_table "pages", :force => true do |t|
       t.integer "user_id", :null => false
       t.integer "group_id", :null => false
-      t.string  "goal"
-      t.boolean "done", :default => false
-      t.integer "notes_count", :default => 0
-      t.integer "user_id"
-      t.datetime "done_at"
-      t.integer "notes_count", :default => 0
+      t.string  "title"
+      t.text "body"
       t.integer "category_id"
       t.datetime "created_at"
       t.datetime "updated_at"
     end
 
-    add_index :plans, :user_id
-    add_index :plans, :group_id
-    add_index :plans, :category_id
+    add_index :pages, :user_id
+    add_index :pages, :group_id
+    add_index :pages, :category_id
 
     create_table "notes", :force => true do |t|
       t.text     "body" 

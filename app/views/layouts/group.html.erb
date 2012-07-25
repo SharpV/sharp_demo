@@ -22,15 +22,7 @@
 				<div class='span2'>	
 					<%= render "groups/nav"%>		
 				</div>
-
-				<div class='span10'>
-					<%- if @current_group %>
-						<%= render 'groups/profile' %>
-						<%= render 'groups/menu' %>
-					<% end %>
-					<%= yield %>
-				</div>
-				
+				<%= yield %>
 			</div>
 		</div><!--/content-->
 		<div class='clearfix'><div>

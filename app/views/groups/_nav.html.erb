@@ -1,5 +1,6 @@
 <div class="tabbable tabs-left">
-	<%= tabs_tag(:namespace => :group_nav, :open_tabs => {:id => "user_menus", :class => "nav nav-tabs" }, :builder => MenuTabBuilder) do |tab| %>
+	<%= tabs_tag(:namespace => :group_nav, :open_tabs => {:id => "group_menus", :class => "nav nav-tabs" }, :builder => MenuTabBuilder) do |tab| %>
+		<li><%= image_tag current_user.avatar_url(:b) || "http://placehold.it/125x125" %></li>
 	  <%= tab.index t('All Groups'), root_path %>
 		<%- current_user.groups.each do |group| %>
 	  	<%= tab.try "group_#{group.id}", group.name, group_path(group) %>

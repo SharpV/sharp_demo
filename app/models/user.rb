@@ -29,16 +29,23 @@ class User < ActiveRecord::Base
     :format => {:with => /\A\w+\z/, :message => '只允许数字、大小写字母和下划线'}
     
   before_validation :update_login
+  
+  def flow
+      #tag_ids = subscriptions.select(:tag_id).to_sql
+      #group_ids = groups.select(:id).to_sql
+      #conditions = []
+      #conditions << "taggings.tag_id in (#{tag_ids})"
+      #conditions << "posts.group_id in (#{user_ids})"
+      #Post.joins(:users).where(conditions.join(' or ')).uniq
+    end
+  
     
   def update_login
     self.login = Digest::SHA1.hexdigest("#{email}#{Time.now}") unless self.login
   end
   
-  def recent_groups
-    contact_subjects(:type => :group, :direction => :sent) do |q|
-      q.select("contacts.created_at").
-      merge(Contact.recent)
-    end
+  def stream
+    Post.where(:id => posts.select(:id))
   end
 
   def init_category!

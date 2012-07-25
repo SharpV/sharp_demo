@@ -5,22 +5,19 @@
 		</td>
 		<td>
 			<h3><%= @current_group.name %></h3>
-			<ul class="nav nav-pills">
-				<li><%= link_to raw("<i class='icon-edit'></i> #{t("Write Post")}"), new_group_post_path(@current_group), :remote => true, :data => {:type=>"script"} %></li>
-				<li><%= link_to raw("<i class='icon-camera'></i> #{t("Add Photo")}"), new_group_event_path(@current_group) %></li>
-				
-				<li><%= link_to raw("<i class='icon-question-sign'></i> #{t("Ask Question")}"), new_group_question_path(@current_group) %></li>
-				<li><%= link_to raw("<i class='icon-folder-open'></i> #{t("Create Document")}"), new_group_document_path(@current_group) %></li>
-				<li><%= link_to raw("<i class='icon-tasks'></i> #{t("Create Task")}"), new_group_task_path(@current_group) %></li>
-				<li><%= link_to raw("<i class='icon-link'></i> #{t("Create Link")}"), new_group_link_path(@current_group) %></li>
-				<li><%= link_to raw("<i class='icon-bullhorn'></i> #{t("Publish Event")}"), new_group_event_path(@current_group) %></li>
-			</ul>
-
+			
 		</td>
 		<td>
 		</td>
 	</tr>
 </table>
-<div id='remote_form'>
+<ul class="nav nav-pills">
+	<li><%= link_to raw("<i class='icon-edit'></i> #{t("Write Post")}"), new_group_post_path(@current_group), :remote => true, :data => {:type=>"script"} %></li>
+	<li><%= link_to raw("<i class='icon-camera'></i> #{t("Add Photo")}"), new_group_event_path(@current_group) %></li>
 	
-</div>
+	<li><%= link_to raw("<i class='icon-question-sign'></i> #{t("Ask Question")}"), new_group_question_path(@current_group) %></li>
+	<li><%= link_to raw("<i class='icon-folder-open'></i> #{t("Create Document")}"), new_group_document_path(@current_group) %></li>
+	<li><%= link_to raw("<i class='icon-tasks'></i> #{t("Create Task")}"), new_group_task_path(@current_group) %></li>
+	<li><%= link_to raw("<i class='icon-link'></i> #{t("Create Link")}"), new_group_link_path(@current_group) %></li>
+	<li><%= link_to raw("<i class='icon-bullhorn'></i> #{t("Publish Event")}"), new_group_event_path(@current_group) %></li>
+</ul>

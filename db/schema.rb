@@ -11,22 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120724123507) do
-
-  create_table "activities", :force => true do |t|
-    t.string   "title",                         :null => false
-    t.string   "body"
-    t.datetime "created_at"
-    t.datetime "updated_at"
-    t.integer  "comments_count", :default => 0
-    t.string   "user_avatar"
-    t.string   "group_logo"
-    t.integer  "user_id"
-    t.integer  "group_id"
-  end
-
-  add_index "activities", ["group_id"], :name => "index_activities_on_group_id"
-  add_index "activities", ["user_id"], :name => "index_activities_on_user_id"
+ActiveRecord::Schema.define(:version => 20120721091814) do
 
   create_table "categories", :force => true do |t|
     t.integer "parent_id"
@@ -63,28 +48,18 @@ ActiveRecord::Schema.define(:version => 20120724123507) do
   create_table "documents", :force => true do |t|
     t.integer "likes_count",        :default => 0
     t.string  "name"
+    t.string  "file"
     t.text    "summary"
     t.integer "downloadings_count", :default => 0
     t.integer "category_id"
     t.integer "group_id"
     t.integer "user_id"
     t.integer "readings_count",     :default => 0
-    t.string  "file"
   end
 
   add_index "documents", ["category_id"], :name => "index_documents_on_category_id"
   add_index "documents", ["group_id"], :name => "index_documents_on_group_id"
   add_index "documents", ["user_id"], :name => "index_documents_on_user_id"
-
-  create_table "fields", :force => true do |t|
-    t.integer "parent_id"
-    t.string  "name"
-    t.integer "lft"
-    t.integer "rgt"
-    t.integer "users_count",    :default => 0
-    t.integer "posts_count",    :default => 0
-    t.integer "subjects_count", :default => 0
-  end
 
   create_table "group_members", :force => true do |t|
     t.boolean  "admin",      :default => false
@@ -106,6 +81,7 @@ ActiveRecord::Schema.define(:version => 20120724123507) do
     t.string   "permalink",                              :null => false
     t.boolean  "public",              :default => false
     t.integer  "user_id",                                :null => false
+    t.string   "kind"
     t.integer  "group_members_count", :default => 0
     t.text     "description"
     t.string   "logo"
@@ -113,7 +89,6 @@ ActiveRecord::Schema.define(:version => 20120724123507) do
     t.datetime "updated_at"
     t.text     "settings"
     t.boolean  "deleted",             :default => false, :null => false
-    t.string   "kind"
   end
 
   add_index "groups", ["deleted"], :name => "index_groups_on_deleted"
@@ -142,39 +117,19 @@ ActiveRecord::Schema.define(:version => 20120724123507) do
   add_index "notes", ["plan_id"], :name => "index_notes_on_plan_id"
   add_index "notes", ["user_id"], :name => "index_notes_on_user_id"
 
-  create_table "pictures", :force => true do |t|
-    t.string   "title",                            :null => false
-    t.string   "note"
-    t.datetime "created_at"
-    t.datetime "updated_at"
-    t.integer  "comments_count",    :default => 0
-    t.integer  "likes_count",       :default => 0
-    t.integer  "collections_count", :default => 0
-    t.string   "image"
-    t.integer  "user_id"
-    t.integer  "group_id"
-    t.integer  "category_id"
-  end
-
-  add_index "pictures", ["category_id"], :name => "index_pictures_on_category_id"
-  add_index "pictures", ["group_id"], :name => "index_pictures_on_group_id"
-  add_index "pictures", ["user_id"], :name => "index_pictures_on_user_id"
-
-  create_table "plans", :force => true do |t|
-    t.integer  "user_id"
-    t.integer  "group_id",                       :null => false
-    t.string   "goal"
-    t.boolean  "done",        :default => false
-    t.integer  "notes_count", :default => 0
-    t.datetime "done_at"
+  create_table "pages", :force => true do |t|
+    t.integer  "user_id",     :null => false
+    t.integer  "group_id",    :null => false
+    t.string   "title"
+    t.text     "body"
     t.integer  "category_id"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
 
-  add_index "plans", ["category_id"], :name => "index_plans_on_category_id"
-  add_index "plans", ["group_id"], :name => "index_plans_on_group_id"
-  add_index "plans", ["user_id"], :name => "index_plans_on_user_id"
+  add_index "pages", ["category_id"], :name => "index_pages_on_category_id"
+  add_index "pages", ["group_id"], :name => "index_pages_on_group_id"
+  add_index "pages", ["user_id"], :name => "index_pages_on_user_id"
 
   create_table "post_assets", :force => true do |t|
     t.integer  "user_id"
@@ -194,14 +149,18 @@ ActiveRecord::Schema.define(:version => 20120724123507) do
     t.integer  "comments_count",    :default => 0
     t.integer  "likes_count",       :default => 0
     t.integer  "collections_count", :default => 0
-    t.string   "avatar"
+    t.datetime "done_at"
+    t.string   "kind"
+    t.string   "link"
     t.integer  "user_id"
     t.integer  "group_id"
     t.integer  "category_id"
+    t.integer  "done",              :default => 0
   end
 
   add_index "posts", ["category_id"], :name => "index_posts_on_category_id"
   add_index "posts", ["group_id"], :name => "index_posts_on_group_id"
+  add_index "posts", ["kind"], :name => "index_posts_on_kind"
   add_index "posts", ["user_id"], :name => "index_posts_on_user_id"
 
   create_table "profiles", :force => true do |t|
@@ -234,24 +193,6 @@ ActiveRecord::Schema.define(:version => 20120724123507) do
     t.integer "code", :null => false
   end
 
-  create_table "questions", :force => true do |t|
-    t.string   "title",                            :null => false
-    t.string   "note"
-    t.datetime "created_at"
-    t.datetime "updated_at"
-    t.integer  "comments_count",    :default => 0
-    t.integer  "likes_count",       :default => 0
-    t.integer  "collections_count", :default => 0
-    t.string   "image"
-    t.integer  "user_id"
-    t.integer  "group_id"
-    t.integer  "category_id"
-  end
-
-  add_index "questions", ["category_id"], :name => "index_questions_on_category_id"
-  add_index "questions", ["group_id"], :name => "index_questions_on_group_id"
-  add_index "questions", ["user_id"], :name => "index_questions_on_user_id"
-
   create_table "taggings", :force => true do |t|
     t.integer  "tag_id"
     t.integer  "taggable_id"
@@ -268,25 +209,6 @@ ActiveRecord::Schema.define(:version => 20120724123507) do
   create_table "tags", :force => true do |t|
     t.string "name"
   end
-
-  create_table "topics", :force => true do |t|
-    t.string   "title",                            :null => false
-    t.text     "body",                             :null => false
-    t.string   "url"
-    t.datetime "created_at"
-    t.datetime "updated_at"
-    t.integer  "comments_count",    :default => 0
-    t.integer  "likes_count",       :default => 0
-    t.integer  "collections_count", :default => 0
-    t.string   "avatar"
-    t.integer  "user_id"
-    t.integer  "group_id"
-    t.integer  "category_id"
-  end
-
-  add_index "topics", ["category_id"], :name => "index_topics_on_category_id"
-  add_index "topics", ["group_id"], :name => "index_topics_on_group_id"
-  add_index "topics", ["user_id"], :name => "index_topics_on_user_id"
 
   create_table "users", :force => true do |t|
     t.string   "name"

@@ -1,6 +1,5 @@
 class GroupController < ApplicationController
   before_filter :set_current_group
-  layout 'group'
   
   
   def set_current_group

@@ -15,14 +15,15 @@ class Install < ActiveRecord::Migration
 
     
     create_table "documents", :force => true do |t|
-      t.integer "likes_count", :default => 0
-      t.string  "name"
-      t.text  "summary"
-      t.integer "downloadings_count", :default => 0
-      t.integer "category_id"
+      t.integer  "likes_count", :default => 0
+      t.string   "name"
+      t.string   "file"
+      t.text     "summary"
+      t.integer  "downloadings_count", :default => 0
+      t.integer  "category_id"
       t.integer  "group_id"
-      t.integer "user_id"
-      t.integer "readings_count", :default => 0
+      t.integer  "user_id"
+      t.integer  "readings_count", :default => 0
     end
     
     add_index :documents, :category_id
@@ -34,6 +35,7 @@ class Install < ActiveRecord::Migration
       t.string   "permalink",                                                   :null => false
       t.boolean  "public",          :default => false
       t.integer  "user_id",         :null => false
+      t.string  "kind"
       t.integer  "group_members_count", :default => 0
       t.text     "description"
       t.string   "logo"
@@ -45,7 +47,9 @@ class Install < ActiveRecord::Migration
 
     add_index "groups", "deleted"
     add_index "groups", "user_id"
+    add_index "groups", "kind"
     add_index "groups", "permalink"
+  
     
     create_table "group_members", :force => true do |t|
       t.boolean  "admin",          :default => false
@@ -61,17 +65,6 @@ class Install < ActiveRecord::Migration
     add_index "group_members", "user_id"
     add_index "group_members", ["user_id", "group_id"]
     add_index "group_members", "active"
-    
-
-    create_table "fields", :force => true do |t|
-      t.integer "parent_id"
-      t.string  "name"
-      t.integer "lft"
-      t.integer "rgt"
-      t.integer "users_count",    :default => 0
-      t.integer "posts_count",    :default => 0
-      t.integer "subjects_count", :default => 0
-    end
    
     create_table "profiles", :force => true do |t|
       t.integer  "user_id"
@@ -119,34 +112,20 @@ class Install < ActiveRecord::Migration
       t.integer  "comments_count",                  :default => 0
       t.integer  "likes_count",                     :default => 0
       t.integer  "collections_count",               :default => 0
-      t.string   "avatar"
+      t.datetime  "done_at"
+      t.string   "kind"
+      t.string   "link"
       t.integer  "user_id"
       t.integer "group_id"
       t.integer "category_id"
+      t.integer  "done",          :default => 0
+      
     end
     
     add_index "posts", :category_id
     add_index "posts", :group_id
     add_index "posts", :user_id
-    
-    create_table "topics", :force => true do |t|
-      t.string   "title",                                              :null => false
-      t.text     "body",                                               :null => false
-      t.string   "url"
-      t.datetime "created_at"
-      t.datetime "updated_at"
-      t.integer  "comments_count",                  :default => 0
-      t.integer  "likes_count",                     :default => 0
-      t.integer  "collections_count",               :default => 0
-      t.string   "avatar"
-      t.integer  "user_id"
-      t.integer "group_id"
-      t.integer "category_id"
-    end
-    
-    add_index "topics", :category_id
-    add_index "topics", :group_id
-    add_index "topics", :user_id
+    add_index "posts", :kind
     
 
   end

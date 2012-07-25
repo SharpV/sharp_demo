@@ -7,7 +7,6 @@
 	<%= f.input :name, :required => true %>
 	<%= f.input :password, :required => true %>
 	<%= f.input :password_confirmation, :required => true %>
-	<%# f.input :field_id, :label => "领域", :collection => Field.all.collect{|d|[d.name, d.id]}, :include_blank => false, :required => true, :hint => "选择您所关注的领域，将会结识更多同行业的朋友  "  %>
 	<div class="form-actions">
 		<%= f.submit :class => "btn btn-primary" %>
 	</div>

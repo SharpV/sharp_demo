@@ -1,6 +1,9 @@
 <div class="tabbable">
-	<%= tabs_tag(:namespace => :group_menu, :open_tabs => {:id => "group_menu", :class => "nav nav-tabs" }, :builder => MenuTabBuilder) do |tab| %>
+	<%= tabs_tag(:namespace => :group_menus, :open_tabs => {:id => "group_menus", :class => "nav nav-tabs" }, :builder => MenuTabBuilder) do |tab| %>
 	  <%= tab.index t('Activity'),group_path(@current_group) %>
 	  <%= tab.document t('Document'), group_documents_path(@current_group) %>	
+	  <%= tab.document t('Pages'), group_pages_path(@current_group) %>	
+	  <%= tab.document t('Categories'), group_categories_path(@current_group) %>	
+	  <%= tab.document t('Settings'), group_documents_path(@current_group) %>	
 	<% end %>
 </div>

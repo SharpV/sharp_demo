@@ -1,10 +1,10 @@
 class GroupsController < GroupController
-  set_tab :index, :group_nav
+  set_tab :index, :group_menus
 
   def index
     @user = current_user 
     @post = Post.new
-    @activities = Activity.all
+    @post = current_user.stream
   end
   
   def show

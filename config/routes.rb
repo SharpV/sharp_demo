@@ -49,15 +49,17 @@ SharpLink::Application.routes.draw do
     resources :groups do 
       resources :documents
       resources :events
+      resources :topics
+      resources :settings
       resources :comments
       resources :passwords
-      resources :likes
+      resources :categories
       resources :questions
       resources :links
       resources :notifications
       resources :photos
       resources :tasks
-      resources :posts do
+      resources :pages do
         resources :comments
       end
     end

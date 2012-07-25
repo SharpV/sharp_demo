@@ -23,6 +23,14 @@ class Group < ActiveRecord::Base
         merge(Contact.recent)
     end
   end
+  
+  class << self
+    
+    def kinds
+      [[]]
+    end
+  
+  end
 
   private
   

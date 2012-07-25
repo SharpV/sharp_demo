@@ -4,8 +4,6 @@ body {
     font: 12px/162% Arial,Helvetica,sans-serif;
     background-attachment: scroll;
     background-clip: border-box;
-    background-color: #F0F0F0;
-    background-image: url("/assets/backend.gif");
     background-origin: padding-box;
     background-position: -70% 0;
     background-repeat: repeat;

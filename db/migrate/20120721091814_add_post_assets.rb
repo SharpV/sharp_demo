@@ -9,7 +9,6 @@ class AddPostAssets < ActiveRecord::Migration
     
     add_index :post_assets, :user_id
     add_index :post_assets, :post_id
-    add_column :documents, :file, :string
   end
 
   def down
