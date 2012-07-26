@@ -5,6 +5,7 @@
 *= require_self
 *= require 'font-awesome'
 *= require lazybox
+*= require jquery.fileupload-ui
 *= require_tree .
 */
 

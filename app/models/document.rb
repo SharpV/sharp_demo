@@ -6,7 +6,7 @@ class Document < ActiveRecord::Base
   belongs_to :user
   belongs_to :group
 
-  after_save :conv_to_swf
+  #after_save :conv_to_swf
 
   def conv_to_swf
     system " unoconv -f pdf #{file_path}"

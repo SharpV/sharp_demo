@@ -11,5 +11,7 @@
 //= require autocomplete-rails
 //= require kindeditor
 //= require lazybox
+//= require jquery-fileupload
 //= require_tree .
+
 
