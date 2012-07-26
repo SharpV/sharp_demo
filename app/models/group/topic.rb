@@ -1,10 +1,4 @@
-# When a new {SocialStream::Models::Subject subject} is created, a initial set
-# of relations is created for him. Afterwards, the {SocialStream::Models::Subject subject}
-# can customize them and adapt them to his own preferences.
-#
-# Default relations are defined at config/relations.yml
-#
-class Relation::Custom < Relation
+class Group::Topic < Post
   # Default relations are defined in this configuration file
   CONFIG = File.join(::Rails.root, 'config', 'relations.yml')
 

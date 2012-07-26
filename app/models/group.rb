@@ -7,7 +7,7 @@ class Group < ActiveRecord::Base
   
   belongs_to :user
   
-  has_many :activities
+  has_many :topics
   
   before_validation  :generate_permalink
   
