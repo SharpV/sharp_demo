@@ -1,15 +1,6 @@
 class Group::TopicsController < GroupController
   
-  # must be an admin to create new forum topics
-  #before_filter :check_admin_auth, :only => [:new, :create, :update, :destroy]
-  
-  
-  def check_admin_auth
-    if !current_user.is_admin
-      access_denied
-    end
-  end
-  
+  before_filter :set_group_tab
   
   def set_section
     @section = 'FORUM' 

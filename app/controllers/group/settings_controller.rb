@@ -1,7 +1,5 @@
-class SettingsController < ApplicationController
+class Group::SettingsController < GroupController
     
-  before_filter :authenticate_user!
-  
   def index
   end
 

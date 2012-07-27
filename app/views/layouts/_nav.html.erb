@@ -1,5 +1,5 @@
 <%= tabs_tag(:namespace => :site_menus, :open_tabs => {:id => "user_menus", :class => "nav" }, :builder => MenuTabBuilder) do |tab| %>
   <%= tab.home t('Groups'), groups_path %>
-  <%= tab.message t('Messages'), messages_path %>
-  <%= tab.like t('Likes'), likes_path %>
+  <%= tab.contact t('Contacts'), contacts_path %>
+  <%= tab.me t('Me'), profile_path(current_user.login) %>
 <% end %>

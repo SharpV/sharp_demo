@@ -20,10 +20,10 @@ SharpLink::Application.routes.draw do
 
     root :to => 'dashboard#show'
   end
-  
-  resources :groups
-  
-  
+
+  #resources :groups
+
+
   resources :users do 
     resources :activities
     resources :avatars
@@ -41,12 +41,12 @@ SharpLink::Application.routes.draw do
       resources :comments
     end
   end
-  
+
   delete 'likes/:resource_name/:resource_id' => "my/likes#destroy", :as => 'like'
   post 'likes/:resource_name/:resource_id' => "my/likes#create",  :as => 'like'
-    
-  scope :module => "group" do
-    resources :groups do 
+
+  resources :groups do 
+    scope :module => "group" do
       resources :documents
       resources :events
       resources :topics
@@ -67,26 +67,11 @@ SharpLink::Application.routes.draw do
 
   resources :organizations
   resources :apps  
-  
+
   resources :tags, :only => [:index] do
     get :subscribe, :on => :member
   end
-  resources :documents
-  resources :plans
-  resources :users
-  
-  resources :posts
-  resources :pages
-  resources :messages
-  resources :likes
-  resources :notes
-  resources :contacts
-  resources :doc_categories do
-    collection do
-      get :manage
-      post :rebuild
-    end
-  end
+  resources :profiles
   resources :comments do
     collection do
       get :manage

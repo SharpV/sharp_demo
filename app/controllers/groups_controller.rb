@@ -9,12 +9,22 @@ class GroupsController < GroupController
   
   def show
     @current_group = Group.find params[:id]
+    self.try "set_tab", "group_#{@current_group.id}", :group_nav
   end
   
   def new
     self.try "set_tab", "new", :group_nav
     
     @group = Group.new
+  end
+  
+  def update
+    @current_group = Group.find params[:id]
+    if @current_group.update_attributes params[:group]
+      redirect_to @current_group  
+    else  
+      render :controller => "group/settings", :action => :index
+    end
   end
 
   def create

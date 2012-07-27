@@ -27,7 +27,9 @@
 					<%= yield %>
 				</div>
 				<div class='span2'>	
-					<%= render 'groups/profile' %>
+					<%- if @current_group %>
+						<%= render 'groups/profile' %>
+					<% end %>
 				</div>
 			</div>
 		</div><!--/content-->
