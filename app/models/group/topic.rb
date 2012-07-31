@@ -1,16 +1,6 @@
 class Group::Topic < Post
-  # Default relations are defined in this configuration file
-  CONFIG = File.join(::Rails.root, 'config', 'relations.yml')
 
-  # This is weird. We must call #inspect before has_ancestry for Relation::Custom
-  # to recognize STI
-  inspect
-  has_ancestry
-
-  belongs_to :actor
-
-  validates_presence_of :name, :actor_id
-  validates_uniqueness_of :name, :scope => :actor_id
+  belongs_to :group#, :polymorphic => true
 
   class << self
     # Relations configuration

@@ -12,17 +12,16 @@ class Post < ActiveRecord::Base
   after_save :update_tag_list
 
   belongs_to :user
-  belongs_to :domain
+  belongs_to :group
   
   has_many :post_images
 
 
-  before_validation  :generate_link, :generate_slug, :set_dates
+  before_validation :generate_slug
   #after_save :conv_to_swf
   
   validates :title, :presence => true, :length => {:within => 1..100}
   validates   :body, :presence => true
-  validates :domain_id, :presence => true
   
   
   #attr_accessor :minor_edit, :title, :body, :slug, :domain_id
@@ -76,7 +75,7 @@ class Post < ActiveRecord::Base
   end
 
   def to_param
-    "#{id}-#{slug.parameterize}"
+    "#{id}-#{link.parameterize}"
   end
 
   def login
@@ -151,16 +150,11 @@ class Post < ActiveRecord::Base
     end
   end
 
-  def set_dates
-    self.edited_at = Time.now 
-    self.published_at = Time.now
-  end
-
   def denormalize_comments_count!
     Post.update_all(["approved_comments_count = ?", self.approved_comments.count], ["id = ?", self.id])
   end
 
   def generate_slug
-    self.slug = Hz2py.do(self.title, :join_with => '-', :to_simplified => true).gsub(/\W/, "-").gsub(/(-){2,}/, '-').to_s
+    self.link = Hz2py.do(self.title, :join_with => '-', :to_simplified => true).gsub(/\W/, "-").gsub(/(-){2,}/, '-').to_s
   end
 end

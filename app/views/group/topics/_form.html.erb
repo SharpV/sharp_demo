@@ -4,14 +4,18 @@ $(document).ready(function() {
 });
 </script>
 <div class="post_form">
-	<%= simple_form_for [@current_group, @topic], :html => {:id => "post_form", :class => 'form-horizontal'} do |f| -%>	
-	<%= render 'shared/error_messages', :object => f.object %>
-	<%= f.input :title, :label => "title" %>
-	<%= f.input :body, :label => "Body", :input_html => { :width => 120, :height => 30, :id => "input_post" } %>
-	<div class="actions">
-		<%= f.submit "发布", :class=>'btn btn-primary'%>
-		&nbsp;
-		<button class="btn" type="reset">保存为草稿</button>
+  <%= simple_form_for @topic, :html => {:id => "topic_form", :class => 'form-horizontal'} do |f| -%>	
+  <%# render 'shared/error_messages', :object => f.object %>
+  <div class="control-group">
+		<%= f.input :title, :label => "title" %>
 	</div>
-	<% end %>
+	<div class="control-group">
+  	<%= f.input :body, :label => "Body", :input_html => { :width => 120, :height => 30, :id => "input_post" } %>
+	</div>
+  <div class="actions">
+    <%= f.submit "发布", :class=>'btn btn-primary'%>
+    &nbsp;
+    <button class="btn" type="reset">保存为草稿</button>
+  </div>
+  <% end %>
 </div>

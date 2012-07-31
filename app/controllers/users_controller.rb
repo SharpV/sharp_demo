@@ -1,4 +1,6 @@
 class UsersController < ApplicationController
+
+  layout "user"
   
   def search
     if params[:q].present?

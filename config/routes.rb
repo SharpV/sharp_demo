@@ -21,9 +21,6 @@ SharpLink::Application.routes.draw do
     root :to => 'dashboard#show'
   end
 
-  #resources :groups
-
-
   resources :users do 
     resources :activities
     resources :avatars
@@ -52,7 +49,7 @@ SharpLink::Application.routes.draw do
       resources :topics
       resources :settings
       resources :comments
-      resources :passwords
+      resources :posts
       resources :categories
       resources :questions
       resources :links
@@ -65,8 +62,8 @@ SharpLink::Application.routes.draw do
     end
   end
 
-  resources :organizations
-  resources :apps  
+  resources :contacts
+  resources :pages
 
   resources :tags, :only => [:index] do
     get :subscribe, :on => :member

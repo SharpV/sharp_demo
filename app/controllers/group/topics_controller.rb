@@ -2,11 +2,6 @@ class Group::TopicsController < GroupController
   
   before_filter :set_group_tab
   
-  def set_section
-    @section = 'FORUM' 
-  end
-  
-  
   def index
     @forum_topics = ForumTopic.find(:all)
     respond_to do |format|
@@ -29,28 +24,15 @@ class Group::TopicsController < GroupController
 
   def new
     @topic = Group::Topic.new
-  end
+ end
 
 
   def create
-    @forum_topic = ForumTopic.new(params[:forum_topic])
-    respond_to do |format|
-      if @forum_topic.save
-        flash[:notice] = 'ForumTopic was successfully created.'
-        format.html { 
-          if params['admin_page']
-            redirect_to('/admin/forums')
-          else
-            redirect_to(@forum_topic) 
-          end
-         }
-        format.xml  { render :xml => @forum_topic, :status => :created, :location => @forum_topic }
-        format.json { render :json => @forum_topic.to_json, :status => :created, :location => @forum_topic} 
-      else
-        format.html { render :action => "new" }
-        format.xml  { render :xml => @forum_topic.errors, :status => :unprocessable_entity }
-        format.json { render :json => @forum_topic.errors.to_json, :status => :unprocessable_entity} 
-      end
+    @topic = current_user.topics.build params[:group_topic]
+    if @topic.save
+      redirect_to @topic
+    else
+      render :action => :new
     end
   end
 
