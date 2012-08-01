@@ -7,20 +7,19 @@
 	<tr>
 		<td>
 			<h3><%= @current_group.name %></h3>
-			
 		</td>
 		<td>
 		</td>
 	</tr>
 </table>
 <br />
-<ul class="nav nav-pills">
-	<li><%= link_to raw("<i class='icon-edit'></i> #{t("Write Topic")}"), new_group_topic_path(@current_group) %></li>
-	<li><%= link_to raw("<i class='icon-camera'></i> #{t("Add Photo")}"), new_group_event_path(@current_group) %></li>
-	
-	<li><%= link_to raw("<i class='icon-question-sign'></i> #{t("Ask Question")}"), new_group_question_path(@current_group) %></li>
-	<li><%= link_to raw("<i class='icon-folder-open'></i> #{t("Create Document")}"), new_group_document_path(@current_group) %></li>
-	<li><%= link_to raw("<i class='icon-tasks'></i> #{t("Create Task")}"), new_group_task_path(@current_group) %></li>
-	<li><%= link_to raw("<i class='icon-link'></i> #{t("Create Link")}"), new_group_link_path(@current_group) %></li>
-	<li><%= link_to raw("<i class='icon-bullhorn'></i> #{t("Publish Event")}"), new_group_event_path(@current_group) %></li>
-</ul>
+<div class="tab">
+	<%= tabs_tag(:namespace => :group_actions, :open_tabs => {:id => "group_menus", :class => "nav nav-pills" }, :builder => MenuTabBuilder) do |tab| %>
+	  <%= tab.topic raw("<i class='icon-edit'></i> #{t("Write Topic")}"), new_group_topic_path(@current_group) %>
+	  <%= tab.photo raw("<i class='icon-camera''></i> #{t("Add Photo")}"), new_group_photo_path(@current_group) %>	
+	  <%= tab.document raw("<i class='icon-folder-open'></i> #{t("Create Document")}"), new_group_document_path(@current_group) %>	
+	  <%= tab.task raw("<i class='icon-tasks'></i> #{t("Create Task")}"), new_group_task_path(@current_group) %>
+	  <%= tab.question raw("<i class='icon-question-sign'></i> #{t("Create Question")}"), new_group_question_path(@current_group) %>	
+	  <%= tab.event raw("<i class='icon-bullhorn'></i> #{t("Publish Event")}"), new_group_event_path(@current_group) %>	
+	<% end %>
+</div>

@@ -1,6 +1,9 @@
 class Group::TopicsController < GroupController
   
   before_filter :set_group_tab
+  set_tab :topic, :group_menus
+  set_tab :topic, :group_actions, :only => %w(new edit)
+  
   
   def index
     @forum_topics = ForumTopic.find(:all)
@@ -13,12 +16,7 @@ class Group::TopicsController < GroupController
   
   
   def show
-    @forum_topic = ForumTopic.find(params[:id])
-    respond_to do |format|
-      format.html
-      format.xml { render :xml => @forum_topic }
-      format.json { render :json => @forum_topic.to_json } 
-    end
+    @topic = Group::Topic.find(params[:id])
   end
 
 
@@ -30,7 +28,8 @@ class Group::TopicsController < GroupController
   def create
     @topic = current_user.topics.build params[:group_topic]
     if @topic.save
-      redirect_to @topic
+      puts @topic.id
+      redirect_to group_topic_path(@current_group, @topic)
     else
       render :action => :new
     end
