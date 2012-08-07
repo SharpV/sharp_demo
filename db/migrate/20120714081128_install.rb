@@ -12,7 +12,28 @@ class Install < ActiveRecord::Migration
     
     add_index :categories, :parent_id
     add_index :categories, :group_id
-
+    
+    
+    create_table "grades", :force => true do |t|
+      t.integer "parent_id"
+      t.string  "name"
+      t.integer "lft"
+      t.integer "rgt"
+    end
+    
+    add_index :grades, :parent_id    
+    
+    create_table "subjects", :force => true do |t|
+      t.integer "parent_id"
+      t.string  "name"
+      t.integer "lft"
+      t.integer "rgt"
+      t.integer "grade_id"
+    end
+    
+    add_index :subjects, :parent_id
+    add_index :subjects, :grade_id
+    
     
     create_table "documents", :force => true do |t|
       t.integer  "likes_count", :default => 0
@@ -35,17 +56,19 @@ class Install < ActiveRecord::Migration
       t.string   "permalink",                                                   :null => false
       t.boolean  "public",          :default => false
       t.integer  "user_id",         :null => false
-      t.string  "kind"
+      t.integer  "grade_id"
+      t.integer  "subject_id"
       t.integer  "group_members_count", :default => 0
       t.text     "description"
       t.string   "logo"
+      t.string   "kind"
       t.datetime "created_at"
       t.datetime "updated_at"
       t.text     "settings"
       t.boolean  "deleted",           :default => false,                        :null => false
     end
 
-    add_index "groups", "deleted"
+    add_index "groups", "grade_id"
     add_index "groups", "user_id"
     add_index "groups", "kind"
     add_index "groups", "permalink"

@@ -61,6 +61,15 @@ ActiveRecord::Schema.define(:version => 20120721091814) do
   add_index "documents", ["group_id"], :name => "index_documents_on_group_id"
   add_index "documents", ["user_id"], :name => "index_documents_on_user_id"
 
+  create_table "grades", :force => true do |t|
+    t.integer "parent_id"
+    t.string  "name"
+    t.integer "lft"
+    t.integer "rgt"
+  end
+
+  add_index "grades", ["parent_id"], :name => "index_grades_on_parent_id"
+
   create_table "group_members", :force => true do |t|
     t.boolean  "admin",      :default => false
     t.boolean  "active",     :default => false
@@ -81,17 +90,19 @@ ActiveRecord::Schema.define(:version => 20120721091814) do
     t.string   "permalink",                              :null => false
     t.boolean  "public",              :default => false
     t.integer  "user_id",                                :null => false
-    t.string   "kind"
+    t.integer  "grade_id"
+    t.integer  "subject_id"
     t.integer  "group_members_count", :default => 0
     t.text     "description"
     t.string   "logo"
+    t.string   "kind"
     t.datetime "created_at"
     t.datetime "updated_at"
     t.text     "settings"
     t.boolean  "deleted",             :default => false, :null => false
   end
 
-  add_index "groups", ["deleted"], :name => "index_groups_on_deleted"
+  add_index "groups", ["grade_id"], :name => "index_groups_on_grade_id"
   add_index "groups", ["kind"], :name => "index_groups_on_kind"
   add_index "groups", ["permalink"], :name => "index_groups_on_permalink"
   add_index "groups", ["user_id"], :name => "index_groups_on_user_id"
@@ -192,6 +203,17 @@ ActiveRecord::Schema.define(:version => 20120721091814) do
     t.string  "mark"
     t.integer "code", :null => false
   end
+
+  create_table "subjects", :force => true do |t|
+    t.integer "parent_id"
+    t.string  "name"
+    t.integer "lft"
+    t.integer "rgt"
+    t.integer "grade_id"
+  end
+
+  add_index "subjects", ["grade_id"], :name => "index_subjects_on_grade_id"
+  add_index "subjects", ["parent_id"], :name => "index_subjects_on_parent_id"
 
   create_table "taggings", :force => true do |t|
     t.integer  "tag_id"

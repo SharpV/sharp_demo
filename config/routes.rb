@@ -62,7 +62,7 @@ SharpLink::Application.routes.draw do
     end
   end
 
-  resources :contacts
+  resources :grades
   resources :pages
 
   resources :tags, :only => [:index] do
