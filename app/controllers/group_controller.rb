@@ -1,5 +1,5 @@
 class GroupController < ApplicationController
-  before_filter :set_current_group
+  before_filter :authenticate_user!, :set_current_group  
   layout "group"
   
   def set_current_group
@@ -10,6 +10,7 @@ class GroupController < ApplicationController
   
   def set_group_tab
     self.try "set_tab", "group_#{@current_group.id}", :group_nav
+    self.set_tab :index, :site_nav
   end
  
 end

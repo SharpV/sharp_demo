@@ -1,6 +1,6 @@
 <%- if current_user %>
-	<%= tabs_tag(:namespace => :site_menus, :open_tabs => {:id => "site_nav", :class => "nav" }, :builder => MenuTabBuilder) do |tab| %>
-	  <%= tab.home '首页', groups_path %>
+	<%= tabs_tag(:namespace => :site_nav, :open_tabs => {:id => "site_nav", :class => "nav" }, :builder => MenuTabBuilder) do |tab| %>
+	  <%= tab.index '首页', root_path %>
 		<% Grade.list.each do |grade| %>
 		<li class="dropdown">
 		  <a data-toggle="dropdown" class="dropdown-toggle" href="#"><%= grade.name %> <b class="caret"></b></a>

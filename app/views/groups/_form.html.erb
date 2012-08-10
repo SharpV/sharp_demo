@@ -1,7 +1,9 @@
 <%= simple_form_for @group, :html => {:class => 'form-stacked, new-share'} do |f| -%>	
-        <%= f.error_notification %>
-	<%= f.input :name, :class=>'xlarge', :label => t('name') %>
-	<%= f.input :logo, :label => t('logo') %>
+  <%= f.error_notification %>
+	<%= f.input :name, :class=>'xlarge', :label => '名称' %>
+	<%= f.input :grade_id, :label => "年级", :collection => nested_set_options(Grade, @group.grade){|i| "#{'-' * i.level} #{i.name}"} %>
+	
+	<%= f.input :logo, :label => '图标' %>
 	<%# f.input :kind_id, :label => t('kind'), :collection => Group.Kinds, :include_blank => false, :required => true %>
 	<%= f.input :description, :label => t('description') %>
 	<div class="actions">

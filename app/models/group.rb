@@ -7,6 +7,8 @@ class Group < ActiveRecord::Base
   
   belongs_to :user
   
+  belongs_to :grade
+  
   has_many :topics, :class_name => 'Group::Topic' , :as => :post
   
   before_validation :generate_permalink

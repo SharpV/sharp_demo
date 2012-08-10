@@ -16,8 +16,8 @@ class User < ActiveRecord::Base
   has_many :documents
   has_many :groups
   has_many :posts
-  has_many :topics, :class_name => 'Group::Topic'# , :as => :post
- 
+  has_many :topics, :class_name => 'Group::Topic'
+  has_many :tasks, :class_name => 'Group::Task'
   
   # Setup accessible (or protected) attributes for your model
   attr_accessible :email, :password, :password_confirmation, :remember_me, :login, 

@@ -1,15 +1,16 @@
 <%- if @current_group %>
 	<div class="tabbable">
 		<%= tabs_tag(:namespace => :group_menus, :open_tabs => {:id => "group_menus", :class => "nav nav-tabs" }, :builder => MenuTabBuilder) do |tab| %>
-		  <%= tab.index t('All'), @current_group %>
-		  <%= tab.topic t('Topic'), group_topics_path(@current_group) %>	
-		  <%= tab.photo t('Photo'), group_photos_path(@current_group) %>	
-		  <%= tab.document t('Document'), group_documents_path(@current_group) %>	
-		  <%= tab.task t('Task'), group_tasks_path(@current_group) %>	
-		  <%= tab.question t('Question'), group_questions_path(@current_group) %>	
-		  <%= tab.event t('Event'), group_events_path(@current_group) %>	
-		  <%= tab.category t('Categories'), group_categories_path(@current_group) %>	
-		  <%= tab.setting t('Settings'), group_settings_path(@current_group) %>	
+		  <%= tab.index '主页', @current_group %>
+		  <%= tab.topic '话题', group_topics_path(@current_group) %>	
+		  <%= tab.photo '图片', group_photos_path(@current_group) %>	
+		  <%= tab.document '文档', group_documents_path(@current_group) %>	
+		  <%= tab.task '作业', group_tasks_path(@current_group) %>	
+		  <%= tab.question '问题', group_questions_path(@current_group) %>	
+		  <%= tab.event '活动', group_categories_path(@current_group) %>	
+		  <%= tab.event '成员', group_categories_path(@current_group) %>	
+		  <%= tab.event '实时', group_events_path(@current_group) %>	
+		  <%= tab.setting '课程设置', group_settings_path(@current_group) %>	
 		<% end %>
 	</div>
 <% end %>
