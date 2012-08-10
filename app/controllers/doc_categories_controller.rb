@@ -1,4 +1,4 @@
-class My::PostCategoriesController < ApplicationController
+class PostCategoriesController < ApplicationController
   respond_to :html, :js
   set_tab :post, :user_menus
   set_tab :home, :site_menus

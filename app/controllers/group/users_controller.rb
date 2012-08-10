@@ -1,4 +1,4 @@
-class My::UsersController < ApplicationController
+class Group::UsersController < GroupController
   set_tab :user, :site_menus
   set_tab :timeline, :user_timeline_menus
   
@@ -12,3 +12,4 @@ class My::UsersController < ApplicationController
     @user.count_view! unless current_user == @user
   end
 end
+

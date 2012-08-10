@@ -1,4 +1,4 @@
-class My::SubjectsController < ApplicationController
+class Group::SubjectsController < GroupController
 
   def new
     @reply = Reply.new

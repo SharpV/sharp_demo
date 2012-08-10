@@ -1,4 +1,4 @@
-class My::EventsController < MyController
+class Group::EventsController < GroupController
   before_filter :find_user
   set_tab :event, :user_menus
   # GET /my/events

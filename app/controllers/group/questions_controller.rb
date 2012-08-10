@@ -1,4 +1,4 @@
-class My::QuestionsController < MyController
+class Group::QuestionsController < GroupController
   set_tab :question, :user_menus
   set_tab :home, :site_menus
   

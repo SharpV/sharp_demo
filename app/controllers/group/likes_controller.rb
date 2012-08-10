@@ -1,4 +1,4 @@
-class My::LikesController < MyController
+class Group::LikesController < GroupController
   before_filter :find_user
   set_tab :like, :user_menus
   before_filter :authenticate_user!
