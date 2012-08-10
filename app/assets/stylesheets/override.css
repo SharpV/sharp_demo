@@ -24,8 +24,18 @@ body {
     padding-left: 10px;
     padding-right: 10px;
 }
+.span-left, .span9 {
+    width: 700px;
+}
 
+.span-right, .span3{
+    width: 240px;
+}
 
+[class*="span"] {
+    float: left;
+    margin-left: 20px;
+}
 .nav-tabs > .active > a, .nav-tabs > .active > a:hover {
     cursor: pointer;
 }
