@@ -29,14 +29,6 @@ SharpLink::Application.routes.draw do
     resources :comments
     resources :passwords
     resources :likes
-
-    resources :collections
-    resources :notifications
-    resources :professions
-    resources :educations
-    resources :posts do
-      resources :comments
-    end
   end
 
   delete 'likes/:resource_name/:resource_id' => "my/likes#destroy", :as => 'like'

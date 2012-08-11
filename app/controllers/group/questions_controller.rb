@@ -1,55 +1,50 @@
 class Group::QuestionsController < GroupController
-  set_tab :question, :user_menus
-  set_tab :home, :site_menus
+  before_filter :set_group_tab
+  set_tab :question, :group_menus
+  set_tab :question, :group_actions, :only => %w(new edit)
   
-  before_filter :find_user
   
-  before_filter :authenticate_user!, :only => [:new, :edit, :create, :update, :destroy]
-
-  def show
-    @question = Question.find_cached(params[:id])
-    Question.increment_counter(:view_count, @question.id)
-    @answer = @question.answers.build(:answer_body => AnswerBody.new)
-  end
-
   def index
-    @questions = Question.order(nav_order).page(params[:page] || 1)
-    @questions = @questions.where(:answers_count => 0) if params[:nav] == 'not_answered'
+    @questions = Group::Question.all
   end
+  
+  
+  def show
+    @question = Group::Question.find(params[:id])
+  end
+
 
   def new
-    @question = Question.new
+    @question = Group::Qustion.new
+  end
+  
+  def edit
+    @question = Group::Question.find(params[:id])
   end
 
   def create
-    @question = current_user.questions.build(params[:question])
+    @question = current_user.questions.build params[:group_question]
     if @question.save
-      flash[:notice] = "Your Question was successfully created!"
-      redirect_to @question
+      redirect_to group_question_path(@current_group, @question)
     else
-      render 'new'
+      render :action => :new
     end
   end
 
-  def edit
-    @question = current_user.questions.find(params[:id])
-  end
 
   def update
-    @question = current_user.questions.find(params[:id])
-    if @question.update_attributes(params[:question])
-      flash[:notice] = "Your Question was successfully updated!"
-      redirect_to @question
+    @question = Group::Question.find(params[:id])
+    if @Group::Question.update_attributes(params[:forum_topic])
+      redirect_to group_question_path(@current_group, @question)
     else
-      render 'edit'
+      render :action => :edit
     end
   end
 
-  protected
-    def nav_order
-      params[:nav] = "id" unless %w(id vote_points answers_count not_answered).include?(params[:nav])
-      params[:order] = "desc" unless %w(desc asc).include?(params[:order])
-      "questions.#{params[:nav] == "not_answered" ? "id" : params[:nav]} #{params[:order]}"
-    end
+
+  def destroy
+    @question = Group::Question.find(params[:id])
+    @question.destroy
+  end
 end
 
