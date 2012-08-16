@@ -45,7 +45,6 @@ gem 'mailboxer'
 gem 'stringex'
 gem 'rails3-jquery-autocomplete'
 gem 'simple_form', '~> 2.0.1'
-gem 'formtastic'
 gem 'likeable'
 gem "rails_config"
 gem "annotate"
@@ -72,5 +71,6 @@ group :assets do
   # gem 'therubyracer'
   gem 'uglifier', '>= 1.0.3'
 end
+gem 'activeadmin'
 gem 'rspec'
 

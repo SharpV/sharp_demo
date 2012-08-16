@@ -1,4 +1,8 @@
 SharpLink::Application.routes.draw do
+  ActiveAdmin.routes(self)
+
+  devise_for :admin_users, ActiveAdmin::Devise.config
+
   devise_for :users, :controllers => {:registrations => "registrations", :passwords => "passwords", :sessions => "sessions"}
   match "/my", :to => "home#index"                                    
   match '/new/:type', :to => 'my/posts#new', :as => :new_post
