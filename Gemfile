@@ -1,7 +1,7 @@
 source 'http://ruby.taobao.org/'  
-#source 'https://rubygems.org'
+source 'https://rubygems.org'
 gem 'rails', '3.2.6'
-gem 'therubyracer'
+gem "therubyracer", "0.10.2", :require => 'v8'
 gem 'mobile-fu'
 gem 'hz2py'
 gem 'rails_kindeditor', '~> 0.3.0'
@@ -55,8 +55,8 @@ gem "friendly_id"
 gem 'react_reporter', :git => "git://github.com/reactualize/react_reporter.git"
 gem "acts-as-taggable-on", :git => "git://github.com/mbleigh/acts-as-taggable-on.git"
 gem 'acts_as_commentable'
-gem 'twitter-bootstrap-rails', :git => 'git://github.com/seyhunak/twitter-bootstrap-rails.git'
-gem 'font-awesome-rails', :git => "git://github.com/bokmann/font-awesome-rails.git"
+gem 'twitter-bootstrap-rails'#, :git => 'git://github.com/seyhunak/twitter-bootstrap-rails.git'
+gem 'font-awesome-rails'#, :git => "git://github.com/bokmann/font-awesome-rails.git"
 gem 'ancestry'
 gem "jquery-fileupload-rails"
 # in production environments by default.
@@ -64,11 +64,10 @@ gem 'ruby_parser'
 gem 'hpricot'
 group :assets do
   gem 'sprockets'
-  gem 'sass-rails',   '~> 3.2.3'
-  gem 'coffee-rails', '~> 3.2.1'
-  #gem 'haml-rails'
+  gem 'coffee-rails'
+  gem 'haml-rails'
+  gem 'sass-rails'
   # See https://github.com/sstephenson/execjs#readme for more supported runtimes
-  # gem 'therubyracer'
   gem 'uglifier', '>= 1.0.3'
 end
 gem 'activeadmin'
