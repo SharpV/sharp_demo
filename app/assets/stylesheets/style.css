@@ -1,0 +1,9 @@
+.support{overflow: auto; font-size:12px; margin:10px 0; color:#999;}
+.support li{float:left; margin-right:20px;text-align: center;}
+.support a{display:block;height:40px;width:40px;background:url("/assets/sup_icon.png") no-repeat;}
+.support .ipad{background-position:0 0px;}
+.support .iphone{background-position:-40px 0;}
+.support .android{background-position:-80px 0;}
+.support .window{background-position:-120px 0;}
+.support .ipad:hover,.support .iphone:hover, .support .android:hover, .support .window:hover{background-position-y: -40px;}
+

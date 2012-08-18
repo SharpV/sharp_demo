@@ -1,6 +1,6 @@
 source 'http://ruby.taobao.org/'  
 source 'https://rubygems.org'
-gem 'rails', '3.2.6'
+gem 'rails', '3.2.3'
 gem "therubyracer", "0.10.2", :require => 'v8'
 gem 'mobile-fu'
 gem 'hz2py'
