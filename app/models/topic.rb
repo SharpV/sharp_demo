@@ -1,6 +1,7 @@
-class Group::Topic < Post
+class Topic < ActiveRecord::Base
 
-  belongs_to :group#, :polymorphic => true
+  belongs_to :group
+  belongs_to :user
 
   class << self
     # Relations configuration
@@ -48,33 +49,6 @@ class Group::Topic < Post
     end
   end
 
-  # Compare two relations
-  def <=> rel
-    return -1 if rel.is_a?(Public)
-
-    if ancestor_ids.include?(rel.id)
-      1
-    elsif rel.ancestor_ids.include?(id)
-      -1
-    else
-      0
-    end
-  end
-
-  # Other relations below in the same hierarchy that this relation
-  def weaker
-    descendants
-  end
-
-  # Relations below or at the same level of this relation
-  def weaker_or_equal
-    subtree
-  end
-
-  # Other relations above in the same hierarchy that this relation
-  def stronger
-    ancestors
-  end
 
   # Relations above or at the same level of this relation
   def stronger_or_equal

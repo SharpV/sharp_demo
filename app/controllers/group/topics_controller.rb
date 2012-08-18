@@ -6,12 +6,7 @@ class Group::TopicsController < GroupController
   
   
   def index
-    @forum_topics = ForumTopic.find(:all)
-    respond_to do |format|
-      format.html # index.html.erb
-      format.xml  { render :xml => @forum_topics }
-      format.json { render :json => @forum_topics.to_json } 
-    end
+    @topics = Topic.all
   end
   
   

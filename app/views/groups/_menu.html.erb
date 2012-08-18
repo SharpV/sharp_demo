@@ -2,7 +2,7 @@
 	<div class="tabbable">
 		<%= tabs_tag(:namespace => :group_menus, :open_tabs => {:id => "group_menus", :class => "nav nav-tabs" }, :builder => MenuTabBuilder) do |tab| %>
 		  <%= tab.index '主页', @current_group %>
-		  <%= tab.topic '话题', group_topics_path(@current_group) %>	
+		  <%= tab.post '话题', group_posts_path(@current_group) %>	
 		  <%= tab.photo '图片', group_photos_path(@current_group) %>	
 		  <%= tab.document '文档', group_documents_path(@current_group) %>	
 		  <%= tab.task '作业', group_tasks_path(@current_group) %>	

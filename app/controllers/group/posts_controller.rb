@@ -1,37 +1,40 @@
 class Group::PostsController < GroupController
-  respond_to :html, :js  
-  
-  layout false
+
+  before_filter :set_group_tab
+   set_tab :post, :group_menus
+   set_tab :post, :group_actions, :only => %w(new edit)
+
   
   def index
-    @user = current_user
-    @post_category = PostCategory.new
-    current_user.init_category!
-    @post_categories = current_user.post_categories.nested_set.all
+    @posts = Post.all
+    @categories = @current_group.categories
   end
 
   def edit
-    @post_category = PostCategory.find params[:id]
-    respond_to do |format|
-      format.js
-    end
+    @post = Post.find params[:id]
   end
-
-  def manage
-    @article_categories = ArticleCategory.nested_set.all
+  
+  def show
+    @post = Post.find params[:id]
   end
-
-  def new
-    @post = Post.new
-    respond_with do |format|
-      format.js
-    end
-  end
-
+  
   def create
-    @post_category = PostCategory.new(params[:post_category])   
-    @post_category.user = current_user 
-    @post_category.save
-    redirect_to post_categories_path
+    @post = current_user.posts.build params[:post]
+    if @post.save
+      redirect_to group_post_path(@current_group, @post)
+    else
+      render :action => :new
+    end
   end
+
+
+  def update
+    @post = Post.find(params[:id])
+    if @post.update_attributes(params[:post])
+      redirect_to group_post_path(@current_group, @post) 
+    else
+      render :action => :edit
+    end
+  end
+
 end

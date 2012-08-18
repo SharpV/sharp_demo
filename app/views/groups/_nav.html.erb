@@ -1,6 +1,6 @@
 <div class="tabbable tabs-left">
 	<%= tabs_tag(:namespace => :group_nav, :open_tabs => {:id => "group_menus", :class => "nav nav-tabs" }, :builder => MenuTabBuilder) do |tab| %>
-		<li><%= image_tag current_user.avatar_url(:b) || "http://placehold.it/100x100" %></li>
+		<li><%= image_tag current_user.avatar_url(:b) || "default_avatar.gif" %></li>
 	  <%= tab.index '所有课程', root_path %>
 		<%- current_user.groups.each do |group| %>
 	  	<%= tab.try "group_#{group.id}", group.name, group_path(group) %>

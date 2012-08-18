@@ -9,9 +9,9 @@ class Group < ActiveRecord::Base
   
   belongs_to :grade
   
-  has_many :topics, :class_name => 'Group::Topic' 
-  has_many :tasks, :class_name => 'Group::Task' 
-  has_many :questions, :class_name => 'Group::Qustion'
+  has_many :topics
+  has_many :categories
+  has_many :questions
   
   before_validation :generate_permalink
   

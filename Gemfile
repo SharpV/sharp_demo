@@ -4,6 +4,7 @@ gem 'rails', '3.2.6'
 gem "therubyracer", "0.10.2", :require => 'v8'
 gem 'mobile-fu'
 gem 'hz2py'
+gem 'activeadmin', '~> 0.4.4'
 gem 'rails_kindeditor', '~> 0.3.0'
 gem 'redcarpet'
 gem 'sqlite3'
@@ -70,6 +71,5 @@ group :assets do
   # See https://github.com/sstephenson/execjs#readme for more supported runtimes
   gem 'uglifier', '>= 1.0.3'
 end
-gem 'activeadmin'
 gem 'rspec'
 

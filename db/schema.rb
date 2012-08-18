@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120816155936) do
+ActiveRecord::Schema.define(:version => 20120818132620) do
 
   create_table "active_admin_comments", :force => true do |t|
     t.string   "resource_id",   :null => false
@@ -45,6 +45,23 @@ ActiveRecord::Schema.define(:version => 20120816155936) do
 
   add_index "admin_users", ["email"], :name => "index_admin_users_on_email", :unique => true
   add_index "admin_users", ["reset_password_token"], :name => "index_admin_users_on_reset_password_token", :unique => true
+
+  create_table "albums", :force => true do |t|
+    t.integer  "user_id",                       :null => false
+    t.integer  "group_id",                      :null => false
+    t.string   "title"
+    t.text     "body"
+    t.integer  "likes_count",    :default => 0
+    t.integer  "reading_count",  :default => 0
+    t.integer  "comments_count", :default => 0
+    t.integer  "category_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "albums", ["category_id"], :name => "index_albums_on_category_id"
+  add_index "albums", ["group_id"], :name => "index_albums_on_group_id"
+  add_index "albums", ["user_id"], :name => "index_albums_on_user_id"
 
   create_table "categories", :force => true do |t|
     t.integer "parent_id"
@@ -139,6 +156,23 @@ ActiveRecord::Schema.define(:version => 20120816155936) do
   add_index "groups", ["kind"], :name => "index_groups_on_kind"
   add_index "groups", ["permalink"], :name => "index_groups_on_permalink"
   add_index "groups", ["user_id"], :name => "index_groups_on_user_id"
+
+  create_table "images", :force => true do |t|
+    t.string   "title"
+    t.string   "file"
+    t.integer  "user_id",                       :null => false
+    t.integer  "group_id",                      :null => false
+    t.integer  "likes_count",    :default => 0
+    t.integer  "reading_count",  :default => 0
+    t.integer  "comments_count", :default => 0
+    t.integer  "category_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "images", ["category_id"], :name => "index_images_on_category_id"
+  add_index "images", ["group_id"], :name => "index_images_on_group_id"
+  add_index "images", ["user_id"], :name => "index_images_on_user_id"
 
   create_table "notes", :force => true do |t|
     t.text     "body"
@@ -237,6 +271,25 @@ ActiveRecord::Schema.define(:version => 20120816155936) do
     t.integer "code", :null => false
   end
 
+  create_table "questions", :force => true do |t|
+    t.string   "title",                         :null => false
+    t.text     "body",                          :null => false
+    t.datetime "created_at"
+    t.datetime "updated_at"
+    t.integer  "comments_count", :default => 0
+    t.integer  "likes_count",    :default => 0
+    t.integer  "reading_count",  :default => 0
+    t.datetime "answered_at"
+    t.string   "kind"
+    t.integer  "user_id"
+    t.integer  "group_id"
+    t.integer  "category_id"
+  end
+
+  add_index "questions", ["category_id"], :name => "index_questions_on_category_id"
+  add_index "questions", ["group_id"], :name => "index_questions_on_group_id"
+  add_index "questions", ["user_id"], :name => "index_questions_on_user_id"
+
   create_table "subjects", :force => true do |t|
     t.integer "parent_id"
     t.string  "name"
@@ -264,6 +317,26 @@ ActiveRecord::Schema.define(:version => 20120816155936) do
   create_table "tags", :force => true do |t|
     t.string "name"
   end
+
+  create_table "tasks", :force => true do |t|
+    t.string   "title",                         :null => false
+    t.text     "body",                          :null => false
+    t.datetime "created_at"
+    t.datetime "updated_at"
+    t.integer  "comments_count", :default => 0
+    t.integer  "likes_count",    :default => 0
+    t.integer  "reading_count",  :default => 0
+    t.datetime "done_at"
+    t.string   "kind"
+    t.integer  "user_id"
+    t.integer  "group_id"
+    t.integer  "category_id"
+    t.integer  "done",           :default => 0
+  end
+
+  add_index "tasks", ["category_id"], :name => "index_tasks_on_category_id"
+  add_index "tasks", ["group_id"], :name => "index_tasks_on_group_id"
+  add_index "tasks", ["user_id"], :name => "index_tasks_on_user_id"
 
   create_table "users", :force => true do |t|
     t.string   "name"
