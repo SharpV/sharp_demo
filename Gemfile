@@ -1,10 +1,11 @@
-source 'http://ruby.taobao.org/'  
-source 'https://rubygems.org'
-gem 'rails', '3.2.3'
+#source 'http://ruby.taobao.org/'  
+source 'http://rubygems.org'
+gem 'rails', '3.2.6'
 gem "therubyracer", "0.10.2", :require => 'v8'
 gem 'mobile-fu'
 gem 'hz2py'
-gem 'activeadmin', '~> 0.4.4'
+gem 'fastercsv' # Only required on Ruby 1.8 and below
+gem 'activeadmin'
 gem 'rails_kindeditor', '~> 0.3.0'
 gem 'redcarpet'
 gem 'sqlite3'
@@ -35,8 +36,8 @@ gem 'lazybox'
 gem 'modernizr-rails'
 gem 'inherited_resources'
 gem "omniauth"
-gem 'omniauth-facebook'
-gem 'omniauth-linkedin'
+gem 'omniauth-qq-connect'
+gem 'omniauth-weibo-oauth2'
 gem 'thin'
 gem "friendly_id"
 gem "cancan"
