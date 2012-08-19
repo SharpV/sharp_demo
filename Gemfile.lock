@@ -330,7 +330,6 @@ DEPENDENCIES
   coffee-rails
   devise (~> 2.1.2)
   escape
-  fastercsv
   flash_cookie_session
   font-awesome-rails
   foreigner

@@ -32,10 +32,6 @@ body {
     width: 240px;
 }
 
-[class*="span"] {
-    float: left;
-    margin-left: 20px;
-}
 .nav-tabs > .active > a, .nav-tabs > .active > a:hover {
     cursor: pointer;
 }

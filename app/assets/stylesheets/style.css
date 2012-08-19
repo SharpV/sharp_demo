@@ -39,3 +39,63 @@ ul{list-style: none;}
 li.feature {
     height: 250px;
 }
+
+.simple_form textarea{
+	width: 500px;
+	height: 200px;
+
+}
+
+#category_select.radio{
+	float: left;
+	margin-left: 18px;
+}
+
+#profile_info{
+	clear:both;
+}
+
+#profile_info td{
+  padding: 5px;
+	vertical-align: top;
+ }
+
+.span-right .nav{
+ width: 240px
+}
+
+.marketing h3{
+	color: #336699;
+}
+
+.icon, .icon-large{
+	color: #577BF2;
+}
+
+.marketing p {
+	color: #444;
+	margin-top:5px;
+	margin-right: 5px;
+}
+.marketing{
+	float:left;
+	margin-left:15px;
+	width: 310px;
+}
+
+#footer {
+	border-top: 1px dashed #DDDDDD;
+	color: #999999;
+	margin-top: 10px;
+	overflow: hidden;
+	padding-top: 6px;
+	margin-bottom: 25px;
+}
+.fleft {
+	float: left;
+}
+.fright {
+	float: right;
+}
+
+
