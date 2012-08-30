@@ -29,4 +29,83 @@ body {
 // See http://twitter.github.com/bootstrap/less.html for their names and documentation
 //
 // Example:
-// @linkColor: #ff0000;
+
+@linkColor: #ff0000;
+[class*="span"] {
+    float: left;
+    margin-left: 20px;
+}
+
+h3 {
+    font-size: 20px;
+    line-height: 30px;
+}
+
+.navbar-inner {
+	background-color: #333;
+    background-image: -moz-linear-gradient(center top , #666, #333);
+}
+
+.nav-tabs > li > a, .nav-pills > li > a {
+    padding-left: 10px;
+    padding-right: 10px;
+}
+.span-left, .span9 {
+    width: 700px;
+}
+
+.span-right, .span3{
+    width: 240px;
+}
+
+.nav-tabs > .active > a, .nav-tabs > .active > a:hover {
+    cursor: pointer;
+}
+.navbar .brand {
+    margin-right: 10px;
+    margin-left: 0px;
+    padding: 0px;
+    line-height: 40px;
+}
+.navbar-inner {
+    min-height: 50px;
+}
+
+#user_menus, #account, #search-form{
+    line-height:40px;
+}
+#search-form{
+    margin-top: 10px;
+}
+
+.form-horizontal .control-label {
+    float: left;
+    margin-right: 10px;
+    text-align: right;
+    width: 80px;
+    padding-top: 2px;
+}
+
+.form-horizontal .controls {
+    margin-left: 120px;
+}
+
+.radio input[type="radio"], .checkbox input[type="checkbox"] {
+    margin: 0px;
+}
+
+.navbar-search .search-query{
+    background-color: #eee;
+}
+
+.navbar .nav > li > a {
+    color: #eee;
+    float: none;
+    font-size: 14px;
+    line-height: 28px;
+    padding-bottom: 11px;
+    padding-left: 10px;
+    padding-right: 10px;
+    padding-top: 11px;
+    cursor: pointer;
+}

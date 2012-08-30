@@ -1,5 +1,7 @@
-class GroupsController < GroupController
+class GroupsController < ApplicationController
   set_tab :index, :group_menus
+
+  layout 'group', :only => [:show]
 
   def index
     @user = current_user 

@@ -56,8 +56,8 @@ gem "friendly_id"
 gem 'react_reporter', :git => "git://github.com/reactualize/react_reporter.git"
 gem "acts-as-taggable-on", :git => "git://github.com/mbleigh/acts-as-taggable-on.git"
 gem 'acts_as_commentable'
-gem 'twitter-bootstrap-rails'#, :git => 'git://github.com/seyhunak/twitter-bootstrap-rails.git'
-gem 'font-awesome-rails'#, :git => "git://github.com/bokmann/font-awesome-rails.git"
+gem 'twitter-bootstrap-rails', :git => 'git://github.com/seyhunak/twitter-bootstrap-rails.git'
+gem 'font-awesome-rails', :git => "git://github.com/bokmann/font-awesome-rails.git"
 gem 'ancestry'
 gem "jquery-fileupload-rails"
 # in production environments by default.

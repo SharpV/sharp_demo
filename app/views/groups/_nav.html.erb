@@ -1,10 +1,15 @@
-<div class="tabbable tabs-left">
-	<%= tabs_tag(:namespace => :group_nav, :open_tabs => {:id => "group_menus", :class => "nav nav-tabs" }, :builder => MenuTabBuilder) do |tab| %>
-		<li><%= image_tag current_user.avatar_url(:b) || "default_avatar.gif" %></li>
-	  <%= tab.index '所有课程', root_path %>
-		<%- current_user.groups.each do |group| %>
-	  	<%= tab.try "group_#{group.id}", group.name, group_path(group) %>
-		<% end %>
-	  <%= tab.new '创建课程', new_group_path %>	
-	<% end %>
-</div>
+<%= tabs_tag(:namespace => :site_nav, :open_tabs => {:id => "site_nav", :class => "nav nav-list bs-docs-sidenav" }, :builder => MenuTabBuilder) do |tab| %>
+  <% Grade.list.each do |grade| %>
+    <li class="dropdown-submenu">
+	<%= grade.name %>
+      <a data-toggle="dropdown" class="dropdown-toggle" href="#">
+
+	<b class="caret"></b>
+      </a>
+      <% grade.children.each do |child| %>
+      <%= tab.try "grade_#{child.id}", child.name, child %>
+    <li class="divider"></li>
+    <% end %>
+  <% end %>
+<% end %>
+
