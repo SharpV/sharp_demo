@@ -1,20 +1,14 @@
 <div class='span2'>	
-  <%= render "nav" %>		
+  <%= render "shared/grades_nav" %>		
 </div>
 <div class='span8'>	
-  <%= render 'menu'%>
-  <h3>推荐班级</h3>
+  <>
+ <%= render 'menu'%>
+
+  
 </div>
 <div class='span2'>	
-
+  <h4>推荐班级</h4>
   <div class="tabbable tabs-left">
-    <%= tabs_tag(:namespace => :group_nav, :open_tabs => {:id => "group_menus", :class => "nav nav-tabs" }, :builder => MenuTabBuilder) do |tab| %>
-    <li><%= image_tag current_user.avatar_url(:b) || "default_avatar.gif" %></li>
-    <%= tab.index '所有课程', root_path %>
-    <%- current_user.groups.each do |group| %>
-    <%= tab.try "group_#{group.id}", group.name, group_path(group) %>
-    <% end %>
-    <%= tab.new '创建课程', new_group_path %>	
-    <% end %>
   </div>
 </div>
