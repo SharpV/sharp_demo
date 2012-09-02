@@ -14,6 +14,7 @@ class User < ActiveRecord::Base
   has_many :documents
   has_many :groups
   has_many :posts
+  has_many :tasks
   
   # Setup accessible (or protected) attributes for your model
   attr_accessible :email, :password, :password_confirmation, :remember_me, :login, 

@@ -47,7 +47,7 @@ gem 'mailboxer'
 gem 'stringex'
 gem 'rails3-jquery-autocomplete'
 gem 'simple_form', '~> 2.0.1'
-gem 'likeable'
+gem 'exception_notification'
 gem "rails_config"
 gem "annotate"
 gem 'redis_voteable'

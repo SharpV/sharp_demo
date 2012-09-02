@@ -1,7 +1,0 @@
-<div class="tabbable tabs-left">
-<%= tabs_tag(:namespace => :site_nav, :open_tabs => {:id => "group_nav", :class => "nav nav-tabs" }, :builder => MenuTabBuilder) do |tab| %>
-  <% current_user.groups.each do |group| %>
-    <%= tab.try "group_#{child.id}", group.name, group %>
-  <% end %>
-<% end %>
-</div>
