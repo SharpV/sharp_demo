@@ -1,7 +1,0 @@
-<%= simple_form_for @post_category, :html => {:class => 'well form-inline' } do |f| -%>	
-	<%= f.error_notification %>
-	<%= f.hidden_field(:parent_id, :value => params[:parent_id]) unless @post_category.parent_id %>
-	<%= f.input :name, :label => "分类名" %>
-	<%= f.submit "保存", :class=>'btn' %>&nbsp;
-	<button class="btn" type="reset" onclick='$.lazybox.close()'>取消</button>
-<% end %>

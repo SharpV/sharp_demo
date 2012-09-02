@@ -30,11 +30,41 @@ body {
 //
 // Example:
 
+a, a:link, a:visited {
+    color: #38678B;
+    text-decoration: none;
+}
+
 .container, .navbar-fixed-top .container, .navbar-fixed-bottom .container, .span12 {
     width: 960px;
 }
+.container { width:960px !important} 
 
-@linkColor: #ff0000;
+
+.navbar-search .search-query{
+    background-color: #eee;
+}
+.navbar .nav > li > a {
+    text-decoration: none;
+    text-shadow: none;
+}
+.navbar .nav > li > a {
+    color: #eee;
+    text-decoration: none;
+    float: none;
+    font-size: 14px;
+    line-height: 28px;
+    padding-bottom: 11px;
+    padding-left: 10px;
+    padding-right: 10px;
+    padding-top: 11px;
+    cursor: pointer;
+}
+.navbar .nav > li > a:visited {
+    color: eef;
+    text-decoration: none;
+}
+
 [class*="span"] {
     float: left;
     margin-left: 20px;
@@ -46,8 +76,8 @@ h3 {
 }
 
 .navbar-inner {
-    background-color: #333;
-    background-image: -moz-linear-gradient(center top , #666, #333);
+    background-color: #653;
+    background-image: -moz-linear-gradient(center top , #666, #663);
 }
 
 .nav-tabs > li > a, .nav-pills > li > a {
@@ -96,20 +126,4 @@ h3 {
 
 .radio input[type="radio"], .checkbox input[type="checkbox"] {
     margin: 0px;
-}
-
-.navbar-search .search-query{
-    background-color: #eee;
-}
-
-.navbar .nav > li > a {
-    color: #eee;
-    float: none;
-    font-size: 14px;
-    line-height: 28px;
-    padding-bottom: 11px;
-    padding-left: 10px;
-    padding-right: 10px;
-    padding-top: 11px;
-    cursor: pointer;
 }

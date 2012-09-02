@@ -1,15 +1,7 @@
-<%= tabs_tag(:namespace => :site_nav, :open_tabs => {:id => "site_nav", :class => "nav nav-list bs-docs-sidenav" }, :builder => MenuTabBuilder) do |tab| %>
-  <% Grade.list.each do |grade| %>
-    <li class="dropdown-submenu">
-	<%= grade.name %>
-      <a data-toggle="dropdown" class="dropdown-toggle" href="#">
-
-	<b class="caret"></b>
-      </a>
-      <% grade.children.each do |child| %>
-      <%= tab.try "grade_#{child.id}", child.name, child %>
-    <li class="divider"></li>
-    <% end %>
+<div class="tabbable tabs-left">
+<%= tabs_tag(:namespace => :site_nav, :open_tabs => {:id => "group_nav", :class => "nav nav-tabs" }, :builder => MenuTabBuilder) do |tab| %>
+  <% current_user.groups.each do |group| %>
+    <%= tab.try "group_#{group.id}", group.name, group %>
   <% end %>
 <% end %>
-
+</div>

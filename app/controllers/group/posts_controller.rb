@@ -9,6 +9,10 @@ class Group::PostsController < GroupController
     @posts = Post.all
     @categories = @current_group.categories
   end
+  
+  def new
+    @post = Post.new
+  end
 
   def edit
     @post = Post.find params[:id]

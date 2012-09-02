@@ -1,13 +1,16 @@
 <%= tabs_tag(:namespace => :site_nav, :open_tabs => {:id => "site_nav", :class => "nav nav-list bs-docs-sidenav" }, :builder => MenuTabBuilder) do |tab| %>
   <% Grade.list.each do |grade| %>
-    <li class="dropdown-submenu">
+    <li class="dropdown">
       <a data-toggle="dropdown" class="dropdown-toggle" href="#">
-	<%= grade.name %>
-	<b class="caret"></b>
+			<%= grade.name %>
+			<b class="caret"></b>
       </a>
-      <% grade.children.each do |child| %>
-      <%= tab.try "grade_#{child.id}", child.name, child %>
-    <li class="divider"></li>
-    <% end %>
-  <% end %>
+			<ul class="dropdown-menu">
+      	<% grade.children.each do |child| %>
+      		<%= tab.try "grade_#{child.id}", child.name, child %>
+    			<li class="divider"></li>
+    		<% end %>
+			</ul>
+		</li>	
+	<% end %>	  
 <% end %>
