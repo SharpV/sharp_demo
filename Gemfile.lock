@@ -104,6 +104,8 @@ GEM
     erubis (2.7.0)
     escape (0.0.4)
     eventmachine (0.12.10)
+    exception_notification (2.6.1)
+      actionmailer (>= 3.0.4)
     execjs (1.4.0)
       multi_json (~> 1.0)
     faraday (0.8.4)
@@ -148,8 +150,6 @@ GEM
       actionpack (>= 3.0.0)
       activesupport (>= 3.0.0)
       railties (>= 3.0.0)
-    keytar (1.5.3)
-      activesupport
     lazybox (0.2.1)
     less (2.2.1)
       commonjs (~> 0.2.6)
@@ -157,10 +157,6 @@ GEM
       actionpack (>= 3.1)
       less (~> 2.2.0)
     libv8 (3.3.10.4)
-    likeable (0.1.2)
-      activesupport
-      keytar (>= 1.5.2)
-      redis
     mail (2.4.4)
       i18n (>= 0.4.0)
       mime-types (~> 1.16)
@@ -340,6 +336,7 @@ DEPENDENCIES
   coffee-rails
   devise (~> 2.1.2)
   escape
+  exception_notification
   flash_cookie_session
   font-awesome-rails!
   foreigner
@@ -354,7 +351,6 @@ DEPENDENCIES
   json
   kaminari
   lazybox
-  likeable
   mailboxer
   mini_magick
   mobile-fu

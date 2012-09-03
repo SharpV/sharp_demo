@@ -4,8 +4,6 @@ require 'carrierwave/orm/activerecord'
 class Note < ActiveRecord::Base
   mount_uploader :file, FileUploader 
   
-  include Likeable
-  
   acts_as_taggable_on :tags
   acts_as_commentable
   
