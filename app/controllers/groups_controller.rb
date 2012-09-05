@@ -1,6 +1,6 @@
 class GroupsController < GroupController
   set_tab :index, :site_nav
-
+  
   def index
     @user = current_user 
     @post = Post.new
@@ -13,7 +13,7 @@ class GroupsController < GroupController
   end
   
   def new
-    self.try "set_tab", "new", :group_nav
+    self.try "set_tab", "new_group", :group_nav
     
     @group = Group.new
   end
