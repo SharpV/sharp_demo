@@ -1,6 +1,6 @@
 <div class="clearfix">
   <%= tabs_tag(:namespace => :grade_nav, :open_tabs => {:class => "nav nav-tabs nav-stacked"}, :builder => MenuTabBuilder) do |tab| %>
-    <%= tab.new_group "所有课程", subjects_path %>
+    <%= tab.new_group "所有课程", [@grade, :subjects] %>
     <% @grade.subjects.each do |subject| %>
       <%= tab.try("subject_#{subject.id}", subject.name, [@grade, subject]) %>
     <% end %>
