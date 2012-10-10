@@ -1,18 +1,17 @@
 <table>
-	<tr>
-		<td>
-			<%= image_tag @current_group.logo_url(:m) || "default_group.gif" %>
-		</td>
-	</tr>
-	<tr>
-		<td>
-			<h3><%= @current_group.name %></h3>
-		</td>
-		<td>
-		</td>
-	</tr>
+  <tr>
+    <td>
+      <%= image_tag @current_group.logo_url(:m) || "default_group.gif" %>
+    </td>
+  </tr>
+  <tr>
+    <td>
+      <h3><%= @current_group.name %></h3>
+    </td>
+    <td>
+    </td>
+  </tr>
 </table>
-<br />
 <div class="tab">
 	<%= tabs_tag(:namespace => :group_actions, :open_tabs => {:id => "group_menus", :class => "nav nav-pills" }, :builder => MenuTabBuilder) do |tab| %>
 	  <%= tab.post raw("<i class='icon-edit'></i> 添加话题"), new_group_post_path(@current_group) %>

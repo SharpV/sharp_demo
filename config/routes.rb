@@ -59,19 +59,21 @@ SharpLink::Application.routes.draw do
     end
   end
 
-  resources :grades
+  resources :grades do
+    resources :subjects do
+      collection do
+        get :hot
+        get :recommand
+      end
+    end
+  end
+
   resources :pages
 
   resources :tags, :only => [:index] do
     get :subscribe, :on => :member
   end
   resources :profiles
-  resources :comments do
-    collection do
-      get :manage
-      post :rebuild
-    end
-  end
-
+  
   root :to => 'home#index'
 end

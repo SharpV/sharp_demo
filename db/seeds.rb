@@ -11,9 +11,11 @@ end
 
 Settings.subjects.to_hash.each do |key, value|
   puts 'load subjects ...'
-  g = Grade.find_by_name key
-  value.each do |name|
-    Subject.create :name =>name, :grade => g
+  grade = Grade.find_by_name key
+  grade.children.each do |g|
+    value.each do |name|
+      Subject.create :name =>name, :grade => g
+    end
   end
 end
 
