@@ -82,7 +82,7 @@ Devise.setup do |config|
   config.stretches = Rails.env.test? ? 1 : 10
 
   # Setup a pepper to generate the encrypted password.
-  # config.pepper = "e7df166118750a44b396b93ce6e6c56be4234ade93eee6c893b2d76d529650369f8f74cc962743992b4bf401da7ec7470abc851eb914c3b5ececcb2c3de325d8"
+  # config.pepper = "2650fd1a27dd53ef1cf21646d18b414d47ddb4eae2aab0ba029e404036401209ede0e3993caddb77c35abe02433e638941043615c963a057dd38f92c9b9c893c"
 
   # ==> Configuration for :confirmable
   # A period that the user is allowed to access the website even without
@@ -96,14 +96,14 @@ Devise.setup do |config|
   # initial account confirmation) to be applied. Requires additional unconfirmed_email
   # db field (see migrations). Until confirmed new email is stored in
   # unconfirmed email column, and copied to email column on successful confirmation.
-  #config.reconfirmable = true
+  config.reconfirmable = true
 
   # Defines which key will be used when confirming an account
   # config.confirmation_keys = [ :email ]
 
   # ==> Configuration for :rememberable
   # The time the user will be remembered without asking for credentials again.
-  config.remember_for = 2.weeks
+  # config.remember_for = 2.weeks
 
   # If true, extends the user's remember period when remembered via cookie.
   # config.extend_remember_period = false
@@ -114,7 +114,7 @@ Devise.setup do |config|
 
   # ==> Configuration for :validatable
   # Range for password length. Default is 6..128.
-  config.password_length = 6..128
+  # config.password_length = 6..128
 
   # Email regex used to validate email formats. It simply asserts that
   # an one (and only one) @ exists in the given string. This is mainly
@@ -206,6 +206,15 @@ Devise.setup do |config|
   # Add a new OmniAuth provider. Check the wiki for more information on setting
   # up on your models and hooks.
   # config.omniauth :github, 'APP_ID', 'APP_SECRET', :scope => 'user,public_repo'
+  config.omniauth :linkedin, "ekxfXU8nueVSMQ9fc5KJAryBkyztUlCBYMW3DoQPzbE79WhivvzhQloRNHCHgPeB", "WYiHFT-KKFgjd45W3-pEAficmXRHmN6_6DGwj1C_ZILJlSO1gBvv6VNYXU9tybGY"
+                      
+  config.omniauth :facebook, "129571360447856","eef39dce5e20e76f77495c59623bdb38"
+                      
+  #config.omniauth :twitter, "wgTxO0fTpjTeSnjKC9ZHA","JepulVWwLcuAnGfWjwCu47yEP0TcJJfKtvISPBsilI"
+                      
+  config.token_authentication_key = :auth_token
+                      
+  config.skip_session_storage << :token_auth
 
   # ==> Warden configuration
   # If you want to use other strategies, that are not supported by Devise, or

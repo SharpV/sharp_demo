@@ -1,5 +1,5 @@
-source 'http://ruby.taobao.org/'  
-#source 'http://rubygems.org'
+#source 'http://ruby.taobao.org/'  
+source 'http://rubygems.org'
 
 gem 'rails', '3.2.8'
 gem "therubyracer", "0.10.2", :require => 'v8'
@@ -8,6 +8,7 @@ gem 'hz2py'
 gem 'activeadmin'#, :git => 'git://github.com/gregbell/active_admin'
 gem 'rails_kindeditor', '~> 0.3.0'
 gem 'redcarpet'
+gem 'social_stream', '~> 0.30.2'
 gem 'sqlite3'
 gem 'mini_magick'
 gem 'resque'
@@ -24,7 +25,7 @@ gem 'carrierwave'
 gem 'mini_magick'
 gem 'flash_cookie_session'
 gem 'devise', '~> 2.1.2'
-gem 'foreigner'
+
 #gem 'devise_invitable', '~> 1.0.0'
 gem 'sequel'
 gem "recaptcha", :require => "recaptcha/rails"
@@ -44,7 +45,7 @@ gem "cancan"
 gem "escape"
 gem 'kaminari'
 gem 'mailboxer'
-gem 'stringex'
+gem 'less-rails'
 gem 'rails3-jquery-autocomplete'
 gem 'simple_form', '~> 2.0.1'
 gem 'exception_notification'
@@ -55,15 +56,18 @@ gem "bcrypt-ruby", :require => "bcrypt"
 gem "jquery-rails"
 gem "friendly_id"
 gem 'react_reporter', :git => "git://github.com/reactualize/react_reporter.git"
-gem "acts-as-taggable-on", :git => "git://github.com/mbleigh/acts-as-taggable-on.git"
+#gem "acts-as-taggable-on", :git => "git://github.com/mbleigh/acts-as-taggable-on.git"
 gem 'acts_as_commentable'
 gem 'twitter-bootstrap-rails', :git => 'git://github.com/seyhunak/twitter-bootstrap-rails.git'
 gem 'font-awesome-rails', :git => "git://github.com/bokmann/font-awesome-rails.git"
-gem 'ancestry'
+gem 'binding_of_caller'
 gem "jquery-fileupload-rails"
 # in production environments by default.
 gem 'ruby_parser'
 gem 'hpricot'
+group :development do
+  gem "better_errors"
+end
 group :assets do
   gem 'sprockets'
   gem 'coffee-rails'

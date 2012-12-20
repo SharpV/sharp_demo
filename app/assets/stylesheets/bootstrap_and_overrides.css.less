@@ -1,24 +1,24 @@
 @import "twitter/bootstrap/bootstrap";
-body { 
-	padding-top: 60px;
-}
-
 @import "twitter/bootstrap/responsive";
 
 // Set the correct sprite paths
-@iconSpritePath: asset-path('twitter/bootstrap/glyphicons-halflings.png');
-@iconWhiteSpritePath: asset-path('twitter/bootstrap/glyphicons-halflings-white.png');
+@iconSpritePath: asset-path("twitter/bootstrap/glyphicons-halflings");
+@iconWhiteSpritePath: asset-path("twitter/bootstrap/glyphicons-halflings-white");
 
 // Set the Font Awesome (Font Awesome is default. You can disable by commenting below lines)
-// Note: If you use asset_path() here, your compiled boostrap_and_overrides.css will not 
+// Note: If you use asset_path() here, your compiled bootstrap_and_overrides.css will not
 //       have the proper paths. So for now we use the absolute path.
-@fontAwesomeEotPath: '/assets/fontawesome-webfont.eot';
-@fontAwesomeWoffPath: '/assets/fontawesome-webfont.woff';
-@fontAwesomeTtfPath: '/assets/fontawesome-webfont.ttf';
-@fontAwesomeSvgPath: '/assets/fontawesome-webfont.svg';
+@fontAwesomeEotPath: asset-path("fontawesome-webfont.eot");
+@fontAwesomeEotPath_iefix: asset-path("fontawesome-webfont.eot#iefix");
+@fontAwesomeWoffPath: asset-path("fontawesome-webfont.woff");
+@fontAwesomeTtfPath: asset-path("fontawesome-webfont.ttf");
+@fontAwesomeSvgPath: asset-path("fontawesome-webfont.svg");
 
 // Font Awesome
 @import "fontawesome";
+
+// Glyphicons
+//@import "twitter/bootstrap/sprites.less";
 
 // Your custom LESS stylesheets goes here
 //
@@ -26,104 +26,7 @@ body {
 // you may use and inherit here
 //
 // If you'd like to override bootstrap's own variables, you can do so here as well
-// See http://twitter.github.com/bootstrap/less.html for their names and documentation
+// See http://twitter.github.com/bootstrap/customize.html#variables for their names and documentation
 //
 // Example:
-
-a, a:link, a:visited {
-    color: #38678B;
-    text-decoration: none;
-}
-
-.container, .navbar-fixed-top .container, .navbar-fixed-bottom .container, .span12 {
-    width: 960px;
-}
-.container { width:960px !important} 
-
-
-.navbar-search .search-query{
-    background-color: #eee;
-}
-.navbar .nav > li > a {
-    text-decoration: none;
-    text-shadow: none;
-}
-.navbar .nav > li > a {
-    color: #eee;
-    text-decoration: none;
-    float: none;
-    font-size: 14px;
-    line-height: 28px;
-    padding-bottom: 11px;
-    padding-left: 10px;
-    padding-right: 10px;
-    padding-top: 11px;
-    cursor: pointer;
-}
-.navbar .nav > li > a:visited {
-    color: eef;
-    text-decoration: none;
-}
-
-[class*="span"] {
-    float: left;
-    margin-left: 20px;
-}
-
-h3 {
-    font-size: 18px;
-    line-height: 20px;
-}
-
-.navbar-inner {
-    background-color: #653;
-    background-image: -moz-linear-gradient(center top , #666, #663);
-}
-
-.nav-tabs > li > a, .nav-pills > li > a {
-    padding-left: 10px;
-    padding-right: 10px;
-}
-.span-left, .span9 {
-    width: 700px;
-}
-
-.span-right, .span3{
-    width: 240px;
-}
-
-.nav-tabs > .active > a, .nav-tabs > .active > a:hover {
-    cursor: pointer;
-}
-.navbar .brand {
-    margin-right: 10px;
-    margin-left: 0px;
-    padding: 0px;
-    line-height: 40px;
-}
-.navbar-inner {
-    min-height: 50px;
-}
-
-#user_menus, #account, #search-form{
-    line-height:40px;
-}
-#search-form{
-    margin-top: 10px;
-}
-
-.form-horizontal .control-label {
-    float: left;
-    margin-right: 10px;
-    text-align: right;
-    width: 80px;
-    padding-top: 2px;
-}
-
-.form-horizontal .controls {
-    margin-left: 120px;
-}
-
-.radio input[type="radio"], .checkbox input[type="checkbox"] {
-    margin: 0px;
-}
+// @linkColor: #ff0000;
