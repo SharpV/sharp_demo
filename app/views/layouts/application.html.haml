@@ -6,10 +6,7 @@
     %meta(name="viewport" content="width=device-width, initial-scale=1.0")
     %title= content_for?(:title) ? yield(:title) : "SharpLink"
     = csrf_meta_tags
-    / Le HTML5 shim, for IE6-8 support of HTML elements
-    /[if lt IE 9]
-      = javascript_include_tag "//cdnjs.cloudflare.com/ajax/libs/html5shiv/3.6.1/html5shiv.js"
-    = stylesheet_link_tag "application", :media => "all"
+    = render "layouts/assets"
     %link(href="images/apple-touch-icon-144x144.png" rel="apple-touch-icon-precomposed" sizes="144x144")
     %link(href="images/apple-touch-icon-114x114.png" rel="apple-touch-icon-precomposed" sizes="114x114")
     %link(href="images/apple-touch-icon-72x72.png" rel="apple-touch-icon-precomposed" sizes="72x72")
@@ -18,28 +15,24 @@
 
 
   %body
-    .navbar.navbar-fixed-top
-      .navbar-inner
-        .container
-          %a.btn.btn-navbar(data-target=".nav-collapse" data-toggle="collapse")
-            %span.icon-bar
-            %span.icon-bar
-            %span.icon-bar
-          %a.brand(href="#") SharpLink
-          .container.nav-collapse
-            %ul.nav
-              %li= link_to "Link 1", "/path1"
-              %li= link_to "Link 2", "/path2"
-              %li= link_to "Link 3", "/path3"
-            = render "layouts/account"
+    = render "layouts/header"
 
-    .container
-
-      .row
+    .container#wrapper
+      = render :partial => "layouts/header" 
+      %nav#toolbar
+        = yield :toolbar
+      
+      #flash
+        = render :partial => "layouts/flash", :locals => {:flash => flash}
+      
+      %section.row
         .span9
-          = bootstrap_flash
           = yield
         .span3
+          -if content_for?(:sidebar) 
+            %aside{:id=>"sidebar"}
+              #sidebarContent
+                = yield :sidebar 
           .well.sidebar-nav
             %h3 Sidebar
             %ul.nav.nav-list
@@ -49,8 +42,7 @@
               %li= link_to "Link 3", "/path3"
 
     
-      %footer
-        %p &copy; Company 2012
+      = render "layouts/footer"
     /
       Javascripts
       \==================================================

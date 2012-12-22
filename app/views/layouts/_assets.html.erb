@@ -1,3 +1,6 @@
+
+<%= javascript_include_tag "//cdnjs.cloudflare.com/ajax/libs/html5shiv/3.6.1/html5shiv.js" %>
+<%= stylesheet_link_tag "application", :media => "all" %>
 <%= stylesheet_link_tag 'tree', :media => :all %>
 <%= stylesheet_link_tag 'sortable', :media => :all %>
 <%= stylesheet_link_tag 'comments_tree', :media => :all %>
@@ -8,3 +11,14 @@
 <%= javascript_include_tag 'jquery.ui.nestedSortable' %>
 <%= javascript_include_tag 'sortable/base' %>
 <%= javascript_include_tag 'comments/base' %>
+	
+	<script type="text/javascript">
+      I18n.defaultLocale = "<%= I18n.default_locale %>";
+      I18n.locale = "<%= I18n.locale %>";
+    </script>
+
+    <script type="text/javascript">
+      $(document).ready(function() {
+        <%= yield :javascript %>
+      })
+    </script>

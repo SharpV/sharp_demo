@@ -1,36 +1,84 @@
-require 'pathname'
-require 'carrierwave/orm/activerecord'
-
 class Document < ActiveRecord::Base
-  mount_uploader :file, FileUploader
-  belongs_to :user
-  belongs_to :group
+  include SocialStream::Models::Object
 
-  #after_save :conv_to_swf
+  IMAGE_FORMATS = ["doc","ppt","xls","rar","zip","mpeg","plain","pdf"]
 
-  def conv_to_swf
-    system " unoconv -f pdf #{file_path}"
-    system "pdf2swf #{pdf_path} -o #{swf_path} -T 9 -f"
-  end
+  has_attached_file :file, 
+                    :url => '/:class/:id.:content_type_extension',
+                    :path => ':rails_root/documents/:class/:id_partition/:style/:filename.:extension'
 
-  def file_path
-    file.current_path
-  end
-
-  def dir_path
-    File.dirname(self.file.current_path)
-  end
-
-  def file_without_extname
-    File.basename(self.file.current_path, File.extname(self.file.current_path))
-  end
-
-  def swf_path
-    "#{dir_path}/#{file_without_extname}.swf"
-  end
-
-  def pdf_path
-    "#{dir_path}/#{file_without_extname}.pdf"
+  paginates_per 20
+  
+  validates_attachment_presence :file
+  validates_presence_of :title
+  
+  before_validation(:on => :create) do
+    set_title
   end
   
+  define_index do
+    activity_object_index
+
+    indexes file_file_name, :as => :file_name
+  end
+  
+  class << self 
+    def new(*args)
+      if !(self.name == "Document")
+        return super
+       end 
+      doc = super
+      
+      if(doc.file_content_type.nil?)
+        return doc
+      end
+      
+      if !(doc.file_content_type =~ /^image.*/).nil?
+        return Picture.new *args
+      end
+      
+      if !(doc.file_content_type =~ /^audio.*/).nil?
+        return Audio.new *args
+      end
+      
+      if !(doc.file_content_type =~ /^video.*/).nil?
+        return Video.new *args
+      end
+      
+      return doc
+    end
+  end
+
+  def mime_type
+    Mime::Type.lookup(file_content_type)
+  end
+
+  def format
+    mime_type.to_sym
+  end
+
+  # Thumbnail file
+  def thumb(size, helper)
+    if format && IMAGE_FORMATS.include?(format.to_s)
+      "#{ size.to_s }/#{ format }.png"
+    else
+      "#{ size.to_s }/default.png"
+    end
+  end
+
+ # JSON, generic version for most documents
+  def as_json(options = nil)
+    {:id => id,
+     :title => title,
+     :description => description,
+     :author => author.name,
+     :src => file.to_s
+    }
+  end
+  
+  protected
+
+  def set_title
+    self.title = file_file_name if self.title.blank?
+  end
 end

@@ -1,7 +1,7 @@
 #source 'http://ruby.taobao.org/'  
 source 'http://rubygems.org'
 
-gem 'rails', '3.2.8'
+gem 'rails', '3.2.9'
 gem "therubyracer", "0.10.2", :require => 'v8'
 gem 'mobile-fu'
 gem 'hz2py'
@@ -58,21 +58,23 @@ gem "friendly_id"
 gem 'react_reporter', :git => "git://github.com/reactualize/react_reporter.git"
 #gem "acts-as-taggable-on", :git => "git://github.com/mbleigh/acts-as-taggable-on.git"
 gem 'acts_as_commentable'
-gem 'twitter-bootstrap-rails', :git => 'git://github.com/seyhunak/twitter-bootstrap-rails.git'
-gem 'font-awesome-rails', :git => "git://github.com/bokmann/font-awesome-rails.git"
+#gem 'twitter-bootstrap-rails', :git => 'git://github.com/seyhunak/twitter-bootstrap-rails.git'
 gem 'binding_of_caller'
 gem "jquery-fileupload-rails"
 # in production environments by default.
 gem 'ruby_parser'
 gem 'hpricot'
 group :development do
-  gem "better_errors"
+  #gem "better_errors"
 end
 group :assets do
+  gem 'compass'
+  gem 'bootstrap-sass'
   gem 'sprockets'
   gem 'coffee-rails'
   gem 'haml-rails'
   gem 'sass-rails'
+  gem 'font-awesome-rails', :git => "git://github.com/bokmann/font-awesome-rails.git"
   # See https://github.com/sstephenson/execjs#readme for more supported runtimes
   gem 'uglifier', '>= 1.0.3'
 end

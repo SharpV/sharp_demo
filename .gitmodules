@@ -1,0 +1,6 @@
+[submodule "app/assets/javascripts/bootstrap-multiselect"]
+	path = app/assets/javascripts/bootstrap-multiselect
+	url = git@github.com:davidstutz/bootstrap-multiselect.git
+[submodule "app/assets/javascripts/jquery.autosize"]
+	path = app/assets/javascripts/jquery.autosize
+	url = git@github.com:melvynhills/jquery.autosize.git
