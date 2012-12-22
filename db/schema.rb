@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20121220132655) do
+ActiveRecord::Schema.define(:version => 20120714081128) do
 
   create_table "active_admin_comments", :force => true do |t|
     t.string   "resource_id",   :null => false
@@ -408,21 +408,20 @@ ActiveRecord::Schema.define(:version => 20121220132655) do
     t.date     "birthday"
     t.datetime "created_at"
     t.datetime "updated_at"
-    t.string   "organization", :limit => 45
-    t.string   "phone",        :limit => 45
-    t.string   "mobile",       :limit => 45
-    t.string   "fax",          :limit => 45
+    t.string   "organization",  :limit => 45
+    t.string   "phone",         :limit => 45
+    t.string   "mobile",        :limit => 45
+    t.string   "fax",           :limit => 45
     t.string   "address"
-    t.string   "city"
-    t.string   "zipcode",      :limit => 45
-    t.string   "province",     :limit => 45
-    t.string   "country",      :limit => 45
+    t.string   "name"
     t.integer  "prefix_key"
     t.string   "description"
+    t.integer  "city_code"
+    t.integer  "zone_code"
     t.string   "experience"
     t.string   "website"
-    t.string   "skype",        :limit => 45
-    t.string   "im",           :limit => 45
+    t.string   "qq",            :limit => 45
+    t.string   "identity_card", :limit => 45
   end
 
   add_index "profiles", ["actor_id"], :name => "index_profiles_on_actor_id"
@@ -590,6 +589,7 @@ ActiveRecord::Schema.define(:version => 20121220132655) do
     t.integer  "actor_id"
     t.string   "language"
     t.string   "email"
+    t.string   "nickname"
     t.string   "confirmation_token"
     t.datetime "confirmed_at"
     t.datetime "confirmation_sent_at"
@@ -600,9 +600,12 @@ ActiveRecord::Schema.define(:version => 20121220132655) do
     t.boolean  "connected",                             :default => false
     t.string   "status",                                :default => "available"
     t.boolean  "chat_enabled",                          :default => true
+    t.string   "login"
+    t.string   "avatar"
   end
 
   add_index "users", ["actor_id"], :name => "index_users_on_actor_id"
+  add_index "users", ["login"], :name => "index_users_on_login"
   add_index "users", ["reset_password_token"], :name => "index_users_on_reset_password_token", :unique => true
 
   create_table "zones", :force => true do |t|

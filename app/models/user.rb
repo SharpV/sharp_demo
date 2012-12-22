@@ -18,14 +18,13 @@ class User < ActiveRecord::Base
   
   # Setup accessible (or protected) attributes for your model
   attr_accessible :email, :password, :password_confirmation, :remember_me, :login, 
-    :province_code, :city_code, :name, :field_id
+    :province_code, :city_code, :nickname, :field_id
   
   # Validations
   validates_presence_of :password
   validates_presence_of :email, :presence => true, :uniqueness => true
   validates_presence_of :password, :presence => true, :length => {:within => 6..50}
-  validates :login, :presence => true, :length => {:within => 5..50}, :uniqueness => true, 
-    :format => {:with => /\A\w+\z/, :message => '只允许数字、大小写字母和下划线'}
+  validates :login, :presence => true, :length => {:within => 5..50}, :uniqueness => true, :format => {:with => /\A\w+\z/, :message => '只允许数字、大小写字母和下划线'}
     
   before_validation :update_login
   
