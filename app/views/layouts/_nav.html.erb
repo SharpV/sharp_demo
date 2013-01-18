@@ -1,5 +1,9 @@
 <%= tabs_tag(:namespace => :site_nav, :open_tabs => {:id => "site_nav", :class => "nav" }, :builder => MenuTabBuilder) do |tab| %>
   <%= tab.index '首页', root_path %>
+  <%= tab.index '笔记', notes_path %>
+  <%= tab.index '课件', groups_path %>
+  <%= tab.index '问答', groups_path %>
+  <%= tab.index '课程', groups_path %>
   <%= tab.index '群组', groups_path %>
     <% Grade.list.each do |grade| %>
      <li class="dropdown">

@@ -37,27 +37,27 @@ SharpLink::Application.routes.draw do
     resources :passwords
     resources :likes
   end
-
+  resources :documents
+  resources :events
+  resources :topics
+  resources :settings
+  resources :comments
+  resources :posts
+  resources :categories
+  resources :questions
+  resources :notes
+  resources :notifications
+  resources :photos
+  resources :tasks
+  resources :pages do      
+    resources :comments
+  end
   delete 'likes/:resource_name/:resource_id' => "my/likes#destroy", :as => 'like'
   post 'likes/:resource_name/:resource_id' => "my/likes#create",  :as => 'like'
 
   resources :groups do 
     scope :module => "group" do
-      resources :documents
-      resources :events
-      resources :topics
-      resources :settings
-      resources :comments
-      resources :posts
-      resources :categories
-      resources :questions
-      resources :links
-      resources :notifications
-      resources :photos
-      resources :tasks
-      resources :pages do
-        resources :comments
-      end
+      
     end
   end
 
