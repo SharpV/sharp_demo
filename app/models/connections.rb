@@ -1,12 +1,7 @@
 require 'pathname'
 require 'carrierwave/orm/activerecord'
 
-class Document < ActiveRecord::Base
-  mount_uploader :file, FileUploader
-  belongs_to :user
-  belongs_to :group
-
-  #after_save :conv_to_swf
+class Connection < ActiveRecord::Base
 
   def conv_to_swf
     system " unoconv -f pdf #{file_path}"

@@ -25,7 +25,7 @@ gem 'mime-types'
 gem 'carrierwave'
 gem 'mini_magick'
 gem 'flash_cookie_session'
-gem 'devise', '~> 2.1.2'
+gem 'devise', '~> 2.2.2'
 gem 'riak-client'
 #gem 'devise_invitable', '~> 1.0.0'
 gem 'sequel'
@@ -69,13 +69,12 @@ group :development do
   #gem "better_errors"
 end
 group :assets do
-  gem 'compass'
-  gem 'bootstrap-sass'
+  gem 'twitter-bootstrap-rails', :git => 'git://github.com/seyhunak/twitter-bootstrap-rails.git'  
+  gem 'font-awesome-rails', :git => "git://github.com/bokmann/font-awesome-rails.git"
   gem 'sprockets'
   gem 'coffee-rails'
-  gem 'haml-rails'
+  #gem 'haml-rails'
   gem 'sass-rails'
-  gem 'font-awesome-rails', :git => "git://github.com/bokmann/font-awesome-rails.git"
   # See https://github.com/sstephenson/execjs#readme for more supported runtimes
   gem 'uglifier', '>= 1.0.3'
 end

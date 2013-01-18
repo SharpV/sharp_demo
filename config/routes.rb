@@ -1,12 +1,19 @@
 SharpLink::Application.routes.draw do
 
+  devise_for :users
+
   devise_for :users, :controllers => {:omniauth_callbacks => 'omniauth_callbacks'}
 
   ActiveAdmin.routes(self)
 
   devise_for :admin_users, ActiveAdmin::Devise.config
 
-  devise_for :users, :controllers => {:registrations => "registrations", :passwords => "passwords", :sessions => "sessions"}
+  #devise_for :users, :controllers => {:registrations => "registrations", :passwords => "passwords", :sessions => "sessions"}
+  
+  devise_scope :user do
+    get "sign_in", :to => "sessions#new"
+  end
+
   match "/my", :to => "home#index"                                    
   match '/new/:type', :to => 'my/posts#new', :as => :new_post
   match '/categories/:parent_id/new', :to => 'my/post_categories#new', :as => :add_post_category
@@ -28,38 +35,40 @@ SharpLink::Application.routes.draw do
     root :to => 'dashboard#show'
   end
 
+
+  resources :topics
+  resources :posts
+  resources :comments
+  resources :categories
+  resources :sections
+  resources :assets
+
+
   resources :users do 
     resources :activities
-    resources :avatars
+    resources :posts
     resources :groups
-    resources :events
+    resources :settings
     resources :comments
     resources :passwords
     resources :likes
+    resources :notifications
   end
-  resources :documents
-  resources :events
-  resources :topics
-  resources :settings
-  resources :comments
-  resources :posts
-  resources :categories
-  resources :questions
-  resources :notes
-  resources :notifications
-  resources :photos
-  resources :tasks
+
+  resources :courses do
+    resources :slots 
+    resources :sections
+  end
+
+  resources :groups do
+    resources :topics
+    resources :members
+  end
   resources :pages do      
     resources :comments
   end
   delete 'likes/:resource_name/:resource_id' => "my/likes#destroy", :as => 'like'
   post 'likes/:resource_name/:resource_id' => "my/likes#create",  :as => 'like'
-
-  resources :groups do 
-    scope :module => "group" do
-      
-    end
-  end
 
   resources :grades do
     resources :subjects do

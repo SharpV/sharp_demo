@@ -1,5 +1,5 @@
 class HomeController < ApplicationController
-  before_filter :authenticate_user!
+  #before_filter :authenticate_user!
 
   set_tab :index, :site_nav
   #layout 'group'
@@ -8,9 +8,7 @@ class HomeController < ApplicationController
   
   def index
     unless current_user 
-      redirect_to(new_user_session_path) 
-    #else
-      #redirect_to(groups_path) 
+      redirect_to(sign_in_path) 
     end
   end
 end

@@ -12,6 +12,15 @@ GIT
     react_reporter (1.0.0.dev)
 
 GIT
+  remote: git://github.com/seyhunak/twitter-bootstrap-rails.git
+  revision: 26e38bf06cd6cbc8d55631740deca826965abb33
+  specs:
+    twitter-bootstrap-rails (2.2.0)
+      actionpack (>= 3.1)
+      execjs
+      railties (>= 3.1)
+
+GIT
   remote: git@github.com:SharpX/socialization.git
   revision: bed2653911a668aed7747949f1ac283b7a8481fd
   specs:
@@ -60,7 +69,7 @@ GEM
     activesupport (3.2.11)
       i18n (~> 0.6)
       multi_json (~> 1.0)
-    acts-as-taggable-on (2.2.2)
+    acts-as-taggable-on (2.3.3)
       rails (~> 3.0)
     acts_as_commentable (4.0.0)
     annotate (2.5.0)
@@ -73,8 +82,6 @@ GEM
     bcrypt-ruby (3.0.1)
     beefcake (0.3.7)
     binding_of_caller (0.6.8)
-    bootstrap-sass (2.2.2.0)
-      sass (~> 3.2)
     bourbon (3.0.1)
       sass (>= 3.2.0)
       thor
@@ -84,7 +91,6 @@ GEM
       activemodel (>= 3.2.0)
       activesupport (>= 3.2.0)
     chronic (0.9.0)
-    chunky_png (1.2.7)
     coffee-rails (3.2.2)
       coffee-script (>= 2.2.0)
       railties (~> 3.2.0)
@@ -93,12 +99,8 @@ GEM
       execjs
     coffee-script-source (1.4.0)
     commonjs (0.2.6)
-    compass (0.12.2)
-      chunky_png (~> 1.2)
-      fssm (>= 0.2.7)
-      sass (~> 3.1)
     daemons (1.1.9)
-    devise (2.1.2)
+    devise (2.2.2)
       bcrypt-ruby (~> 3.0)
       orm_adapter (~> 0.1)
       railties (~> 3.1)
@@ -124,13 +126,6 @@ GEM
     formtastic (2.2.1)
       actionpack (>= 3.0)
     friendly_id (4.0.9)
-    fssm (0.2.9)
-    haml (3.1.7)
-    haml-rails (0.3.5)
-      actionpack (>= 3.1, < 4.1)
-      activesupport (>= 3.1, < 4.1)
-      haml (~> 3.1)
-      railties (>= 3.1, < 4.1)
     has_scope (0.5.1)
     hashie (1.2.0)
     hike (1.2.1)
@@ -354,18 +349,15 @@ DEPENDENCIES
   awesome_nested_set
   bcrypt-ruby
   binding_of_caller
-  bootstrap-sass
   cancan
   carrierwave
   coffee-rails
-  compass
-  devise (~> 2.1.2)
+  devise (~> 2.2.2)
   escape
   exception_notification
   flash_cookie_session
   font-awesome-rails!
   friendly_id
-  haml-rails
   hpricot
   hz2py
   i18n-js
@@ -409,5 +401,6 @@ DEPENDENCIES
   the_sortable_tree (~> 1.9.3)
   therubyracer (= 0.10.2)
   thin
+  twitter-bootstrap-rails!
   uglifier (>= 1.0.3)
   whenever
