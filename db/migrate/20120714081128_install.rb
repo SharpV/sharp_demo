@@ -267,12 +267,14 @@ class Install < ActiveRecord::Migration
     t.string   "unconfirmed_email"
     t.integer  "failed_attempts",                       :default => 0
     t.string   "unlock_token"
+    t.string   "login",                                 :null => false
     t.datetime "locked_at"
     t.string   "status",                                :default => "available"
     t.string   "avatar"
   end
 
   add_index "users", "email"
+  add_index "users", "login"
   add_index "users", "status"
   add_index "users", "reset_password_token"
 

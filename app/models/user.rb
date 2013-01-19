@@ -16,12 +16,8 @@ class User < ActiveRecord::Base
 
   has_many :connects, :dependent => :destroy
 
-  has_many :user_authored_objects,
-           :class_name => "ActivityObject",
-           :foreign_key => :user_author_id
-
   # Setup accessible (or protected) attributes for your model
-  attr_accessible :name, :email, :password, :password_confirmation, :language, :remember_me, :profile_attributes, :nickname
+  attr_accessible :name, :email, :password, :password_confirmation, :login, :remember_me, :profile_attributes, :nickname
 
   validates_presence_of :email
 
@@ -55,25 +51,6 @@ class User < ActiveRecord::Base
   def generate_login
     self.login = Digest::SHA1.hexdigest("#{email}#{Time.now}") unless self.login
   end
-
-  
-  def recent_groups
-    contact_subjects(:type => :group, :direction => :sent) do |q|
-      q.select("contacts.created_at").
-        merge(Contact.recent)
-    end
-  end
-
-  # Subjects this user can acts as
-  def represented
-    candidates = contact_actors(:direction => :sent).map(&:id)
-
-    contact_subjects(:direction => :received) do |q|
-      q.joins(:sent_ties => { :relation => :permissions }).
-        merge(Permission.represent).
-        where(:id => candidates)
-    end
-  end
   
   protected
   
@@ -92,16 +69,6 @@ class User < ActiveRecord::Base
   end
   
   class << self
-    %w( email slug name ).each do |a|
-      eval <<-EOS
-    def find_by_#{ a }(#{ a })             # def find_by_email(email)
-      find :first,                         #   find(:first,
-           :include => :actor,             #         :include => :actor,
-           :conditions =>                  #         :conditions =>
-             { 'actors.#{ a }' => #{ a } } #           { 'actors.email' => email }
-    end                                    # end
-      EOS
-    end
 
    # Overwrite devise default find method to support login with email,
     # presence ID and login
@@ -115,35 +82,6 @@ class User < ActiveRecord::Base
       else
         super
       end
-    end
-
-    def find_or_initialize_with_errors(required_attributes, attributes, error=:invalid)
-      if required_attributes == [:email]
-        find_or_initialize_with_error_by_email(attributes[:email], error)
-      else
-        super
-      end
-    end
-    
-    # Overwrite devise default method to support finding with actor.email
-    def find_or_initialize_with_error_by_email(value, error)
-      if value.present?
-        record = find_by_email(value)
-      end
-      
-      unless record
-        record = new
-        
-        if value.present?
-          record.email = value
-        else
-          error = :blank
-        end
-        
-        record.errors.add(:email, error)
-      end
-      
-      record
     end
 
     def find_or_create_for_facebook_oauth(hash, signed_in_resource = nil)

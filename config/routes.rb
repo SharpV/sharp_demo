@@ -1,19 +1,11 @@
 SharpLink::Application.routes.draw do
 
-  devise_for :users
-
-  devise_for :users, :controllers => {:omniauth_callbacks => 'omniauth_callbacks'}
-
   ActiveAdmin.routes(self)
 
   devise_for :admin_users, ActiveAdmin::Devise.config
 
-  #devise_for :users, :controllers => {:registrations => "registrations", :passwords => "passwords", :sessions => "sessions"}
+  devise_for :users, :controllers => {:registrations => "registrations", :passwords => "passwords", :sessions => "sessions", :omniauth_callbacks => 'omniauth_callbacks'}
   
-  devise_scope :user do
-    get "sign_in", :to => "sessions#new"
-  end
-
   match "/my", :to => "home#index"                                    
   match '/new/:type', :to => 'my/posts#new', :as => :new_post
   match '/categories/:parent_id/new', :to => 'my/post_categories#new', :as => :add_post_category
@@ -43,15 +35,19 @@ SharpLink::Application.routes.draw do
   resources :sections
   resources :assets
 
+  resources :questions
 
   resources :users do 
     resources :activities
     resources :posts
     resources :groups
+    resources :questions
     resources :settings
     resources :comments
     resources :passwords
     resources :likes
+    resources :profiles
+    resources :courses
     resources :notifications
   end
 

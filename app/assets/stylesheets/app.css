@@ -1,0 +1,175 @@
+html, body, p, table, dl, ul, section{
+    color: #333;
+    font-family: Arial,Helvetica,sans-serif;
+    font-size: 13px;
+    font-size-adjust: none;
+    font-stretch: normal;
+    font-style: normal;
+    font-variant: normal;
+    font-weight: normal;
+    line-height: 1.62;
+}
+
+body{
+
+    padding-top: 50px;  
+}
+
+.container, .navbar-fixed-top .container, .navbar-fixed-bottom .container {
+    width: 900px;
+}
+.brand h2{
+    color:#01BDBC;
+}
+.subpage{
+    width: 680px;
+    float:right
+}
+
+.indexpage{
+	background: url("/assets/bg.jpg") repeat scroll left top transparent;
+    background: url("/assets/bg.png") repeat scroll left top transparent;
+    background-color: #dfdfdf;
+    width: 100%;
+    margin: 0px;
+    padding-top: 20px;
+    display: block;
+}
+
+ul.nav-tabs li a{
+    font-size: 14px;
+    font-weight:normal;
+}
+
+.nav-list .nav-header {
+    margin-left: -15px;
+    font-size: 14px;
+    text-shadow: none;	
+    color: #fff;
+    background-color: #0088CC;
+}
+
+.section-header h3, .page-header h3{
+  color: #189B99;
+  font-size: 16px;
+}
+
+ul{list-style: none;}
+.share{padding:15px 0; }
+.banner{margin:5px; width:450px; float:left;word-break:break-all;}
+.banner h1{font-size: 23px;font-weight:22; margin-bottom:20px;}
+.banner p{
+    font-size: 14px;
+    font-weight: normal;
+    line-height:1.68;
+    color: #444;
+    word-wrap:break-word;
+    word-break:normal;
+}
+
+.img_intro{
+    text-align:center;
+    float: right;
+    width: 400px;
+}
+
+
+h3{
+    color: #333;
+    font-size: 18px;
+}
+h4{
+
+    color: #333;
+    font-size: 15px;
+}
+
+.products a:visited {
+    color: #333;
+    TEXT-DECORATION: none;
+}
+
+.products a:hover {
+    color: #03BDBC;
+    text-decoration: none;
+}
+.products a:active {
+    COLOR: #333;  
+    text-decoration: none;
+}
+
+.products h3{
+    line-height: 36px;
+}
+
+.products p{
+    color: #333;
+}
+.support{overflow: auto; font-size:12px; margin:10px 0; color:#999;}
+.support li{float:left; margin-right:20px;text-align: center;}
+.support a{display:block;height:40px;width:40px;background:url("/assets/sup_icon.png") no-repeat;}
+
+.support .ipad{background-position:0 0px;}
+.support .iphone{background-position:-40px 0;}
+.support .android{background-position:-80px 0;}
+.support .window{background-position:-120px 0;}
+
+.support a.ipad:hover{background-position: 0 -40px;}
+.support a.iphone:hover{background-position: -40px -40px;}
+.support a.android:hover{background-position: -80px -40px;}
+.support a.window:hover {background-position: -120px -40px;}
+
+.article li:hover{background-color: #eee;}
+.article img{ margin-bottom:10px;clear:both}
+.article h3{
+    font-weight: normal; font-size:21px; color:#01BDBC; margin-bottom:5px;
+}
+
+#app_download  td{
+    color:#333; 
+    text-align:left;
+    word-wrap:break-word;
+    word-break:break-all;
+    width: 202px;
+    padding: 10px;
+    vertical-align: top;
+}
+
+.footer{
+    font-size:12px;
+    color:#333;
+    border-top:#ddd 1px solid;
+    padding-top:10px;
+    margin-top:20px; 
+    margin-bottom:20px; 
+    line-height:22px; 
+}
+.footer a{color:#333;}
+.footer span.left{float:left;}
+.footer span.right{float:right;}
+
+.subnav{
+    float:left;
+    margin:15px;
+    margin-left: 25px;
+    width: 160px;
+    display: block;
+}
+.subnav-fixed {
+    position: fixed;
+    z-index: 1020;
+}
+
+li.cover {
+    float:left;
+    width: 145px;
+    height: 150px;
+    overflow:hidden;
+    background-color: #fff;
+}
+
+#jwplayer{
+    width: 580px;
+    height:500px;
+    _height: 480px;
+}

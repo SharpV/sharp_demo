@@ -288,12 +288,14 @@ ActiveRecord::Schema.define(:version => 20120714081128) do
     t.string   "unconfirmed_email"
     t.integer  "failed_attempts",                       :default => 0
     t.string   "unlock_token"
+    t.string   "login",                                                          :null => false
     t.datetime "locked_at"
     t.string   "status",                                :default => "available"
     t.string   "avatar"
   end
 
   add_index "users", ["email"], :name => "index_users_on_email"
+  add_index "users", ["login"], :name => "index_users_on_login"
   add_index "users", ["reset_password_token"], :name => "index_users_on_reset_password_token"
   add_index "users", ["status"], :name => "index_users_on_status"
 

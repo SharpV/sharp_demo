@@ -3,7 +3,7 @@
   <%= tab.post raw("<i class='icon icon-edit'></i> 分享"), user_posts_path(@user.login) %>
   <%= tab.question raw("<i class='icon icon-question-sign'></i> 问答"), user_questions_path(@user.login) %>
 	<%= tab.group raw("<i class='icon icon-group'></i> 群组"), user_groups_path(@user.login) %>
-	<%= tab.event raw("<i class='icon icon-facetime-video'></i> 课程"), user_events_path(@user.login) %>
+	<%= tab.event raw("<i class='icon icon-facetime-video'></i> 课程"), user_courses_path(@user.login) %>
 	<%= tab.like raw("<i class='icon icon-heart'></i> 收藏"), user_likes_path(@user.login) %>
 	<% if current_user and current_user.login === @user.login %>
 		<%= tab.notification raw("<i class='icon icon-bullhorn'></i> 提醒"), user_notifications_path(@user.login) %>

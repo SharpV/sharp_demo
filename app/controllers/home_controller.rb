@@ -7,7 +7,9 @@ class HomeController < ApplicationController
   #set_tab :timeline, :user_timeline_menus
   
   def index
-    unless current_user 
+    if current_user 
+      @user = current_user
+    else
       redirect_to(sign_in_path) 
     end
   end
