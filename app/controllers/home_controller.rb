@@ -10,7 +10,7 @@ class HomeController < ApplicationController
     if current_user 
       @user = current_user
     else
-      redirect_to(sign_in_path) 
+      redirect_to new_session_path(resource_name)
     end
   end
 end

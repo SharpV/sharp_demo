@@ -1,138 +1,19 @@
-body {
-    padding-top: 70px;
-    font-family: Tahoma,Verdana;
-    font: 12px/162% Arial,Helvetica,sans-serif;
-    background-attachment: scroll;
-    background-clip: border-box;
-    background-origin: padding-box;
-    background-position: -70% 0;
-    background-repeat: repeat;
-    background-size: auto auto;
-}
-
-.support{overflow: auto; font-size:12px; margin:10px 0; color:#999;}
-.support li{float:left; margin-right:20px;text-align: center;}
-.support a{display:block;height:40px;width:40px;background:url("/assets/sup_icon.png") no-repeat;}
-.support .ipad{background-position:0 0px;}
-.support .iphone{background-position:-40px 0;}
-.support .android{background-position:-80px 0;}
-.support .window{background-position:-120px 0;}
-.support .ipad:hover,.support .iphone:hover, .support .android:hover, .support .window:hover{background-position-y: -40px;}
-.info{
-	padding:0px;
-	display:block;	
-	margin-bottom: 5px;
-}
-.info li{
-	margin-top: 10px;
-	float:left;
-	clear:both;
-}
-ul{list-style: none;}
-
-.feature.scala:after {
-    border-right-color: #7AC9DE;
-}
-.feature:after {
-    border-bottom: 50px solid transparent;
-    border-left: 50px solid transparent;
-    border-right: 50px solid #0080B0;
-    content: "";
-    height: 0;
-    pointer-events: none;
-    position: absolute;
-    right: 0;
-    top: 0;
-    width: 0;
-}
-.feature .grid-1 {
-    width: 220px;
-}
-li.feature {
-    height: 250px;
-}
-
-.simple_form textarea{
-	width: 500px;
-	height: 200px;
-
-}
-
-#category_select.radio{
-	float: left;
-	margin-left: 18px;
-}
-
-#profile_info{
-	clear:both;
-}
-
-#profile_info td{
-  padding: 5px;
-	vertical-align: top;
- }
-
-.span-right .nav{
- width: 240px
-}
-
-.marketing h3{
-	color: #336699;
-}
-
-.icon, .icon-large{
-	color: #577BF2;
-}
-
-.marketing p {
-	color: #444;
-	margin-top:5px;
-	margin-right: 5px;
-}
-.marketing{
-	float:left;
-	margin-left:15px;
-	width: 220px;
-}
-
-.bs-docs-sidenav.affix {
-    top: 40px;
-}
-.bs-docs-sidenav {
-    width: 138px;
-}
-.bs-docs-sidenav {
+#user_menus{
     background-color: #FFFFFF;
-    border-bottom-left-radius: 6px;
-    border-bottom-right-radius: 6px;
-    border-top-left-radius: 6px;
-    border-top-right-radius: 6px;
+    border-radius: 6px 6px 6px 6px;
     box-shadow: 0 1px 4px rgba(0, 0, 0, 0.067);
-    margin-bottom: 0;
-    margin-left: 0;
-    margin-right: 0;
-    margin-top: 30px;
-    padding-bottom: 0;
-    padding-left: 0;
-    padding-right: 0;
-    padding-top: 0;
-    width: 108px;
+    margin: 30px 0 0;
+    padding: 0;
+    width: 128px;
 }
 
-#footer {
-	border-top: 1px dashed #DDDDDD;
-	color: #777;
-	margin-top: 12px;
-	overflow: hidden;
-	padding-top: 6px;
-	margin-bottom: 25px;
-	font-size: 12px;
-}
-.fleft {
-	float: left;
-}
-.fright {
-	float: right;
+#user_menus > li > a {
+    border: 1px solid #E5E5E5;
+    display: block;
+    margin: 0 0 -1px;
+    padding: 8px 14px;
 }
 
-
+#user_menus > li > a {
+    border-radius: 6px 6px 0 0;
+}

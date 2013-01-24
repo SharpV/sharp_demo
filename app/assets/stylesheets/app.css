@@ -15,9 +15,6 @@ body{
     padding-top: 50px;  
 }
 
-.container, .navbar-fixed-top .container, .navbar-fixed-bottom .container {
-    width: 900px;
-}
 .brand h2{
     color:#01BDBC;
 }

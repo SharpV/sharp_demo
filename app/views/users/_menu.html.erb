@@ -1,4 +1,4 @@
-<%= tabs_tag(:namespace => :user_menus, :open_tabs => { :id => "user_menus", :class => "nav nav-tabs" }, :builder => MenuTabBuilder) do |tab| %>
+<%= tabs_tag(:namespace => :user_menus, :open_tabs => { :id => "user_menus", :class => "nav nav-list" }, :builder => MenuTabBuilder) do |tab| %>
   <%= tab.home raw("<i class='icon icon-comments'></i> 关注"), user_path(@user.login) %>
   <%= tab.post raw("<i class='icon icon-edit'></i> 分享"), user_posts_path(@user.login) %>
   <%= tab.question raw("<i class='icon icon-question-sign'></i> 问答"), user_questions_path(@user.login) %>

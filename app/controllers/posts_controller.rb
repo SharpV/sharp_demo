@@ -1,4 +1,4 @@
-class Group::PostsController < GroupController
+class PostsController < ApplicationController
 
   before_filter :set_group_tab
    set_tab :post, :group_menus
