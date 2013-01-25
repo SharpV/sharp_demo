@@ -36,12 +36,13 @@ class User < ActiveRecord::Base
   end
   
   def flow
-      #tag_ids = subscriptions.select(:tag_id).to_sql
-      #group_ids = groups.select(:id).to_sql
-      #conditions = []
-      #conditions << "taggings.tag_id in (#{tag_ids})"
-      #conditions << "posts.group_id in (#{user_ids})"
-      #Post.joins(:users).where(conditions.join(' or ')).uniq
+    #tag_ids = subscriptions.select(:tag_id).to_sql
+    user_ids = friends.select(:followed_user_id).to_sql
+    conditions = []
+    conditions << "posts.user_id = #{id}"
+    #conditions << "taggings.tag_id in (#{tag_ids}) and posts.is_private = 'f'"
+    conditions << "posts.user_id in (#{user_ids}) and posts.is_private = 'f'"
+    Post.joins(:comments).where(conditions.join(' or ')).uniq
   end
     
   def to_param

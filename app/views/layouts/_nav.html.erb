@@ -5,21 +5,6 @@
   <%= tab.index '群组', groups_path %>
   <%= tab.index '班级', groups_path %>
   <%= tab.index '学校', schools_path %>
-  <%= tab.index '搜索', schools_path %>
-
-    <% Grade.list.each do |grade| %>
-     <li class="dropdown">
-       <a data-toggle="dropdown" class="dropdown-toggle" href="#">
-	     <%= grade.name %>
-	     <b class="caret"></b>
-       </a>
-       <ul class="dropdown-menu">
-      	<% grade.children.each do |child| %>
-      	<%= tab.try "grade_#{child.id}", child.name, child %>
-    	 <li class="divider"></li>
-    	<% end %>
-       </ul>
-     </li>	
-   <% end %>	  
+  <%= tab.index '搜索', schools_path %>  
 <% end %>
 
