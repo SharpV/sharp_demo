@@ -34,6 +34,7 @@ SharpLink::Application.routes.draw do
   resources :categories
   resources :sections
   resources :assets
+  resources :teams
   resources :schools
 
   resources :users do 

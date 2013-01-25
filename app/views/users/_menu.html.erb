@@ -8,6 +8,6 @@
 	<% if current_user and current_user.login === @user.login %>
 		<%= tab.notification raw("<i class='icon icon-bullhorn'></i> 提醒"), user_notifications_path(@user.login) %>
 		<%= tab.profile raw("<i class='icon icon-cog'></i> 个人设置"), user_profiles_path(@user.login) %>
-		<%= tab.create raw("<i class='icon icon-plus'></i> 新建"), new_user_post_path(@user.login) %>
+		<%= tab.create raw("<i class='icon icon-plus'></i> 添加应用"), new_user_post_path(@user.login) %>
 	<% end %>
 <% end %>
