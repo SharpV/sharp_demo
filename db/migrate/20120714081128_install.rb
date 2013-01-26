@@ -41,6 +41,21 @@ class Install < ActiveRecord::Migration
     t.datetime "updated_at", :null => false
   end
   add_index "connections", "user_id"
+  add_index "connections", "uid"
+  add_index "connections", "provider"
+  
+  create_table "categories", :force => true do |t|
+      t.integer "parent_id"
+      t.string  "name"
+      t.integer "lft"
+      t.integer "rgt"
+      t.references :categoryable, :polymorphic => true
+      t.integer :depth
+
+  end
+  add_index "categories", "parent_id"
+  add_index "categories", "categoryable_type"
+  add_index "categories", "categoryable_id"
   
 
   create_table "profiles", :force => true do |t|
@@ -54,7 +69,7 @@ class Install < ActiveRecord::Migration
     t.string   "identity_card",:limit => 45
     t.string   "address"
     t.string   "name"
-    t.integer  "prefix_key"
+    t.integer  "notifications_count",                :default => 0
     t.string   "description"
     t.integer  "city_code"
     t.integer  "zone_code"
@@ -62,6 +77,11 @@ class Install < ActiveRecord::Migration
     t.string   "website"
     t.string   "qq",        :limit => 45
     t.string   "identity_card",           :limit => 45
+    t.integer  "posts_count",                 :default => 0
+    t.integer  "courses_count",                       :default => 0
+    t.integer  "groups_count",                        :default => 0
+    t.integer  "likes_count",                         :default => 0
+    t.integer  "school_classes_count",                :default => 0
   end
 
   add_index "profiles", ["user_id"], :name => "index_profiles_on_actor_id"

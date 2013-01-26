@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130125133725) do
+ActiveRecord::Schema.define(:version => 20130125144223) do
 
   create_table "active_admin_comments", :force => true do |t|
     t.string   "resource_id",   :null => false
@@ -51,6 +51,20 @@ ActiveRecord::Schema.define(:version => 20130125133725) do
     t.string   "file"
   end
 
+  create_table "categories", :force => true do |t|
+    t.integer "parent_id"
+    t.string  "name"
+    t.integer "lft"
+    t.integer "rgt"
+    t.integer "categoryable_id"
+    t.string  "categoryable_type"
+    t.integer "depth"
+  end
+
+  add_index "categories", ["categoryable_id"], :name => "index_categories_on_categoryable_id"
+  add_index "categories", ["categoryable_type"], :name => "index_categories_on_categoryable_type"
+  add_index "categories", ["parent_id"], :name => "index_categories_on_parent_id"
+
   create_table "connections", :force => true do |t|
     t.integer  "user_id"
     t.string   "provider"
@@ -59,37 +73,28 @@ ActiveRecord::Schema.define(:version => 20130125133725) do
     t.datetime "updated_at", :null => false
   end
 
+  add_index "connections", ["provider"], :name => "index_connections_on_provider"
+  add_index "connections", ["uid"], :name => "index_connections_on_uid"
   add_index "connections", ["user_id"], :name => "index_connections_on_user_id"
 
-  create_table "course_categories", :force => true do |t|
-    t.integer "parent_id"
-    t.string  "name"
-    t.integer "lft"
-    t.integer "rgt"
-  end
-
-  add_index "course_categories", ["parent_id"], :name => "index_course_categories_on_parent_id"
-
   create_table "courses", :force => true do |t|
-    t.integer  "creator_id",                            :null => false
-    t.integer  "course_category_id",                    :null => false
-    t.integer  "students_count",     :default => 0
-    t.decimal  "price",              :default => 0.0
+    t.integer  "creator_id",                           :null => false
+    t.integer  "students_count",    :default => 0
+    t.decimal  "price",             :default => 0.0
     t.string   "promo_video"
     t.string   "cover"
-    t.datetime "created_at",                            :null => false
-    t.datetime "updated_at",                            :null => false
+    t.datetime "created_at",                           :null => false
+    t.datetime "updated_at",                           :null => false
     t.string   "slug"
-    t.string   "name",                                  :null => false
+    t.string   "name",                                 :null => false
     t.text     "body"
-    t.boolean  "published",          :default => false
-    t.integer  "readings_count",     :default => 0
-    t.integer  "comments_count",     :default => 0
-    t.integer  "likes_count",        :default => 0
-    t.integer  "collections_count",  :default => 0
+    t.boolean  "published",         :default => false
+    t.integer  "readings_count",    :default => 0
+    t.integer  "comments_count",    :default => 0
+    t.integer  "likes_count",       :default => 0
+    t.integer  "collections_count", :default => 0
   end
 
-  add_index "courses", ["course_category_id"], :name => "index_courses_on_course_category_id"
   add_index "courses", ["creator_id"], :name => "index_courses_on_creator_id"
 
   create_table "courses_properties", :force => true do |t|
@@ -100,6 +105,17 @@ ActiveRecord::Schema.define(:version => 20130125133725) do
   add_index "courses_properties", ["course_id"], :name => "index_courses_properties_on_course_id"
   add_index "courses_properties", ["property_id"], :name => "index_courses_properties_on_property_id"
 
+  create_table "followings", :force => true do |t|
+    t.integer  "follower_id"
+    t.integer  "followed_user_id"
+    t.datetime "created_at",       :null => false
+    t.datetime "updated_at",       :null => false
+  end
+
+  add_index "followings", ["followed_user_id", "follower_id"], :name => "index_followings_on_followed_user_id_and_follower_id", :unique => true
+  add_index "followings", ["followed_user_id"], :name => "index_followings_on_followed_user_id"
+  add_index "followings", ["follower_id"], :name => "index_followings_on_follower_id"
+
   create_table "group_topics", :force => true do |t|
     t.integer  "user_id",                          :null => false
     t.integer  "group_id",                         :null => false
@@ -107,7 +123,6 @@ ActiveRecord::Schema.define(:version => 20130125133725) do
     t.text     "body"
     t.integer  "readings_count", :default => 0
     t.integer  "comments_count", :default => 0
-    t.integer  "category_id"
     t.datetime "created_at"
     t.datetime "updated_at"
     t.boolean  "published",      :default => true
@@ -144,24 +159,49 @@ ActiveRecord::Schema.define(:version => 20130125133725) do
   add_index "groups_members", ["user_id", "group_id"], :name => "index_groups_members_on_user_id_and_group_id"
   add_index "groups_members", ["user_id"], :name => "index_groups_members_on_user_id"
 
+  create_table "posts", :force => true do |t|
+    t.text     "body"
+    t.boolean  "published",                      :default => true
+    t.integer  "kind",              :limit => 2
+    t.string   "title"
+    t.string   "url"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+    t.datetime "edited_at"
+    t.integer  "readings_count",                 :default => 0
+    t.integer  "comments_count",                 :default => 0
+    t.integer  "likes_count",                    :default => 0
+    t.integer  "collections_count",              :default => 0
+    t.string   "file"
+    t.integer  "user_id",                                          :null => false
+  end
+
+  add_index "posts", ["kind"], :name => "index_posts_on_kind"
+  add_index "posts", ["user_id"], :name => "index_posts_on_user_id"
+
   create_table "profiles", :force => true do |t|
     t.integer  "user_id"
     t.date     "birthday"
     t.datetime "created_at"
     t.datetime "updated_at"
-    t.string   "organization",  :limit => 45
-    t.string   "phone",         :limit => 45
-    t.string   "mobile",        :limit => 45
-    t.string   "identity_card", :limit => 45
+    t.string   "organization",         :limit => 45
+    t.string   "phone",                :limit => 45
+    t.string   "mobile",               :limit => 45
+    t.string   "identity_card",        :limit => 45
     t.string   "address"
     t.string   "name"
-    t.integer  "prefix_key"
+    t.integer  "notifications_count",                :default => 0
     t.string   "description"
     t.integer  "city_code"
     t.integer  "zone_code"
     t.string   "experience"
     t.string   "website"
-    t.string   "qq",            :limit => 45
+    t.string   "qq",                   :limit => 45
+    t.integer  "posts_count",                        :default => 0
+    t.integer  "courses_count",                      :default => 0
+    t.integer  "groups_count",                       :default => 0
+    t.integer  "likes_count",                        :default => 0
+    t.integer  "school_classes_count",               :default => 0
   end
 
   add_index "profiles", ["user_id"], :name => "index_profiles_on_actor_id"
@@ -208,38 +248,6 @@ ActiveRecord::Schema.define(:version => 20130125133725) do
   end
 
   add_index "sections", ["course_id"], :name => "index_sections_on_course_id"
-
-  create_table "share_categories", :force => true do |t|
-    t.integer "parent_id"
-    t.string  "name"
-    t.integer "lft"
-    t.integer "rgt"
-    t.integer "user_id"
-  end
-
-  add_index "share_categories", ["parent_id"], :name => "index_share_categories_on_parent_id"
-  add_index "share_categories", ["user_id"], :name => "index_share_categories_on_user_id"
-
-  create_table "share_posts", :force => true do |t|
-    t.text     "body"
-    t.boolean  "published",         :default => true
-    t.string   "kind"
-    t.string   "title"
-    t.datetime "created_at"
-    t.datetime "updated_at"
-    t.datetime "edited_at"
-    t.integer  "readings_count",    :default => 0
-    t.integer  "comments_count",    :default => 0
-    t.integer  "likes_count",       :default => 0
-    t.integer  "collections_count", :default => 0
-    t.integer  "user_id"
-    t.integer  "share_category_id"
-    t.string   "file"
-  end
-
-  add_index "share_posts", ["kind"], :name => "index_share_posts_on_kind"
-  add_index "share_posts", ["share_category_id"], :name => "index_share_posts_on_share_category_id"
-  add_index "share_posts", ["user_id"], :name => "index_share_posts_on_user_id"
 
   create_table "slots", :force => true do |t|
     t.integer  "creator_id"

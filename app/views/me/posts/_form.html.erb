@@ -1,17 +1,19 @@
-<%= form_for(@me_post) do |f| %>
-  <% if @me_post.errors.any? %>
-    <div id="error_explanation">
-      <h2><%= pluralize(@me_post.errors.count, "error") %> prohibited this me_post from being saved:</h2>
-
-      <ul>
-      <% @me_post.errors.full_messages.each do |msg| %>
-        <li><%= msg %></li>
-      <% end %>
-      </ul>
-    </div>
-  <% end %>
-
-  <div class="actions">
-    <%= f.submit %>
-  </div>
-<% end %>
+<script>
+$(document).ready(function() {
+	$('#input_post').elastic();
+});
+</script>
+<div id='new_post'>
+	<div class="avatar">
+	</div>
+	<div class="post_form">
+		<%= simple_form_for Post.new, :remote => true, :html => {:id => "post_form", :class => 'form-horizontal', :data => {:type=>"script", :"method"=>"post"}} do |f| -%>	
+			<%= render 'shared/error_messages', :object => f.object %>
+			<%= f.input :body, :label => "和好友分享学习体会、问题以及最近的发现吧 ：）", :input_html => { :width => 120, :height => 50, :id => "input_post" } %>
+			<div class="actions">
+				<%= f.submit "发布", :class=>'btn btn-primary pull-right'%>&nbsp;
+				<button class="btn" type="reset">保存为草稿</button>
+			</div>
+		<% end %>
+	</div>
+</div>

@@ -31,7 +31,7 @@ gem 'public_activity'
 gem 'sequel'
 gem "recaptcha", :require => "recaptcha/rails"
 gem 'whenever'
-gem 'inherited_resources'
+gem 'classy_enum'
 #gem "thinking-sphinx", :require => 'thinking_sphinx'
 #gem 'ajaxful_rating'
 gem 'lazybox'

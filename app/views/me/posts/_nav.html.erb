@@ -1,0 +1,11 @@
+<%= tabs_tag(:namespace => :post_menus, :open_tabs => { :id => "post_nav", :class => "nav nav-tabs" }, :builder => MenuTabBuilder) do |tab| %>
+  <%= tab.home raw("所有分享"), me_activities_path %>
+  <li class="dropdown">
+	<a class="dropdown-toggle" data-toggle="dropdown" href="#">	
+		创建 <b class="caret"></b>
+	</a>
+	<ul class="dropdown-menu">
+		<li> <%= link_to "新建笔记", new_me_post_path(:type => Settings.post[:note]) %> </li>
+	</ul>
+  </li>
+<% end %>

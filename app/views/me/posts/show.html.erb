@@ -1,5 +1,4 @@
-<p id="notice"><%= notice %></p>
+<%= render :partial => 'objects/show',
+           :locals  => { :object => @post } %>
 
-
-<%= link_to 'Edit', edit_me_post_path(@me_post) %> |
-<%= link_to 'Back', me_posts_path %>
+<%= render @post.post_activity %>

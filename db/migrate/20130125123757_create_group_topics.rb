@@ -8,7 +8,6 @@ class CreateGroupTopics < ActiveRecord::Migration
     	t.text     "body"
     	t.integer  "readings_count",     :default => 0
     	t.integer  "comments_count",     :default => 0
-    	t.integer  "category_id"
     	t.datetime "created_at"
     	t.datetime "updated_at"
     	t.boolean  "published",            :default => true
