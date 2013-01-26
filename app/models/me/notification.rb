@@ -1,0 +1,3 @@
+class Me::Notification < ActiveRecord::Base
+  # attr_accessible :title, :body
+end

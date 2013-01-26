@@ -1,5 +1,35 @@
 SharpLink::Application.routes.draw do
 
+  namespace :me do
+    resources :settings
+  end
+
+
+  namespace :me do
+    resources :school_classes
+  end
+
+
+  namespace :me do
+    resources :courses
+  end
+
+
+  namespace :me do
+    resources :groups
+  end
+
+
+  namespace :me do
+    resources :activities
+  end
+
+
+  namespace :me do
+    resources :posts
+  end
+
+
   ActiveAdmin.routes(self)
 
   devise_for :admin_users, ActiveAdmin::Devise.config
@@ -26,8 +56,18 @@ SharpLink::Application.routes.draw do
 
     root :to => 'dashboard#show'
   end
-
-
+  
+  match "me" => "me#index"
+  namespace :me do
+    resources :posts
+    resources :comments
+    resources :settings
+    resources :courses
+    resources :school_classes
+    resources :groups
+    resources :likes
+    resources :notifications
+  end
   resources :topics
   resources :posts
   resources :comments

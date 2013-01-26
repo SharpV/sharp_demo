@@ -36,7 +36,6 @@ gem 'inherited_resources'
 #gem 'ajaxful_rating'
 gem 'lazybox'
 gem 'modernizr-rails'
-gem 'inherited_resources'
 gem "omniauth"
 gem 'omniauth-qq-connect'
 gem 'omniauth-weibo-oauth2'
@@ -57,7 +56,7 @@ gem "bcrypt-ruby", :require => "bcrypt"
 gem "jquery-rails"
 gem "friendly_id"
 gem 'react_reporter', :git => "git://github.com/reactualize/react_reporter.git"
-#gem "acts-as-taggable-on", :git => "git://github.com/mbleigh/acts-as-taggable-on.git"
+gem 'carrierwave-video-thumbnailer'
 gem 'acts_as_commentable'
 #gem 'twitter-bootstrap-rails', :git => 'git://github.com/seyhunak/twitter-bootstrap-rails.git'
 gem 'binding_of_caller'
@@ -65,8 +64,14 @@ gem "jquery-fileupload-rails"
 # in production environments by default.
 gem 'ruby_parser'
 gem 'hpricot'
+group :test, :development do
+  	gem "rspec-rails", "~> 2.12.0"
+ 	gem "webrat"
+  	gem "capybara"
+end
 group :development do
-  #gem "better_errors"
+	gem 'quiet_assets'
+ 	gem "better_errors"
 end
 group :assets do
   gem 'twitter-bootstrap-rails', :git => 'git://github.com/seyhunak/twitter-bootstrap-rails.git'  
