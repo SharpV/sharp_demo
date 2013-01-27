@@ -1,0 +1,5 @@
+
+<%= simple_form_for @post, :html => {:class => 'form-horizontal'} do |form| %>
+  <%= form.input :title %>
+  <%= form.input :body, :as => :kindeditor, :label => false, :input_html => { :width => 500, :height => 300 } %>
+<% end %>

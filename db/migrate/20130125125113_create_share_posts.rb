@@ -2,8 +2,8 @@ class CreateSharePosts < ActiveRecord::Migration
   def change
     create_table "posts", :force => true do |t|
    		t.text     "body"
-   		t.boolean  "published",            :default => true
-    	t.integer   "kind",                :limit => 1, :deault => 0
+   		t.boolean  "published",           :default => true
+    	t.string   "kind",                :limit => 10
    		t.string   "title"
       t.string   "url"
     	t.datetime "created_at"

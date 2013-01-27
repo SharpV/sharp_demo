@@ -69,6 +69,6 @@ subjects:
     - 外语
     - 
 post:
-    note: 1
-    bookmark: 2
-    video: 3    
+    note: 'note'
+    bookmark: 'bookmark'
+    video: 'video'

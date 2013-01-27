@@ -1,6 +1,11 @@
 SharpLink::Application.routes.draw do
 
   namespace :me do
+    resources :plans
+  end
+
+
+  namespace :me do
     resources :settings
   end
 
