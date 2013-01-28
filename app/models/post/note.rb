@@ -1,7 +1,7 @@
 require 'pathname'
 require 'carrierwave/orm/activerecord'
 
-class Note < ActiveRecord::Base
+class Post::Note < Post
   mount_uploader :file, FileUploader 
   
   acts_as_taggable_on :tags

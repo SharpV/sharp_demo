@@ -4,7 +4,8 @@ class Me::PostsController < MeController
 	end
 
 	def new
-		@post = Post.new
+		@post = Post::Note.new #{}"Post::#{params[:type].camelize}".constantize.new
+		puts Post::Note.all
 		@kind = params[:type] || 'note'
 	end
 end

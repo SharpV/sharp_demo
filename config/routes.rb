@@ -1,40 +1,5 @@
 SharpLink::Application.routes.draw do
 
-  namespace :me do
-    resources :plans
-  end
-
-
-  namespace :me do
-    resources :settings
-  end
-
-
-  namespace :me do
-    resources :school_classes
-  end
-
-
-  namespace :me do
-    resources :courses
-  end
-
-
-  namespace :me do
-    resources :groups
-  end
-
-
-  namespace :me do
-    resources :activities
-  end
-
-
-  namespace :me do
-    resources :posts
-  end
-
-
   ActiveAdmin.routes(self)
 
   devise_for :admin_users, ActiveAdmin::Devise.config
