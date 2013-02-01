@@ -1,6 +1,7 @@
 
 <%= simple_form_for @post, :url => me_posts_path, :validate => true, :html => {:class => 'form-horizontal'} do |form| %>
   <%= form.input :title, :validate => {:presence => true} %>
+  <%= hidden_field_tag 'type', 'note' %>
   <%= form.input :body, :as => :kindeditor, :label => false, :input_html => { :width => 500, :height => 300 } %>
   <%= form.button :submit %>
 <% end %>

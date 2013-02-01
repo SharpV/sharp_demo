@@ -11,7 +11,7 @@ class Post::Note < Post
 
   belongs_to :user
 
-  before_validation  :generate_link, :generate_slug, :set_dates
+  before_validation :generate_slug
   #after_save :conv_to_swf
   
   validates :title, :presence => true, :length => {:within => 1..100}
@@ -39,38 +39,13 @@ class Post::Note < Post
   end
   
   
-  def conv_to_swf
-    system " unoconv -f pdf #{file_path}"
-    system "pdf2swf #{pdf_path} -o #{swf_path} -T 9 -f"
-  end
-
-  def file_extname
-    File.extname(self.file.current_path)
-  end
-
-  def swf_path
-    file.current_path.gsub("#{file_extname}", ".swf")
-  end
-
-  def pdf_path
-    file.current_path.gsub("#{file_extname}", ".pdf")
-  end
-
-  def swf_url
-    file.url.gsub("#{file_extname}", ".swf")
-  end
-
-  def pdf_url
-    file.url.gsub("#{file_extname}", ".pdf")
-  end
-
 
   def type
     self.kind || "article"
   end
 
   def to_param
-    "#{id}-#{slug.parameterize}"
+    "#{id}-#{url.parameterize}"
   end
 
   def login
@@ -86,6 +61,14 @@ class Post::Note < Post
     
   end
 
+  def denormalize_comments_count!
+    Post.update_all(["approved_comments_count = ?", self.approved_comments.count], ["id = ?", self.id])
+  end
+
+  def generate_slug
+    self.url = Hz2py.do(self.title, :join_with => '-', :to_simplified => true).gsub(/\W/, "-").gsub(/(-){2,}/, '-').to_s
+  end
+
   class << self
     def build_for_preview(params)
       post = Post.new(params)
@@ -97,64 +80,6 @@ class Post::Note < Post
       end
       post
     end
-
-    def find_recent(options = {})
-      tag = options.delete(:tag)
-      options = {
-        :order      => 'posts.published_at DESC',
-        :conditions => ['published_at < ?', Time.zone.now],
-        :limit      => DEFAULT_LIMIT
-      }.merge(options)
-      if tag
-        find_tagged_with(tag, options)
-      else
-        find(:all, options)
-      end
-    end
-
-
-    def find_all_grouped_by_month
-      posts = find(
-        :all,
-        :order      => 'posts.published_at DESC',
-        :conditions => ['published_at < ?', Time.now]
-      )
-      month = Struct.new(:date, :posts)
-      posts.group_by(&:month).inject([]) {|a, v| a << month.new(v[0], v[1])}
-    end
   end
 
-  def generate_link
-    if self.kind == TYPES[:link]
-      begin
-        l = Linkser.parse self.link, {:max_images => 1}
-        puts link.inspect
-        if l.is_a? Linkser::Objects::HTML
-          puts l.inspect
-          puts l.title
-          self.body = l.description
-          self.image = l.images.first
-          self.title = l.title
-        end
-        return true
-      rescue
-       return false
-      end
-    else
-      return true
-    end
-  end
-
-  def set_dates
-    self.edited_at = Time.now 
-    self.published_at = Time.now
-  end
-
-  def denormalize_comments_count!
-    Post.update_all(["approved_comments_count = ?", self.approved_comments.count], ["id = ?", self.id])
-  end
-
-  def generate_slug
-    self.slug = Hz2py.do(self.title, :join_with => '-', :to_simplified => true).gsub(/\W/, "-").gsub(/(-){2,}/, '-').to_s
-  end
 end

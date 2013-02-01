@@ -1,4 +1,4 @@
-<%= render :partial => 'objects/show',
-           :locals  => { :object => @post } %>
+<%= render 'nav' %>
 
-<%= render @post.post_activity %>
+<%= render "me/posts/views/#{@post.kind}" %>
+

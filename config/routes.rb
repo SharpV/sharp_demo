@@ -37,6 +37,7 @@ SharpLink::Application.routes.draw do
     resources :groups
     resources :likes
     resources :notifications
+    resources :activities
   end
   resources :topics
   resources :posts
