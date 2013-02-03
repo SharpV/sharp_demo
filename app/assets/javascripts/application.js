@@ -8,13 +8,10 @@
 //= require jquery-ui
 //= require jquery_ujs
 //= require twitter/bootstrap
-//= require bootstrap
-//= require autocomplete-rails
 //= require kindeditor
 //= require lazybox
 //= require rails.validations
 //= require rails.validations.simple_form
 //= require jquery-fileupload
-//= require_tree .
 
 

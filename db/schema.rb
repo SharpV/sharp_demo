@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130125144223) do
+ActiveRecord::Schema.define(:version => 20120714081128) do
 
   create_table "active_admin_comments", :force => true do |t|
     t.string   "resource_id",   :null => false
@@ -47,9 +47,19 @@ ActiveRecord::Schema.define(:version => 20130125144223) do
   add_index "admin_users", ["reset_password_token"], :name => "index_admin_users_on_reset_password_token", :unique => true
 
   create_table "assets", :force => true do |t|
-    t.datetime "created_at"
+    t.integer  "assetable_id"
+    t.string   "assetable_type"
+    t.string   "file_name"
+    t.integer  "file_size"
+    t.string   "file_type"
     t.string   "file"
+    t.string   "play_path"
+    t.datetime "created_at",     :null => false
+    t.datetime "updated_at",     :null => false
   end
+
+  add_index "assets", ["assetable_id"], :name => "index_assets_on_assetable_id"
+  add_index "assets", ["assetable_type"], :name => "index_assets_on_assetable_type"
 
   create_table "categories", :force => true do |t|
     t.integer "parent_id"
@@ -265,14 +275,6 @@ ActiveRecord::Schema.define(:version => 20130125144223) do
   add_index "slots", ["course_id"], :name => "index_slots_on_course_id"
   add_index "slots", ["creator_id"], :name => "index_slots_on_creator_id"
   add_index "slots", ["section_id"], :name => "index_slots_on_section_id"
-
-  create_table "slots_assets", :force => true do |t|
-    t.integer "asset_id", :null => false
-    t.integer "slot_id",  :null => false
-  end
-
-  add_index "slots_assets", ["asset_id"], :name => "index_slots_assets_on_asset_id"
-  add_index "slots_assets", ["slot_id"], :name => "index_slots_assets_on_slot_id"
 
   create_table "taggings", :force => true do |t|
     t.integer  "tag_id"

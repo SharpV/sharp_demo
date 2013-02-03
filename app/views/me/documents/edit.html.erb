@@ -1,0 +1,6 @@
+<%= render 'me/posts/nav' %>
+
+<%= render 'form' %>
+
+<%= render "assets/fileupload", :local => {:object_new => @post}, :url => "/assets?id=#{@post.id};type=#{Post} " %>
+

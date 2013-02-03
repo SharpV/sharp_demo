@@ -9,6 +9,10 @@ html, body, p, table, dl, ul, section{
     font-weight: normal;
     line-height: 1.62;
 }
+.simple_form textarea {
+    height: 100px;
+    width: 490px;
+}
 
 body{
 

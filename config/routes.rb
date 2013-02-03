@@ -1,5 +1,18 @@
 SharpLink::Application.routes.draw do
 
+  namespace :me do
+    resources :notes
+  end
+
+
+  namespace :me do
+    resources :documents
+  end
+
+
+  resources :assets
+
+
   ActiveAdmin.routes(self)
 
   devise_for :admin_users, ActiveAdmin::Devise.config
@@ -28,6 +41,7 @@ SharpLink::Application.routes.draw do
   end
   
   match "me" => "me#index"
+  
   namespace :me do
     resources :posts
     resources :comments
@@ -35,12 +49,27 @@ SharpLink::Application.routes.draw do
     resources :courses
     resources :school_classes
     resources :groups
-    resources :likes
+    resources :notes
+    resources :documents do 
+      resources :assets
+    end
+    resources :videos do 
+      resources :assets
+    end
+    resources :bookmarks
+    resources :audios do 
+      resources :assets
+    end
+    resources :albums do 
+      resources :assets
+    end
     resources :notifications
     resources :activities
   end
-  resources :topics
-  resources :posts
+  resources :posts do 
+    resources :assets
+    resources :topics
+  end
   resources :comments
   resources :categories
   resources :sections

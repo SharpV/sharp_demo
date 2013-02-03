@@ -1,15 +1,10 @@
-require 'pathname'
-require 'carrierwave/orm/activerecord'
-
 class Post::Note < Post
-  mount_uploader :file, FileUploader 
   
   acts_as_taggable_on :tags
   acts_as_commentable
   
   after_save :update_tag_list
 
-  belongs_to :user
 
   before_validation :generate_slug
   #after_save :conv_to_swf

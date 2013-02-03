@@ -27,6 +27,7 @@ gem 'mini_magick'
 gem 'flash_cookie_session'
 gem 'devise', '~> 2.2.2'
 gem 'public_activity'
+gem "jquery-fileupload-rails", :git => 'git@github.com:tors/jquery-fileupload-rails.git'
 #gem 'devise_invitable', '~> 1.0.0'
 gem 'sequel'
 gem "recaptcha", :require => "recaptcha/rails"
@@ -61,7 +62,6 @@ gem 'carrierwave-video-thumbnailer'
 gem 'acts_as_commentable'
 #gem 'twitter-bootstrap-rails', :git => 'git://github.com/seyhunak/twitter-bootstrap-rails.git'
 gem 'binding_of_caller'
-gem "jquery-fileupload-rails"
 # in production environments by default.
 gem 'ruby_parser'
 gem 'hpricot'

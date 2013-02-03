@@ -72,3 +72,6 @@ post:
     note: 'note'
     bookmark: 'bookmark'
     video: 'video'
+    audio: 'audio'
+    document: 'document'
+    album: 'album'
