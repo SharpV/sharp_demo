@@ -1,6 +1,9 @@
 <%= render 'me/posts/nav' %>
-
-<%= render 'form' %>
-
-<%= render "assets/fileupload", :local => {:object_new => @post}, :url => "/assets?id=#{@post.id};type=#{Post} " %>
-
+<div class='row'>
+	<div class='span row'>
+		<%= render "assets/fileupload", :local => {:object_new => @post}, :url => "/assets?id=#{@post.id};type=#{Post} " %>
+	</div>
+	<div class='span row'>
+		<%= render 'form' %>
+	</div>
+</div>

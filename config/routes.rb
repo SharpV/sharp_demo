@@ -41,8 +41,9 @@ SharpLink::Application.routes.draw do
   end
   
   match "me" => "me#index"
-  
+
   namespace :me do
+    resources :likes
     resources :posts
     resources :comments
     resources :settings
@@ -50,9 +51,7 @@ SharpLink::Application.routes.draw do
     resources :school_classes
     resources :groups
     resources :notes
-    resources :documents do 
-      resources :assets
-    end
+    resources :documents
     resources :videos do 
       resources :assets
     end

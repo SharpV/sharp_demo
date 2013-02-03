@@ -1,12 +1,12 @@
-<%= form_for Asset.new, :url => url, :html => { :multipart => true, :id => "fileupload"  } do |f| %>
+<%= form_for Asset.new, :url => url, :method => :post, :html => { :multipart => true, :id => "fileupload" } do |f| %>
     <!-- The fileupload-buttonbar contains buttons to add/delete files and start/cancel the upload -->
     <div class="row fileupload-buttonbar">
-      <div class="span7">
+      <div class="span">
         <!-- The fileinput-button span is used to style the file input field as button -->
         <span class="btn btn-success fileinput-button">
           <i class="icon-plus icon-white"></i>
-          <span>Add files...</span>
-          <%= f.file_field :upload %>
+          <span>添加文件...</span>
+          <%= f.file_field :file %>
         </span>
         <button type="submit" class="btn btn-primary start">
           <i class="icon-upload icon-white"></i>
@@ -22,7 +22,7 @@
         </button>
         <input type="checkbox" class="toggle">
       </div>
-      <div class="span5">
+      <div class="span">
         <!-- The global progress bar -->
         <div class="progress progress-success progress-striped active fade">
           <div class="bar" style="width:0%;"></div>
@@ -57,7 +57,9 @@
     <td class="name"><span>{%=file.name%}</span></td>
     <td class="size"><span>{%=o.formatFileSize(file.size)%}</span></td>
     {% if (file.error) { %}
-    <td class="error" colspan="2"><span class="label label-important">{%=locale.fileupload.error%}</span> {%=locale.fileupload.errors[file.error] || file.error%}</td>
+    <td class="error" colspan="2">
+        <span class="label label-important">{%=locale.fileupload.error%}</span> 
+        {%=locale.fileupload.errors[file.error] || file.error%}</td>
     {% } else if (o.files.valid && !i) { %}
     <td>
       <div class="progress progress-success progress-striped active"><div class="bar" style="width:0%;"></div></div>
@@ -117,12 +119,10 @@
       // 
       // Load existing files:
       $.getJSON($('#fileupload').prop('action'), function (files) {
-        var fu = $('#fileupload').data('fileupload'), 
-          template;
+        var fu = $('#fileupload').data('fileupload'), template;
         fu._adjustMaxNumberOfFiles(-files.length);
         console.log(files);
-        template = fu._renderDownload(files)
-          .appendTo($('#fileupload .files'));
+        template = fu._renderDownload(files).appendTo($('#fileupload .files'));
         // Force reflow:
         fu._reflow = fu._transition && template.length &&
           template[0].offsetWidth;

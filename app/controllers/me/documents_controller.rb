@@ -1,4 +1,4 @@
-class Me::DocumentsController < ApplicationController
+class Me::DocumentsController < MeController
   # GET /me/documents
   # GET /me/documents.json
   def index

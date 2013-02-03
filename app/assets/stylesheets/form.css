@@ -1,0 +1,18 @@
+.simple_form textarea {
+    height: 100px;
+    width: 390px;
+}
+
+.form-horizontal .controls {
+    margin-left: 68px;
+}
+
+.form-horizontal .btn {
+}
+
+.form-horizontal .control-label {
+    float: left;
+    padding-top: 5px;
+    text-align: left;
+    width: 45px;
+}

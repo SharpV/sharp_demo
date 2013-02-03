@@ -1,18 +1,28 @@
 class AssetsController < InheritedResources::Base
-	def create
-    	@asset = Asset.new
-    	@asset.file = params[:asset][:path].shift
-    	if @asset.save
-      		respond_to do |format|
-        		format.html {                                         #(html response is for browsers using iframe sollution)
+
+	def index
+    	@assets = Asset.all
+    	render :json => @assets.collect { |p| p.to_jq_upload }.to_json
+  	end
+	
+	# POST /uploads
+  	# POST /uploads.json
+  	def create
+    	@asset = Asset.new(params[:asset])
+    	@asset.assetable_id = params[:id]
+    	@asset.assetable_type = params[:type]
+    	respond_to do |format|
+      		if @asset.save
+        		format.html {
           			render :json => [@asset.to_jq_upload].to_json, :content_type => 'text/html', :layout => false
-        		}	
-        		format.json {
-          			render :json => [@asset.to_jq_upload].to_json
         		}
-      		end
-    	else
-      		render :json => [{:error => "custom_failure"}], :status => 304
+        		format.json { 
+        			puts [@asset.to_jq_upload].to_json.inspect
+        			render json: [@asset.to_jq_upload].to_json, status: :created, location: @asset 
+        		}
+    		else
+     			render :json => [{:error => "custom_failure"}], :status => 304
+    		end
     	end
   	end
 
