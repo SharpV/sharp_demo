@@ -27,7 +27,7 @@ gem 'mini_magick'
 gem 'flash_cookie_session'
 gem 'devise', '~> 2.2.2'
 gem 'public_activity'
-gem "jquery-fileupload-rails", :git => 'git@github.com:tors/jquery-fileupload-rails.git'
+gem "jquery-fileupload-rails"#, '0.4.0' #:git => 'git@github.com:tors/jquery-fileupload-rails.git'
 #gem 'devise_invitable', '~> 1.0.0'
 gem 'sequel'
 gem "recaptcha", :require => "recaptcha/rails"
@@ -55,7 +55,7 @@ gem "rails_config"
 gem "annotate"
 gem 'redis_voteable'
 gem "bcrypt-ruby", :require => "bcrypt"
-gem "jquery-rails"
+gem "jquery-rails", '2.2.0'
 gem "friendly_id"
 gem 'react_reporter', :git => "git://github.com/reactualize/react_reporter.git"
 gem 'carrierwave-video-thumbnailer'
