@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120714081128) do
+ActiveRecord::Schema.define(:version => 20130214150944) do
 
   create_table "active_admin_comments", :force => true do |t|
     t.string   "resource_id",   :null => false
@@ -150,6 +150,7 @@ ActiveRecord::Schema.define(:version => 20120714081128) do
     t.integer  "groups_members_count", :default => 0
     t.string   "logo"
     t.boolean  "published",            :default => true
+    t.string   "slug"
   end
 
   add_index "groups", ["creator_id"], :name => "index_groups_on_creator_id"

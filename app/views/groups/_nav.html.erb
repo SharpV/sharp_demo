@@ -1,8 +1,11 @@
-<div class="tabbable tabs-left">
+<div class="tabbable tabs">
   <%= tabs_tag(:namespace => :group_nav, :open_tabs => {:class => "nav nav-tabs"}, :builder => MenuTabBuilder) do |tab| %>
-  <% current_user.groups.each do |group| %>
-    <%= tab.try("group_#{group.id}", group.name, group) %>
-  <% end %>
+  <%= tab.home @group.name, group_topic_path(@group) %>
+  <%= tab.home raw("话题"), me_activities_path %>
+  <%= tab.home raw("话题"), me_activities_path %>
+  <%= tab.home raw("话题"), me_activities_path %>
+  <%= tab.home raw("话题"), me_activities_path %>
+  <%= tab.home raw("话题"), me_activities_path %>
   <%= tab.new_group "创建班级", new_group_path %>
   <% end %>
 </div>

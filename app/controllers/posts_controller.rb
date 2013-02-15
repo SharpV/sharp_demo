@@ -1,13 +1,11 @@
 class PostsController < ApplicationController
-
-  before_filter :set_group_tab
-   set_tab :post, :group_menus
-   set_tab :post, :group_actions, :only => %w(new edit)
+  #before_filter :set_group_tab
+  set_tab :post, :group_menus
+  set_tab :post, :group_actions, :only => %w(new edit)
 
   
   def index
     @posts = Post.all
-    @categories = @current_group.categories
   end
   
   def new

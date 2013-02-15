@@ -13,11 +13,11 @@ class Me::NotesController < MeController
   # GET /me/notes/1
   # GET /me/notes/1.json
   def show
-    @me_note = Me::Note.find(params[:id])
+    @post = Post::Note.find(params[:id])
 
     respond_to do |format|
       format.html # show.html.erb
-      format.json { render json: @me_note }
+      format.json { render json: @post }
     end
   end
 
@@ -41,10 +41,10 @@ class Me::NotesController < MeController
   # POST /me/notes.json
   def create
     @post = Post::Note.new(params[:post_note])
-
+    @post.user = current_user
     respond_to do |format|
       if @post.save
-        format.html { redirect_to me_post_path(@post), notice: 'Note was successfully created.' }
+        format.html { redirect_to me_note_path(@post), notice: 'Note was successfully created.' }
         format.json { render json: @post, status: :created, location: @post }
       else
         format.html { render action: "new" }

@@ -1,0 +1,8 @@
+<div>
+  <%= simple_form_for @post, :url => me_documents_path, :validate => true, :html => {:class => 'form-horizontal'} do |form| %>
+    <%= form.input :title, :validate => {:presence => true} %>
+    <%= form.hidden_field :kind, value: "album" %>
+    <%= form.input :body, :input_html => {:maxlength => 15, :size => 40, :height => 30} %>
+    <%= form.button :submit %>
+  <% end %>
+</div>

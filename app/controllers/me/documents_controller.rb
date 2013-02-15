@@ -2,7 +2,7 @@ class Me::DocumentsController < MeController
   # GET /me/documents
   # GET /me/documents.json
   def index
-    @posts = Me::Document.all
+    @posts = Post::Document.all
 
     respond_to do |format|
       format.html # index.html.erb

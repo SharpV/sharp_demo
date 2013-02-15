@@ -16,7 +16,8 @@ class User < ActiveRecord::Base
 
   has_many :connects, :dependent => :destroy
   has_many :posts
-
+  has_many :groups
+  has_many :courses
   # Setup accessible (or protected) attributes for your model
   attr_accessible :name, :email, :password, :password_confirmation, :login, :remember_me, :profile_attributes, :nickname
 

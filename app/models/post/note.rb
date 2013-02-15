@@ -39,9 +39,6 @@ class Post::Note < Post
     self.kind || "article"
   end
 
-  def to_param
-    "#{id}-#{url.parameterize}"
-  end
 
   def login
     user.login
