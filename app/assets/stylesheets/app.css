@@ -20,13 +20,13 @@ body{
 }
 
 .left {
-    width: 740px;
+    width: 180px;
     float: left;
     min-height: 10px;
 }
 
 .right{
-    width: 200px;
+    width: 760px;
     float: left;
     margin-left: 20px;
     min-height: 10px;

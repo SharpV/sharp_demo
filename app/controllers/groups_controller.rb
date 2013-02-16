@@ -1,5 +1,5 @@
 class GroupsController < ApplicationController
-  set_tab :index, :site_nav
+  set_tab :group, :site_nav
   
   def index
     @user = current_user 

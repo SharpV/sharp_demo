@@ -41,7 +41,7 @@ class Me::NotesController < MeController
   # POST /me/notes.json
   def create
     @post = Post::Note.new(params[:post_note])
-    @post.user = current_user
+    @post.postable = current_user
     respond_to do |format|
       if @post.save
         format.html { redirect_to me_note_path(@post), notice: 'Note was successfully created.' }

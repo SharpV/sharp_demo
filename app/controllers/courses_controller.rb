@@ -7,6 +7,9 @@ class CoursesController < ApplicationController
     @courses = Course.page params[:page]
   end
 
+  def show
+    @course = Course.find params[:id]
+  end
 
   def new
     @course = Course.new
