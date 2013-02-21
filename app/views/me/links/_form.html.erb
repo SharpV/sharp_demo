@@ -1,0 +1,7 @@
+<%= simple_form_for @post, :url => me_links_path, :validate => true, :html => {:class => 'form-horizontal'} do |form| %>
+  <%= form.input :url, :validate => {:presence => true}, label: '网址' %>
+  <%= form.hidden_field :kind, value: "bookmark" %>
+  <%= form.input :body, label: '备注', input_html: {:maxlength => 15, :size => 40, :height => 30}%>
+  <%= form.button :submit %>
+<% end %>
+

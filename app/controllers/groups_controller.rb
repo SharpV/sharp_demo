@@ -1,15 +1,14 @@
-class GroupsController < GroupController
-  set_tab :index, :site_nav
+class GroupsController < ApplicationController
+  set_tab :group, :site_nav
   
   def index
     @user = current_user 
     @post = Post.new
-    @post = current_user.stream
   end
   
   def show
-    @current_group = Group.find params[:id]
-    self.try "set_tab", "group_#{@current_group.id}", :group_nav
+    @group = Group.find params[:id]
+    #self.try "set_tab", "group_#{@current_group.id}", :group_nav
   end
   
   def new
@@ -28,7 +27,8 @@ class GroupsController < GroupController
   end
 
   def create
-    @group = current_user.groups.build(params[:group])
+    @group = Group.new(params[:group])
+    @group.user = current_user
     if @group.save
       redirect_to @group  
     else

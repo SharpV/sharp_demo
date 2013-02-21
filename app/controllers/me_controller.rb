@@ -1,7 +1,5 @@
 class MeController < ApplicationController
-  	layout "me"
-
   	def index
-
+      puts "\n ********* " + session[:assets].inspect
   	end
 end

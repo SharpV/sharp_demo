@@ -1,0 +1,2 @@
+module Me::AlbumsHelper
+end

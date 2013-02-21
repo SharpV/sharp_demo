@@ -1,5 +1,11 @@
 <p id="notice"><%= notice %></p>
+<div class='left'>
 
-
-<%= link_to 'Edit', edit_me_note_path(@me_note) %> |
-<%= link_to 'Back', me_notes_path %>
+</div>
+<div class='right'>
+  <%= render 'me/posts/nav' %>
+  <h3><%= @post.title%></h3>
+  <p>
+	 <%= @post.body %>
+  </p>
+</div>

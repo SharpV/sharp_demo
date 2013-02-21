@@ -1,6 +1,11 @@
 
-<%= simple_form_for @post, :url => me_posts_path, :validate => true, :html => {:class => 'form-horizontal'} do |form| %>
-  <%= form.input :title, validate: {presence: true}, label: '标题' %>
-  <%= form.input :body, :as => :kindeditor, :label => false, :input_html => { :width => 500, :height => 300 } %>
-  <%= form.button :wrapped %>
+<%= simple_form_for @post, :url => me_notes_path, :validate => true, :html => {:class => 'form-horizontal'} do |form| %>
+	<% @post.errors.full_messages.each do |msg| %>
+      <p><%= msg %></p>
+    <% end %>
+    <%= form.hidden_field :kind, value: "note" %>
+
+  	<%= form.input :title, :validate => {:presence => true} %>
+  	<%= form.input :body, :as => :kindeditor, :label => false, :input_html => { :width => 500, :height => 300 } %>
+  	<%= form.button :submit %>
 <% end %>

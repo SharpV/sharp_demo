@@ -5,7 +5,7 @@ class Group < ActiveRecord::Base
 
   mount_uploader :logo, ImageUploader
   
-  belongs_to :user
+  belongs_to :user, :foreign_key => "creator_id"
   
   belongs_to :grade
   
@@ -13,33 +13,16 @@ class Group < ActiveRecord::Base
   has_many :categories
   has_many :questions
   
-  before_validation :generate_permalink
-  
+  before_validation :generate_slug
 
-
-  def profile!
-    actor!.profile || actor!.build_profile
-  end
- 
-  def recent_groups
-    contact_subjects(:type => :group, :direction => :sent) do |q|
-      q.select("contacts.created_at").
-        merge(Contact.recent)
-    end
-  end
-  
-  class << self
-    
-    def kinds
-      [[]]
-    end
-  
+  def to_param
+    "#{id}-#{slug.parameterize}"
   end
 
   private
   
   
-  def generate_permalink
-    self.permalink = Hz2py.do(self.name, :join_with => '-', :to_simplified => true).gsub(/\W/, "-").gsub(/(-){2,}/, '-').to_s
+  def generate_slug
+    self.slug = Hz2py.do(self.name, :join_with => '-', :to_simplified => true).gsub(/\W/, "-").gsub(/(-){2,}/, '-').to_s
   end
 end

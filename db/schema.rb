@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120714081128) do
+ActiveRecord::Schema.define(:version => 20130216131320) do
 
   create_table "active_admin_comments", :force => true do |t|
     t.string   "resource_id",   :null => false
@@ -150,6 +150,7 @@ ActiveRecord::Schema.define(:version => 20120714081128) do
     t.integer  "groups_members_count", :default => 0
     t.string   "logo"
     t.boolean  "published",            :default => true
+    t.string   "slug"
   end
 
   add_index "groups", ["creator_id"], :name => "index_groups_on_creator_id"
@@ -183,11 +184,12 @@ ActiveRecord::Schema.define(:version => 20120714081128) do
     t.integer  "likes_count",                     :default => 0
     t.integer  "collections_count",               :default => 0
     t.string   "file"
-    t.integer  "user_id",                                           :null => false
+    t.integer  "postable_id"
+    t.string   "postable_type"
+    t.string   "slug"
   end
 
   add_index "posts", ["kind"], :name => "index_posts_on_kind"
-  add_index "posts", ["user_id"], :name => "index_posts_on_user_id"
 
   create_table "profiles", :force => true do |t|
     t.integer  "user_id"

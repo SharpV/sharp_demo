@@ -6,14 +6,13 @@ class Post::Note < Post
   after_save :update_tag_list
 
 
-  before_validation :generate_slug
   #after_save :conv_to_swf
   
-  validates :title, :presence => true, :length => {:within => 1..100}
+  validates :title, :presence => true, :length => {:within => 1..30}
   validates :body, :presence => true
-  validates :user_id, :presence => true
-  
-  
+  validates :postable_id, :presence => true
+  validates :postable_type, :presence => true
+
   #attr_accessor :minor_edit, :title, :body, :slug, :domain_id
   
   TYPES = {:article => 'article', :link => 'link', :pic => 'pic', :doc => 'doc', :question => 'question', 
@@ -39,9 +38,6 @@ class Post::Note < Post
     self.kind || "article"
   end
 
-  def to_param
-    "#{id}-#{url.parameterize}"
-  end
 
   def login
     user.login
@@ -60,9 +56,7 @@ class Post::Note < Post
     Post.update_all(["approved_comments_count = ?", self.approved_comments.count], ["id = ?", self.id])
   end
 
-  def generate_slug
-    self.url = Hz2py.do(self.title, :join_with => '-', :to_simplified => true).gsub(/\W/, "-").gsub(/(-){2,}/, '-').to_s
-  end
+  
 
   class << self
     def build_for_preview(params)

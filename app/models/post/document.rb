@@ -1,6 +1,6 @@
 class Post::Document < Post
 
-	  has_many :pictures, :as => :assetable
+	  has_many :files, :as => :assetable
 
   	def conv_to_swf
     	system " unoconv -f pdf #{file_path}"
