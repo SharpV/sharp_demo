@@ -1,0 +1,6 @@
+.left
+  = link_to "添加分类", new_me_category_path, class: "btn btn-success", remote: true, data: {type: "script"}
+
+.right
+  %ol.sortable_tree{ :data => { :max_levels => 3, :rebuild_url => rebuild_me_categories_url } }
+    = build_server_tree @categories, :type => :sortable

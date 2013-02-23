@@ -42,6 +42,14 @@ SharpLink::Application.routes.draw do
     resources :audios do 
       resources :assets
     end
+    resources :categories do
+      collection do
+        get :manage
+
+        # required for Sortable GUI server side actions
+        post :rebuild
+      end
+    end
     resources :albums do 
       resources :assets
     end
@@ -78,6 +86,8 @@ SharpLink::Application.routes.draw do
   resources :courses do
     resources :slots 
     resources :sections
+    resources :questions 
+    resources :comments
   end
 
   resources :groups do

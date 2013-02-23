@@ -1,7 +1,7 @@
 #source 'http://ruby.taobao.org/'  
 source 'http://rubygems.org'
 
-gem 'rails', '3.2.11'
+gem 'rails', '3.2.12'
 gem "therubyracer", "0.10.2", :require => 'v8'
 gem 'mobile-fu'
 gem 'hz2py'
@@ -18,7 +18,8 @@ gem 'i18n-js'
 gem 'rails_autolink'
 gem 'social_cheesecake'
 gem 'awesome_nested_set'
-gem 'the_sortable_tree', '~> 1.9.3'
+gem 'the_sortable_tree', '~> 2.3.0'
+gem 'haml-rails'
 gem 'nokogiri' , '~> 1.5.2'
 gem "tabs_on_rails"
 gem 'mime-types'
@@ -35,7 +36,7 @@ gem 'whenever'
 #gem "thinking-sphinx", :require => 'thinking_sphinx'
 #gem 'ajaxful_rating'
 gem 'wicked'
-gem 'lazybox'
+gem 'lazybox', '~> 0.2.4'
 gem 'modernizr-rails'
 gem "omniauth"
 gem 'omniauth-qq-connect'
@@ -56,7 +57,7 @@ gem "rails_config"
 gem "annotate"
 gem 'redis_voteable'
 gem "bcrypt-ruby", :require => "bcrypt"
-gem "jquery-rails", '2.2.0'
+gem "jquery-rails"
 gem "friendly_id"
 gem 'react_reporter', :git => "git://github.com/reactualize/react_reporter.git"
 gem 'carrierwave-video-thumbnailer'

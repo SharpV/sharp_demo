@@ -1,0 +1,8 @@
+<%= @course.id %>
+<%= tabs_tag(:namespace => :course_nav, :open_tabs => { :id => "course_nav", :class => "nav nav-tabs" }, :builder => MenuTabBuilder) do |tab| %>
+    <%= tab.home '课程主页', courses_path %>
+    <%= tab.section '课程列表', [@course, :sections] %>
+    <%= tab.question '问答', course_questions_path(@course) %>
+    <%= tab.comment '留言', course_comments_path(@course) %>
+    <%= tab.admin '管理', edit_course_path(@course) %>
+<% end %>

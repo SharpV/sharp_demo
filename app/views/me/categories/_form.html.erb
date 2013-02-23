@@ -1,0 +1,6 @@
+<h3><%= title %></h3>
+<%= simple_form_for [:me, @category], remote: true, html: {class: 'form-horizontal', data: {type: "script"}} do |f| %>
+  <%= f.input :parent_id, label: '父分类', prompt: '请选择', collection: current_user.categories.select{|c|[!c.parent_id]} %>
+  <%= f.input :name, label: '名称' %>
+  <%= f.button :wrapped, value: '创 建' %>
+<% end %>

@@ -9,6 +9,16 @@ html, body, p, table, dl, ul, section{
     font-weight: normal;
     line-height: 1.62;
 }
+
+body{
+    background-image: url("/assets/bg.jpg");
+    background-position: center center;
+    background-repeat: repeat;
+    position: relative;
+    background-color: #DEDDE3;
+}
+
+
 .simple_form textarea {
     height: 100px;
     width: 490px;

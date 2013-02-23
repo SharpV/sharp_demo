@@ -14,17 +14,18 @@ class User < ActiveRecord::Base
   attr_accessible :email, :password, :password_confirmation, :remember_me
 
 
-  has_many :connects, :dependent => :destroy
+  has_many :connects, dependent: :destroy
   has_many :groups
   has_many :courses
-  has_many :posts, :as => :postable
+  has_many :posts, as: :postable
+  has_many :categories, as: :categoryable
 
   # Setup accessible (or protected) attributes for your model
   attr_accessible :name, :email, :password, :password_confirmation, :login, :remember_me, :profile_attributes, :nickname
 
   validates_presence_of :email
 
-  validates_format_of :email, :with => Devise.email_regexp, :allow_blank => true
+  validates_format_of :email, with: Devise.email_regexp, allow_blank: true
 
   validate :email_must_be_uniq
 
@@ -35,7 +36,7 @@ class User < ActiveRecord::Base
   with_options :if => :password_required? do |v|
     v.validates_presence_of     :password
     v.validates_confirmation_of :password
-    v.validates_length_of       :password, :within => Devise.password_length, :allow_blank => true
+    v.validates_length_of       :password, within: Devise.password_length, :allow_blank => true
   end
   
   def flow

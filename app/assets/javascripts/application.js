@@ -14,4 +14,11 @@
 //= require rails.validations.simple_form
 //= require jquery-fileupload
 
+$(document).ready(function() {
+  $('.images a').lazybox({closeImg: true});
+});
+
+$.lazybox.settings = {cancelClass: "button gray", submitClass: 'button gray', opacity: 0.5};
+
+
 

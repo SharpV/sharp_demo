@@ -1,0 +1,34 @@
+.page-header {
+    border-bottom: 1px solid #CCE4FC;
+    margin: 8px 0;
+    padding-bottom: 1px;
+}
+.page-header h4 {
+    float: left;
+}
+
+.profile h4, .page-header h4 {
+    font-size: 13px;
+    line-height: 18px;
+		color: #889;
+}
+.page-header .more {
+    float: right;
+    margin-bottom: 0;
+}
+
+.navbar-inner {
+    background-color: #fff;
+    background-image: linear-gradient(to bottom, #111, #222);
+}
+.navbar .brand {
+    color: #eee;
+    text-shadow: none;
+}
+.navbar .nav > li > a {
+    color: #eee;
+    float: none;
+    padding: 10px 15px;
+    text-decoration: none;
+    text-shadow: none;
+}
