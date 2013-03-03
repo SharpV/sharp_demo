@@ -1,8 +1,8 @@
-
 <%= simple_form_for @post, :url => me_notes_path, :validate => true, :html => {:class => 'form-horizontal'} do |form| %>
 	<% @post.errors.full_messages.each do |msg| %>
       <p><%= msg %></p>
     <% end %>
+    <%= form.input :category_id, as: :select, collection: nested_set_options(Category, nil) {|i| "#{' - ' * i.level} #{i.name}" }, label: '分类', prompt: '请选择' %>    
     <%= form.hidden_field :kind, value: "note" %>
 
   	<%= form.input :title, :validate => {:presence => true} %>

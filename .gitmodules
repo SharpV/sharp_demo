@@ -7,3 +7,6 @@
 [submodule "lib/assets/file_uploader"]
 	path = lib/assets/file_uploader
 	url = git@github.com:valums/file-uploader.git
+[submodule "lib/assets/tag-it"]
+	path = lib/assets/tag-it
+	url = git@github.com:aehlke/tag-it.git

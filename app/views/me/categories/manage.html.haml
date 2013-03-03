@@ -1,7 +1,13 @@
 .left
-  = link_to "添加分类", new_me_category_path, class: "btn btn-success", remote: true, data: {type: "script"}
+  = render 'users/profile'
+  = render 'me/menu'
 
 .right
+  = render 'me/posts/nav'
+
+  .clearfix
+    = link_to "添加分类", new_me_category_path, class: "btn btn-success pull-right", remote: true, data: {type: "script"}
+  %br
   %ol.sortable_tree{ :data => { :max_levels => 3, :rebuild_url => rebuild_me_categories_url } }
     = build_server_tree @categories, :type => :sortable
 /  %ol.sortable_tree{ :data => { :max_levels => 3, :rebuild_url => rebuild_me_categories_url } }
