@@ -19,7 +19,6 @@ gem 'rails_autolink'
 gem 'social_cheesecake'
 gem 'awesome_nested_set'
 gem 'the_sortable_tree', '~> 2.3.0'
-gem 'haml-rails'
 gem 'nokogiri' , '~> 1.5.2'
 gem "tabs_on_rails"
 gem 'mime-types'
@@ -28,7 +27,9 @@ gem 'mini_magick'
 gem 'flash_cookie_session'
 gem 'devise', '~> 2.2.2'
 gem 'public_activity'
-gem "jquery-fileupload-rails"#, '0.4.0' #:git => 'git@github.com:tors/jquery-fileupload-rails.git'
+gem 'rack-raw-upload'
+
+gem "jquery-fileupload-rails", '0.4.1'#:git => 'git@github.com:tors/jquery-fileupload-rails.git'
 #gem 'devise_invitable', '~> 1.0.0'
 gem 'sequel'
 gem "recaptcha", :require => "recaptcha/rails"
@@ -47,7 +48,6 @@ gem "cancan"
 gem "escape"
 gem 'kaminari'
 gem 'mailboxer'
-gem 'less-rails'
 gem 'rails3-jquery-autocomplete'
 gem 'simple_form', '~> 2.0.2'
 gem 'client_side_validations'
@@ -57,14 +57,17 @@ gem "rails_config"
 gem "annotate"
 gem 'redis_voteable'
 gem "bcrypt-ruby", :require => "bcrypt"
-gem "jquery-rails"
 gem "friendly_id"
 gem 'react_reporter', :git => "git://github.com/reactualize/react_reporter.git"
 gem 'carrierwave-video-thumbnailer'
 gem 'acts_as_commentable'
 gem 'linkser'
 gem 'binding_of_caller'
-# in production environments by default.
+gem 'redis-rails'
+gem 'redis-rack'
+gem 'redis-rack-cache'
+gem 'resque'
+gem 'settingslogic'
 gem 'ruby_parser'
 gem 'hpricot'
 group :test, :development do
@@ -77,11 +80,14 @@ group :development do
  	#gem "better_errors"
 end
 group :assets do
+  gem "jquery-rails"
+  gem 'less-rails'
   gem 'twitter-bootstrap-rails', :git => 'git://github.com/seyhunak/twitter-bootstrap-rails.git'  
   gem 'font-awesome-rails', :git => "git://github.com/bokmann/font-awesome-rails.git"
   gem 'sprockets'
   gem 'coffee-rails'
-  #gem 'haml-rails'
+  gem 'haml-rails'
+  gem 'slim'
   gem 'sass-rails'
   # See https://github.com/sstephenson/execjs#readme for more supported runtimes
   gem 'uglifier', '>= 1.0.3'

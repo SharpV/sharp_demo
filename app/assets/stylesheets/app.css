@@ -46,6 +46,19 @@ body{
     color:#01BDBC;
 }
 
+.page {
+    background-color: #F6F6F6;
+    background-image: -moz-linear-gradient(center bottom , rgba(0, 0, 0, 0.1) 0%, rgba(255, 255, 255, 0.1) 100%);
+    border-bottom: 1px solid #8A94A0;
+    border-radius: 5px 5px 0 0;
+    box-shadow: 0 4px 4px rgba(0, 0, 0, 0.11);
+    display: table;
+    margin: 0;
+    padding: 10px;
+    width: 100%;
+    min-height: 520px;
+}
+
 #user_menus{
     background-color: #FFFFFF;
     border-radius: 6px 6px 6px 6px;

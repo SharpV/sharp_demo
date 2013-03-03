@@ -39,6 +39,7 @@ SharpLink::Application.routes.draw do
     resources :videos do 
       resources :assets
     end
+    resources :assets
     resources :audios do 
       resources :assets
     end
@@ -56,6 +57,7 @@ SharpLink::Application.routes.draw do
     resources :notifications
     resources :activities
     resources :albums
+    resources :collections
 
   end
 
@@ -66,7 +68,7 @@ SharpLink::Application.routes.draw do
   resources :comments
   resources :categories
   resources :sections
-  resources :assets
+  
   resources :schools
 
   resources :users do 

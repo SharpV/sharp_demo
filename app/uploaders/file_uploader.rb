@@ -1,4 +1,5 @@
 # encoding: utf-8
+require 'carrierwave/processing/mime_types'
 
 class FileUploader < CarrierWave::Uploader::Base
 
@@ -6,6 +7,10 @@ class FileUploader < CarrierWave::Uploader::Base
   # include CarrierWave::RMagick
   # include CarrierWave::MiniMagick
   # include CarrierWave::ImageScience
+
+  include CarrierWave::MimeTypes
+
+  process :set_content_type
 
   # Choose what kind of storage to use for this uploader:
   storage :file

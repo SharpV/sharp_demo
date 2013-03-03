@@ -1,5 +1,43 @@
 <div class='left'>
+  <%= render 'users/profile' %>
+  <%= render 'me/menu' %>
+</div>
+<div class='right'>
   <%= render 'me/posts/nav' %>
-  <%= render 'form' %>
-  <%= render "assets/fileupload" %>
+  <%# render 'form' %>
+  <%# render "assets/fileupload" %>
+  <div id="bootstrapped-fine-uploader"></div>
+  <script>
+    function createUploader() {
+      var uploader = new qq.FineUploader({
+        element: document.getElementById('bootstrapped-fine-uploader'),
+        request: {
+          endpoint: '/me/assets?authenticity_token=<%= form_authenticity_token %>'
+        },
+        text: {
+          uploadButton: '<i class="icon-upload icon-white"></i> Test me now and upload a file'
+        },
+        template: '<div class="qq-uploader span12">' +
+                '<pre class="qq-upload-drop-area span12"><span>{dragZoneText}</span></pre>' +
+                '<div class="qq-upload-button btn btn-success" style="width: auto;">{uploadButtonText}</div>' +
+                '<span class="qq-drop-processing"><span>{dropProcessingText}</span><span class="qq-drop-processing-spinner"></span></span>' +
+                '<ul class="qq-upload-list" style="margin-top: 10px; text-align: center;"></ul>' +
+                '</div>',
+        classes: {
+          success: 'alert alert-success',
+          fail: 'alert alert-error'
+        },
+        onSubmit: function(id, fileName) {
+          uploader.setParams({
+            xx: "xx",
+            yy: 'yy',
+            zz: 'zz',
+            authenticity_token: "<%= form_authenticity_token.to_s %>"
+        });
+      }
+
+      });
+    }
+    window.onload = createUploader;
+</script>
 </div>

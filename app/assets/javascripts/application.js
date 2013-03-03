@@ -12,7 +12,9 @@
 //= require lazybox
 //= require rails.validations
 //= require rails.validations.simple_form
-//= require jquery-fileupload
+//= require jquery.ui.nestedSortable
+//= require sortable_tree/initializer
+//= require file_uploader
 
 $(document).ready(function() {
   $('.images a').lazybox({closeImg: true});

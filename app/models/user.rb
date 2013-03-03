@@ -19,7 +19,7 @@ class User < ActiveRecord::Base
   has_many :courses
   has_many :posts, as: :postable
   has_many :categories, as: :categoryable
-
+  has_many :assets, as: :assetable
   # Setup accessible (or protected) attributes for your model
   attr_accessible :name, :email, :password, :password_confirmation, :login, :remember_me, :profile_attributes, :nickname
 

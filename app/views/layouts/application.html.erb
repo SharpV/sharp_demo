@@ -42,18 +42,15 @@
 
     <%= render "layouts/header" %>
     <div class="page container">
-        <div class="row">
+        <div class="content">
           <%= bootstrap_flash %>
           <%= yield %>
-        </div><!--/row-->
-
+        </div>
+    </div> <!-- /container -->
+    <div class="container">
       <footer>
         <p>&copy; haobanji.com 2013</p>
       </footer>
-
-    </div> <!-- /container -->
-
-    
-
+    </div>
   </body>
 </html>

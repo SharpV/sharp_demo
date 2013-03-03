@@ -4,3 +4,6 @@
 [submodule "app/assets/javascripts/jquery.autosize"]
 	path = app/assets/javascripts/jquery.autosize
 	url = git@github.com:melvynhills/jquery.autosize.git
+[submodule "lib/assets/file_uploader"]
+	path = lib/assets/file_uploader
+	url = git@github.com:valums/file-uploader.git

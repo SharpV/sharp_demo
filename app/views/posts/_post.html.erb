@@ -1,3 +1,31 @@
-<%= div_for post, :class => 'content_size' do %>
-  <%= simple_format auto_link(post.text) %>
-<% end %>
+<div id="post-<%= post.id %>" class="post">
+  <header>
+    <h3>
+      <%= link_to post.title.strip, post %>
+    </h3>
+  </header>
+  <div class="avatar">
+    <%= link_to image_tag(post.user.avatar.url(:s)), post.user %>
+    <span class="rating">
+  </div>
+  <div class="preview markdown group">
+    <%= post.body %>
+  </div>
+  <footer class="post-footer">
+    <div class="left">
+      <%= post_timestamp(post) %>
+    </div>
+    <div class="right">
+      <div class="btn-group">
+        <%= link_to post, class: 'btn' do %>
+          <i class="icon-align-left"></i>
+        <% end %>
+        <%= link_to post, class: 'btn' do %>
+          <i class="icon-align-center"></i>
+        <% end %>
+        <%= link_to_like post %>
+        <%= link_to_comments post %>
+      </div>
+    </div>
+  </footer>
+</article>

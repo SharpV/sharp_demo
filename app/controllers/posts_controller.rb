@@ -5,7 +5,7 @@ class PostsController < ApplicationController
 
   
   def index
-    @posts = Post.all
+    @posts = Post.share.page params[:page]
   end
   
   def new

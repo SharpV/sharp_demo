@@ -6,6 +6,9 @@ class Asset < ActiveRecord::Base
 
 	mount_uploader :file, FileUploader 
 
+  before_save :update_file_attributes
+
+
   # attr_accessible :title, :body
 	belongs_to :assetable, :polymorphic => true
 
@@ -19,5 +22,15 @@ class Asset < ActiveRecord::Base
       "delete_url" => asset_path(:id => id),
       "delete_type" => "DELETE"
     }
+  end
+
+
+  private
+  
+  def update_file_attributes
+    if file.present? && file_changed?
+      self.content_type = file.file.content_type
+      self.file_size = file.file.size
+    end
   end
 end
