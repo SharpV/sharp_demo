@@ -34,6 +34,7 @@ gem "jquery-fileupload-rails", '0.4.1'#:git => 'git@github.com:tors/jquery-fileu
 gem 'sequel'
 gem "recaptcha", :require => "recaptcha/rails"
 gem 'whenever'
+gem 'bootstrap_form'
 #gem "thinking-sphinx", :require => 'thinking_sphinx'
 #gem 'ajaxful_rating'
 gem 'wicked'

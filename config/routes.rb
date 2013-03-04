@@ -43,7 +43,7 @@ SharpLink::Application.routes.draw do
     resources :audios do 
       resources :assets
     end
-    resources :categories do
+    resources :post_categories do
       collection do
         get :manage
 
@@ -56,7 +56,7 @@ SharpLink::Application.routes.draw do
     end
     resources :notifications
     resources :activities
-    resources :albums
+    resources :medias
     resources :collections
 
   end

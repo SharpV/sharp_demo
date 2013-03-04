@@ -1,0 +1,109 @@
+.post-list h4 {
+    font-size: 15px;
+    line-height: 22px;
+}
+
+.meta ul{
+    list-style: none;
+    margin: 0px;
+    padding-left: 0em;
+    padding-bottom: 0.5em;
+    display: inline;
+    color: #666;
+    font-size: 9pt;
+}
+.archive-month .tags
+{
+    color: #bbbbbb;
+}
+
+div.meta{
+    margin-top: 5px;
+    margin-bottom: 15px; 
+}
+
+.meta a, .archive-month .tags a{
+    background-color: #E0EAF1;
+    border-bottom: 1px solid #3E6D8E;
+    border-right: 1px solid #7F9FB6;
+    color: #3E6D8E;
+    font-size: 90%;
+    line-height: 2.4;
+    margin: 2px 2px 2px 0;
+    padding: 3px 6px;
+    text-decoration: none;
+    white-space: nowrap;
+}
+
+.meta a:hover
+{
+    text-decoration: none;
+}
+
+.meta ul li
+{
+    display: inline;
+}
+
+
+.meta ul li:last-child:after
+{
+    content: " ";
+}
+input, textarea, select, .uneditable-input {
+    color:#222;
+}
+
+.item .item_title {
+    cursor: pointer;
+    height: 32px;
+    line-height: 32px;
+    overflow: hidden;
+}
+
+.item_tag, .item_title {
+    color: #333;
+    font-weight:13px;
+    font-weight:bold;
+    display: inline;
+    padding:5px;
+    width: 100%;
+}
+
+.pagination span {
+  border-bottom: 1px dotted #999999;
+  float: left;
+  overflow: hidden;
+  padding: 10px 0;
+}
+
+#footer{
+    position: relative;
+    margin-top: 20px;
+    font-size: 10pt;
+    padding-top: 5px;
+    padding-right: 15px;
+    padding-bottom: 5px;
+    padding-left: 5px;
+    color: gray;
+    border-top: solid 1px #aaaaaa;
+}
+.post{
+    border-bottom: dashed 1px #ccc;
+    margin-bottom: 10px;
+}
+.datetime select{
+    width: 100px;
+}
+
+span.tag a{
+    font-size: 14px;
+    padding: 5px;
+}
+
+
+li.tags{
+    list-style: none;
+    margin:10px;
+    clear:both;
+}

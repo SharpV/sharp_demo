@@ -1,19 +1,14 @@
-<script>
-$(document).ready(function() {
-	$('#input_post').elastic();
-});
-</script>
-<div id='new_post'>
-	<div class="avatar">
-	</div>
-	<div class="post_form">
-		<%= simple_form_for Post.new, :remote => true, :html => {:id => "post_form", :class => 'form-horizontal', :data => {:type=>"script", :"method"=>"post"}} do |f| -%>	
-			<%= render 'shared/error_messages', :object => f.object %>
-			<%= f.input :body, :label => "和好友分享学习体会、问题以及最近的发现吧 ：）", :input_html => { :width => 120, :height => 50, :id => "input_post" } %>
-			<div class="actions">
-				<%= f.submit "发布", :class=>'btn btn-primary pull-right'%>&nbsp;
-				<button class="btn" type="reset">保存为草稿</button>
-			</div>
-		<% end %>
-	</div>
-</div>
+<%= javascript_include_tag "js/tag-it.min" %>
+<%= simple_form_for [:me, @post], :validate => true, :html => {:class => 'form-horizontal'} do |f| %>
+	<% @post.errors.full_messages.each do |msg| %>
+      <p><%= msg %></p>
+    <% end %>
+    <%= f.association :post_category, as: :select, collection: nested_set_options(PostCategory, nil) {|i| "#{' - ' * i.level} #{i.name}" }, label: '分类', prompt: '请选择' %>    
+    <%= f.hidden_field :kind, value: "note" %>
+
+  	<%= f.input :title, label: '标题', :validate => {:presence => true} %>
+  	<%= f.input :body, :as => :kindeditor, :label => false, :input_html => { :width => 500, :height => 300 } %>
+    <%= f.input :tag_list, label: '标签' %>
+
+    <%= f.button :wrapped, value: '创建', :cancel => me_posts_path %>
+<% end %>

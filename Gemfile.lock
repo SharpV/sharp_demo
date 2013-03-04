@@ -90,6 +90,7 @@ GEM
     bcrypt-ruby (3.0.1)
     binding_of_caller (0.7.1)
       debug_inspector (>= 0.0.1)
+    bootstrap_form (0.3.2)
     bourbon (3.1.1)
       sass (>= 3.2.0)
       thor
@@ -360,6 +361,10 @@ GEM
     simple_form (2.0.4)
       actionpack (~> 3.0)
       activemodel (~> 3.0)
+    simple_form_fancy_uploads (0.0.2)
+      carrierwave
+      rails (~> 3.2.1)
+      simple_form (~> 2.0.1)
     sinatra (1.3.5)
       rack (~> 1.4)
       rack-protection (~> 1.3)
@@ -424,6 +429,7 @@ DEPENDENCIES
   awesome_nested_set
   bcrypt-ruby
   binding_of_caller
+  bootstrap_form
   cancan
   capybara
   carrierwave
@@ -480,6 +486,7 @@ DEPENDENCIES
   sequel
   settingslogic
   simple_form (~> 2.0.2)
+  simple_form_fancy_uploads
   slim
   social_cheesecake
   socialization!

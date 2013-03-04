@@ -10,3 +10,6 @@
 [submodule "lib/assets/tag-it"]
 	path = lib/assets/tag-it
 	url = git@github.com:aehlke/tag-it.git
+[submodule "lib/assets/jScroll"]
+	path = lib/assets/jScroll
+	url = git@github.com:wduffy/jScroll.git

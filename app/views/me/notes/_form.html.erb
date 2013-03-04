@@ -1,11 +1,14 @@
-<%= simple_form_for @post, :url => me_notes_path, :validate => true, :html => {:class => 'form-horizontal'} do |form| %>
+<%= javascript_include_tag "js/tag-it.min" %>
+<%= simple_form_for @post, :url => me_notes_path, :validate => true, :html => {:class => 'form-horizontal'} do |f| %>
 	<% @post.errors.full_messages.each do |msg| %>
       <p><%= msg %></p>
     <% end %>
-    <%= form.input :category_id, as: :select, collection: nested_set_options(Category, nil) {|i| "#{' - ' * i.level} #{i.name}" }, label: '分类', prompt: '请选择' %>    
-    <%= form.hidden_field :kind, value: "note" %>
+    <%= f.input :category_id, as: :select, collection: nested_set_options(Category, nil) {|i| "#{' - ' * i.level} #{i.name}" }, label: '分类', prompt: '请选择' %>    
+    <%= f.hidden_field :kind, value: "note" %>
 
-  	<%= form.input :title, :validate => {:presence => true} %>
-  	<%= form.input :body, :as => :kindeditor, :label => false, :input_html => { :width => 500, :height => 300 } %>
-  	<%= form.button :submit %>
+  	<%= f.input :title, label: '标题', :validate => {:presence => true} %>
+  	<%= f.input :body, :as => :kindeditor, :label => false, :input_html => { :width => 500, :height => 300 } %>
+    <%= f.input :tag_list, label: '标签' %>
+
+    <%= f.button :wrapped, value: '创建', :cancel => me_posts_path %>
 <% end %>

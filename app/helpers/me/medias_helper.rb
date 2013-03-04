@@ -1,0 +1,2 @@
+module Me::MediasHelper
+end

@@ -3,10 +3,15 @@
  * and any sub-directories. You're free to add application-wide styles to this file and they'll appear at
  * the top of the compiled file, but it's generally better to create a new file per style scope.
  *= require_self
+ *= require bootstrap_and_overrides
  *= require jquery.fileupload-ui
  *= require lazybox
  *= require tree
  *= require sortable_tree
  *= require nested_options
- *= require_tree .
+ *= require form
+ *= require bootstrap_form
+ *= require post
+ *= require common
+ *= require app
 */

@@ -31,11 +31,13 @@ class Me::AlbumsController < MeController
   end
 
   def create
-    @post = Post::Album.new(params[:post_document])
-    @post.user = current_user
+    puts session[:assets].inspect
+
+    @post = current_user.posts.build params[:post_album]
+    @post.assets = session[:assets]
     respond_to do |format|
       if @post.save
-        format.html { redirect_to edit_me_document_path(@post), notice: 'Document was successfully created.' }
+        format.html { redirect_to me_album_path(@post), notice: '您的相册已成功创建!' }
         format.json { render json: @post, status: :created, location: @post }
       else
         format.html { render action: "new" }

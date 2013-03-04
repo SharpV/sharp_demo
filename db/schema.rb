@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130303115434) do
+ActiveRecord::Schema.define(:version => 20130304140919) do
 
   create_table "active_admin_comments", :force => true do |t|
     t.string   "resource_id",   :null => false
@@ -61,20 +61,6 @@ ActiveRecord::Schema.define(:version => 20130303115434) do
   add_index "assets", ["assetable_id"], :name => "index_assets_on_assetable_id"
   add_index "assets", ["assetable_type"], :name => "index_assets_on_assetable_type"
 
-  create_table "categories", :force => true do |t|
-    t.integer "parent_id"
-    t.string  "name"
-    t.integer "lft"
-    t.integer "rgt"
-    t.integer "categoryable_id"
-    t.string  "categoryable_type"
-    t.integer "depth"
-  end
-
-  add_index "categories", ["categoryable_id"], :name => "index_categories_on_categoryable_id"
-  add_index "categories", ["categoryable_type"], :name => "index_categories_on_categoryable_type"
-  add_index "categories", ["parent_id"], :name => "index_categories_on_parent_id"
-
   create_table "connections", :force => true do |t|
     t.integer  "user_id"
     t.string   "provider"
@@ -114,6 +100,17 @@ ActiveRecord::Schema.define(:version => 20130303115434) do
 
   add_index "courses_properties", ["course_id"], :name => "index_courses_properties_on_course_id"
   add_index "courses_properties", ["property_id"], :name => "index_courses_properties_on_property_id"
+
+  create_table "folders", :force => true do |t|
+    t.integer "user_id"
+    t.integer "parent_id"
+    t.string  "name"
+    t.integer "lft"
+    t.integer "rgt"
+    t.integer "depth"
+  end
+
+  add_index "folders", ["user_id"], :name => "index_folders_on_user_id"
 
   create_table "followings", :force => true do |t|
     t.integer  "follower_id"
@@ -169,6 +166,32 @@ ActiveRecord::Schema.define(:version => 20130303115434) do
   add_index "groups_members", ["group_id"], :name => "index_groups_members_on_group_id"
   add_index "groups_members", ["user_id", "group_id"], :name => "index_groups_members_on_user_id_and_group_id"
   add_index "groups_members", ["user_id"], :name => "index_groups_members_on_user_id"
+
+  create_table "medias", :force => true do |t|
+    t.integer  "user_id"
+    t.integer  "folder_id"
+    t.string   "file_name"
+    t.integer  "file_size"
+    t.string   "content_type"
+    t.string   "file"
+    t.string   "play_path"
+    t.datetime "created_at",   :null => false
+    t.datetime "updated_at",   :null => false
+  end
+
+  add_index "medias", ["folder_id"], :name => "index_medias_on_folder_id"
+  add_index "medias", ["user_id"], :name => "index_medias_on_user_id"
+
+  create_table "post_categories", :force => true do |t|
+    t.integer "parent_id"
+    t.string  "name"
+    t.integer "lft"
+    t.integer "rgt"
+    t.integer "depth"
+    t.integer "user_id"
+  end
+
+  add_index "post_categories", ["parent_id"], :name => "index_categories_on_parent_id"
 
   create_table "posts", :force => true do |t|
     t.text     "body"

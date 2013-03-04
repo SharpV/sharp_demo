@@ -1,14 +1,22 @@
 class Post < ActiveRecord::Base
 
+  acts_as_taggable_on :tags
+
+
   default_scope where("postable_id is not null and slug is not null and postable_type is not null")
 
   validates :title, :body, :slug, :presence => true
 
-  scope :share, where(:postable_type => 'User')
-
   before_validation :generate_slug
 
-  belongs_to :postable, :polymorphic => true
+  belongs_to :user
+
+  belongs_to :post_category, foreign_key: :category_id
+
+  has_many :assets, as: :assetable
+
+
+  paginates_per 30
   
   def to_param
     "#{id}-#{slug.parameterize}"
@@ -21,4 +29,9 @@ class Post < ActiveRecord::Base
   def user
     User.find postable_id
   end
+
+  def belongs? actor
+    postable_id == actor.id && postable_type == actor.class.to_s.classify
+  end
+
 end

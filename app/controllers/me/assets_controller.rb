@@ -14,7 +14,8 @@ class Me::AssetsController < MeController
     puts current_user.inspect
     @asset = current_user.assets.build file: file
     if @asset.save
-      puts @asset.inspect
+      session[:assets] = session[:assets] || Array.new
+      session[:assets] << @asset
       render json: {:success => true, :src => @asset.file.url}
     else
       puts file.inspect

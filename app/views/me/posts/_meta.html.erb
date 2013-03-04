@@ -1,0 +1,14 @@
+<div class="meta">
+  <ul>
+    <%- if current_user and post.belongs?(current_user) %>
+      <li class="comments"><%= link_to "编辑", edit_post_path(post) %></li>
+    <% end -%>
+    <li class="comments"> 浏览(<%= post.readings_count %>)</li>
+    <li class="comments"> 评论(<%= post.comments_count %>)</li>
+
+    <li class="date">发表于 <%= format_post_date(post.created_at) %></li>
+    <% unless post.tags.empty? -%>
+      <li class="tags"><%= linked_tag_list(post.tags) %></li>
+    <% end -%>
+  </ul>
+</div>

@@ -1,3 +1,4 @@
-<%= div_for post, :class => 'content_size' do %>
-  <%= simple_format auto_link(post.text) %>
-<% end %>
+<div class="post row" id="post-<%= post.id %>">
+  <h3><%= link_to(post.title, post_path(post)) %></h3>
+  <%= render "meta", :post => post %>
+</div>

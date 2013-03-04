@@ -1,19 +1,19 @@
 require 'pathname'
 require 'carrierwave/orm/activerecord'
-class Asset < ActiveRecord::Base
-	
-	include Rails.application.routes.url_helpers
+class Media < ActiveRecord::Base
+  
+  include Rails.application.routes.url_helpers
 
-	mount_uploader :file, FileUploader 
+  mount_uploader :file, FileUploader 
 
   before_save :update_file_attributes
 
 
   # attr_accessible :title, :body
-	belongs_to :assetable, :polymorphic => true
+  belongs_to :assetable, :polymorphic => true
 
 
-	def to_jq_upload
+  def to_jq_upload
     {
       "name" => read_attribute(:file),
       "size" => file.size,
@@ -29,7 +29,7 @@ class Asset < ActiveRecord::Base
   
   def update_file_attributes
     if file.present? && file_changed?
-      self.file_type = file.file.content_type
+      self.content_type = file.file.content_type
       self.file_size = file.file.size
     end
   end
