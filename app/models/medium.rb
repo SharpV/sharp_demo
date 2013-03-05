@@ -1,16 +1,15 @@
 require 'pathname'
 require 'carrierwave/orm/activerecord'
-class Media < ActiveRecord::Base
-  
+class Medium < ActiveRecord::Base
+
   include Rails.application.routes.url_helpers
+  # attr_accessible :title, :body
+  belongs_to :user
+  belongs_to :folder
 
   mount_uploader :file, FileUploader 
 
   before_save :update_file_attributes
-
-
-  # attr_accessible :title, :body
-  belongs_to :assetable, :polymorphic => true
 
 
   def to_jq_upload

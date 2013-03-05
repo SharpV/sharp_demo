@@ -1,0 +1,6 @@
+<%= simple_form_for [:me, @medium], :validate => true, :html => {:class => 'form-horizontal'} do |f| %>
+  <%= f.association :folder, as: :select, collection: nested_set_options(current_user.folders, nil) {|i| "#{' - ' * i.level} #{i.name}" }, label: '目录', prompt: '请选择' %>    
+  <%= f.button :submit %>
+
+  <%= render 'me/shared/upload' %>
+<% end %>

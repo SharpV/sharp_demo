@@ -38,6 +38,19 @@ body{
     min-height: 10px;
 }
 
+#page-left{
+    width: 660px;
+    float: left;
+    min-height: 10px;
+}
+
+#page-right{
+    width: 280px;
+    float: left;
+    margin-left: 20px;
+    min-height: 10px;
+}
+
 .brand h2{
     color:#01BDBC;
 }
@@ -55,6 +68,7 @@ body{
     box-shadow: 0 4px 4px rgba(0, 0, 0, 0.11);
     min-height: 520px;
     width: 960px;
+    padding: 10px;
 }
 
 #user_menus{

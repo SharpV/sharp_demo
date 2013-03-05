@@ -35,10 +35,7 @@ SharpLink::Application.routes.draw do
     resources :school_classes
     resources :groups
     resources :notes
-    resources :documents
-    resources :videos do 
-      resources :assets
-    end
+    resources :folders
     resources :assets
     resources :audios do 
       resources :assets
@@ -56,7 +53,7 @@ SharpLink::Application.routes.draw do
     end
     resources :notifications
     resources :activities
-    resources :medias
+    resources :media
     resources :collections
 
   end

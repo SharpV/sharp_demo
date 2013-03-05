@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130304140919) do
+ActiveRecord::Schema.define(:version => 20130305123056) do
 
   create_table "active_admin_comments", :force => true do |t|
     t.string   "resource_id",   :null => false
@@ -167,7 +167,7 @@ ActiveRecord::Schema.define(:version => 20130304140919) do
   add_index "groups_members", ["user_id", "group_id"], :name => "index_groups_members_on_user_id_and_group_id"
   add_index "groups_members", ["user_id"], :name => "index_groups_members_on_user_id"
 
-  create_table "medias", :force => true do |t|
+  create_table "media", :force => true do |t|
     t.integer  "user_id"
     t.integer  "folder_id"
     t.string   "file_name"
@@ -179,8 +179,8 @@ ActiveRecord::Schema.define(:version => 20130304140919) do
     t.datetime "updated_at",   :null => false
   end
 
-  add_index "medias", ["folder_id"], :name => "index_medias_on_folder_id"
-  add_index "medias", ["user_id"], :name => "index_medias_on_user_id"
+  add_index "media", ["folder_id"], :name => "index_medias_on_folder_id"
+  add_index "media", ["user_id"], :name => "index_medias_on_user_id"
 
   create_table "post_categories", :force => true do |t|
     t.integer "parent_id"

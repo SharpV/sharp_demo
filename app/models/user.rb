@@ -19,7 +19,8 @@ class User < ActiveRecord::Base
   has_many :courses
   has_many :posts, as: :postable
   has_many :post_categories
-  has_many :assets, as: :assetable
+  has_many :media
+  has_many :folders
   # Setup accessible (or protected) attributes for your model
   attr_accessible :name, :email, :password, :password_confirmation, :login, :remember_me, :profile_attributes, :nickname
 
@@ -37,6 +38,14 @@ class User < ActiveRecord::Base
     v.validates_presence_of     :password
     v.validates_confirmation_of :password
     v.validates_length_of       :password, within: Devise.password_length, :allow_blank => true
+  end
+
+  def folders
+    user_folders = Folder.where user_id: self.id
+    if user_folders.blank?
+      user_folders << Folder.create!(name: "默认目录", user_id: self.id)
+    end
+    user_folders
   end
   
   def flow

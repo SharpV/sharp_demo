@@ -1,0 +1,26 @@
+<div class='left'>
+  <%= render 'users/profile' %>
+  <%= render 'me/menu' %>
+</div>
+<div class='right'>
+  <%= render 'me/posts/nav' %>
+
+  <div class='content'>
+    <%= link_to '添加文件', new_me_medium_path, :class => 'btn btn-success pull-right' %>
+  </div>
+  <table class="table">
+    <thead>
+      <tr>
+        <th>#</th>
+        <th>LOGO</th>
+        <th>名称</th>
+        <th>当前版本</th>  
+        <th>文件大小</th>
+        <th>下载地址</th>
+        <th>备注</th>
+        <th>操作</th>
+      </tr>
+    </thead>
+    <%= render @media %>
+  </table>
+</div>
