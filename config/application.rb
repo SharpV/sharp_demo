@@ -72,5 +72,6 @@ module SharpLink
     end
 
     config.middleware.use 'Rack::RawUpload'
+    config.middleware.use JQuery::FileUpload::Rails::Middleware
   end
 end

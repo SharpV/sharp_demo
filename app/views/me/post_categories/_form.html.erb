@@ -1,6 +1,6 @@
 <h3><%= title %></h3>
 <%= simple_form_for [:me, @category], remote: true, html: {class: 'form-horizontal', data: {type: "script"}} do |f| %>
-  <%= f.input :parent_id, as: :select, collection: nested_set_options(Category, nil) {|i| "#{' - ' * i.level} #{i.name}" }, label: '上级分类', prompt: '请选择' %> 
+  <%= f.input :parent_id, as: :select, collection: nested_set_options(PostCategory, nil) {|i| "#{' - ' * i.level} #{i.name}" }, label: '上级分类', prompt: '请选择' %> 
 
   <%= f.input :name, label: '名称' %>
   <%= f.button :wrapped, value: '创 建' %>

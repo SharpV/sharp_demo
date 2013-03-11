@@ -3,8 +3,18 @@
 class Me::MediaController < MeController
   skip_before_filter :verify_authenticity_token
 
+  respond_to :html, :json
+  set_tab :media, :me_nav
+  set_tab :media, :media_nav
+  
   def index
-    @media = current_user.media.page(params[:page])
+    #session[:media] = session[:media] || Array.new
+    @media = Medium.all#find_all_by_id session[:media]
+    puts "......" + @media.inspect
+    respond_to do |format|
+      format.html # index.html.erb
+      format.json { render json: @media.map{|upload| upload.to_jq_upload } }
+    end
   end
 
   def new
@@ -13,24 +23,18 @@ class Me::MediaController < MeController
   end
 
   def create
-    if params[:qqfile]
-      medium = params[:qqfile].is_a?(ActionDispatch::Http::UploadedFile) ? params[:qqfile] : params[:file]
-      @medium = current_user.media.build file: medium
+    @medium = Medium.new(params[:medium])
+    respond_to do |format|
+      #medium = params[:qqfile].is_a?(ActionDispatch::Http::UploadedFile) ? params[:qqfile] : params[:file]
+      @medium.user = current_user
       if @medium.save
         session[:media] = session[:media] || Array.new
-        session[:media] << @medium
-        render json: {:success => true, :src => @medium.file.url}
+        session[:media] << @medium.id
+        #render json: {:success => true, :src => @medium.file.url}
+        format.json { render json: [@medium.to_jq_upload].to_json, status: :created, location: [:me, @medium] }
       else
         render json: @medium.errors.to_json
       end
-    elsif params[:medium][:folder_id]
-      if folder = Folder.find(params[:medium][:folder_id])
-        folder.media = session[:media] 
-        redirect_to [:me, folder]
-      end
-    else
-      flash[:error] = "请选择正确的上传方式..."
-      render action: :new
     end
   end
 

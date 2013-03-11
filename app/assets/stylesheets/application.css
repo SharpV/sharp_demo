@@ -11,7 +11,7 @@
  *= require nested_options
  *= require form
  *= require bootstrap_form
- *= require post
  *= require common
  *= require app
+ *= require posts
 */

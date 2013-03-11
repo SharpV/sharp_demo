@@ -18,7 +18,7 @@ class Medium < ActiveRecord::Base
       "size" => file.size,
       "url" => file.url,
       "thumbnail_url" => file.url,
-      "delete_url" => asset_path(:id => id),
+      "delete_url" => me_medium_path(:id => id),
       "delete_type" => "DELETE"
     }
   end

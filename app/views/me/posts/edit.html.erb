@@ -1,12 +1,8 @@
-<h1>Editing ey_module</h1>
-
-<% form_for(@ey_module) do |f| %>
-  <%= f.error_messages %>
-
-  <p>
-    <%= f.submit 'Update' %>
-  </p>
-<% end %>
-
-<%= link_to 'Show', @ey_module %> |
-<%= link_to 'Back', ey_modules_path %>
+<div class='left'>
+  <%= render 'users/profile' %>
+  <%= render 'me/menu' %>
+</div>
+<div class='right'>
+  <%= render 'me/posts/nav' %>
+  <%= render 'form' %>
+</div>

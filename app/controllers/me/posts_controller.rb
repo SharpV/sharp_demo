@@ -1,5 +1,6 @@
 class Me::PostsController < MeController
   set_tab :post, :me_nav
+  set_tab :post, :post_nav
 	def index
 		@posts = current_user.posts
 		respond_to do |format|
@@ -32,7 +33,7 @@ class Me::PostsController < MeController
 
   # GET /me/notes/1/edit
   def edit
-    @me_note = Me::Note.find(params[:id])
+    @post = Post.find(params[:id])
   end
 
   # POST /me/notes

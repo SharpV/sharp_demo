@@ -3,12 +3,12 @@
   = render 'me/menu'
 
 .right
-  = render 'me/posts/nav'
+  = render 'me/media/nav'
 
   .clearfix
   %br
-  %ol.sortable_tree{ :data => { :max_levels => 3, :rebuild_url => rebuild_me_post_categories_path } }
-    = build_server_tree @categories, type: :sortable, namespace: :me
+  %ol.sortable_tree{ data: { max_levels: 3, namespace: :me } }
+    = build_server_tree @folders, :type => :sortable, namespace: :me 
 /  %ol.sortable_tree{ :data => { :max_levels => 3, :rebuild_url => rebuild_me_categories_url } }
 /    = build_server_tree @categories, :type => :sortable
   

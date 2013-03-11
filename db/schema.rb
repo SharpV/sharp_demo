@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130305123056) do
+ActiveRecord::Schema.define(:version => 20130311130816) do
 
   create_table "active_admin_comments", :force => true do |t|
     t.string   "resource_id",   :null => false
@@ -61,6 +61,24 @@ ActiveRecord::Schema.define(:version => 20130305123056) do
   add_index "assets", ["assetable_id"], :name => "index_assets_on_assetable_id"
   add_index "assets", ["assetable_type"], :name => "index_assets_on_assetable_type"
 
+  create_table "bookmarks", :force => true do |t|
+    t.text     "body"
+    t.boolean  "published",         :default => true
+    t.string   "title"
+    t.string   "slug"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+    t.boolean  "is_public",         :default => false
+    t.integer  "readings_count",    :default => 0
+    t.integer  "comments_count",    :default => 0
+    t.integer  "likes_count",       :default => 0
+    t.integer  "collections_count", :default => 0
+    t.string   "origin_url"
+    t.integer  "user_id",                              :null => false
+  end
+
+  add_index "bookmarks", ["user_id"], :name => "index_bookmarks_on_user_id"
+
   create_table "connections", :force => true do |t|
     t.integer  "user_id"
     t.string   "provider"
@@ -108,6 +126,7 @@ ActiveRecord::Schema.define(:version => 20130305123056) do
     t.integer "lft"
     t.integer "rgt"
     t.integer "depth"
+    t.boolean "is_public", :default => false
   end
 
   add_index "folders", ["user_id"], :name => "index_folders_on_user_id"
@@ -175,8 +194,9 @@ ActiveRecord::Schema.define(:version => 20130305123056) do
     t.string   "content_type"
     t.string   "file"
     t.string   "play_path"
-    t.datetime "created_at",   :null => false
-    t.datetime "updated_at",   :null => false
+    t.datetime "created_at",                      :null => false
+    t.datetime "updated_at",                      :null => false
+    t.boolean  "is_public",    :default => false
   end
 
   add_index "media", ["folder_id"], :name => "index_medias_on_folder_id"
@@ -211,6 +231,7 @@ ActiveRecord::Schema.define(:version => 20130305123056) do
     t.string   "postable_type"
     t.string   "slug"
     t.integer  "category_id"
+    t.boolean  "is_public",                       :default => false
   end
 
   add_index "posts", ["category_id"], :name => "index_posts_on_category_id"

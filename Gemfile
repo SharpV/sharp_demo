@@ -29,7 +29,7 @@ gem 'devise', '~> 2.2.2'
 gem 'public_activity'
 gem 'rack-raw-upload'
 gem 'simple_form_fancy_uploads'
-gem "jquery-fileupload-rails", '0.4.1'#:git => 'git@github.com:tors/jquery-fileupload-rails.git'
+gem "jquery-fileupload-rails", ' 0.4.0'# :git => 'git@github.com:tors/jquery-fileupload-rails.git'
 #gem 'devise_invitable', '~> 1.0.0'
 gem 'sequel'
 gem "recaptcha", :require => "recaptcha/rails"

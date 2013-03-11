@@ -47,6 +47,14 @@ class User < ActiveRecord::Base
     end
     user_folders
   end
+
+  def post_categories
+    user_categories = PostCategory.where user_id: self.id
+    if user_categories.blank?
+      user_categories << PostCategory.create!(name: "默认目录", user_id: self.id)
+    end
+    user_categories
+  end
   
   def flow
     #tag_ids = subscriptions.select(:tag_id).to_sql

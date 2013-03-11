@@ -1,7 +1,7 @@
 <%= tabs_tag(:namespace => :me_nav, :open_tabs => { :id => "user_menus", :class => "nav nav-list" }, :builder => MenuTabBuilder) do |tab| %>
   	<%= tab.home raw("<i class='icon icon-comments'></i> 动态 <i class='right'>0</i>"), me_activities_path %>
  	<%= tab.post raw("<i class='icon icon-edit'></i> 我的纪录"), me_posts_path %>
-  <%= tab.media raw("<i class='icon icon-edit'></i> 我的文件"), me_medias_path %>
+  <%= tab.media raw("<i class='icon icon-edit'></i> 我的文件"), me_media_path %>
 	<%= tab.group raw("<i class='icon icon-group'></i> 我的群组"), me_groups_path %>
 	<%= tab.event raw("<i class='icon icon-facetime-video'></i> 我的课程"), me_courses_path %>
 	<%= tab.like raw("<i class='icon icon-heart'></i> 我的收藏"), me_likes_path %>
