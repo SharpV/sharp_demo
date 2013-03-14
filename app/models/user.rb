@@ -15,12 +15,25 @@ class User < ActiveRecord::Base
 
 
   has_many :connects, dependent: :destroy
-  has_many :groups
+  has_many :groups_members, dependent: :destroy
+
+
+  has_many :groups, through: :groups_members
+  has_one :group
   has_many :courses
   has_many :posts, as: :postable
   has_many :post_categories
   has_many :media
   has_many :folders
+
+  has_many :adminable_groups,
+           :through => :admin_memberships,
+           :class_name => 'Group',
+           :source => :group
+  has_many :group_requests,
+           :through => :membership_requests,
+           :class_name => 'Group',
+           :source => :group
   # Setup accessible (or protected) attributes for your model
   attr_accessible :name, :email, :password, :password_confirmation, :login, :remember_me, :profile_attributes, :nickname
 

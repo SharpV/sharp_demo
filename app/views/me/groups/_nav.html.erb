@@ -1,0 +1,8 @@
+<%= tabs_tag(:namespace => :group_nav, :open_tabs => {:class => "nav nav-tabs" }, :builder => MenuTabBuilder) do |tab| %>
+  <%= tab.post raw("我的群组"), me_groups_path %>
+  <%# tab.category raw("分类管理"), manage_me_post_categories_path %>
+  <%# link_to "添加分类", new_me_post_category_path, class: "btn btn-info pull-right span", remote: true, data: {type: "script"} %>
+  <%= link_to '创建群组', new_me_group_path, :class => 'btn btn-success pull-right span' %>
+
+<% end %>
+

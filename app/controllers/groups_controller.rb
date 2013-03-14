@@ -10,6 +10,7 @@ class GroupsController < ApplicationController
     @group = Group.find params[:id]
     #self.try "set_tab", "group_#{@current_group.id}", :group_nav
   end
+
   
   def new
     self.try "set_tab", "new_group", :group_nav

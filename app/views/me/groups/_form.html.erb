@@ -1,17 +1,15 @@
-<%= form_for(@me_group) do |f| %>
-  <% if @me_group.errors.any? %>
-    <div id="error_explanation">
-      <h2><%= pluralize(@me_group.errors.count, "error") %> prohibited this me_group from being saved:</h2>
+<%= javascript_include_tag "js/tag-it.min" %>
+<%= simple_form_for [:me, @group], :validate => true, :html => {:class => 'form-horizontal'} do |f| %>
+  <% @group.errors.full_messages.each do |msg| %>
+      <p><%= msg %></p>
+    <% end %>
+    <%# f.association :post_category, as: :select, collection: nested_set_options(PostCategory, nil) {|i| "#{' - ' * i.level} #{i.name}" }, label: '分类', prompt: '请选择' %>    
 
-      <ul>
-      <% @me_group.errors.full_messages.each do |msg| %>
-        <li><%= msg %></li>
-      <% end %>
-      </ul>
-    </div>
-  <% end %>
+    <%= f.input :name, label: '名字', :validate => {:presence => true} %>
+    <%= f.input :logo, label: "图标" %>
+    <%= f.input :published, label: '公开' %>
+    <%= f.input :body, :label => '简介' %>
+    <%= f.input :tag_list, label: '标签' %>
 
-  <div class="actions">
-    <%= f.submit %>
-  </div>
+    <%= f.button :wrapped, value: '创建', :cancel => me_posts_path %>
 <% end %>

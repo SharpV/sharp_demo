@@ -97,6 +97,9 @@ SharpLink::Application.routes.draw do
   resources :groups do
     resources :topics
     resources :members
+
+    get :apply, on: :member
+    post :email_members, on: :member
   end
   resources :pages do      
     resources :comments
