@@ -27,7 +27,14 @@ module ApplicationHelper
 
     flash_messages.join("\n").html_safe
   end
-  
+
+  def avatar_url(model,mode='m')
+     model.avatar and !model.avatar.blank? ? model.avatar.url(mode) : default_avatar_url(model.class.to_s.downcase, mode)
+   end
+
+   def default_avatar_url(kclass, mode)
+     "default_#{kclass}_#{mode}.gif"
+   end
 
   def title_block(text, more_url=nil, more_text="更多")
     more_link = more_url ? link_to(more_text, more_url, :class=>'RouterLink') : ''

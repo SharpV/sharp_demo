@@ -1,4 +1,4 @@
-<li class='clearfix'>
-  <%= link_to image_tag(group.logo.url(:m)), group %>
-  <p>group.name</p>
+<li class='span clearfix'>
+  <%= link_to image_tag(avatar_url(group), placeholder: 'logo.png'), group %>
+  <p><%= group.name %></p>
 </li>

@@ -31,9 +31,12 @@
 }
 
 .navbar .nav > li > a {
+    padding: 12px;
+}
+
+.navbar .nav > li > a {
     color: #ddd;
     float: none;
-    padding: 10px 15px;
     text-decoration: none;
     text-shadow: none;
 }

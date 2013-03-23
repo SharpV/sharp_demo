@@ -7,7 +7,7 @@ class Course < ActiveRecord::Base
 	validates :name, :presence => true, :length => {:within => 1..30}
   validates :body, :slug, :presence => true
 
-  mount_uploader :cover, ImageUploader
+  mount_uploader :avatar, ImageUploader
 	
   belongs_to :user, :foreign_key => "creator_id"
 

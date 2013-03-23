@@ -1,6 +1,6 @@
 class Group < ActiveRecord::Base
 
-  mount_uploader :logo, ImageUploader
+  mount_uploader :avatar, ImageUploader
   acts_as_taggable_on :tags
 
   #belongs_to :user, foreign_key: :creator_id
