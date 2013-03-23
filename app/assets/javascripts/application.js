@@ -14,6 +14,7 @@
 //= require rails.validations.simple_form
 //= require jquery.ui.nestedSortable
 //= require sortable_tree/initializer
+//= require flat-ui
 
 $(document).ready(function() {
   $('.images a').lazybox({closeImg: true});

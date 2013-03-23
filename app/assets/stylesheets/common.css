@@ -25,8 +25,13 @@
     color: #eee;
     text-shadow: none;
 }
+.nav-tabs a{
+    text-decoration: none;
+    text-shadow: none;
+}
+
 .navbar .nav > li > a {
-    color: #eee;
+    color: #ddd;
     float: none;
     padding: 10px 15px;
     text-decoration: none;

@@ -81,6 +81,7 @@ group :development do
  	#gem "better_errors"
 end
 group :assets do
+  gem 'flatui-rails'
   gem "jquery-rails"
   gem 'less-rails'
   gem 'twitter-bootstrap-rails', :git => 'git://github.com/seyhunak/twitter-bootstrap-rails.git'  

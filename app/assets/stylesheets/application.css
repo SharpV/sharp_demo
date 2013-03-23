@@ -7,6 +7,7 @@
  *= require jquery.fileupload-ui
  *= require lazybox
  *= require tree
+ *= require flat-ui
  *= require sortable_tree
  *= require nested_options
  *= require form

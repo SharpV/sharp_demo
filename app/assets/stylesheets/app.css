@@ -95,7 +95,7 @@ body{
     display: block;
     margin: 0 0 -1px;
     padding: 8px 14px;
-    color: #005580;
+    text-decoration: none;
 }
 
 #user_menus > li > a > i.right{
