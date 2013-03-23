@@ -1,9 +1,0 @@
-<%= tabs_tag(:namespace => :group_nav, :open_tabs => {:class => "nav nav-tabs"}, :builder => MenuTabBuilder) do |tab| %>
-  <%= tab.home @group.name, group_topic_path(@group) %>
-  <%= tab.home raw("话题"), me_activities_path %>
-  <%= tab.home raw("话题"), me_activities_path %>
-  <%= tab.home raw("话题"), me_activities_path %>
-  <%= tab.home raw("话题"), me_activities_path %>
-  <%= tab.home raw("话题"), me_activities_path %>
-  <%= link_to "申请加入", apply_group_path(@group), remote: true, class: 'btn btn-info pull-right' %>
-<% end %>

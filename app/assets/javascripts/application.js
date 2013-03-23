@@ -15,6 +15,8 @@
 //= require jquery.ui.nestedSortable
 //= require sortable_tree/initializer
 //= require flat-ui
+//= require rails-timeago
+//= require locales/jquery.timeago.zh-CN.js
 
 $(document).ready(function() {
   $('.images a').lazybox({closeImg: true});

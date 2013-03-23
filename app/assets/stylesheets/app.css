@@ -8,6 +8,7 @@ html, body, p, table, dl, ul, section{
     font-variant: normal;
     font-weight: normal;
     line-height: 1.62;
+    word-wrap: break-word;      /* IE 5.5-7 */
 }
 
 body{
@@ -17,6 +18,10 @@ body{
     position: relative;
     background-color: #DEDDE3;
     padding-top: 50px; 
+}
+
+#site_nav{
+    margin-left: 20px;
 }
 
 .brand img{
@@ -190,10 +195,11 @@ h4{
 .support a.android:hover{background-position: -80px -40px;}
 .support a.window:hover {background-position: -120px -40px;}
 
-.article li:hover{background-color: #eee;}
-.article img{ margin-bottom:10px;clear:both}
-.article h3{
-    font-weight: normal; font-size:21px; color:#01BDBC; margin-bottom:5px;
+.search-query input {
+    border: 1px solid #DCE4EC;
+}
+.navbar-search .search-query{
+    padding-top: 1px;
 }
 
 #app_download  td{

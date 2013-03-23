@@ -95,12 +95,19 @@ SharpLink::Application.routes.draw do
   end
 
   resources :groups do
-    resources :topics
-    resources :members
-
     get :apply, on: :member
     post :email_members, on: :member
+    get :admin, on: :member
   end
+
+  namespace :group do
+    resources :groups do
+      resources :topics
+      resources :media
+      resources :members
+    end
+  end
+
   resources :pages do      
     resources :comments
   end

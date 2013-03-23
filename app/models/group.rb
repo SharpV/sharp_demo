@@ -9,7 +9,7 @@ class Group < ActiveRecord::Base
 
   belongs_to :grade
   
-  has_many :topics
+  has_many :group_topics
   has_many :categories
   has_many :questions
 
@@ -19,10 +19,13 @@ class Group < ActiveRecord::Base
 
   after_save :create_admin
 
-  #def to_param
-   # "#{id}-#{slug.parameterize}"
-  #end
+  def to_param
+    "#{id}-#{slug.parameterize}"
+  end
 
+  def member(user)
+    GroupsMember.where(user_id: user.id, group_id: self.id).first
+  end
 
   private
 

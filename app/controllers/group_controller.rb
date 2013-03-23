@@ -1,11 +1,13 @@
 class GroupController < ApplicationController
-  before_filter :authenticate_user!, :set_current_group  
+  before_filter :authenticate_user!, :set_current_group_context  
   layout "group"
   
-  def set_current_group
-    @current_group = Group.find(params[:group_id])
+  def set_current_group_context
+    @group = Group.find(params[:group_id])
+    @group_member = @group.member(current_user)
   rescue    
-    @current_group = nil
+    @group = nil
+    @group_member = nil
   end
   
   def set_group_tab

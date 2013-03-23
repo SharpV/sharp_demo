@@ -1,0 +1,15 @@
+<table class='table content'>
+  <thead>
+    <tr>
+      <th>话题</th>
+      <th>作者</th>
+      <th>阅读</th>
+      <th>回复</th>
+      <th>最后更新时间</th>
+    </tr>
+  </thead>
+  <tbody>
+    <%# @topics.inspect %>
+    <%= render partial: 'topic', collection: @topics, as: :topic %>
+  </tbody>
+</table>

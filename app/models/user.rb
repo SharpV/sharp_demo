@@ -86,7 +86,7 @@ class User < ActiveRecord::Base
   def generate_login
     self.login = Digest::SHA1.hexdigest("#{email}#{Time.now}") unless self.login
   end
-  
+
   protected
   
   # From devise

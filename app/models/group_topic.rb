@@ -1,4 +1,4 @@
-class Topic < ActiveRecord::Base
+class GroupTopic < ActiveRecord::Base
 
   belongs_to :group
   belongs_to :user

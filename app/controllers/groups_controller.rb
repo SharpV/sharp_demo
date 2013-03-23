@@ -1,21 +1,19 @@
 class GroupsController < ApplicationController
-  set_tab :group, :site_nav
-  
+  set_tab :admin, :group_nav  
   def index
     @user = current_user 
     @post = Post.new
   end
   
   def show
-    @group = Group.find params[:id]
-    #self.try "set_tab", "group_#{@current_group.id}", :group_nav
+    redirect_to group_group_topics_path params[:id]
   end
 
   
-  def new
-    self.try "set_tab", "new_group", :group_nav
-    
-    @group = Group.new
+  def admin
+    @group = Group.find params[:id]
+    @group_member = @group.member current_user
+    render :layout => 'group'
   end
   
   def update
