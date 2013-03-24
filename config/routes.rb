@@ -30,14 +30,14 @@ SharpLink::Application.routes.draw do
     resources :likes
     resources :posts
     resources :comments
-    resources :settings
+    resources :settings 
+    resources :certifications
+    resources :photos
     resources :courses
     resources :school_classes
     resources :groups
     resources :notes
-    resources :albums do 
-      resources :assets
-    end
+    resources :passwords
     resources :notifications
     resources :activities
     resources :media
@@ -45,7 +45,6 @@ SharpLink::Application.routes.draw do
     resources :folders do
       collection do
         get :manage
-        # required for Sortable GUI server side actions
         post :rebuild
       end
     end
@@ -56,8 +55,6 @@ SharpLink::Application.routes.draw do
     resources :post_categories do
       collection do
         get :manage
-
-        # required for Sortable GUI server side actions
         post :rebuild
       end
     end
@@ -100,7 +97,7 @@ SharpLink::Application.routes.draw do
     get :admin, on: :member
   end
 
-  namespace :group do
+  namespace :group  do
     resources :groups do
       resources :topics
       resources :media

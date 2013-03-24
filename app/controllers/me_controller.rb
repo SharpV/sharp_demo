@@ -1,5 +1,4 @@
 class MeController < ApplicationController
-  	def index
-      puts "\n ********* " + session[:assets].inspect
-  	end
+  before_filter :authenticate_user!
+  layout "me"
 end

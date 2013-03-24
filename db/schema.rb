@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130323015643) do
+ActiveRecord::Schema.define(:version => 20130324020340) do
 
   create_table "active_admin_comments", :force => true do |t|
     t.string   "resource_id",   :null => false
@@ -45,6 +45,40 @@ ActiveRecord::Schema.define(:version => 20130323015643) do
 
   add_index "admin_users", ["email"], :name => "index_admin_users_on_email", :unique => true
   add_index "admin_users", ["reset_password_token"], :name => "index_admin_users_on_reset_password_token", :unique => true
+
+  create_table "answers", :force => true do |t|
+    t.text     "body"
+    t.boolean  "accept",      :default => false
+    t.datetime "accept_at"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+    t.boolean  "close",       :default => false
+    t.integer  "ask_id",                         :null => false
+    t.integer  "likes_count", :default => 0
+    t.integer  "vote",        :default => 0
+    t.integer  "bounty",      :default => 0
+    t.integer  "user_id",                        :null => false
+  end
+
+  add_index "answers", ["ask_id"], :name => "index_answers_on_ask_id"
+
+  create_table "asks", :force => true do |t|
+    t.text     "body"
+    t.boolean  "published",      :default => true
+    t.string   "title"
+    t.string   "slug"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+    t.boolean  "is_public",      :default => false
+    t.integer  "readings_count", :default => 0
+    t.integer  "answers_count",  :default => 0
+    t.integer  "likes_count",    :default => 0
+    t.integer  "answer_id"
+    t.integer  "bounty",         :default => 0
+    t.integer  "user_id",                           :null => false
+  end
+
+  add_index "asks", ["user_id"], :name => "index_asks_on_user_id"
 
   create_table "assets", :force => true do |t|
     t.integer  "assetable_id"
@@ -141,6 +175,14 @@ ActiveRecord::Schema.define(:version => 20130323015643) do
   add_index "followings", ["followed_user_id", "follower_id"], :name => "index_followings_on_followed_user_id_and_follower_id", :unique => true
   add_index "followings", ["followed_user_id"], :name => "index_followings_on_followed_user_id"
   add_index "followings", ["follower_id"], :name => "index_followings_on_follower_id"
+
+  create_table "group_categories", :force => true do |t|
+    t.string  "name"
+    t.integer "group_id", :null => false
+    t.integer "user_id",  :null => false
+  end
+
+  add_index "group_categories", ["group_id"], :name => "index_group_categories_on_group_id"
 
   create_table "group_topics", :force => true do |t|
     t.integer  "user_id",                          :null => false
@@ -247,9 +289,7 @@ ActiveRecord::Schema.define(:version => 20130323015643) do
     t.string   "mobile",               :limit => 45
     t.string   "identity_card",        :limit => 45
     t.string   "address"
-    t.string   "name"
     t.integer  "notifications_count",                :default => 0
-    t.string   "description"
     t.integer  "city_code"
     t.integer  "zone_code"
     t.string   "experience"
@@ -367,6 +407,7 @@ ActiveRecord::Schema.define(:version => 20130323015643) do
     t.datetime "locked_at"
     t.string   "status",                                :default => "available"
     t.string   "avatar"
+    t.string   "description"
   end
 
   add_index "users", ["email"], :name => "index_users_on_email"

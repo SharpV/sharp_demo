@@ -1,17 +1,12 @@
-<%= form_for(@me_setting) do |f| %>
-  <% if @me_setting.errors.any? %>
-    <div id="error_explanation">
-      <h2><%= pluralize(@me_setting.errors.count, "error") %> prohibited this me_setting from being saved:</h2>
+<h2>修改个人基本信息</h2>
 
-      <ul>
-      <% @me_setting.errors.full_messages.each do |msg| %>
-        <li><%= msg %></li>
-      <% end %>
-      </ul>
-    </div>
-  <% end %>
+<%= simple_form_for(current_user, url: me_setting_path(current_user)) do |f| %>
+  <%= f.error_notification %>
 
-  <div class="actions">
-    <%= f.submit %>
+  <%= f.input :nickname, :required => true, :autofocus => true, label: '昵称' %>
+  <%= f.input :description, label: '一句话介绍自己' %>
+
+  <div class="form-actions">
+    <%= f.button :submit, "更新" %>
   </div>
 <% end %>

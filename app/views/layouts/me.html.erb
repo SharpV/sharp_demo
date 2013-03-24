@@ -9,7 +9,15 @@
     <div class="page container">
         <div class="content">
           <%= bootstrap_flash %>
-          <%= yield %>
+          <div class='left'>
+            <%= render 'users/profile' %>
+            <%= render 'me/menu' %>
+          </div>
+
+          <div class='right'>
+            <%= yield %>
+          </div>
+
         </div>
     </div> <!-- /container -->
     <div class="container clearfix content">
