@@ -9,10 +9,19 @@ class Course < ActiveRecord::Base
 
   mount_uploader :avatar, ImageUploader
 	
-  belongs_to :user, :foreign_key => "creator_id"
+  belongs_to :admin, foreign_key: "creator_id", class_name: 'User'
+  has_many :users, through: :courses_members
+  has_many :groups_members
+  has_many :sections
+
+  has_many :slots
 
   def to_param
     "#{id}-#{self.slug.parameterize}"
+  end
+
+  def member(user)
+    CoursesMember.where(user_id: user.id, course_id: self.id).first
   end
 
 

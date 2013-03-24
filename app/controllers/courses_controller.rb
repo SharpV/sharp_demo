@@ -3,6 +3,8 @@
 
 class CoursesController < ApplicationController
 
+  layout 'course', only: [:show]
+
   def index
     @courses = Course.page params[:page]
   end
@@ -15,6 +17,7 @@ class CoursesController < ApplicationController
     @course = Course.new
   end
 
+  
 
   def edit
     @html_content = HtmlContent.find(params[:id])

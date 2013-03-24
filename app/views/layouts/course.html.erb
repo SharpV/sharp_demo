@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <%= render 'layouts/head' %>
+  </head>
+  <body>
+
+    <%= render "layouts/header" %>
+    <div class="page container">
+      <div class='left'>
+        <%= image_tag avatar_url(@course) %>
+        <h3><%= @course.name %></h3>
+        <p><%= @course.body %></p>
+      </div>
+
+      <div class='right'>
+        <%= bootstrap_flash %>
+        <%= render 'course/nav' %>
+        <%= yield %>
+      </div>
+
+    </div> <!-- /container -->
+    <div class="container clearfix content">
+      <footer>
+        <p>&copy; haobanji.com 2013</p>
+      </footer>
+    </div>
+  </body>
+</html>

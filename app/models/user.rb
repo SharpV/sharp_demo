@@ -16,11 +16,11 @@ class User < ActiveRecord::Base
 
   has_many :connects, dependent: :destroy
   has_many :groups_members, dependent: :destroy
-
+  has_many :courses_members, dependent: :destroy
 
   has_many :groups, through: :groups_members
+  has_many :courses, through: :courses_members
   has_one :group
-  has_many :courses
   has_many :posts, as: :postable
   has_many :post_categories
   has_many :media

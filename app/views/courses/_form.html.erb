@@ -1,7 +1,7 @@
-<%= simple_form_for @course, :html => {:class => 'form-stacked, new-share'} do |f| -%>	
+<%= simple_form_for @course, :html => {:class => 'form-stacked'} do |f| -%>	
   <%= f.error_notification %>
 	<%= f.input :name, :class=>'xlarge', :label => '名称' %>
-	<%= f.input :cover, :label => '图标' %>
+	<%= f.input :avatar, :label => '图标' %>
 	<%# f.input :kind_id, :label => t('kind'), :collection => Group.Kinds, :include_blank => false, :required => true %>
 	<%= f.input :body, label: '简介' %>
 	<div class="actions">

@@ -1,6 +1,6 @@
 class Me::PostsController < MeController
-  set_tab :post, :me_nav
-  set_tab :post, :post_nav
+  set_tab :posts, :me_nav
+  set_tab :index, :post_nav
 	def index
 		@posts = current_user.posts
 		respond_to do |format|

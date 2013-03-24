@@ -1,0 +1,5 @@
+<tr>
+  <td><%= link_to course.name, course %></td>
+  <td><%= link_to course.name, edit_me_course_path(course) %></td>
+  <td><%= link_to '删除', course, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+</tr>

@@ -1,0 +1,17 @@
+<%= tabs_tag(:namespace => :course_nav, :open_tabs => {:class => "nav nav-tabs"}, :builder => MenuTabBuilder) do |tab| %>
+  <%= tab.index "主页", @course %>
+  <%= tab.slots "课时", course_course_sections_path(@course) %>
+  <%= tab.discusses "讨论", course_course_discusses_path(@course) %>
+  <%= tab.members "学员", course_course_members_path(@course) %>
+
+  <%- if @course_member and @course_member.admin %>
+    <%= tab.admin "讨论", course_course_discusses_path(@course) %>
+  <% end %>
+
+  <%- if @course_member %>
+    <%= link_to "发起讨论", new_group_group_topic_path(@group), class: 'btn btn-info pull-right span' %>
+    <%＃ link_to "共享文件", new_group_group_medium_path(@group), class: 'btn btn-sucess pull-right span' %>
+  <% else %>
+    <%= link_to "立即学习", apply_course_course_path(@course), remote: true, class: 'btn btn-info pull-right span' %>
+  <% end %>
+<% end %>

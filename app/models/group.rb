@@ -3,7 +3,7 @@ class Group < ActiveRecord::Base
   mount_uploader :avatar, ImageUploader
   acts_as_taggable_on :tags
 
-  #belongs_to :user, foreign_key: :creator_id
+  belongs_to :admin, foreign_key: "creator_id", class_name: 'User'
   has_many :users, through: :groups_members
   has_many :groups_members
 

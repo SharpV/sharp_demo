@@ -2,10 +2,7 @@
 
 class Me::GroupsController < MeController
 
-  #load_and_authorize_resource except: :show
-  #before_filter :authenticate_user!, except: :show
-  #before_filter :check_group_read_permissions, :only => :show
-  #after_filter :store_location, :only => :show
+  set_tab :group, :me_nav
 
   def index
     @groups = current_user.groups

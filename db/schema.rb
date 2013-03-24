@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130324020340) do
+ActiveRecord::Schema.define(:version => 20130324083448) do
 
   create_table "active_admin_comments", :force => true do |t|
     t.string   "resource_id",   :null => false
@@ -125,25 +125,72 @@ ActiveRecord::Schema.define(:version => 20130324020340) do
   add_index "connections", ["uid"], :name => "index_connections_on_uid"
   add_index "connections", ["user_id"], :name => "index_connections_on_user_id"
 
+  create_table "course_categories", :force => true do |t|
+    t.string  "name"
+    t.integer "course_id", :null => false
+    t.integer "user_id",   :null => false
+  end
+
+  add_index "course_categories", ["course_id"], :name => "index_course_categories_on_course_id"
+  add_index "course_categories", ["user_id"], :name => "index_course_categories_on_user_id"
+
+  create_table "course_discusses", :force => true do |t|
+    t.integer  "user_id",                               :null => false
+    t.integer  "course_id",                             :null => false
+    t.integer  "slot_id"
+    t.integer  "course_category_id"
+    t.string   "title"
+    t.text     "body"
+    t.integer  "readings_count",     :default => 0
+    t.integer  "comments_count",     :default => 0
+    t.datetime "created_at"
+    t.datetime "updated_at"
+    t.integer  "parent_id"
+    t.integer  "lft"
+    t.integer  "rgt"
+    t.integer  "depth"
+    t.boolean  "delete",             :default => false
+  end
+
+  add_index "course_discusses", ["course_category_id"], :name => "index_course_discusses_on_course_category_id"
+  add_index "course_discusses", ["course_id"], :name => "index_course_discusses_on_course_id"
+  add_index "course_discusses", ["slot_id"], :name => "index_course_discusses_on_slot_id"
+  add_index "course_discusses", ["user_id"], :name => "index_course_discusses_on_user_id"
+
   create_table "courses", :force => true do |t|
-    t.integer  "creator_id",                           :null => false
-    t.integer  "students_count",    :default => 0
-    t.decimal  "price",             :default => 0.0
+    t.integer  "creator_id",                               :null => false
+    t.integer  "cousers_members_count", :default => 0
+    t.decimal  "price",                 :default => 0.0
     t.string   "promo_video"
     t.string   "avatar"
-    t.datetime "created_at",                           :null => false
-    t.datetime "updated_at",                           :null => false
+    t.datetime "created_at",                               :null => false
+    t.datetime "updated_at",                               :null => false
     t.string   "slug"
-    t.string   "name",                                 :null => false
+    t.string   "name",                                     :null => false
     t.text     "body"
-    t.boolean  "published",         :default => false
-    t.integer  "readings_count",    :default => 0
-    t.integer  "comments_count",    :default => 0
-    t.integer  "likes_count",       :default => 0
-    t.integer  "collections_count", :default => 0
+    t.boolean  "published",             :default => false
+    t.integer  "readings_count",        :default => 0
+    t.integer  "comments_count",        :default => 0
+    t.integer  "likes_count",           :default => 0
+    t.integer  "collections_count",     :default => 0
+    t.integer  "sections_count",        :default => 0
+    t.integer  "slots_count",           :default => 0
   end
 
   add_index "courses", ["creator_id"], :name => "index_courses_on_creator_id"
+
+  create_table "courses_members", :force => true do |t|
+    t.boolean  "admin",      :default => false
+    t.boolean  "active",     :default => false
+    t.integer  "user_id",                       :null => false
+    t.integer  "course_id",                     :null => false
+    t.string   "note"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "courses_members", ["course_id"], :name => "index_courses_members_on_course_id"
+  add_index "courses_members", ["user_id"], :name => "index_courses_members_on_user_id"
 
   create_table "courses_properties", :force => true do |t|
     t.string  "property_id", :null => false
@@ -205,10 +252,11 @@ ActiveRecord::Schema.define(:version => 20130324020340) do
     t.datetime "updated_at"
     t.string   "name"
     t.text     "body"
-    t.integer  "groups_members_count", :default => 0
+    t.integer  "groups_members_count",  :default => 0
     t.string   "avatar"
-    t.boolean  "published",            :default => true
+    t.boolean  "published",             :default => true
     t.string   "slug"
+    t.boolean  "need_check_when_apply", :default => false
   end
 
   add_index "groups", ["creator_id"], :name => "index_groups_on_creator_id"
@@ -408,6 +456,7 @@ ActiveRecord::Schema.define(:version => 20130324020340) do
     t.string   "status",                                :default => "available"
     t.string   "avatar"
     t.string   "description"
+    t.string   "name"
   end
 
   add_index "users", ["email"], :name => "index_users_on_email"

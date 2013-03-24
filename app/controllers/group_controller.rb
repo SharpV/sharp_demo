@@ -9,10 +9,5 @@ class GroupController < ApplicationController
     @group = nil
     @group_member = nil
   end
-  
-  def set_group_tab
-    self.try "set_tab", "group_#{@current_group.id}", :group_nav
-    self.set_tab :index, :site_nav
-  end
  
 end

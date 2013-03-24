@@ -5,16 +5,13 @@ SharpLink::Application.routes.draw do
   devise_for :admin_users, ActiveAdmin::Devise.config
 
   devise_for :users, :controllers => {:registrations => "registrations", :passwords => "passwords", :sessions => "sessions", :omniauth_callbacks => 'omniauth_callbacks'}
-  
-  match "/my", :to => "home#index"                                    
-  match '/new/:type', :to => 'my/posts#new', :as => :new_post
-  match '/categories/:parent_id/new', :to => 'my/post_categories#new', :as => :add_post_category
   match "errors/routing", :to => "errors#routing"
   match "tags/:tag/posts",  :to => "posts#show",:as => "tag_posts"
   match "/ajax/get_subjects_by_grade/:grade_id", :to => "ajax#get_subjects_by_grade"
   match "/ajax/get_cities_by_province/:province_code", :to => "ajax#get_cities_by_province"
 
-  match "/admin", :to => "admin#index"                                     
+  match "/admin", :to => "admin#index"    
+                                 
   namespace :admin do
     resources :comments
 
@@ -33,7 +30,12 @@ SharpLink::Application.routes.draw do
     resources :settings 
     resources :certifications
     resources :photos
-    resources :courses
+    resources :courses do
+      collection do
+        get :manage
+        post :rebuild
+      end
+    end
     resources :school_classes
     resources :groups
     resources :notes
@@ -120,11 +122,42 @@ SharpLink::Application.routes.draw do
     end
   end
 
-  resources :pages
-
   resources :tags, :only => [:index] do
     get :subscribe, :on => :member
   end
+
+  resources :pages
+
+  namespace :course do
+    resources :slots do
+      resources :course_discusses
+    end
+
+    resources :courses do
+      resources :courses_members, as: :members, path: :members do
+
+      end
+      
+      resources :sections do
+        collection do 
+          get :admin
+        end
+        resources :slots 
+      end
+
+      resources :course_categories do
+        resources :course_discusses
+      end   
+
+      resources :course_discusses, as: :discusses, path: :discusses
+
+      member do 
+        get :admin
+        get :apply
+      end
+    end
+  end
+
   resources :profiles
   
   root :to => 'home#index'
