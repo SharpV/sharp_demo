@@ -5,6 +5,7 @@
 
   <%- if @group_member.admin %>
     <%= tab.admin raw("管理"), admin_group_path(@group) %>
+    <%= link_to "添加章节", new_course_course_section_path(@group), class: 'btn btn-info pull-right span' %>
   <% end %>
 
   <%- if @group_member %>

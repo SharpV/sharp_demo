@@ -1,11 +1,14 @@
 <%= tabs_tag(:namespace => :me_nav, :open_tabs => { :id => "user_menus", :class => "nav nav-list" }, :builder => MenuTabBuilder) do |tab| %>
-  	<%= tab.home raw("<i class='icon icon-comments'></i> 动态 <i class='right'>0</i>"), me_activities_path %>
+  <%= tab.home raw("<i class='icon icon-comments'></i> 动态 <i class='right'>0</i>"), me_activities_path %>
+  <%= tab.notifications raw("<i class='icon icon-bullhorn'></i> 我的提醒"), me_notifications_path %>
  	<%= tab.posts raw("<i class='icon icon-edit'></i> 我的纪录"), me_posts_path %>
-  <%= tab.media raw("<i class='icon icon-edit'></i> 我的文件"), me_media_path %>
+  <%= tab.media raw("<i class='icon icon-file-alt'></i> 我的文件"), me_media_path %>
+  <%= tab.ask raw("<i class='icon icon-question-sign'></i> 我的问答"), me_questions_path %>
+  <%= tab.bookmark raw("<i class='icon icon-bookmark'></i> 我的书签"), me_bookmarks_path %>
 	<%= tab.groups raw("<i class='icon icon-group'></i> 我的群组"), me_groups_path %>
 	<%= tab.courses raw("<i class='icon icon-facetime-video'></i> 我的课程"), me_courses_path %>
 	<%= tab.like raw("<i class='icon icon-heart'></i> 我的收藏"), me_likes_path %>
-	<%= tab.notifications raw("<i class='icon icon-bullhorn'></i> 我的提醒"), me_notifications_path %>
 	<%= tab.settings raw("<i class='icon icon-cog'></i> 个人设置"), me_settings_path %>
+
 	<%= tab.create raw("<i class='icon icon-plus'></i> 添加应用"), root_path %>
 <% end %>

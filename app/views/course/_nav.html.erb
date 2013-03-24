@@ -4,9 +4,11 @@
   <%= tab.discusses "讨论", course_course_discusses_path(@course) %>
   <%= tab.members "学员", course_course_members_path(@course) %>
 
-  <%- if @course_member and @course_member.admin %>
-    <%= tab.admin "讨论", course_course_discusses_path(@course) %>
+  <%- if current_user.can_admin_course?(@course) %>
+    <%= tab.admin "管理", admin_course_path(@course) %>
   <% end %>
+  
+  <%= link_to "添加章节", new_course_course_section_path(@course), class: 'btn btn-info pull-right span' %>
 
   <%- if @course_member %>
     <%= link_to "发起讨论", new_group_group_topic_path(@group), class: 'btn btn-info pull-right span' %>

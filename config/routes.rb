@@ -23,13 +23,13 @@ SharpLink::Application.routes.draw do
   match "me" => "me#index"
 
   namespace :me do
-    resources :links
+    resources :bookmarks
     resources :likes
     resources :posts
     resources :comments
     resources :settings 
     resources :certifications
-    resources :photos
+    resources :groups
     resources :courses do
       collection do
         get :manage
@@ -37,8 +37,8 @@ SharpLink::Application.routes.draw do
       end
     end
     resources :school_classes
-    resources :groups
-    resources :notes
+    resources :questions
+    resources :answers
     resources :passwords
     resources :notifications
     resources :activities
@@ -50,10 +50,7 @@ SharpLink::Application.routes.draw do
         post :rebuild
       end
     end
-    resources :assets
-    resources :audios do 
-      resources :assets
-    end
+
     resources :post_categories do
       collection do
         get :manage
@@ -91,6 +88,7 @@ SharpLink::Application.routes.draw do
     resources :sections
     resources :questions 
     resources :comments
+    get :admin, on: :member
   end
 
   resources :groups do
@@ -127,6 +125,8 @@ SharpLink::Application.routes.draw do
   end
 
   resources :pages
+  resources :questions
+  resources :answers
 
   namespace :course do
     resources :slots do
@@ -137,7 +137,7 @@ SharpLink::Application.routes.draw do
       resources :courses_members, as: :members, path: :members do
 
       end
-      
+
       resources :sections do
         collection do 
           get :admin

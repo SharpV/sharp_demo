@@ -9,12 +9,11 @@ class Course < ActiveRecord::Base
 
   mount_uploader :avatar, ImageUploader
 	
-  belongs_to :admin, foreign_key: "creator_id", class_name: 'User'
+  belongs_to :creator, foreign_key: "creator_id", class_name: 'User'
   has_many :users, through: :courses_members
   has_many :groups_members
-  has_many :sections
-
-  has_many :slots
+  has_many :sections, order: :position
+  has_many :slots, order: :created_at
 
   def to_param
     "#{id}-#{self.slug.parameterize}"

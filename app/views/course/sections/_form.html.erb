@@ -1,1 +1,16 @@
-_form
+<%= simple_form_for @section, :html => {:class => 'form-stacked'} do |f| -%> 
+  <%= f.error_notification %>
+  <%= f.input :title, :label => '名称' %>
+  <table id="slots">
+  <%= f.fields_for :slots, :wrapper => false do |slot_form| %>
+    <tr class="fields">
+      <td><%= slot_form.text_field :name %></td>
+      </td><%= slot_form.link_to_remove "删除" %></td>
+    </tr>
+  <% end %>
+</table>
+<p><%# f.link_to_add "Add a task", :slots, :data => { :target => "#tasks" } %></p>
+  <div class="actions">
+    <%= f.submit '创建', :class=>'btn btn-primary' %>
+  </div>
+<% end %>

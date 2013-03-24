@@ -1,6 +1,6 @@
  # encoding: utf-8
 
-class Me::LinksController < MeController
+class Me:BookmarksController < MeController
   def index
      @posts = Post::Link.list.page(params[:page])
 

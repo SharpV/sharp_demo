@@ -26,14 +26,6 @@ class User < ActiveRecord::Base
   has_many :media
   has_many :folders
 
-  has_many :adminable_groups,
-           :through => :admin_memberships,
-           :class_name => 'Group',
-           :source => :group
-  has_many :group_requests,
-           :through => :membership_requests,
-           :class_name => 'Group',
-           :source => :group
   # Setup accessible (or protected) attributes for your model
   attr_accessible :name, :email, :password, :password_confirmation, :login, :remember_me, :profile_attributes, :nickname
 
@@ -67,6 +59,22 @@ class User < ActiveRecord::Base
       user_categories << PostCategory.create!(name: "默认目录", user_id: self.id)
     end
     user_categories
+  end
+
+  def can_admin_course? (course)
+    course.creator_id == self.id || CoursesMember.where(course_id: course.id, user_id: self.id, admin: true).first
+  end
+
+  def can_admin_group? (group)
+    group.creator_id == self.id || GroupsMember.where(group_id: group.id, user_id: self.id, admin: true).first
+  end
+
+  def own_courses
+    Course.where creator_id: self.id
+  end
+
+  def own_groups
+    Group.where creator_id: self.id
   end
   
   def flow

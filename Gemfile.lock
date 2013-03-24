@@ -80,6 +80,7 @@ GEM
     acts-as-taggable-on (2.3.3)
       rails (~> 3.0)
     acts_as_commentable (4.0.0)
+    acts_as_list (0.1.9)
     annotate (2.5.0)
       rake
     arbre (1.0.1)
@@ -224,6 +225,7 @@ GEM
     modernizr-rails (2.6.2)
     multi_json (1.6.1)
     multipart-post (1.2.0)
+    nested_form (0.3.1)
     nokogiri (1.5.6)
     oauth2 (0.8.1)
       faraday (~> 0.8)
@@ -434,6 +436,7 @@ DEPENDENCIES
   activeadmin
   acts-as-taggable-on
   acts_as_commentable
+  acts_as_list
   annotate
   awesome_nested_set
   bcrypt-ruby
@@ -467,6 +470,7 @@ DEPENDENCIES
   mini_magick
   mobile-fu
   modernizr-rails
+  nested_form
   nokogiri (~> 1.5.2)
   omniauth
   omniauth-qq-connect

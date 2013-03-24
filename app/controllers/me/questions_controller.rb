@@ -1,13 +1,8 @@
-class Me::NotesController < MeController
-  # GET /me/notes
-  # GET /me/notes.json
-  def index
-    @posts = Post::Note.all
+class Me::QuestionsController < MeController
 
-    respond_to do |format|
-      format.html # index.html.erb
-      format.json { render json: @posts }
-    end
+  def index
+    @questions = current_user.questions.page params[:page]
+
   end
 
   # GET /me/notes/1
