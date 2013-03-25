@@ -138,24 +138,43 @@ ul.nav-tabs li a{
 }
 
 ul{list-style: none;}
-.share{padding:15px 0; }
-.banner{margin:5px; width:450px; float:left;word-break:break-all;}
-.banner h1{font-size: 23px;font-weight:22; margin-bottom:20px;}
-.banner p{
-    font-size: 14px;
-    font-weight: normal;
-    line-height:1.68;
-    color: #444;
-    word-wrap:break-word;
-    word-break:normal;
+
+.feature .tile {
+    background-color: transparent;
+    border-radius: 6px 6px 6px 6px;
+    padding: 4px;
+    position: relative;
+    text-align: center;
+    height: 280px;
 }
 
-.img_intro{
-    text-align:center;
-    float: right;
-    width: 400px;
+.feature .tile-image {
+    height: 100px;
+    width: 100px;
+    margin: 1px;
+    vertical-align: bottom;
 }
 
+.feature .tile-title {
+    font-size: 16px;
+    margin: 0;
+}
+
+.feature .span {
+    width: 210px;
+}
+
+.feature .tile p {
+    text-align: left;
+    font-size: 13px;
+    margin-bottom: 33px;
+}
+
+[class*="span"] {
+    float: left;
+    margin-left: 15px;
+    min-height: 1px;
+}
 
 h3{
     color: #333;
@@ -232,16 +251,9 @@ h4{
 .footer span.left{float:left;}
 .footer span.right{float:right;}
 
-.subnav{
-    float:left;
-    margin:15px;
-    margin-left: 25px;
-    width: 160px;
-    display: block;
-}
-.subnav-fixed {
-    position: fixed;
-    z-index: 1020;
+.video-js{
+    margin-top: 5px;
+    margin-bottom: 40px;
 }
 
 li.cover {

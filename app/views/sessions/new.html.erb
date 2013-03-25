@@ -1,37 +1,9 @@
 <div id='page-left'>
-	<table>
-		<tr>
-			<td>
-				<%= image_tag "group.jpg" %>
-			</td>
-			<td>
-				<%= image_tag "class.png" %>
-				<ul class="info clearfix">
-					<li><span class="badge badge-info">12312</span> 个班级 </li>
-					<li>
-						<span class="badge badge-important">49222</span> 位老师 
-					</li>
-					<li>
-						<span class="badge badge-warning">112121</span> 位家长
-					</li>
-					<li>
-						<span class="badge badge-success">1212133</span> 位同学
-					</li>
-				</ul>
-				
-				<ul class="support clearfix">
-					<li><a class="ipad"></a>ipad</li>
-					<li><a class="iphone"></a>iphone</li>
-					<li><a class="android"></a>android</li>
-					<li><a class="window"></a>window</li>
-				</ul>
-			</td>
-		</tr>
-	</table>
+	<%= render 'player' %>
 	<br />
 	<%= render 'features' %>
-
 </div>
+
 <div id='page-right'>
 	<div class='login-form'>
 		<%= render "form" %>

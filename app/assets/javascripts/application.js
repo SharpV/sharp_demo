@@ -17,7 +17,6 @@
 //= require flat-ui
 //= require rails-timeago
 //= require locales/jquery.timeago.zh-CN.js
-//= require jquery_nested_form
 
 $(document).ready(function() {
   $('.images a').lazybox({closeImg: true});

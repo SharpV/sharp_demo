@@ -135,21 +135,32 @@ SharpLink::Application.routes.draw do
 
     resources :courses do
       resources :courses_members, as: :members, path: :members do
-
+        collection do 
+          get :admin
+        end
       end
 
       resources :sections do
         collection do 
           get :admin
         end
-        resources :slots 
+        resources :slots
       end
 
-      resources :course_categories do
-        resources :course_discusses
+      resources :course_categories, as: :categories, path: :categories do
+        resources :course_discusses, as: :discusses, path: :discusses
+        collection do 
+          get :admin
+        end
       end   
 
       resources :course_discusses, as: :discusses, path: :discusses
+
+      resources :slots do
+        collection do 
+          get :admin
+        end  
+      end
 
       member do 
         get :admin

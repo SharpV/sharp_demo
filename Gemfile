@@ -30,7 +30,7 @@ gem 'devise', '~> 2.2.2'
 gem 'acts_as_list'
 gem 'public_activity'
 gem 'rack-raw-upload'
-gem "nested_form"
+gem 'redis-objects'
 gem 'simple_form_fancy_uploads'
 gem "jquery-fileupload-rails", ' 0.4.0'# :git => 'git@github.com:tors/jquery-fileupload-rails.git'
 #gem 'devise_invitable', '~> 1.0.0'

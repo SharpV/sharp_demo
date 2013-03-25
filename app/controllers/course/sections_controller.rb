@@ -1,5 +1,8 @@
 class Course::SectionsController < CourseController
-set_tab :slots, :course_nav
+  
+  set_tab :slots, :course_nav 
+  set_tab :admin, :course_nav, only: [:admin]
+  set_tab :sections, :course_admin_nav
 
   def index
     @sections = @course.sections
@@ -12,6 +15,18 @@ set_tab :slots, :course_nav
   end
 
   def admin
+    @section = Section.new
+  end
+
+  def create
+    @section = @course.sections.build params[:section]
+    if @section.save
+      respond_with do |format|
+        format.js
+      end
+    else
+
+    end
   end
 
   def new
