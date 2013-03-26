@@ -4,7 +4,6 @@
     <%= render 'layouts/head' %>
   </head>
   <body>
-
     <%= render "layouts/header" %>
     <div class="page container">
         <div class="content">
@@ -12,10 +11,6 @@
           <%= yield %>
         </div>
     </div> <!-- /container -->
-    <div class="container clearfix content">
-      <footer>
-        <p>&copy; haobanji.com 2013</p>
-      </footer>
-    </div>
+    <%= render 'layouts/footer' %>
   </body>
 </html>

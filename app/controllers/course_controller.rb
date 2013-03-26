@@ -1,6 +1,4 @@
 class CourseController < ApplicationController
-
-  respond_to :html, :js
   
   before_filter :authenticate_user!, :set_current_course_context  
   layout "course"

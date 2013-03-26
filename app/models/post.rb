@@ -11,7 +11,7 @@ class Post < ActiveRecord::Base
 
   belongs_to :user
 
-  belongs_to :post_category, foreign_key: :category_id
+  belongs_to :category, foreign_key: :category_id
 
   has_many :assets, as: :assetable
 

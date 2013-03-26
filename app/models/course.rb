@@ -8,7 +8,9 @@ class Course < ActiveRecord::Base
   validates :body, :slug, :presence => true
 
   mount_uploader :avatar, ImageUploader
-	
+	  
+  has_many :categories, as: :categoryable
+  has_many :folders, as: :folderable
   belongs_to :creator, foreign_key: "creator_id", class_name: 'User'
   has_many :users, through: :courses_members
   has_many :groups_members

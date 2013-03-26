@@ -4,26 +4,20 @@
     <%= render 'layouts/head' %>
   </head>
   <body>
-
     <%= render "layouts/header" %>
     <div class="page container">
-        <div class="content">
-          <%= bootstrap_flash %>
-          <div class='left'>
-            <%= render 'users/profile' %>
-            <%= render 'me/menu' %>
-          </div>
-
-          <div class='right'>
-            <%= yield %>
-          </div>
-
+      <div class="content">
+        <%= bootstrap_flash %>
+        <div class='left'>
+          <%= render 'users/profile' %>
+          <%= render 'me/menu' %>
         </div>
+
+        <div class='right'>
+          <%= yield %>
+        </div>
+      </div>
     </div> <!-- /container -->
-    <div class="container clearfix content">
-      <footer>
-        <p>&copy; haobanji.com 2013</p>
-      </footer>
-    </div>
+    <%= render 'layouts/footer' %>
   </body>
 </html>

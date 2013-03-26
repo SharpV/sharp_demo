@@ -5,7 +5,9 @@ class Folder < ActiveRecord::Base
 
   default_scope where("user_id is not null")
 
-  belongs_to :user
+  belongs_to :creator, class_name: 'User'
+
+  belongs_to :categoryable, :polymorphic => true
   
   has_many :media
   

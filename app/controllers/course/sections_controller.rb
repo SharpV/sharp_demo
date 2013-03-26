@@ -1,4 +1,6 @@
 class Course::SectionsController < CourseController
+    
+  respond_to :html, :js
   
   set_tab :slots, :course_nav 
   set_tab :admin, :course_nav, only: [:admin]

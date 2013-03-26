@@ -1,0 +1,5 @@
+<%= simple_form_for current_user, url: me_photo_path(current_user), :validate => true do |f| %> 
+    <%= f.input :avatar, label: '图片', :validate => {:presence => true} %>
+
+    <%= f.button :wrapped, value: '更新', :cancel => me_settings_path %>
+<% end %>

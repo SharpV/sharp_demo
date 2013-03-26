@@ -1,4 +1,4 @@
-class Me::PostCategoriesController < MeController
+class Me::CategoriesController < MeController
   
   respond_to :html, :json
   
@@ -9,8 +9,9 @@ class Me::PostCategoriesController < MeController
     @categories = current_user.post_categories.nested_set.all
   end
 
-  def manage
-    @categories = current_user.post_categories.nested_set.all
+  def admin
+    @category = Category.new
+    @categories = current_user.categories
   end
 
   def new
@@ -25,9 +26,12 @@ class Me::PostCategoriesController < MeController
   end
 
   def create
-    @category = current_user.post_categories.build(params[:post_category])
-
-    render :action => :new unless @category.save
+    @category = current_user.categories.build(params[:category])
+    if @category.save
+      respond_with do |format|
+        format.js
+      end
+    end
   end
 
   def update

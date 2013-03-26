@@ -6,12 +6,9 @@ class Group < ActiveRecord::Base
   belongs_to :admin, foreign_key: "creator_id", class_name: 'User'
   has_many :users, through: :groups_members
   has_many :groups_members
-
-  belongs_to :grade
-  
+  has_many :folders, as: :folderable  
   has_many :group_topics
-  has_many :categories
-  has_many :questions
+  has_many :categories, as: :categoryable
 
   belongs_to :creator,  :class_name => "User"
   

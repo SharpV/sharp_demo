@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130324124052) do
+ActiveRecord::Schema.define(:version => 20130326131653) do
 
   create_table "active_admin_comments", :force => true do |t|
     t.string   "resource_id",   :null => false
@@ -113,6 +113,15 @@ ActiveRecord::Schema.define(:version => 20130324124052) do
 
   add_index "bookmarks", ["user_id"], :name => "index_bookmarks_on_user_id"
 
+  create_table "categories", :force => true do |t|
+    t.string  "name"
+    t.string  "categoryable_type"
+    t.integer "categoryable_id"
+    t.integer "creator_id"
+  end
+
+  add_index "categories", ["categoryable_id", "categoryable_type"], :name => "index_categories_on_categoryable_id_and_categoryable_type"
+
   create_table "connections", :force => true do |t|
     t.integer  "user_id"
     t.string   "provider"
@@ -124,15 +133,6 @@ ActiveRecord::Schema.define(:version => 20130324124052) do
   add_index "connections", ["provider"], :name => "index_connections_on_provider"
   add_index "connections", ["uid"], :name => "index_connections_on_uid"
   add_index "connections", ["user_id"], :name => "index_connections_on_user_id"
-
-  create_table "course_categories", :force => true do |t|
-    t.string  "name"
-    t.integer "course_id", :null => false
-    t.integer "user_id",   :null => false
-  end
-
-  add_index "course_categories", ["course_id"], :name => "index_course_categories_on_course_id"
-  add_index "course_categories", ["user_id"], :name => "index_course_categories_on_user_id"
 
   create_table "course_discusses", :force => true do |t|
     t.integer  "user_id",                               :null => false
@@ -202,14 +202,14 @@ ActiveRecord::Schema.define(:version => 20130324124052) do
 
   create_table "folders", :force => true do |t|
     t.integer "user_id"
-    t.integer "parent_id"
+    t.integer "creator_id"
     t.string  "name"
-    t.integer "lft"
-    t.integer "rgt"
-    t.integer "depth"
-    t.boolean "is_public", :default => false
+    t.integer "folderable_id"
+    t.boolean "is_public",       :default => false
+    t.string  "folderable_type"
   end
 
+  add_index "folders", ["folderable_type", "folderable_id"], :name => "index_folders_on_folderable_type_and_folderable_id"
   add_index "folders", ["user_id"], :name => "index_folders_on_user_id"
 
   create_table "followings", :force => true do |t|
@@ -222,14 +222,6 @@ ActiveRecord::Schema.define(:version => 20130324124052) do
   add_index "followings", ["followed_user_id", "follower_id"], :name => "index_followings_on_followed_user_id_and_follower_id", :unique => true
   add_index "followings", ["followed_user_id"], :name => "index_followings_on_followed_user_id"
   add_index "followings", ["follower_id"], :name => "index_followings_on_follower_id"
-
-  create_table "group_categories", :force => true do |t|
-    t.string  "name"
-    t.integer "group_id", :null => false
-    t.integer "user_id",  :null => false
-  end
-
-  add_index "group_categories", ["group_id"], :name => "index_group_categories_on_group_id"
 
   create_table "group_topics", :force => true do |t|
     t.integer  "user_id",                          :null => false
@@ -291,17 +283,6 @@ ActiveRecord::Schema.define(:version => 20130324124052) do
 
   add_index "media", ["folder_id"], :name => "index_medias_on_folder_id"
   add_index "media", ["user_id"], :name => "index_medias_on_user_id"
-
-  create_table "post_categories", :force => true do |t|
-    t.integer "parent_id"
-    t.string  "name"
-    t.integer "lft"
-    t.integer "rgt"
-    t.integer "depth"
-    t.integer "user_id"
-  end
-
-  add_index "post_categories", ["parent_id"], :name => "index_categories_on_parent_id"
 
   create_table "posts", :force => true do |t|
     t.text     "body"

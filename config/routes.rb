@@ -28,6 +28,7 @@ SharpLink::Application.routes.draw do
     resources :posts
     resources :comments
     resources :settings 
+    resources :photos
     resources :certifications
     resources :groups
     resources :courses do
@@ -51,9 +52,9 @@ SharpLink::Application.routes.draw do
       end
     end
 
-    resources :post_categories do
+    resources :categories do
       collection do
-        get :manage
+        get :admin
         post :rebuild
       end
     end
