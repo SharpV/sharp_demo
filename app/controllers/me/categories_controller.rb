@@ -27,6 +27,7 @@ class Me::CategoriesController < MeController
 
   def create
     @category = current_user.categories.build(params[:category])
+    @category.creator = current_user
     if @category.save
       respond_with do |format|
         format.js

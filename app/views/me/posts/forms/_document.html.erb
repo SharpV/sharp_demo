@@ -1,7 +1,0 @@
-
-<%= simple_form_for @post, :url => me_posts_path, :validate => true, :html => {:class => 'form-horizontal'} do |form| %>
-  <%= form.input :title, :validate => {:presence => true} %>
-  <%= hidden_field_tag 'type', 'document' %>
-  <%= form.input :body, :label => '备注'  %>
-  <%= form.button :submit %>
-<% end %>

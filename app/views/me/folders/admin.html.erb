@@ -1,16 +1,15 @@
-<%= render 'me/posts/nav' %>
-
+<%= render 'me/media/nav' %>
+<%= render 'form' %>
 <table class='table content'>
   <thead>
     <tr>
       <th></th>
       <th>名称</th>
-      <th>课时数量</th>  
+      <th>数量</th>  
       <th>操作</th>
     </tr>
   </thead>
-  <tbody id='category-list'>
-    <%= render @categories %>
+  <tbody id='folder-list'>
+    <%= render @folders %>
   </tbody>
 </table>
-<%= render 'form' %>

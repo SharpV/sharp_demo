@@ -5,7 +5,9 @@ class Post < ActiveRecord::Base
   scope :share, where(is_public: true)
   default_scope where("postable_id is not null and slug is not null and postable_type is not null")
 
-  validates :title, :body, :slug, :presence => true
+  validates :title, :slug, :presence => true
+
+  validates :body, :length => { :minimum => 5 }
 
   before_validation :generate_slug
 

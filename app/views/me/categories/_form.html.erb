@@ -1,4 +1,4 @@
-<%= simple_form_for @category, url:  me_categories_path, remote: true, html: {class: 'form-stacked', id: 'category-form', data: {type: "script", method: :post} } do |f| -%> 
+<%= simple_form_for @category, :validate => true, url: me_categories_path, remote: true, html: {class: 'form-stacked', id: 'category-form', data: {type: "script", method: :post} } do |f| -%> 
   <%= f.error_notification %>
   <%= f.input :name, :label => '名称' %>
   <div class="actions">

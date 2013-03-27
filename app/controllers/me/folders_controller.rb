@@ -1,18 +1,25 @@
 class Me::FoldersController < MeController
 
+  respond_to :html, :json
+  
   set_tab :media, :me_nav
   set_tab :folder, :media_nav
-  
-  include TheSortableTreeController::Rebuild
 
-  def manage
-    @folders = Folder.nested_set.select('id, name, parent_id').all
+  def admin
+    @folders = current_user.folders
   end
 
+  def create
+    @folder = current_user.folders.build params[:folder]
+    if @folder.save
+      respond_with do |format|
+        format.js
+      end
+    end
+  end
 
   def show
-    @folder = Folder.find params[:id]
-    @media = @folder.media
+    
   end
 
 end

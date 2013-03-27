@@ -33,8 +33,7 @@ SharpLink::Application.routes.draw do
     resources :groups
     resources :courses do
       collection do
-        get :manage
-        post :rebuild
+        get :admin
       end
     end
     resources :school_classes
@@ -47,9 +46,9 @@ SharpLink::Application.routes.draw do
     resources :collections
     resources :folders do
       collection do
-        get :manage
-        post :rebuild
+        get :admin
       end
+      resources :media
     end
 
     resources :categories do

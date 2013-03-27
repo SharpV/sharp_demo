@@ -17,10 +17,19 @@ class Medium < ActiveRecord::Base
       "name" => read_attribute(:file),
       "size" => file.size,
       "url" => file.url,
-      "thumbnail_url" => file.url,
+      "thumbnail_url" => thumbnail_url(:s),
       "delete_url" => me_medium_path(:id => id),
       "delete_type" => "DELETE"
     }
+  end
+
+  def thumbnail_url(mode='s')
+    if content_type.include? 'image'
+      #file_url(mode)
+    elsif content_type.include? 'pdf'
+      #'/assets/media/pdf.gif'
+    end
+    file_url
   end
 
 
