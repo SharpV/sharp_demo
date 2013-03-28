@@ -1,59 +1,47 @@
  # encoding: utf-8
 
-class Me:BookmarksController < MeController
+class Me::BookmarksController < MeController
+  respond_to :html, :json
+  
   def index
-     @posts = Post::Link.list.page(params[:page])
+     @bookmarks = current_user.bookmarks.page(params[:page])
 
   	 respond_to do |format|
    	   format.html # index.html.erb
-       format.json { render json: @posts }
+       format.json { render json: @bookmarks }
      end
    end
 
    def new
-  	@post = Post::Link.new
-    respond_to do |format|
-    	format.html # new.html.erb
-  		format.json { render json: @post }
-   	end
+  	@bookmark = Bookmark.new
   end
 
   def edit
-    @post = Post::Link.find(params[:id])
+    @bookmark = Bookmark.find params[:id]
   end
 
   def create
-    @post = Post::Link.new(params[:post_bookmark])
-    @post.user = current_user
-    #begin
-      l = Linkser.parse @post.url
-      @post.title = l.title
-      @post.body = l.description
-      puts @post.inspect
-      respond_to do |format|
-        if @post.save
-          format.html { redirect_to me_links_path, notice: '您的书签已被成功创建 ！' }
-          format.json { render json: @post, status: :created, location: @post }
-        else
-          format.html { render action: "new" }
-        end
-      end
-    #rescue
-        #format.html { render action: "new" }
-    #end
+    @bookmark = current_user.bookmarks.build params[:bookmark]
+    begin
+      l = Linkser.parse @bookmark.origin_url
+    rescue
+      render action: :new
+    end
+    @bookmark.title = l.title
+    @bookmark.body = l.description
+    if @bookmark.save
+      redirect_to edit_me_bookmark_path(@bookmark)
+    else
+      render action: :new
+    end
   end
 
   def update
-    @post = Post::Link.find(params[:id])
-
-    respond_to do |format|
-      if @post.update_attributes(params[:post_bookmark])
-        format.html { redirect_to @me_document, notice: 'Document was successfully updated.' }
-        format.json { head :no_content }
-      else
-        format.html { render action: "edit" }
-        format.json { render json: @me_document.errors, status: :unprocessable_entity }
-      end
+    @bookmark = Bookmark.find params[:id]
+    if @bookmark.update_attributes(params[:bookmark])
+      redirect_to me_bookmarks_path
+    else
+      render action: :edit
     end
   end
 

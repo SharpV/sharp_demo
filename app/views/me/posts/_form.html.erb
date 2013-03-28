@@ -1,4 +1,3 @@
-<%= javascript_include_tag "js/tag-it.min" %>
 <%= simple_form_for [:me, @post], :validate => true, :html => {:class => 'form-horizontal'} do |f| %>
 	<% @post.errors.full_messages.each do |msg| %>
       <p><%= msg %></p>

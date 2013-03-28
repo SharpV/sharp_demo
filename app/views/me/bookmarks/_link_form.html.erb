@@ -1,0 +1,5 @@
+<%= simple_form_for [:me, @bookmark], validate: true, html: {class: 'form-horizontal'}, data: {type: "script", method: :post} do |form| %>
+  <%= form.input :origin_url, label: '网址' %>
+  <%= form.button :submit, value: '确定', disable_with: "正在提交..." %>
+<% end %>
+

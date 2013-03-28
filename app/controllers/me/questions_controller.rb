@@ -1,5 +1,8 @@
 class Me::QuestionsController < MeController
 
+  set_tab 'questions', :me_nav
+  set_tab 'index', :question_nav
+
   def index
     @questions = current_user.questions.page params[:page]
 

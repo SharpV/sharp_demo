@@ -1,7 +1,5 @@
 class Post < ActiveRecord::Base
 
-  acts_as_taggable_on :tags
-
   scope :share, where(is_public: true)
   default_scope where("postable_id is not null and slug is not null and postable_type is not null")
 

@@ -1,0 +1,11 @@
+<%= javascript_include_tag "js/tag-it.min" %>
+<%= simple_form_for [@question], :validate => true, :html => {:class => 'form-horizontal'} do |f| %>
+  <% @question.errors.full_messages.each do |msg| %>
+      <p><%= msg %></p>
+    <% end %>
+    <%= f.input :title, label: '标题', :validate => {:presence => true} %>
+    <%= f.input :body, as: :kindeditor, label: false, input_html: {simple_mode: true, width: 500, height: 300 }, :validate => {presence: true}  %>
+    <%= f.input :tag_list, label: '标签' %>
+
+    <%= f.button :wrapped, value: '创建', :cancel => me_posts_path, disable_with: "正在提交..." %>
+<% end %>

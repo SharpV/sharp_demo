@@ -1,0 +1,6 @@
+<%= tabs_tag(:namespace => :question_nav, :open_tabs => {:class => "nav nav-tabs" }, :builder => MenuTabBuilder) do |tab| %>
+  <%= tab.index "我的问题", me_questions_path %>
+  <%= tab.answers "我的回答", me_answers_path %>
+  <%= link_to '我要提问', new_question_path, :class => 'btn btn-success pull-right span', target: '_blank' %>
+<% end %>
+

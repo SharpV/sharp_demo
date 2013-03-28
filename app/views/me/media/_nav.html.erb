@@ -1,5 +1,5 @@
 <%= tabs_tag(:namespace => :media_nav, :open_tabs => { :id => "post_nav", :class => "nav nav-tabs" }, :builder => MenuTabBuilder) do |tab| %>
-  <%= tab.media raw("我的文件"), me_media_path %>
+  <%= tab.media raw("我的文件"), me_folders_path %>
   <%= tab.folder raw("目录管理"), admin_me_folders_path %>
   <div class="btn-group pull-right">
     <button data-toggle="dropdown" class="btn btn-success dropdown-toggle">添加文件 <span class="caret"></span></button>

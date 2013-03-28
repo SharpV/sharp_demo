@@ -1,0 +1,17 @@
+<table class="table">
+  <thead>
+    <tr>
+      <th>LOGO</th>
+      <th>名称</th>
+      <th>当前版本</th>  
+
+    </tr>
+  </thead>
+  <%- media.each do |m| %>
+    <tr>
+      <td><%# image_tag m.thumbnail_url %></td>
+      <td><%= m.file %></td>
+      <td><%= m.file_size%></td>
+    </tr>
+  <% end %>
+</table>

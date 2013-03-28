@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130326131653) do
+ActiveRecord::Schema.define(:version => 20130328131153) do
 
   create_table "active_admin_comments", :force => true do |t|
     t.string   "resource_id",   :null => false
@@ -61,24 +61,6 @@ ActiveRecord::Schema.define(:version => 20130326131653) do
   end
 
   add_index "answers", ["ask_id"], :name => "index_answers_on_ask_id"
-
-  create_table "asks", :force => true do |t|
-    t.text     "body"
-    t.boolean  "published",      :default => true
-    t.string   "title"
-    t.string   "slug"
-    t.datetime "created_at"
-    t.datetime "updated_at"
-    t.boolean  "is_public",      :default => false
-    t.integer  "readings_count", :default => 0
-    t.integer  "answers_count",  :default => 0
-    t.integer  "likes_count",    :default => 0
-    t.integer  "answer_id"
-    t.integer  "bounty",         :default => 0
-    t.integer  "user_id",                           :null => false
-  end
-
-  add_index "asks", ["user_id"], :name => "index_asks_on_user_id"
 
   create_table "assets", :force => true do |t|
     t.integer  "assetable_id"
@@ -339,6 +321,24 @@ ActiveRecord::Schema.define(:version => 20130326131653) do
   end
 
   add_index "properties", ["key"], :name => "index_properties_on_key"
+
+  create_table "questions", :force => true do |t|
+    t.text     "body"
+    t.boolean  "published",      :default => true
+    t.string   "title"
+    t.string   "slug"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+    t.boolean  "is_public",      :default => false
+    t.integer  "readings_count", :default => 0
+    t.integer  "answers_count",  :default => 0
+    t.integer  "likes_count",    :default => 0
+    t.integer  "answer_id"
+    t.integer  "bounty",         :default => 0
+    t.integer  "user_id",                           :null => false
+  end
+
+  add_index "questions", ["user_id"], :name => "index_asks_on_user_id"
 
   create_table "school_classes", :force => true do |t|
     t.integer  "school_grade_id"

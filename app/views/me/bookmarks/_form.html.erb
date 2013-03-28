@@ -1,0 +1,6 @@
+<%= simple_form_for [:me, @bookmark], validate: true, html: {class: 'form-horizontal'}, data: {type: "script", method: :post} do |form| %>
+  <%= form.input :title, :validate => {:presence => true}, label: '标题' %>
+  <%= form.input :body, label: '备注', input_html: {:maxlength => 15, :size => 40, :height => 30}%>
+  <%= form.button :submit, value: '保存', disable_with: "正在提交..." %>
+<% end %>
+

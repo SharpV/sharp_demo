@@ -17,14 +17,16 @@ class User < ActiveRecord::Base
   has_many :connects, dependent: :destroy
   has_many :groups_members, dependent: :destroy
   has_many :courses_members, dependent: :destroy
-
+  has_many :questions
+  has_many :answers
   has_many :groups, through: :groups_members
   has_many :courses, through: :courses_members
-  has_one :group
+  has_many :bookmarks
   has_many :posts, as: :postable
   has_many :categories, as: :categoryable
   has_many :media
   has_many :folders, as: :folderable
+
 
   # Setup accessible (or protected) attributes for your model
   attr_accessible :name, :email, :password, :password_confirmation, :login, :remember_me, :avatar, :nickname
