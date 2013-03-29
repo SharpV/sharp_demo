@@ -3,6 +3,7 @@
 class Me::GroupsController < MeController
 
   set_tab :group, :me_nav
+  set_tab :index, :group_nav
 
   def index
     @groups = current_user.groups

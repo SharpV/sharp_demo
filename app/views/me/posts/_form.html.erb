@@ -5,7 +5,6 @@
     <%= f.association :category, as: :select, collection: current_user.categories, label: '分类', prompt: '请选择' %>    
   	<%= f.input :title, label: '标题', :validate => {:presence => true} %>
   	<%= f.input :body, as: :kindeditor, label: false, input_html: {simple_mode: true, width: 500, height: 300 }, :validate => {presence: true}  %>
-    <%= f.input :tag_list, label: '标签' %>
 
     <%= f.button :wrapped, value: '创建', :cancel => me_posts_path, disable_with: "正在提交..." %>
 <% end %>
