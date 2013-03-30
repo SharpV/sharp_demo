@@ -125,7 +125,9 @@ SharpLink::Application.routes.draw do
   end
 
   resources :pages
-  resources :questions
+  resources :questions do
+    resources :answers
+  end
   resources :answers
 
   namespace :course do

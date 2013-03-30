@@ -19,7 +19,7 @@ class Post < ActiveRecord::Base
   paginates_per 30
   
   def to_param
-    "#{id}-#{slug.parameterize}"
+    slug ? "#{id}-#{slug.parameterize}" : id.to_s
   end
 
   def generate_slug

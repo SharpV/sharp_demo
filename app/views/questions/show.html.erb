@@ -1,9 +1,12 @@
-<div class='span2'>
-  <%= render 'grades/nav' %>
+<div class='span9'>
+  <h3><%= @question.title %></h3>
+  <p><%= @question.body %></p>
+  <%= render 'meta', question: @question %>
+  <%= render 'answer_list' if @question.answers_count > 0 %>
+  <%= render 'answer_form' %>
+
+</div>
+<div class='span3'>
+  <%= link_to '我要提问', new_question_path, class: 'btn btn-success pull-right' %>
 </div>
 
-<div class='span6'>
-</div>
-
-<div class='span2'>
-</div>

@@ -17,7 +17,7 @@ class Group < ActiveRecord::Base
   after_save :create_admin
 
   def to_param
-    "#{id}-#{slug.parameterize}"
+    slug ? "#{id}-#{slug.parameterize}" : id.to_s
   end
 
   def member(user)

@@ -1,3 +1,29 @@
+.item .meta{
+    border-bottom: dashed 1px #ccc;
+    margin-top: 7px;
+    margin-bottom: 7px;
+}
+.item .avatar {
+    margin-top: 7px;
+}
+
+.item .title{
+    word-wrap:break-word;
+    word-break:break-all;
+    overflow:hidden;
+}
+
+.item .title h4 {
+    font-size: 15px;
+    line-height: 22px;
+    font-weight: bold;
+    float: left;
+    height: 25px;
+    margin: 0px;
+    padding: 0px;
+    width: 510px;
+}
+
 .page-header {
     border-bottom: 1px solid #CCE4FC;
     margin: 8px 0;

@@ -75,15 +75,18 @@ body{
     text-shadow: null;
 }
 
-.page {
+#page {
     background-color: #F6F6F6;
     background-image: -moz-linear-gradient(center bottom , rgba(0, 0, 0, 0.1) 0%, rgba(255, 255, 255, 0.1) 100%);
     border-bottom: 1px solid #8A94A0;
     border-radius: 5px 5px 0 0;
     box-shadow: 0 4px 4px rgba(0, 0, 0, 0.11);
     min-height: 520px;
-    width: 960px;
-    padding: 10px;
+    padding: 7px;
+}
+
+.row {
+    margin-left: -15px;
 }
 
 #user_menus{
@@ -186,40 +189,11 @@ h4{
     font-size: 15px;
 }
 
-.products a:visited {
-    color: #333;
-    text-decoration: none;
+ul.inline > li, ol.inline > li {
+    display: inline-block;
+    padding-left: 0px;
+    padding-right: 5px;
 }
-
-.products a:hover {
-    color: #03BDBC;
-    text-decoration: none;
-}
-.products a:active {
-    COLOR: #333;  
-    text-decoration: none;
-}
-
-.products h3{
-    line-height: 36px;
-}
-
-.products p{
-    color: #333;
-}
-.support{overflow: auto; font-size:12px; margin:10px 0; color:#999;}
-.support li{float:left; margin-right:20px;text-align: center;}
-.support a{display:block;height:40px;width:40px;background:url("/assets/sup_icon.png") no-repeat;}
-
-.support .ipad{background-position:0 0px;}
-.support .iphone{background-position:-40px 0;}
-.support .android{background-position:-80px 0;}
-.support .window{background-position:-120px 0;}
-
-.support a.ipad:hover{background-position: 0 -40px;}
-.support a.iphone:hover{background-position: -40px -40px;}
-.support a.android:hover{background-position: -80px -40px;}
-.support a.window:hover {background-position: -120px -40px;}
 
 .search-query input {
     border: 1px solid #DCE4EC;

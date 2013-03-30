@@ -1,0 +1,31 @@
+<div class='item row'>
+  <div class='span1 avatar'>
+    <%= link_to image_tag(question.user.avatar_url(:s)), question.user %>
+  </div>
+  <div class='span8'>
+    <div class='clearfix title'>
+      <h4><%= link_to question.title, question %></h4>
+      <div class='span2 pull-right text-right'>
+        <%= timeago_tag question.created_at, lang: 'zh-CN' %>    
+      </div>
+    </div>
+    <div class='meta clearfix'>
+      <ul class='inline'>
+        <li>
+          作者 <%= link_to question.user.nickname, question.user %>
+        </li>
+        <li>
+          <%= question.answers_count %>个回答
+        </li>
+        <li>
+          <%= question.readings_count %>个查看
+        </li>
+        <li><%# question.comments_count %>个评论</li>
+        <li><%= question.up_votes %>票支持</li>
+        <li><%= question.down_votes %>票反对</li>
+      </ul>
+      <div class='pull-right text-right'>
+      </div>
+    </div>
+  </div>
+</div>

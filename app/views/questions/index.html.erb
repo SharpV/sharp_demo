@@ -1,19 +1,6 @@
-<div class='span-left'>
-	<%= simple_form_for(resource, :as => resource_name, :url => registration_path(resource_name), :html => {:class => 'form-horizontal span-form'}) do |f| %>
-	<h3>注册海学网</h3><br />
-
-	<%= render 'shared/error_messages', :object => f.object %>
-	<%= f.input :email, :required => true, :autofocus => true, :label => '邮箱' %>
-	<%= f.input :login, :required => true, :label => '登录名', :hint => "只允许5-15个字母、数字或者下划线 " %>
-	<%= f.input :password, :required => true, :label => '密码', :hint => "最少6位 " %>
-	<%= f.input :password_confirmation, :required => true, :label => '重复密码' %>
-	<%= render "shared/city_select", :f => f %>
-
-	<div class="form-actions">
-		<%= f.button :submit, "注册", :class => "btn-primary" %>
-	</div>
-	<% end %>
+<div class='span9'>
+	<%= render @questions %>
 </div>
-<div class='span-right'>
-	<%= link_to '已有帐号， 立即去登录', new_user_session_path, :class=>'btn' %>
+<div class='span3'>
+  <%= link_to '我要提问', new_question_path, class: 'btn btn-success pull-right' %>
 </div>

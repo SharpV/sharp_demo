@@ -30,22 +30,10 @@ module ApplicationHelper
 
   def avatar_url(model,mode='m')
      model.avatar and !model.avatar.blank? ? model.avatar.url(mode) : default_avatar_url(model.class.to_s.downcase, mode)
-   end
+  end
 
-   def default_avatar_url(kclass, mode)
-     "default_#{kclass}_#{mode}.gif"
-   end
-
-  def title_block(text, more_url=nil, more_text="更多")
-    more_link = more_url ? link_to(more_text, more_url, :class=>'RouterLink') : ''
-    block = <<-EOS 
-    <div class="page-header clearfix">
-    <h4>#{text}</h4>
-    <div class='more'>
-    #{more_link}
-    </div>
-    </div>
-    EOS
+  def default_avatar_url(kclass, mode)
+    "default_#{kclass}_#{mode}.gif"
   end
 
   def avatar_image(user, size = 52, type = :user)

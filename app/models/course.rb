@@ -18,7 +18,7 @@ class Course < ActiveRecord::Base
   has_many :slots, order: :created_at
 
   def to_param
-    "#{id}-#{self.slug.parameterize}"
+    slug ? "#{id}-#{slug.parameterize}" : id.to_s
   end
 
   def member(user)
