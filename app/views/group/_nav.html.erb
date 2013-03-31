@@ -1,16 +1,9 @@
-<%= tabs_tag(:namespace => :group_nav, :open_tabs => {:class => "nav nav-tabs"}, :builder => MenuTabBuilder) do |tab| %>
-  <%= tab.topics raw("所有话题"), group_group_topics_path(@group) %>
+<%= tabs_tag(:namespace => :group_nav, :open_tabs => {:class => "nav nav-tabs nav-stacked"}, :builder => MenuTabBuilder) do |tab| %>
+  <%= tab.index raw("首页"), @group %>
+  <%= tab.topics raw("话题"), group_group_topics_path(@group) %>
   <%= tab.media raw("文件"), group_group_media_path(@group) %>
   <%= tab.members raw("成员"), group_group_members_path(@group) %>
-
   <%- if @group_member.admin %>
-    <%= tab.admin raw("管理"), admin_group_path(@group) %>
-  <% end %>
-
-  <%- if @group_member %>
-    <%= link_to "添加话题", new_group_group_topic_path(@group), class: 'btn btn-info pull-right span' %>
-    <%= link_to "共享文件", new_group_group_medium_path(@group), class: 'btn btn-sucess pull-right span' %>
-  <% else %>
-    <%= link_to "申请加入", apply_group_path(@group), remote: true, class: 'btn btn-info pull-right' %>
+      <%= tab.admin raw("管理"), admin_group_group_settings_path(@group) %>
   <% end %>
 <% end %>

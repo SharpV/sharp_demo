@@ -2,7 +2,6 @@ class Me::CategoriesController < MeController
   
   respond_to :html, :json
   
-  include TheSortableTreeController::Rebuild
   set_tab :category, :post_nav
   
   def index

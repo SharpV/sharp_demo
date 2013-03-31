@@ -1,4 +1,4 @@
-class AudienceController < ApplicationController
+class MediaController < GroupController
   before_filter :read_activity
 
   respond_to :js

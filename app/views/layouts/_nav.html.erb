@@ -1,10 +1,10 @@
 <%= tabs_tag(:namespace => :site_nav, :open_tabs => {:id => "site_nav", :class => "nav" }, :builder => MenuTabBuilder) do |tab| %>
-  <%= tab.index '首页', root_path %>
-  <%= tab.index '分享', posts_path %>
+  <%= tab.index '我的空间', root_path %>
+  <%= tab.share '分享', posts_path %>
   <%= tab.question '问答', questions_path %>
   <%= tab.course '课程', courses_path %>
-  <%= tab.index '群组', groups_path %>
-  <%= tab.index '班级', groups_path %>
+  <%= tab.group '群组', groups_path %>
+  <%= tab.team '班级', groups_path %>
 <% end %>
 <form class="navbar-search pull-left">
   <input type="text" class="search-query" placeholder="Search">

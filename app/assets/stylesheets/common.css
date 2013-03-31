@@ -1,47 +1,48 @@
-.item .meta{
+.item .line{
     border-bottom: dashed 1px #ccc;
-    margin-top: 7px;
-    margin-bottom: 7px;
+    margin-top: 1px;
+    margin-bottom: 5px;
 }
-.item .avatar {
-    margin-top: 7px;
+
+.item .row{
+    margin-top: 5px;
+    margin-bottom: 5px;
+}
+
+.item ul li{
+    color: #666;
+    font-size: 12px;
+}
+
+.item .avatar, .avatar {
+    margin: 7px;
 }
 
 .item .title{
     word-wrap:break-word;
     word-break:break-all;
     overflow:hidden;
-}
-
-.item .title h4 {
     font-size: 15px;
     line-height: 22px;
     font-weight: bold;
     float: left;
     height: 25px;
-    margin: 0px;
-    padding: 0px;
-    width: 510px;
 }
 
-.page-header {
-    border-bottom: 1px solid #CCE4FC;
-    margin: 8px 0;
-    padding-bottom: 1px;
-}
-.page-header h4 {
-    float: left;
+div.field_with_errors .message {
+    background-color: #B94A48;
+    color: #ffe;
+    margin-top: 5px;
+    border-radius: 3px 3px 3px 3px;
+    padding: 3px;    
 }
 
-.profile h4, .page-header h4 {
-    font-size: 13px;
-    line-height: 18px;
-		color: #889;
+div.field_with_errors, div.ui-effects-wrapper {
+  display: inline;
+  float: left;
+  margin-left: 10px;
 }
-.page-header .more {
-    float: right;
-    margin-bottom: 0;
-}
+
 
 .navbar-inner {
     background-color: #fff;

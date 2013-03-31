@@ -1,10 +1,10 @@
 class Folder < ActiveRecord::Base
 
-  attr_accessible :name
+  attr_accessible :name, :folderable
 
   belongs_to :creator, class_name: 'User'
 
-  belongs_to :categoryable, :polymorphic => true
+  belongs_to :folderable, :polymorphic => true
   
   has_many :media
 

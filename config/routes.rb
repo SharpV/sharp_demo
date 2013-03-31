@@ -101,7 +101,18 @@ SharpLink::Application.routes.draw do
     resources :groups do
       resources :topics
       resources :media
-      resources :members
+      resources :members do
+        get :admin, on: :collection
+      end
+      resources :settings do
+        get :admin, on: :collection
+      end
+      resources :folders do
+        get :admin, on: :collection
+      end
+      resources :categories do
+        get :admin, on: :collection
+      end
     end
   end
 

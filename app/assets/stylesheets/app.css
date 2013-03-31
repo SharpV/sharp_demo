@@ -40,32 +40,6 @@ body{
     width: 490px;
 }
 
-.left {
-    width: 180px;
-    float: left;
-    min-height: 10px;
-}
-
-.right{
-    width: 760px;
-    float: left;
-    margin-left: 20px;
-    min-height: 10px;
-}
-
-#page-left{
-    width: 660px;
-    float: left;
-    min-height: 10px;
-}
-
-#page-right{
-    width: 280px;
-    float: left;
-    margin-left: 20px;
-    min-height: 10px;
-}
-
 .brand h2{
     color:#01BDBC;
 }
@@ -93,9 +67,8 @@ body{
     background-color: #FFFFFF;
     border-radius: 6px 6px 6px 6px;
     box-shadow: 0 1px 4px rgba(0, 0, 0, 0.067);
-    margin: 30px 0 0;
+    margin: 0px 0 0;
     padding: 0;
-    width: 166px;
 }
 
 .nav-list > .active > a, .nav-list > .active > a:hover {
@@ -142,35 +115,17 @@ ul.nav-tabs li a{
 
 ul{list-style: none;}
 
-.feature .tile {
-    background-color: transparent;
+textarea, input[type="text"], input[type="password"], input[type="datetime"], input[type="datetime-local"],
+ input[type="date"], input[type="month"], input[type="time"], input[type="week"], input[type="number"], 
+ input[type="email"], input[type="url"], input[type="search"], input[type="tel"], input[type="color"], 
+ .uneditable-input {
+    border: 1px solid #DCE4EC;
     border-radius: 6px 6px 6px 6px;
+    box-shadow: none;
+    color: #34495E;
     padding: 4px;
-    position: relative;
-    text-align: center;
-    height: 280px;
-}
-
-.feature .tile-image {
-    height: 100px;
-    width: 100px;
-    margin: 1px;
-    vertical-align: bottom;
-}
-
-.feature .tile-title {
-    font-size: 16px;
-    margin: 0;
-}
-
-.feature .span {
-    width: 210px;
-}
-
-.feature .tile p {
-    text-align: left;
     font-size: 13px;
-    margin-bottom: 33px;
+    text-indent: 1px;
 }
 
 [class*="span"] {

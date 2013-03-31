@@ -1,5 +1,5 @@
 class Category < ActiveRecord::Base
-  attr_accessible :name
+  attr_accessible :name, :categoryable
   
   validates :name, :presence => true
 

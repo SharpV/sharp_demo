@@ -19,6 +19,7 @@
 //= require rails-timeago
 //= require locales/jquery.timeago.zh-CN.js
 
+
 $(document).ready(function() {
   $('.images a').lazybox({closeImg: true});
 });

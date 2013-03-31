@@ -1,28 +1,20 @@
 class GroupsController < ApplicationController
-  set_tab :admin, :group_nav  
+  set_tab :index, :group_nav  
+  set_tab :group, :site_nav
+
   def index
     @user = current_user 
     @post = Post.new
   end
   
   def show
-    redirect_to group_group_topics_path params[:id]
-  end
-
-  
-  def admin
     @group = Group.find params[:id]
-    @group_member = @group.member current_user
-    render :layout => 'group'
-  end
-  
-  def update
-    @current_group = Group.find params[:id]
-    if @current_group.update_attributes params[:group]
-      redirect_to @current_group  
-    else  
-      render :controller => "group/settings", :action => :index
+    if current_user
+      @group_member = @group.member(current_user)
+    else
+      @group_member = nil
     end
+    render layout: 'group'
   end
 
   def create

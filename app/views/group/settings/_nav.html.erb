@@ -1,0 +1,6 @@
+<%= tabs_tag(:namespace => :setting_nav, :open_tabs => {:class => "nav nav-tabs"}, :builder => MenuTabBuilder) do |tab| %>
+  <%= tab.index "基本信息", group_group_settings_path(@group) %>
+  <%= tab.category '话题分类', admin_group_group_categories_path(@group) %>
+  <%= tab.folder '文件分类', admin_group_group_folders_path(@group) %>
+<% end %>
+
