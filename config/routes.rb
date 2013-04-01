@@ -99,7 +99,7 @@ SharpLink::Application.routes.draw do
 
   namespace :group  do
     resources :groups do
-      resources :topics
+      resources :posts
       resources :media
       resources :members do
         get :admin, on: :collection
@@ -108,9 +108,11 @@ SharpLink::Application.routes.draw do
         get :admin, on: :collection
       end
       resources :folders do
+        resources :media
         get :admin, on: :collection
       end
       resources :categories do
+        resources :topics
         get :admin, on: :collection
       end
     end

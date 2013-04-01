@@ -3,13 +3,11 @@
   <% @group.errors.full_messages.each do |msg| %>
       <p><%= msg %></p>
     <% end %>
-    <%# f.association :post_category, as: :select, collection: nested_set_options(PostCategory, nil) {|i| "#{' - ' * i.level} #{i.name}" }, label: '分类', prompt: '请选择' %>    
-
     <%= f.input :name, label: '名字', :validate => {:presence => true} %>
-    <%= f.input :logo, label: "图标" %>
+    <%= f.input :avatar, label: "图标" %>
     <%= f.input :published, label: '公开' %>
     <%= f.input :body, :label => '简介' %>
     <%= f.input :tag_list, label: '标签' %>
 
-    <%= f.button :wrapped, value: '创建', :cancel => me_posts_path %>
+    <%= f.button :wrapped, value: '创建', disable_with: "正在提交..." %>
 <% end %>

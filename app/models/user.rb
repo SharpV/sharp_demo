@@ -24,7 +24,7 @@ class User < ActiveRecord::Base
   has_many :bookmarks
   has_many :posts, as: :postable
   has_many :categories, as: :categoryable
-  has_many :media
+  has_many :media, as: :mediumable
   has_many :folders, as: :folderable
 
 

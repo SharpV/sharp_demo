@@ -1,11 +1,13 @@
-require 'pathname'
-require 'carrierwave/orm/activerecord'
+
 class Medium < ActiveRecord::Base
 
   include Rails.application.routes.url_helpers
   # attr_accessible :title, :body
-  belongs_to :user
   belongs_to :folder
+
+  belongs_to :creator, class_name: 'User'
+
+  belongs_to :mediumable, :polymorphic => true
 
   mount_uploader :file, FileUploader 
 

@@ -40,6 +40,14 @@ body{
     width: 490px;
 }
 
+.span3 {
+    width: 240px;
+}
+
+.span2 {
+    width: 160px;
+}
+
 .brand h2{
     color:#01BDBC;
 }
@@ -47,6 +55,12 @@ body{
     color: #777777;
     padding: 0px;
     text-shadow: null;
+    margin-left: 0px;
+}
+
+#header{
+    padding-left: 7px;
+    padding-right: 7px;
 }
 
 #page {
@@ -157,14 +171,18 @@ ul.inline > li, ol.inline > li {
     padding-top: 1px;
 }
 
-#app_download  td{
-    color:#333; 
-    text-align:left;
-    word-wrap:break-word;
-    word-break:break-all;
-    width: 202px;
-    padding: 10px;
-    vertical-align: top;
+.login-form {
+    background-color: #ECEFF1;
+    border-radius: 6px 6px 6px 6px;
+    padding-left: 10px;
+    position: relative;
+}
+
+.feature .span3{
+    margin-top: 10px;
+    height: 430px;
+    min-height: 430px;
+    overflow-y:hidden;
 }
 
 .footer{

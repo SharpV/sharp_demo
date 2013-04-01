@@ -9,7 +9,9 @@ class Post < ActiveRecord::Base
 
   before_validation :generate_slug
 
-  belongs_to :user
+  belongs_to :creator, class_name: 'User'
+
+  belongs_to :postable, :polymorphic => true
 
   belongs_to :category, foreign_key: :category_id
 

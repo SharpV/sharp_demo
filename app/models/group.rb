@@ -1,3 +1,5 @@
+ # encoding: utf-8
+
 class Group < ActiveRecord::Base
 
   mount_uploader :avatar, ImageUploader
@@ -7,14 +9,21 @@ class Group < ActiveRecord::Base
   has_many :users, through: :groups_members
   has_many :groups_members
   has_many :folders, as: :folderable  
-  has_many :group_topics
   has_many :categories, as: :categoryable
 
+  has_many :posts, as: :postable
+  has_many :media, as: :mediumable
+  
   belongs_to :creator,  :class_name => "User"
   
   before_validation :generate_slug
 
-  after_save :create_admin
+  after_create :create_admin, :create_default_category_and_folder
+
+  validates :name, :length => {
+    :minimum   => 1,
+    :maximum   => 30,
+  }
 
   def to_param
     slug ? "#{id}-#{slug.parameterize}" : id.to_s
@@ -25,6 +34,12 @@ class Group < ActiveRecord::Base
   end
 
   private
+
+  def create_default_category_and_folder
+    folder = self.folders.build name: '默认目录'
+    category = self.categories.build name: '默认分类'
+    folder.save and category.save
+  end
 
   def create_admin
     GroupsMember.create group: self, user: self.creator, admin: true, active: true

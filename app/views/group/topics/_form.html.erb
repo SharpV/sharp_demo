@@ -1,12 +1,10 @@
 <%= javascript_include_tag "js/tag-it.min" %>
 <%= simple_form_for [@group, @topic], :validate => true, :html => {:class => 'form-horizontal'} do |f| %>
 	<% @topic.errors.full_messages.each do |msg| %>
-      <p><%= msg %></p>
-    <% end %>
-    <%# f.input :category_id, as: :select, collection: nested_set_options(Category, nil) {|i| "#{' - ' * i.level} #{i.name}" }, label: '分类', prompt: '请选择' %>    
-
-  	<%= f.input :title, label: '标题', :validate => {:presence => true} %>
-  	<%= f.input :body, :as => :kindeditor, :label => false, :input_html => { :width => 500, :height => 300 }, :items => ['fontname', 'fontsize', '|', 'forecolor', 'hilitecolor', 'bold', 'italic', 'underline', 'removeformat', '|', 'justifyleft', 'justifycenter', 'justifyright', 'insertorderedlist', 'insertunorderedlist', '|', 'emoticons', 'image', 'link'] %>
-
+  <p><%= msg %></p>
+  <% end %>
+  <%= f.association :category, as: :select, collection: @group.categories, label: '分类', prompt: '请选择' %>    
+  <%= f.input :title, label: '标题', :validate => {:presence => true} %>
+  <%= f.input :body, as: :kindeditor, label: false, input_html: {simple_mode: true, width: 500, height: 300 } %>
     <%= f.button :wrapped, value: '创建' %>
 <% end %>

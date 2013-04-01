@@ -7,11 +7,11 @@ class Group::TopicsController < GroupController
   end
   
   def new
-    @topic = GroupTopic.new
+    @topic = GroupTopic.new category: Category.find(params[:category_id])
   end
 
   def create
-    @topic = @group.group_topics.build params[:group_topic]
+    @topic = @group.group_topics.build(params[:group_topic])
     @topic.user = current_user
     if @topic.save
       redirect_to [@group, @topic]
