@@ -1,6 +1,6 @@
 <%= tabs_tag(:namespace => :group_nav, :open_tabs => {:class => "nav nav-tabs nav-stacked"}, :builder => MenuTabBuilder) do |tab| %>
   <%= tab.index raw("首页"), @group %>
-  <%= tab.topics raw("话题"), group_group_topics_path(@group) %>
+  <%= tab.posts raw("话题"), group_group_posts_path(@group) %>
   <%= tab.media raw("文件"), group_group_media_path(@group) %>
   <%= tab.members raw("成员"), group_group_members_path(@group) %>
   <%- if @group_member.admin %>

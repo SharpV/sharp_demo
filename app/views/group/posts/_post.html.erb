@@ -1,24 +1,7 @@
-<article class="post group">
-	<header><h3><%= post.title %></h3></header>
-	<div class='body clearfix'>
-		<div class='avatar'>
-			<%= image_tag post.user.avatar_url(:s) %>
-		</div>
-		<div class="preview">
-			<%= post.body %>
-		</div>
-	</div>
-
-	<footer class="group actions">
-		<%= time_tag post.created_at, post.created_at.to_date.to_formatted_s(:long) %>
-		<div class="button-group minor-group">
-
-		</div>
-
-		<div class="btn-group">
-			<%# link_to "编辑", edit_group_post_path(@curent_group, post), :class => 'button icon edit' %>
-			<%= link_to "显示", [@current_group, post], :class => 'btn' %>
-		</div>
-
-	</footer>
-</article>
+<tr>
+  <td><%= link_to post.title, [:group, @group, post] %></td>
+  <td><%= post.creator.nickname if post.creator %></td>
+  <td><%= post.readings_count %></td>
+  <td><%= post.comments_count %></td>
+  <td><%= timeago_tag post.updated_at, lang: 'zh-CN' %></td>
+</tr>

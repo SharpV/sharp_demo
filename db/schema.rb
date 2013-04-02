@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130401133343) do
+ActiveRecord::Schema.define(:version => 20130402143712) do
 
   create_table "active_admin_comments", :force => true do |t|
     t.string   "resource_id",   :null => false
@@ -297,6 +297,7 @@ ActiveRecord::Schema.define(:version => 20130401133343) do
     t.string   "slug"
     t.integer  "category_id"
     t.boolean  "is_public",                       :default => false
+    t.integer  "creator_id",                                         :null => false
   end
 
   add_index "posts", ["category_id"], :name => "index_posts_on_category_id"

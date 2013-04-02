@@ -23,8 +23,8 @@ class User < ActiveRecord::Base
   has_many :courses, through: :courses_members
   has_many :bookmarks
   has_many :posts, as: :postable
-  has_many :categories, as: :categoryable
   has_many :media, as: :mediumable
+  has_many :categories, as: :categoryable
   has_many :folders, as: :folderable
 
 

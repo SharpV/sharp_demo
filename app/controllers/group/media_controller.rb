@@ -1,16 +1,9 @@
-class MediaController < GroupController
-  before_filter :read_activity
+class Group::MediaController < GroupController
+  
+  set_tab :media, :group_nav
 
-  respond_to :js
 
   def index
   end
 
-  private
-
-  def read_activity
-    @activity = Activity.find params[:activity_id]
-
-    authorize! :read, @activity
-  end
 end

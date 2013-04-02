@@ -112,7 +112,7 @@ SharpLink::Application.routes.draw do
         get :admin, on: :collection
       end
       resources :categories do
-        resources :topics
+        resources :posts
         get :admin, on: :collection
       end
     end

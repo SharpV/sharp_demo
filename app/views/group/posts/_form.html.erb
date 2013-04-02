@@ -1,17 +1,10 @@
-<script>
-$(document).ready(function() {
-	$('#input_post').elastic();
-});
-</script>
-<div class="post_form">
-  <%= simple_form_for [@current_group, @post], :html => {:id => "topic_form", :class => 'form-horizontal'} do |f| -%>	
-  	<%= render 'shared/error_messages', :object => f.object %>
-  	<%= f.input :title, :label => "标题" %>
-  	<%= f.input :body, :label => "内容", :input_html => { :width => 120, :height => 30, :id => "input_post" } %>
-  <div class="form-actions">
-    <%= f.submit "发布", :class=>'btn btn-primary'%>
-    &nbsp;
-    <button class="btn" type="reset">保存为草稿</button>
-  </div>
+<%= javascript_include_tag "js/tag-it.min" %>
+<%= simple_form_for @post, url: group_group_posts_path(@group), :validate => true, :html => {:class => 'form-horizontal'} do |f| %>
+  <% @post.errors.full_messages.each do |msg| %>
+  <p><%= msg %></p>
   <% end %>
-</div>
+  <%= f.association :category, as: :select, collection: @group.categories, label: '分类', prompt: '请选择' %>    
+  <%= f.input :title, label: '标题', :validate => {:presence => true} %>
+  <%= f.input :body, as: :kindeditor, label: false, input_html: {simple_mode: true, width: 500, height: 300 } %>
+    <%= f.button :wrapped, value: '创建' %>
+<% end %>
