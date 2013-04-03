@@ -3,7 +3,7 @@
   <ul class="dropdown-menu">
     <li><b>请您先选择分类</b></li>
     <%- @group.categories.each do |category| %>
-      <li><%= link_to category.name, new_group_group_category_topic_path(@group, category) %></li>
+      <li><%= link_to category.name, new_group_group_category_post_path(@group, category) %></li>
     <% end %>
   </ul>
   <button data-toggle="dropdown" class="span btn btn-success dropdown-toggle">添加文件 <span class="caret"></span></button>

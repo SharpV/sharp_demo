@@ -1,5 +1,5 @@
 class Group::FoldersController < GroupController
-  set_tab :folder, :group_nav, only: [:show]
+  set_tab :folders, :group_nav, only: [:index, :show]
 
   set_tab :folder, :setting_nav, only: [:admin]
 
@@ -8,7 +8,7 @@ class Group::FoldersController < GroupController
   respond_to :html, :json
 
   def index
-    @folders = @group.folders
+    @media = @group.media
   end
 
   def admin

@@ -1,21 +1,16 @@
 <%= render 'nav' %>
-<div class='span7'>
-  <h4>我参加的课程</h4>
-  <table class='table'>
-    <tr>
-      <th>课程</th>
-      <th>名称</th>
-      <th>参加人数</th>
-    </tr>
+<div class='row'>
+  <div class='span5'>
+    <h4>我参加的课程</h4>
     <%= render @courses %>
-  </table>
-</div>
-<div class='span2 pull-right'>
-  <h4>我创建的课程</h4>
-  <ul>
-    <%- current_user.own_courses.each do |course| %>
-      <li><%= link_to course.name, course %></li>
-    <% end %>
-  </ul>
+  </div>
+  <div class='span5 pull-right'>
+    <h4>我创建的课程</h4>
+    <ul>
+      <%- current_user.own_courses.each do |course| %>
+        <li><%= link_to course.name, course %></li>
+      <% end %>
+    </ul>
+  </div>
 </div>
 

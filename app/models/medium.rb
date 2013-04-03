@@ -1,6 +1,8 @@
 
 class Medium < ActiveRecord::Base
 
+  default_scope where("mediumable_id is not null and mediumable_type is not null and folder_id is not null")
+
   include Rails.application.routes.url_helpers
   # attr_accessible :title, :body
   belongs_to :folder
