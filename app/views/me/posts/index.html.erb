@@ -1,6 +1,9 @@
-
 <%= render 'me/posts/nav' %>
-
-<div class="post-list">
-  <%= render @posts %>
+<div class='row'>
+  <div class='span-l'>
+    <%= render @posts %>
+  </div>
+  <div class='span-r pull-right'>
+    <%= render 'categories' %>
+  </div>
 </div>

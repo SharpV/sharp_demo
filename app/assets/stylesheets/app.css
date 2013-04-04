@@ -40,14 +40,6 @@ body{
     width: 490px;
 }
 
-.span3 {
-    width: 240px;
-}
-
-.span2 {
-    width: 160px;
-}
-
 .brand h2{
     color:#01BDBC;
 }
@@ -73,16 +65,15 @@ body{
     padding: 7px;
 }
 
-.row {
-    margin-left: -15px;
+.feature .tile{
+    margin-top: 10px;
+    height: 400px;
+    min-height: 400px;
+    overflow-y:hidden;
 }
 
-#user_menus{
-    background-color: #FFFFFF;
-    border-radius: 6px 6px 6px 6px;
-    box-shadow: 0 1px 4px rgba(0, 0, 0, 0.067);
-    margin: 0px 0 0;
-    padding: 0;
+.feature p{
+    text-align: left;
 }
 
 .nav-list > .active > a, .nav-list > .active > a:hover {
@@ -142,12 +133,6 @@ textarea, input[type="text"], input[type="password"], input[type="datetime"], in
     text-indent: 1px;
 }
 
-[class*="span"] {
-    float: left;
-    margin-left: 15px;
-    min-height: 1px;
-}
-
 h3{
     color: #333;
     font-size: 18px;
@@ -172,18 +157,15 @@ ul.inline > li, ol.inline > li {
 }
 
 .login-form {
-    background-color: #ECEFF1;
+    background-color: #E3EAF2;
     border-radius: 6px 6px 6px 6px;
-    padding-left: 10px;
+    padding-left: 25px;
     position: relative;
 }
-
-.feature .span3{
-    margin-top: 10px;
-    height: 430px;
-    min-height: 430px;
-    overflow-y:hidden;
+.login-form:before {
+    border-color: transparent #E3EAF2 transparent transparent;
 }
+
 
 .footer{
     font-size:12px;

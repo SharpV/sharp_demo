@@ -56,6 +56,7 @@ SharpLink::Application.routes.draw do
         get :admin
         post :rebuild
       end
+      resources :posts
     end
   end
 
@@ -168,6 +169,10 @@ SharpLink::Application.routes.draw do
           get :admin
         end
       end   
+
+      resources :settings do
+        get :admin, on: :collection
+      end
 
       resources :course_discusses, as: :discusses, path: :discusses
 

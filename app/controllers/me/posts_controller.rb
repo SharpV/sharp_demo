@@ -3,6 +3,7 @@ class Me::PostsController < MeController
   set_tab :index, :post_nav
 	def index
 		@posts = current_user.posts
+    @categories = current_user.categories
 		respond_to do |format|
     		format.html  # index.html.erb
    	 		format.json  { render :json => @posts }

@@ -1,5 +1,5 @@
 <%= tabs_tag(:namespace => :course_admin_nav, :open_tabs => {:class => "nav nav-tabs nav-stacked"}, :builder => MenuTabBuilder) do |tab| %>
-  <%= tab.index "基本设置", admin_course_path(@course) %>
+  <%= tab.index "基本设置", course_course_settings_path(@course) %>
   <%= tab.categories "分类管理", admin_course_course_categories_path(@course) %>
   <%= tab.sections "章节管理", admin_course_course_sections_path(@course) %>
   <%= tab.slots "课时管理", admin_course_course_slots_path(@course) %>

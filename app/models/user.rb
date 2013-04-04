@@ -37,7 +37,8 @@ class User < ActiveRecord::Base
 
   validate :email_must_be_uniq
 
-  before_validation :generate_login
+  after_create :create_default_category_and_folder, :generate_login
+
 
   mount_uploader :avatar,  ImageUploader
 
@@ -45,22 +46,6 @@ class User < ActiveRecord::Base
     v.validates_presence_of     :password
     v.validates_confirmation_of :password
     v.validates_length_of       :password, within: Devise.password_length, :allow_blank => true
-  end
-
-  def folders
-    user_folders = Folder.where user_id: self.id
-    if user_folders.blank?
-      user_folders << Folder.create!(name: "默认目录", user_id: self.id)
-    end
-    user_folders
-  end
-
-  def post_categories
-    user_categories = PostCategory.where user_id: self.id
-    if user_categories.blank?
-      user_categories << PostCategory.create!(name: "默认目录", user_id: self.id)
-    end
-    user_categories
   end
 
   def can_admin_course? (course)
@@ -94,7 +79,7 @@ class User < ActiveRecord::Base
   end
 
   def generate_login
-    self.login = Digest::SHA1.hexdigest("#{email}#{Time.now}") unless self.login
+    self.update_attributes login: Digest::SHA1.hexdigest("#{id}#{Time.now}") 
   end
 
   protected
@@ -105,6 +90,12 @@ class User < ActiveRecord::Base
   end
 
   private
+
+  def create_default_category_and_folder
+    folder = self.folders.build name: '默认目录'
+    category = self.categories.build name: '默认分类'
+    folder.save and category.save
+  end
 
   def email_must_be_uniq
     user = User.find_by_email(email)

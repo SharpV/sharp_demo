@@ -1,5 +1,12 @@
-<tr>
-  <td><%= link_to course.name, course %></td>
-  <td><%= link_to course.name, edit_me_course_path(course) %></td>
-  <td><%= link_to '删除', course, method: :delete, data: { confirm: 'Are you sure?' } %></td>
-</tr>
+<table>
+  <tr>
+    <td><%= link_to image_tag(avatar_url(course)), course %></td>
+    <td>
+      <p> <%= link_to course.name, course, class: 'span' %> </p>
+      <p>
+        <%= link_to '编辑', edit_me_course_path(course), class: 'span' %>
+        <%= link_to '删除', course, method: :delete, data: { confirm: 'Are you sure?' }, class: 'span' %>
+      </p>
+    </td>
+  </tr>
+</table>

@@ -6,11 +6,7 @@
   </div>
   <div class='span5 pull-right'>
     <h4>我创建的课程</h4>
-    <ul>
-      <%- current_user.own_courses.each do |course| %>
-        <li><%= link_to course.name, course %></li>
-      <% end %>
-    </ul>
+    <%= render partial: 'course', collection: current_user.own_courses %>
   </div>
 </div>
 
