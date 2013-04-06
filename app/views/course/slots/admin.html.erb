@@ -1,7 +1,9 @@
+<h3>课时管理</h3>
+
 <%= javascript_include_tag "jquery-fileupload" %>
 
 <div class='content'>
-  <%= form_for [:me, @folder, @folder, @medium], :html => { :multipart => true, :id => "fileupload"  } do |f| %>
+  <%= form_for [:course, @course, @slot, Medium.new], :html => { :multipart => true, :id => "fileupload"  } do |f| %>
     <!-- The fileupload-buttonbar contains buttons to add/delete files and start/cancel the upload -->
     <div class="row fileupload-buttonbar">
       <div class="span7">
@@ -43,3 +45,6 @@
 <div class='content'>
   <%= render 'shared/file_upload' %>
 </div>
+<%= content_for :left do %>
+  <%= render 'course/settings/nav' %>
+<% end %>

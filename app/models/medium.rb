@@ -29,11 +29,10 @@ class Medium < ActiveRecord::Base
 
   def thumbnail_url(mode='s')
     if content_type.include? 'image'
-      #file_url(mode)
+      file_url(mode)
     elsif content_type.include? 'pdf'
       #'/assets/media/pdf.gif'
     end
-    file_url
   end
 
 

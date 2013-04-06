@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130402143712) do
+ActiveRecord::Schema.define(:version => 20130405092735) do
 
   create_table "active_admin_comments", :force => true do |t|
     t.string   "resource_id",   :null => false
@@ -388,6 +388,10 @@ ActiveRecord::Schema.define(:version => 20130402143712) do
     t.string  "title",                    :null => false
     t.integer "course_id",                :null => false
     t.integer "position",  :default => 0
+    t.integer "parent_id"
+    t.integer "lft"
+    t.integer "rgt"
+    t.integer "depth"
   end
 
   add_index "sections", ["course_id"], :name => "index_sections_on_course_id"

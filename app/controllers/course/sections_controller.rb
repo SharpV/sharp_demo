@@ -18,6 +18,7 @@ class Course::SectionsController < CourseController
 
   def admin
     @section = Section.new
+    @sections = @course.sections
   end
 
   def create

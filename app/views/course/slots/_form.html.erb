@@ -1,0 +1,4 @@
+<%= simple_form_for [:course, @course, @section, @slot], validate: true do |f| %>
+  <%= f.input :title, placeholder: '1-30个字符', label: '课时名称' %>
+  <%= f.submit '创建课时', disable_with: "正在提交..." %>
+<% end %>

@@ -1,0 +1,6 @@
+
+    <%= tabs_tag(:namespace => :section_nav, :open_tabs => {:class => "nav nav-tabs nav-stacked"}, :builder =>     MenuTabBuilder) do |tab| %>
+      <%- @sections.each do |section| %>
+        <%= tab.try "section_#{section.id}", section.title, admin_course_course_section_slots_path(@course, section) %>
+      <% end %>
+    <% end %>

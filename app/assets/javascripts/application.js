@@ -18,7 +18,8 @@
 //= require flat-ui
 //= require rails-timeago
 //= require locales/jquery.timeago.zh-CN.js
-
+//= require scrollTo-min
+//= require jquery.remotipart
 
 $(document).ready(function() {
   $('.images a').lazybox({closeImg: true});

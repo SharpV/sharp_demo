@@ -6,12 +6,12 @@
  *= require bootstrap_and_overrides
  *= require jquery.fileupload-ui
  *= require lazybox
- *= require tree
  *= require flat-ui
+ *= require tree
+ *= require sortable_tree
  *= require sortable_tree
  *= require nested_options
  *= require form
- *= require bootstrap_form
  *= require common
  *= require app
  *= require posts

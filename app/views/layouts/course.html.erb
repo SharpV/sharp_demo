@@ -8,8 +8,7 @@
     <div id="page" class="container">
       <div class="row">
         <div class='span-l'>
-          <div class='avatar'><%= link_to image_tag(avatar_url(@course, 'b')), @course %></div>
-          <h4><%= @course.name %></h4>
+          <%= yield :left %>
         </div>
 
         <div class='span-r'>

@@ -145,11 +145,11 @@ SharpLink::Application.routes.draw do
   resources :answers
 
   namespace :course do
-    resources :slots do
-      resources :course_discusses
-    end
 
     resources :courses do
+
+      resources :posts
+
       resources :courses_members, as: :members, path: :members do
         collection do 
           get :admin
@@ -160,7 +160,9 @@ SharpLink::Application.routes.draw do
         collection do 
           get :admin
         end
-        resources :slots
+        resources :slots do
+          get :admin, on: :member
+        end
       end
 
       resources :course_categories, as: :categories, path: :categories do
@@ -177,6 +179,8 @@ SharpLink::Application.routes.draw do
       resources :course_discusses, as: :discusses, path: :discusses
 
       resources :slots do
+        resources :posts
+        resources :media
         collection do 
           get :admin
         end  
