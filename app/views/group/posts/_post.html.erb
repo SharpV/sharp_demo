@@ -1,5 +1,5 @@
 <tr>
-  <td><%= link_to post.title, [:group, @group, post] %></td>
+  <td><%= link_to post.title, [:group, @current_group, post] %></td>
   <td><%= post.creator.nickname if post.creator %></td>
   <td><%= post.readings_count %></td>
   <td><%= post.comments_count %></td>

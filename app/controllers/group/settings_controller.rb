@@ -8,7 +8,6 @@ class Group::SettingsController < GroupController
   end
 
   def update
-    @current_group = Group.find params[:id]
     if @current_group.update_attributes params[:group]
       redirect_to @current_group  
     else  

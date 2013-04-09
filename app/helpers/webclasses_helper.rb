@@ -1,0 +1,2 @@
+module WebclassesHelper
+end

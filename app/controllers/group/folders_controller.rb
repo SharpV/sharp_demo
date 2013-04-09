@@ -8,16 +8,16 @@ class Group::FoldersController < GroupController
   respond_to :html, :json
 
   def index
-    @media = @group.media
+    @media = @current_group.media
   end
 
   def admin
-    @folders = @group.folders
-    @folder = Folder.new folderable: @group
+    @folders = @current_group.folders
+    @folder = Folder.new folderable: @current_group
   end
 
   def create
-    @folder = @group.folders.build params[:folder]
+    @folder = @current_group.folders.build params[:folder]
     if @folder.save
       respond_with do |format|
         format.js

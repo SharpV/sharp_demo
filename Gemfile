@@ -33,7 +33,7 @@ gem "jquery-scrollto-rails"
 gem 'jack_up'
 gem 'underscore-rails'
 gem 'rack-raw-upload'
-gem 'remotipart', '~> 1.0.5'
+gem 'streamio-ffmpeg'
 gem 'redis-objects'
 gem 'simple_form_fancy_uploads'
 gem "jquery-fileupload-rails", ' 0.4.0'# :git => 'git@github.com:tors/jquery-fileupload-rails.git'
@@ -70,7 +70,7 @@ gem 'redis_voteable'
 gem "bcrypt-ruby", :require => "bcrypt"
 gem "friendly_id"
 gem 'react_reporter', :git => "git://github.com/reactualize/react_reporter.git"
-gem 'carrierwave-video-thumbnailer'
+gem 'sidekiq'
 gem 'acts_as_commentable'
 gem 'linkser'
 gem 'binding_of_caller'

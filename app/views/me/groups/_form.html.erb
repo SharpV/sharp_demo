@@ -9,5 +9,5 @@
     <%= f.input :body, :label => '简介' %>
     <%= f.input :tag_list, label: '标签' %>
 
-    <%= f.button :wrapped, value: '创建', disable_with: "正在提交..." %>
+    <%= f.submit '创建', disable_with: "正在提交...", class: 'btn' %>
 <% end %>

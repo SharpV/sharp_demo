@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130405092735) do
+ActiveRecord::Schema.define(:version => 20130409115426) do
 
   create_table "active_admin_comments", :force => true do |t|
     t.string   "resource_id",   :null => false
@@ -118,29 +118,6 @@ ActiveRecord::Schema.define(:version => 20130405092735) do
   add_index "connections", ["uid"], :name => "index_connections_on_uid"
   add_index "connections", ["user_id"], :name => "index_connections_on_user_id"
 
-  create_table "course_discusses", :force => true do |t|
-    t.integer  "user_id",                               :null => false
-    t.integer  "course_id",                             :null => false
-    t.integer  "slot_id"
-    t.integer  "course_category_id"
-    t.string   "title"
-    t.text     "body"
-    t.integer  "readings_count",     :default => 0
-    t.integer  "comments_count",     :default => 0
-    t.datetime "created_at"
-    t.datetime "updated_at"
-    t.integer  "parent_id"
-    t.integer  "lft"
-    t.integer  "rgt"
-    t.integer  "depth"
-    t.boolean  "delete",             :default => false
-  end
-
-  add_index "course_discusses", ["course_category_id"], :name => "index_course_discusses_on_course_category_id"
-  add_index "course_discusses", ["course_id"], :name => "index_course_discusses_on_course_id"
-  add_index "course_discusses", ["slot_id"], :name => "index_course_discusses_on_slot_id"
-  add_index "course_discusses", ["user_id"], :name => "index_course_discusses_on_user_id"
-
   create_table "courses", :force => true do |t|
     t.integer  "creator_id",                               :null => false
     t.integer  "cousers_members_count", :default => 0
@@ -229,7 +206,7 @@ ActiveRecord::Schema.define(:version => 20130405092735) do
     t.datetime "updated_at"
     t.string   "name"
     t.text     "body"
-    t.integer  "groups_members_count",  :default => 0
+    t.integer  "members_count",         :default => 0
     t.string   "avatar"
     t.boolean  "published",             :default => true
     t.string   "slug"
@@ -277,6 +254,17 @@ ActiveRecord::Schema.define(:version => 20130405092735) do
   add_index "media", ["creator_id"], :name => "index_medias_on_user_id"
   add_index "media", ["folder_id"], :name => "index_medias_on_folder_id"
   add_index "media", ["mediumable_type", "mediumable_id"], :name => "index_media_on_mediumable_type_and_mediumable_id"
+
+  create_table "members", :force => true do |t|
+    t.boolean  "admin",           :default => false
+    t.boolean  "active",          :default => false
+    t.integer  "user_id",                            :null => false
+    t.integer  "memberable_id",                      :null => false
+    t.string   "memberable_type",                    :null => false
+    t.string   "note"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
 
   create_table "posts", :force => true do |t|
     t.text     "body"
@@ -396,6 +384,19 @@ ActiveRecord::Schema.define(:version => 20130405092735) do
 
   add_index "sections", ["course_id"], :name => "index_sections_on_course_id"
 
+  create_table "shares", :force => true do |t|
+    t.integer  "creator_id"
+    t.boolean  "is_public",         :default => false
+    t.string   "shareable_type",                       :null => false
+    t.integer  "shareable_id",                         :null => false
+    t.integer  "readings_count",    :default => 0
+    t.integer  "comments_count",    :default => 0
+    t.integer  "likes_count",       :default => 0
+    t.integer  "collections_count", :default => 0
+    t.datetime "created_at",                           :null => false
+    t.datetime "updated_at",                           :null => false
+  end
+
   create_table "slots", :force => true do |t|
     t.integer  "creator_id"
     t.integer  "section_id"
@@ -481,5 +482,23 @@ ActiveRecord::Schema.define(:version => 20130405092735) do
   add_index "votings", ["voteable_type", "voteable_id", "voter_type", "voter_id"], :name => "unique_voters", :unique => true
   add_index "votings", ["voteable_type", "voteable_id"], :name => "index_votings_on_voteable_type_and_voteable_id"
   add_index "votings", ["voter_type", "voter_id"], :name => "index_votings_on_voter_type_and_voter_id"
+
+  create_table "webclasses", :force => true do |t|
+    t.integer  "creator_id",                           :null => false
+    t.integer  "members_count",     :default => 0
+    t.string   "avatar"
+    t.datetime "created_at",                           :null => false
+    t.datetime "updated_at",                           :null => false
+    t.string   "slug"
+    t.string   "name",                                 :null => false
+    t.text     "body"
+    t.boolean  "published",         :default => false
+    t.integer  "readings_count",    :default => 0
+    t.integer  "comments_count",    :default => 0
+    t.integer  "likes_count",       :default => 0
+    t.integer  "collections_count", :default => 0
+    t.integer  "sections_count",    :default => 0
+    t.integer  "adviser_id"
+  end
 
 end

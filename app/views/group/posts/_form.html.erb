@@ -1,10 +1,10 @@
 <%= javascript_include_tag "js/tag-it.min" %>
-<%= simple_form_for @post, url: group_group_posts_path(@group), :validate => true, :html => {:class => 'form-horizontal'} do |f| %>
+<%= simple_form_for @post, url: group_group_posts_path(@current_group), :validate => true, :html => {:class => 'form-horizontal'} do |f| %>
   <% @post.errors.full_messages.each do |msg| %>
   <p><%= msg %></p>
   <% end %>
-  <%= f.association :category, as: :select, collection: @group.categories, label: '分类', prompt: '请选择' %>    
+  <%= f.association :category, as: :select, collection: @current_group.categories, label: '分类', prompt: '请选择' %>    
   <%= f.input :title, label: '标题', :validate => {:presence => true} %>
   <%= f.input :body, as: :kindeditor, label: false, input_html: {simple_mode: true, width: 500, height: 300 } %>
-    <%= f.button :wrapped, value: '创建' %>
+    <%= f.submit value: '创建', class: 'btn' %>
 <% end %>

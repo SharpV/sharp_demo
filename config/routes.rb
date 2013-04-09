@@ -36,7 +36,7 @@ SharpLink::Application.routes.draw do
         get :admin
       end
     end
-    resources :school_classes
+    resources :webclasses
     resources :questions
     resources :answers
     resources :passwords
@@ -144,6 +144,51 @@ SharpLink::Application.routes.draw do
   end
   resources :answers
 
+  namespace :webclass do
+
+    resources :webclasses do
+
+      resources :posts
+
+      resources :members do
+        collection do 
+          get :admin
+        end
+      end
+
+      resources :folders do
+        collection do 
+          get :admin
+        end
+        resources :slots do
+          get :admin, on: :member
+        end
+      end
+
+      resources :categories do
+        resources :posts
+        collection do 
+          get :admin
+        end
+      end   
+
+      resources :settings do
+        get :admin, on: :collection
+      end
+
+      resources :posts
+
+      resources :media
+
+
+      member do 
+        get :admin
+        get :apply
+      end
+    end
+  end
+
+
   namespace :course do
 
     resources :courses do
@@ -165,8 +210,8 @@ SharpLink::Application.routes.draw do
         end
       end
 
-      resources :course_categories, as: :categories, path: :categories do
-        resources :course_discusses, as: :discusses, path: :discusses
+      resources :categories do
+        resources :posts, as: :discusses, path: :discusses
         collection do 
           get :admin
         end
@@ -175,8 +220,6 @@ SharpLink::Application.routes.draw do
       resources :settings do
         get :admin, on: :collection
       end
-
-      resources :course_discusses, as: :discusses, path: :discusses
 
       resources :slots do
         resources :posts
@@ -193,7 +236,10 @@ SharpLink::Application.routes.draw do
     end
   end
 
-  resources :profiles
+  resources :users
+  resources :webclasses
+
+  resources :shares
   
   root :to => 'home#index'
 end

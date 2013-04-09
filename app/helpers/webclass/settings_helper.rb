@@ -1,0 +1,2 @@
+module Webclass::SettingsHelper
+end

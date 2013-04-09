@@ -19,14 +19,16 @@ class User < ActiveRecord::Base
   has_many :courses_members, dependent: :destroy
   has_many :questions
   has_many :answers
-  has_many :groups, through: :groups_members
+  has_many :members
+  has_many :groups, through: :members, source: :memberable, source_type: 'Group'
+  has_many :webclasses, through: :members, source: :memberable, source_type: 'Webclass'
+
   has_many :courses, through: :courses_members
   has_many :bookmarks
   has_many :posts, as: :postable
   has_many :media, as: :mediumable
   has_many :categories, as: :categoryable
   has_many :folders, as: :folderable
-
 
   # Setup accessible (or protected) attributes for your model
   attr_accessible :name, :email, :password, :password_confirmation, :login, :remember_me, :avatar, :nickname
@@ -48,12 +50,11 @@ class User < ActiveRecord::Base
     v.validates_length_of       :password, within: Devise.password_length, :allow_blank => true
   end
 
-  def can_admin_course? (course)
-    course.creator_id == self.id || CoursesMember.where(course_id: course.id, user_id: self.id, admin: true).first
-  end
-
-  def can_admin_group? (group)
-    group.creator_id == self.id || GroupsMember.where(group_id: group.id, user_id: self.id, admin: true).first
+  def is_admin_member? (memberable)
+    member = member(memberable) 
+    if member
+      webclass.creator_id == self.id || memberable.admin
+    end
   end
 
   def own_courses
@@ -62,6 +63,10 @@ class User < ActiveRecord::Base
 
   def own_groups
     Group.where creator_id: self.id
+  end
+
+  def member(memberable)
+    Member.where(memberable_type: memberable.class.name, memberable_id: memberable.id, user_id: id).first
   end
   
   def flow

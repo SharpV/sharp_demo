@@ -8,12 +8,8 @@ class GroupsController < ApplicationController
   end
   
   def show
-    @group = Group.find params[:id]
-    if current_user
-      @group_member = @group.member(current_user)
-    else
-      @group_member = nil
-    end
+    @current_group = Group.find params[:id]
+    current_group_member = current_user.member(@current_group)
     render layout: 'group'
   end
 

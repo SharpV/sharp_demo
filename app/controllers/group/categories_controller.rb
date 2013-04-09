@@ -7,8 +7,8 @@ class Group::CategoriesController < GroupController
   respond_to :html, :json
 
   def admin
-    @categories = @group.categories
-    @category = Category.new categoryable: @group
+    @categories = @current_group.categories
+    @category = Category.new categoryable: @current_group
   end
 
   def show
@@ -20,7 +20,7 @@ class Group::CategoriesController < GroupController
   end
 
   def create
-    @category = @group.categories.build(params[:category])
+    @category = @current_group.categories.build(params[:category])
     @category.creator = current_user
     if @category.save
       respond_with do |format|

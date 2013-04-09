@@ -6,8 +6,8 @@ class Group < ActiveRecord::Base
   acts_as_taggable_on :tags
 
   belongs_to :admin, foreign_key: "creator_id", class_name: 'User'
-  has_many :users, through: :groups_members
-  has_many :groups_members
+  has_many :members, as: :memberable
+  has_many :users, through: :members
   has_many :folders, as: :folderable  
   has_many :categories, as: :categoryable
 
@@ -29,10 +29,6 @@ class Group < ActiveRecord::Base
     slug ? "#{id}-#{slug.parameterize}" : id.to_s
   end
 
-  def member(user)
-    GroupsMember.where(user_id: user.id, group_id: self.id).first
-  end
-
   private
 
   def create_default_category_and_folder
@@ -42,7 +38,7 @@ class Group < ActiveRecord::Base
   end
 
   def create_admin
-    GroupsMember.create group: self, user: self.creator, admin: true, active: true
+    Member.create memberable: self, user: self.creator, admin: true, active: true
   end
   
   def generate_slug

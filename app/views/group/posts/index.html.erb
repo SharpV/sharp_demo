@@ -1,12 +1,3 @@
-<div class="btn-group pull-right">
-  <button data-toggle="dropdown" class="span btn btn-info dropdown-toggle">添加话题 <span class="caret"></span></button>
-  <ul class="dropdown-menu">
-    <li><b>请您先选择分类</b></li>
-    <%- @group.categories.each do |category| %>
-      <li><%= link_to category.name, new_group_group_category_post_path(@group, category) %></li>
-    <% end %>
-  </ul>
-</div>
 <table class='table content'>
   <thead>
     <tr>
