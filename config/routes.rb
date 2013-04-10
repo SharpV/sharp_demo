@@ -150,19 +150,25 @@ SharpLink::Application.routes.draw do
 
       resources :posts
 
+      resources :lessons
+
       resources :members do
         collection do 
           get :admin
         end
       end
 
+      resources :courses
+
+      resources :slots do
+        get :admin, on: :member
+      end
+
       resources :folders do
         collection do 
           get :admin
         end
-        resources :slots do
-          get :admin, on: :member
-        end
+        
       end
 
       resources :categories do
@@ -180,54 +186,6 @@ SharpLink::Application.routes.draw do
 
       resources :media
 
-
-      member do 
-        get :admin
-        get :apply
-      end
-    end
-  end
-
-
-  namespace :course do
-
-    resources :courses do
-
-      resources :posts
-
-      resources :courses_members, as: :members, path: :members do
-        collection do 
-          get :admin
-        end
-      end
-
-      resources :sections do
-        collection do 
-          get :admin
-        end
-        resources :slots do
-          get :admin, on: :member
-        end
-      end
-
-      resources :categories do
-        resources :posts, as: :discusses, path: :discusses
-        collection do 
-          get :admin
-        end
-      end   
-
-      resources :settings do
-        get :admin, on: :collection
-      end
-
-      resources :slots do
-        resources :posts
-        resources :media
-        collection do 
-          get :admin
-        end  
-      end
 
       member do 
         get :admin

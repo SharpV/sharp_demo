@@ -1,7 +1,7 @@
 #source 'http://ruby.taobao.org/'  
 source 'http://rubygems.org'
 
-gem 'rails', '3.2.12'
+gem 'rails', '3.2.13'
 gem "therubyracer", "0.10.2", :require => 'v8'
 gem 'mobile-fu'
 gem 'hz2py'
@@ -91,11 +91,10 @@ group :development do
  	#gem "better_errors"
 end
 group :assets do
-  gem 'flatui-rails'
   gem "jquery-rails"
   gem 'less-rails'
   gem 'twitter-bootstrap-rails', :git => 'git://github.com/seyhunak/twitter-bootstrap-rails.git'  
-  gem 'font-awesome-rails', :git => "git://github.com/bokmann/font-awesome-rails.git"
+  gem 'font-awesome-rails', '3.0.2'
   gem 'sprockets'
   gem 'coffee-rails'
   gem 'haml-rails'

@@ -1,8 +1,12 @@
 <%= tabs_tag(:namespace => :webclass_nav, :open_tabs => {:class => "nav nav-tabs"}, :builder => MenuTabBuilder) do |tab| %>
   <%= tab.index "主页", @current_webclass %>
   <%= tab.discusses "话题", webclass_webclass_posts_path(@current_webclass) %>
-  <%= tab.folders "课件", webclass_webclass_sections_path(@current_webclass) %>
-  <%= tab.members "成员", webclass_webclass_members_path(@current_webclass) %>
+  <%= tab.folders "相册", webclass_webclass_courses_path(@current_webclass) %>
+
+  <%= tab.folders "课件", webclass_webclass_folders_path(@current_webclass) %>
+  <%= tab.slots "课程表", webclass_webclass_slots_path(@current_webclass) %>
+
+  <%= tab.members "家校联系", webclass_webclass_members_path(@current_webclass) %>
   <%- if @current_webclass_member and @current_webclass_member.admin %>
     <%= tab.admin "管理", admin_webclass_webclass_settings_path(@current_webclass) %>
   <% end %>

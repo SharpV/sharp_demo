@@ -5,8 +5,8 @@
  *= require_self
  *= require bootstrap_and_overrides
  *= require jquery.fileupload-ui
+ *= require font-awesome
  *= require lazybox
- *= require flat-ui
  *= require tree
  *= require sortable_tree
  *= require sortable_tree

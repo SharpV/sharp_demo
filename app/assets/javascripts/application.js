@@ -15,7 +15,6 @@
 //= require jquery.ui.nestedSortable
 //= require sortable_tree/initializer
 //= bootstrap-dropdown
-//= require flat-ui
 //= require rails-timeago
 //= require locales/jquery.timeago.zh-CN.js
 //= require scrollTo-min
