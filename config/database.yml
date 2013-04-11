@@ -1,7 +1,7 @@
 development:
   adapter: postgresql
   encoding: utf8
-  database: sharp_engine_development
+  database: sharp_k12_development
   pool: 5
   host: 127.0.0.1
   username: postgres
@@ -20,7 +20,7 @@ test:
 production:
   adapter: postgresql
   encoding: utf8
-  database: sharp_engine
+  database: sharp_k12
   pool: 5
   host: 127.0.0.1
   username: postgres

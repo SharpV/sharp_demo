@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130409115426) do
+ActiveRecord::Schema.define(:version => 20130411115021) do
 
   create_table "active_admin_comments", :force => true do |t|
     t.string   "resource_id",   :null => false
@@ -77,6 +77,23 @@ ActiveRecord::Schema.define(:version => 20130409115426) do
 
   add_index "assets", ["assetable_id"], :name => "index_assets_on_assetable_id"
   add_index "assets", ["assetable_type"], :name => "index_assets_on_assetable_type"
+
+  create_table "assignments", :force => true do |t|
+    t.boolean  "admin",       :default => false
+    t.boolean  "active",      :default => false
+    t.integer  "creator_id",                     :null => false
+    t.integer  "webclass_id",                    :null => false
+    t.string   "title"
+    t.datetime "created_at"
+    t.datetime "submit_at"
+    t.text     "body"
+  end
+
+  add_index "assignments", ["active"], :name => "index_groups_members_on_active"
+  add_index "assignments", ["creator_id", "webclass_id"], :name => "index_groups_members_on_user_id_and_group_id"
+  add_index "assignments", ["creator_id"], :name => "index_groups_members_on_user_id"
+  add_index "assignments", ["webclass_id"], :name => "index_assignments_on_webclass_id"
+  add_index "assignments", ["webclass_id"], :name => "index_groups_members_on_group_id"
 
   create_table "bookmarks", :force => true do |t|
     t.text     "body"
@@ -217,20 +234,16 @@ ActiveRecord::Schema.define(:version => 20130409115426) do
 
   add_index "groups", ["creator_id"], :name => "index_groups_on_creator_id"
 
-  create_table "groups_members", :force => true do |t|
-    t.boolean  "admin",      :default => false
-    t.boolean  "active",     :default => false
-    t.integer  "user_id",                       :null => false
-    t.integer  "group_id",                      :null => false
-    t.string   "note"
+  create_table "lessons", :force => true do |t|
+    t.integer  "slot_id",     :null => false
+    t.integer  "course_id",   :null => false
+    t.string   "webclass_id", :null => false
+    t.datetime "start_at"
     t.datetime "created_at"
-    t.datetime "updated_at"
   end
 
-  add_index "groups_members", ["active"], :name => "index_groups_members_on_active"
-  add_index "groups_members", ["group_id"], :name => "index_groups_members_on_group_id"
-  add_index "groups_members", ["user_id", "group_id"], :name => "index_groups_members_on_user_id_and_group_id"
-  add_index "groups_members", ["user_id"], :name => "index_groups_members_on_user_id"
+  add_index "lessons", ["slot_id"], :name => "index_lessons_on_slot_id"
+  add_index "lessons", ["webclass_id"], :name => "index_lessons_on_webclass_id"
 
   create_table "media", :force => true do |t|
     t.integer  "creator_id"
@@ -344,21 +357,6 @@ ActiveRecord::Schema.define(:version => 20130409115426) do
 
   add_index "questions", ["user_id"], :name => "index_asks_on_user_id"
 
-  create_table "school_classes", :force => true do |t|
-    t.integer  "school_grade_id"
-    t.string   "name"
-    t.integer  "lft"
-    t.integer  "rgt"
-    t.integer  "school_id"
-    t.integer  "creator_id"
-    t.datetime "created_at",      :null => false
-    t.datetime "updated_at",      :null => false
-  end
-
-  add_index "school_classes", ["creator_id"], :name => "index_school_classes_on_creator_id"
-  add_index "school_classes", ["school_grade_id"], :name => "index_school_classes_on_school_grade_id"
-  add_index "school_classes", ["school_id"], :name => "index_school_classes_on_school_id"
-
   create_table "school_grades", :force => true do |t|
     t.integer "parent_id"
     t.string  "name"
@@ -398,22 +396,20 @@ ActiveRecord::Schema.define(:version => 20130409115426) do
   end
 
   create_table "slots", :force => true do |t|
-    t.integer  "creator_id"
-    t.integer  "section_id"
-    t.integer  "course_id"
+    t.integer  "term_id",                    :null => false
+    t.integer  "week",                       :null => false
+    t.string   "timeslot"
     t.string   "title"
-    t.string   "file"
-    t.string   "kind"
-    t.float    "timeslot"
-    t.text     "description"
+    t.string   "webclass_id",                :null => false
     t.datetime "created_at"
-    t.datetime "updated_at"
-    t.integer  "position"
+    t.datetime "start_at"
+    t.integer  "seq",         :default => 0
+    t.integer  "creator_id",                 :null => false
   end
 
-  add_index "slots", ["course_id"], :name => "index_slots_on_course_id"
-  add_index "slots", ["creator_id"], :name => "index_slots_on_creator_id"
-  add_index "slots", ["section_id"], :name => "index_slots_on_section_id"
+  add_index "slots", ["term_id"], :name => "index_slots_on_term_id"
+  add_index "slots", ["webclass_id"], :name => "index_slots_on_webclass_id"
+  add_index "slots", ["week"], :name => "index_slots_on_week"
 
   create_table "taggings", :force => true do |t|
     t.integer  "tag_id"
@@ -431,6 +427,17 @@ ActiveRecord::Schema.define(:version => 20130409115426) do
   create_table "tags", :force => true do |t|
     t.string "name"
   end
+
+  create_table "terms", :force => true do |t|
+    t.integer  "year",                     :null => false
+    t.integer  "part",        :limit => 2, :null => false
+    t.string   "webclass_id",              :null => false
+    t.datetime "created_at"
+    t.integer  "creator_id",               :null => false
+  end
+
+  add_index "terms", ["webclass_id"], :name => "index_terms_on_webclass_id"
+  add_index "terms", ["year", "part"], :name => "index_terms_on_year_and_part"
 
   create_table "users", :force => true do |t|
     t.string   "encrypted_password",     :limit => 128, :default => "",          :null => false
@@ -499,6 +506,7 @@ ActiveRecord::Schema.define(:version => 20130409115426) do
     t.integer  "collections_count", :default => 0
     t.integer  "sections_count",    :default => 0
     t.integer  "adviser_id"
+    t.integer  "year",              :default => 2013
   end
 
 end

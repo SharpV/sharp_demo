@@ -1,0 +1,2 @@
+module Webclass::AssignmentsHelper
+end

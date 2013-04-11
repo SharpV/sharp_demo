@@ -33,30 +33,82 @@ class Install < ActiveRecord::Migration
   add_index "admin_users", ["email"], :name => "index_admin_users_on_email", :unique => true
   add_index "admin_users", ["reset_password_token"], :name => "index_admin_users_on_reset_password_token", :unique => true
 
-  create_table :assets do |t|
-      t.references :assetable, :polymorphic => true
-      t.string :file_name
-      t.integer :file_size
-      t.string :file_type
-      t.string :file
-      t.string :play_path
-      t.timestamps
+  create_table "answers", :force => true do |t|
+    t.text     "body"
+    t.boolean  "accept",      :default => false
+    t.datetime "accept_at"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+    t.boolean  "close",       :default => false
+    t.integer  "question_id",                    :null => false
+    t.integer  "likes_count", :default => 0
+    t.integer  "bounty",      :default => 0
+    t.integer  "user_id",                        :null => false
+    t.integer  "up_votes",    :default => 0,     :null => false
+    t.integer  "down_votes",  :default => 0,     :null => false
   end
-  add_index :assets, :assetable_id
-  add_index :assets, :assetable_type
+
+  add_index "answers", ["question_id"], :name => "index_answers_on_ask_id"
+
+  create_table "assets", :force => true do |t|
+    t.integer  "assetable_id"
+    t.string   "assetable_type"
+    t.string   "file_name"
+    t.integer  "file_size"
+    t.string   "file_type"
+    t.string   "file"
+    t.string   "play_path"
+    t.datetime "created_at",     :null => false
+    t.datetime "updated_at",     :null => false
+  end
+
+  add_index "assets", ["assetable_id"], :name => "index_assets_on_assetable_id"
+  add_index "assets", ["assetable_type"], :name => "index_assets_on_assetable_type"
+
+  create_table "assignments", :force => true do |t|
+    t.boolean  "admin",       :default => false
+    t.boolean  "active",      :default => false
+    t.integer  "creator_id",                     :null => false
+    t.integer  "webclass_id",                    :null => false
+    t.string   "title"
+    t.datetime "created_at"
+    t.datetime "submit_at"
+    t.text     "body"
+  end
+
+  add_index "assignments", ["active"], :name => "index_groups_members_on_active"
+  add_index "assignments", ["creator_id", "webclass_id"], :name => "index_groups_members_on_user_id_and_group_id"
+  add_index "assignments", ["creator_id"], :name => "index_groups_members_on_user_id"
+  add_index "assignments", ["webclass_id"], :name => "index_assignments_on_webclass_id"
+  add_index "assignments", ["webclass_id"], :name => "index_groups_members_on_group_id"
+
+  create_table "bookmarks", :force => true do |t|
+    t.text     "body"
+    t.boolean  "published",         :default => true
+    t.string   "title"
+    t.string   "slug"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+    t.boolean  "is_public",         :default => false
+    t.integer  "readings_count",    :default => 0
+    t.integer  "comments_count",    :default => 0
+    t.integer  "likes_count",       :default => 0
+    t.integer  "collections_count", :default => 0
+    t.string   "origin_url"
+    t.integer  "user_id",                              :null => false
+  end
+
+  add_index "bookmarks", ["user_id"], :name => "index_bookmarks_on_user_id"
 
   create_table "categories", :force => true do |t|
-    t.integer "parent_id"
     t.string  "name"
-    t.integer "lft"
-    t.integer "rgt"
-    t.references :categoryable, :polymorphic => true
-    t.integer "depth"
+    t.string  "categoryable_type"
+    t.integer "categoryable_id"
+    t.integer "creator_id"
+    t.integer "posts_count",       :default => 0
   end
 
-  add_index "categories", ["categoryable_id"], :name => "index_categories_on_categoryable_id"
-  add_index "categories", ["categoryable_type"], :name => "index_categories_on_categoryable_type"
-  add_index "categories", ["parent_id"], :name => "index_categories_on_parent_id"
+  add_index "categories", ["categoryable_id", "categoryable_type"], :name => "index_categories_on_categoryable_id_and_categoryable_type"
 
   create_table "connections", :force => true do |t|
     t.integer  "user_id"
@@ -71,24 +123,39 @@ class Install < ActiveRecord::Migration
   add_index "connections", ["user_id"], :name => "index_connections_on_user_id"
 
   create_table "courses", :force => true do |t|
-    t.integer  "creator_id",                           :null => false
-    t.integer  "students_count",    :default => 0
-    t.decimal  "price",             :default => 0.0
+    t.integer  "creator_id",                               :null => false
+    t.integer  "cousers_members_count", :default => 0
+    t.decimal  "price",                 :default => 0.0
     t.string   "promo_video"
-    t.string   "cover"
-    t.datetime "created_at",                           :null => false
-    t.datetime "updated_at",                           :null => false
+    t.string   "avatar"
+    t.datetime "created_at",                               :null => false
+    t.datetime "updated_at",                               :null => false
     t.string   "slug"
-    t.string   "name",                                 :null => false
+    t.string   "name",                                     :null => false
     t.text     "body"
-    t.boolean  "published",         :default => false
-    t.integer  "readings_count",    :default => 0
-    t.integer  "comments_count",    :default => 0
-    t.integer  "likes_count",       :default => 0
-    t.integer  "collections_count", :default => 0
+    t.boolean  "published",             :default => false
+    t.integer  "readings_count",        :default => 0
+    t.integer  "comments_count",        :default => 0
+    t.integer  "likes_count",           :default => 0
+    t.integer  "collections_count",     :default => 0
+    t.integer  "sections_count",        :default => 0
+    t.integer  "slots_count",           :default => 0
   end
 
   add_index "courses", ["creator_id"], :name => "index_courses_on_creator_id"
+
+  create_table "courses_members", :force => true do |t|
+    t.boolean  "admin",      :default => false
+    t.boolean  "active",     :default => false
+    t.integer  "user_id",                       :null => false
+    t.integer  "course_id",                     :null => false
+    t.string   "note"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "courses_members", ["course_id"], :name => "index_courses_members_on_course_id"
+  add_index "courses_members", ["user_id"], :name => "index_courses_members_on_user_id"
 
   create_table "courses_properties", :force => true do |t|
     t.string  "property_id", :null => false
@@ -97,6 +164,19 @@ class Install < ActiveRecord::Migration
 
   add_index "courses_properties", ["course_id"], :name => "index_courses_properties_on_course_id"
   add_index "courses_properties", ["property_id"], :name => "index_courses_properties_on_property_id"
+
+  create_table "folders", :force => true do |t|
+    t.integer "user_id"
+    t.integer "creator_id"
+    t.string  "name"
+    t.integer "folderable_id"
+    t.boolean "is_public",       :default => false
+    t.string  "folderable_type"
+    t.integer "media_count",     :default => 0
+  end
+
+  add_index "folders", ["folderable_type", "folderable_id"], :name => "index_folders_on_folderable_type_and_folderable_id"
+  add_index "folders", ["user_id"], :name => "index_folders_on_user_id"
 
   create_table "followings", :force => true do |t|
     t.integer  "follower_id"
@@ -130,27 +210,61 @@ class Install < ActiveRecord::Migration
     t.datetime "updated_at"
     t.string   "name"
     t.text     "body"
-    t.integer  "groups_members_count", :default => 0
-    t.string   "logo"
-    t.boolean  "published",            :default => true
+    t.integer  "members_count",         :default => 0
+    t.string   "avatar"
+    t.boolean  "published",             :default => true
+    t.string   "slug"
+    t.boolean  "need_check_when_apply", :default => false
+    t.integer  "posts_count",           :default => 0
+    t.integer  "media_count",           :default => 0
   end
 
   add_index "groups", ["creator_id"], :name => "index_groups_on_creator_id"
 
-  create_table "groups_members", :force => true do |t|
-    t.boolean  "admin",      :default => false
-    t.boolean  "active",     :default => false
-    t.integer  "user_id",                       :null => false
-    t.integer  "group_id",                      :null => false
+  create_table "lessons", :force => true do |t|
+    t.integer  "slot_id",     :null => false
+    t.integer  "course_id",   :null => false
+    t.string   "webclass_id", :null => false
+    t.datetime "start_at"
+    t.datetime "created_at"
+  end
+
+  add_index "lessons", ["slot_id"], :name => "index_lessons_on_slot_id"
+  add_index "lessons", ["webclass_id"], :name => "index_lessons_on_webclass_id"
+
+  create_table "media", :force => true do |t|
+    t.integer  "creator_id"
+    t.integer  "folder_id"
+    t.string   "file_name"
+    t.integer  "file_size"
+    t.string   "content_type"
+    t.string   "file"
+    t.string   "play_path"
+    t.datetime "created_at",                           :null => false
+    t.datetime "updated_at",                           :null => false
+    t.boolean  "is_public",         :default => false
+    t.integer  "comments_count",    :default => 0
+    t.integer  "mediumable_id"
+    t.string   "mediumable_type"
+    t.integer  "likes_count",       :default => 0
+    t.integer  "collections_count", :default => 0
+    t.integer  "readings_count",    :default => 0
+  end
+
+  add_index "media", ["creator_id"], :name => "index_medias_on_user_id"
+  add_index "media", ["folder_id"], :name => "index_medias_on_folder_id"
+  add_index "media", ["mediumable_type", "mediumable_id"], :name => "index_media_on_mediumable_type_and_mediumable_id"
+
+  create_table "members", :force => true do |t|
+    t.boolean  "admin",           :default => false
+    t.boolean  "active",          :default => false
+    t.integer  "user_id",                            :null => false
+    t.integer  "memberable_id",                      :null => false
+    t.string   "memberable_type",                    :null => false
     t.string   "note"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
-
-  add_index "groups_members", ["active"], :name => "index_groups_members_on_active"
-  add_index "groups_members", ["group_id"], :name => "index_groups_members_on_group_id"
-  add_index "groups_members", ["user_id", "group_id"], :name => "index_groups_members_on_user_id_and_group_id"
-  add_index "groups_members", ["user_id"], :name => "index_groups_members_on_user_id"
 
   create_table "posts", :force => true do |t|
     t.text     "body"
@@ -166,11 +280,17 @@ class Install < ActiveRecord::Migration
     t.integer  "likes_count",                     :default => 0
     t.integer  "collections_count",               :default => 0
     t.string   "file"
-    t.integer  "user_id",                                           :null => false
+    t.integer  "postable_id"
+    t.string   "postable_type"
+    t.string   "slug"
+    t.integer  "category_id"
+    t.boolean  "is_public",                       :default => false
+    t.integer  "creator_id",                                         :null => false
   end
 
+  add_index "posts", ["category_id"], :name => "index_posts_on_category_id"
   add_index "posts", ["kind"], :name => "index_posts_on_kind"
-  add_index "posts", ["user_id"], :name => "index_posts_on_user_id"
+  add_index "posts", ["postable_type", "postable_id"], :name => "index_posts_on_postable_type_and_postable_id"
 
   create_table "profiles", :force => true do |t|
     t.integer  "user_id"
@@ -182,9 +302,7 @@ class Install < ActiveRecord::Migration
     t.string   "mobile",               :limit => 45
     t.string   "identity_card",        :limit => 45
     t.string   "address"
-    t.string   "name"
     t.integer  "notifications_count",                :default => 0
-    t.string   "description"
     t.integer  "city_code"
     t.integer  "zone_code"
     t.string   "experience"
@@ -206,20 +324,25 @@ class Install < ActiveRecord::Migration
 
   add_index "properties", ["key"], :name => "index_properties_on_key"
 
-  create_table "school_classes", :force => true do |t|
-    t.integer  "school_grade_id"
-    t.string   "name"
-    t.integer  "lft"
-    t.integer  "rgt"
-    t.integer  "school_id"
-    t.integer  "creator_id"
-    t.datetime "created_at",      :null => false
-    t.datetime "updated_at",      :null => false
+  create_table "questions", :force => true do |t|
+    t.text     "body"
+    t.boolean  "published",      :default => true
+    t.string   "title"
+    t.string   "slug"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+    t.boolean  "is_public",      :default => false
+    t.integer  "readings_count", :default => 0
+    t.integer  "answers_count",  :default => 0
+    t.integer  "likes_count",    :default => 0
+    t.integer  "answer_id"
+    t.integer  "bounty",         :default => 0
+    t.integer  "user_id",                           :null => false
+    t.integer  "up_votes",       :default => 0,     :null => false
+    t.integer  "down_votes",     :default => 0,     :null => false
   end
 
-  add_index "school_classes", ["creator_id"], :name => "index_school_classes_on_creator_id"
-  add_index "school_classes", ["school_grade_id"], :name => "index_school_classes_on_school_grade_id"
-  add_index "school_classes", ["school_id"], :name => "index_school_classes_on_school_id"
+  add_index "questions", ["user_id"], :name => "index_asks_on_user_id"
 
   create_table "school_grades", :force => true do |t|
     t.integer "parent_id"
@@ -238,26 +361,42 @@ class Install < ActiveRecord::Migration
     t.string  "title",                    :null => false
     t.integer "course_id",                :null => false
     t.integer "position",  :default => 0
+    t.integer "parent_id"
+    t.integer "lft"
+    t.integer "rgt"
+    t.integer "depth"
   end
 
   add_index "sections", ["course_id"], :name => "index_sections_on_course_id"
 
-  create_table "slots", :force => true do |t|
+  create_table "shares", :force => true do |t|
     t.integer  "creator_id"
-    t.integer  "section_id"
-    t.integer  "course_id"
-    t.string   "title"
-    t.string   "file"
-    t.string   "kind"
-    t.float    "timeslot"
-    t.text     "description"
-    t.datetime "created_at"
-    t.datetime "updated_at"
+    t.boolean  "is_public",         :default => false
+    t.string   "shareable_type",                       :null => false
+    t.integer  "shareable_id",                         :null => false
+    t.integer  "readings_count",    :default => 0
+    t.integer  "comments_count",    :default => 0
+    t.integer  "likes_count",       :default => 0
+    t.integer  "collections_count", :default => 0
+    t.datetime "created_at",                           :null => false
+    t.datetime "updated_at",                           :null => false
   end
 
-  add_index "slots", ["course_id"], :name => "index_slots_on_course_id"
-  add_index "slots", ["creator_id"], :name => "index_slots_on_creator_id"
-  add_index "slots", ["section_id"], :name => "index_slots_on_section_id"
+  create_table "slots", :force => true do |t|
+    t.integer  "term_id",                    :null => false
+    t.integer  "week",                       :null => false
+    t.string   "timeslot"
+    t.string   "title"
+    t.string   "webclass_id",                :null => false
+    t.datetime "created_at"
+    t.datetime "start_at"
+    t.integer  "seq",         :default => 0
+    t.integer  "creator_id",                 :null => false
+  end
+
+  add_index "slots", ["term_id"], :name => "index_slots_on_term_id"
+  add_index "slots", ["webclass_id"], :name => "index_slots_on_webclass_id"
+  add_index "slots", ["week"], :name => "index_slots_on_week"
 
   create_table "taggings", :force => true do |t|
     t.integer  "tag_id"
@@ -275,6 +414,17 @@ class Install < ActiveRecord::Migration
   create_table "tags", :force => true do |t|
     t.string "name"
   end
+
+  create_table "terms", :force => true do |t|
+    t.integer  "year",                     :null => false
+    t.integer  "part",        :limit => 2, :null => false
+    t.string   "webclass_id",              :null => false
+    t.datetime "created_at"
+    t.integer  "creator_id",               :null => false
+  end
+
+  add_index "terms", ["webclass_id"], :name => "index_terms_on_webclass_id"
+  add_index "terms", ["year", "part"], :name => "index_terms_on_year_and_part"
 
   create_table "users", :force => true do |t|
     t.string   "encrypted_password",     :limit => 128, :default => "",          :null => false
@@ -302,6 +452,10 @@ class Install < ActiveRecord::Migration
     t.datetime "locked_at"
     t.string   "status",                                :default => "available"
     t.string   "avatar"
+    t.string   "description"
+    t.string   "name"
+    t.integer  "up_votes",                              :default => 0,           :null => false
+    t.integer  "down_votes",                            :default => 0,           :null => false
   end
 
   add_index "users", ["email"], :name => "index_users_on_email"
@@ -309,5 +463,39 @@ class Install < ActiveRecord::Migration
   add_index "users", ["reset_password_token"], :name => "index_users_on_reset_password_token"
   add_index "users", ["status"], :name => "index_users_on_status"
 
+  create_table "votings", :force => true do |t|
+    t.string   "voteable_type"
+    t.integer  "voteable_id"
+    t.string   "voter_type"
+    t.integer  "voter_id"
+    t.boolean  "up_vote",       :null => false
+    t.datetime "created_at",    :null => false
+    t.datetime "updated_at",    :null => false
   end
+
+  add_index "votings", ["voteable_type", "voteable_id", "voter_type", "voter_id"], :name => "unique_voters", :unique => true
+  add_index "votings", ["voteable_type", "voteable_id"], :name => "index_votings_on_voteable_type_and_voteable_id"
+  add_index "votings", ["voter_type", "voter_id"], :name => "index_votings_on_voter_type_and_voter_id"
+
+  create_table "webclasses", :force => true do |t|
+    t.integer  "creator_id",                           :null => false
+    t.integer  "members_count",     :default => 0
+    t.string   "avatar"
+    t.datetime "created_at",                           :null => false
+    t.datetime "updated_at",                           :null => false
+    t.string   "slug"
+    t.string   "name",                                 :null => false
+    t.text     "body"
+    t.boolean  "published",         :default => false
+    t.integer  "readings_count",    :default => 0
+    t.integer  "comments_count",    :default => 0
+    t.integer  "likes_count",       :default => 0
+    t.integer  "collections_count", :default => 0
+    t.integer  "sections_count",    :default => 0
+    t.integer  "adviser_id"
+    t.integer  "year",              :default => 2013
+  end
+
+  end
+
 end
