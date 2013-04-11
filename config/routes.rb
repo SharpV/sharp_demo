@@ -158,17 +158,22 @@ SharpLink::Application.routes.draw do
         end
       end
 
-      resources :courses
+      resources :courses do
+        collection do 
+          get :admin
+        end
+      end
 
       resources :slots do
-        get :admin, on: :member
+        collection do 
+          get :admin
+        end
       end
 
       resources :folders do
         collection do 
           get :admin
-        end
-        
+        end        
       end
 
       resources :categories do

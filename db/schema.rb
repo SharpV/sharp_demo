@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130411115021) do
+ActiveRecord::Schema.define(:version => 20130411150146) do
 
   create_table "active_admin_comments", :force => true do |t|
     t.string   "resource_id",   :null => false
@@ -136,26 +136,22 @@ ActiveRecord::Schema.define(:version => 20130411115021) do
   add_index "connections", ["user_id"], :name => "index_connections_on_user_id"
 
   create_table "courses", :force => true do |t|
-    t.integer  "creator_id",                               :null => false
-    t.integer  "cousers_members_count", :default => 0
-    t.decimal  "price",                 :default => 0.0
-    t.string   "promo_video"
-    t.string   "avatar"
-    t.datetime "created_at",                               :null => false
-    t.datetime "updated_at",                               :null => false
+    t.integer  "creator_id",                        :null => false
+    t.datetime "created_at",                        :null => false
+    t.datetime "updated_at",                        :null => false
     t.string   "slug"
-    t.string   "name",                                     :null => false
+    t.string   "name",                              :null => false
     t.text     "body"
-    t.boolean  "published",             :default => false
-    t.integer  "readings_count",        :default => 0
-    t.integer  "comments_count",        :default => 0
-    t.integer  "likes_count",           :default => 0
-    t.integer  "collections_count",     :default => 0
-    t.integer  "sections_count",        :default => 0
-    t.integer  "slots_count",           :default => 0
+    t.boolean  "published",      :default => false
+    t.integer  "comments_count", :default => 0
+    t.integer  "sections_count", :default => 0
+    t.integer  "slot_id",                           :null => false
+    t.integer  "webclass_id",                       :null => false
   end
 
   add_index "courses", ["creator_id"], :name => "index_courses_on_creator_id"
+  add_index "courses", ["slot_id"], :name => "index_courses_on_slot_id"
+  add_index "courses", ["webclass_id"], :name => "index_courses_on_webclass_id"
 
   create_table "courses_members", :force => true do |t|
     t.boolean  "admin",      :default => false
@@ -357,6 +353,17 @@ ActiveRecord::Schema.define(:version => 20130411115021) do
 
   add_index "questions", ["user_id"], :name => "index_asks_on_user_id"
 
+  create_table "roles", :force => true do |t|
+    t.string   "name"
+    t.integer  "resource_id"
+    t.string   "resource_type"
+    t.datetime "created_at",    :null => false
+    t.datetime "updated_at",    :null => false
+  end
+
+  add_index "roles", ["name", "resource_type", "resource_id"], :name => "index_roles_on_name_and_resource_type_and_resource_id"
+  add_index "roles", ["name"], :name => "index_roles_on_name"
+
   create_table "school_grades", :force => true do |t|
     t.integer "parent_id"
     t.string  "name"
@@ -431,12 +438,11 @@ ActiveRecord::Schema.define(:version => 20130411115021) do
   create_table "terms", :force => true do |t|
     t.integer  "year",                     :null => false
     t.integer  "part",        :limit => 2, :null => false
-    t.string   "webclass_id",              :null => false
     t.datetime "created_at"
     t.integer  "creator_id",               :null => false
+    t.integer  "webclass_id",              :null => false
   end
 
-  add_index "terms", ["webclass_id"], :name => "index_terms_on_webclass_id"
   add_index "terms", ["year", "part"], :name => "index_terms_on_year_and_part"
 
   create_table "users", :force => true do |t|
@@ -475,6 +481,13 @@ ActiveRecord::Schema.define(:version => 20130411115021) do
   add_index "users", ["login"], :name => "index_users_on_login"
   add_index "users", ["reset_password_token"], :name => "index_users_on_reset_password_token"
   add_index "users", ["status"], :name => "index_users_on_status"
+
+  create_table "users_roles", :id => false, :force => true do |t|
+    t.integer "user_id"
+    t.integer "role_id"
+  end
+
+  add_index "users_roles", ["user_id", "role_id"], :name => "index_users_roles_on_user_id_and_role_id"
 
   create_table "votings", :force => true do |t|
     t.string   "voteable_type"

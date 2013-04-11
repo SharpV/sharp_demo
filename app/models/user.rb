@@ -1,9 +1,10 @@
 #encoding: utf-8
 
 require 'digest/sha1'
-
+require 'uuid'
 require 'devise/orm/active_record'
 class User < ActiveRecord::Base
+  rolify
   # Include default devise modules. Others available are:
   # :token_authenticatable, :confirmable,
   # :lockable, :timeoutable and :omniauthable
@@ -39,7 +40,8 @@ class User < ActiveRecord::Base
 
   validate :email_must_be_uniq
 
-  after_create :create_default_category_and_folder, :generate_login
+  after_create :create_default_category_and_folder
+  before_validation :generate_login
 
 
   mount_uploader :avatar,  ImageUploader
@@ -83,9 +85,7 @@ class User < ActiveRecord::Base
     "#{login}"
   end
 
-  def generate_login
-    self.update_attributes login: Digest::SHA1.hexdigest("#{id}#{Time.now}") 
-  end
+  
 
   protected
   
@@ -95,6 +95,13 @@ class User < ActiveRecord::Base
   end
 
   private
+
+  def generate_login
+    unless self.login 
+      uuid = UUID.new
+      self.login = uuid.generate 
+    end
+  end
 
   def create_default_category_and_folder
     folder = self.folders.build name: '默认目录'
