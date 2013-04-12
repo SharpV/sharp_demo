@@ -1,4 +1,8 @@
 class WebclassesController < ApplicationController
+
+  def index
+  end
+
   def show
     @current_webclass = Webclass.find params[:id]
     if current_user

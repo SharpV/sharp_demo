@@ -159,6 +159,7 @@ ul.inline > li, ol.inline > li {
 .login-form {
     background-color: #E3EAF2;
     border-radius: 6px 6px 6px 6px;
+    padding: 10px;
     padding-left: 25px;
     position: relative;
 }
@@ -167,11 +168,15 @@ ul.inline > li, ol.inline > li {
 }
 
 .feature {
-    margin-top: 30px;
+    margin-top: 10px;
 }
 
 .feature td{
     padding: 10px;
+}
+
+.feature h3{
+    color: #00B9CA;
 }
 
 .footer{

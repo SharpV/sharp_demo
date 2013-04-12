@@ -39,6 +39,7 @@ gem 'redis-objects'
 gem 'simple_form_fancy_uploads'
 gem "jquery-fileupload-rails", ' 0.4.0'# :git => 'git@github.com:tors/jquery-fileupload-rails.git'
 #gem 'devise_invitable', '~> 1.0.0'
+gem 'mailboxer'
 gem 'sequel'
 gem "recaptcha", :require => "recaptcha/rails"
 gem 'whenever'
