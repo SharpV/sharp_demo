@@ -1,0 +1,3 @@
+$('#week<%= @slot.week %>-section<%= @slot.section_id %>').html("<%= escape_javascript render('slot', slot: @slot) %>");
+$('#week<%= @slot.week %>-section<%= @slot.section_id %>').effect("highlight", {}, 2000);
+$('#slot-form').trigger('reset');

@@ -9,8 +9,6 @@
  *= require lazybox
  *= require tree
  *= require sortable_tree
- *= require sortable_tree
- *= require nested_options
  *= require form
  *= require common
  *= require app

@@ -9,6 +9,7 @@ class WebclassController < ApplicationController
   
   def set_current_context
     @current_webclass = Webclass.find(params[:webclass_id])
+    @current_term = @current_webclass.current_term
     @current_webclass_member = current_user.member(@current_webclass)
   rescue    
     @current_webclass = nil

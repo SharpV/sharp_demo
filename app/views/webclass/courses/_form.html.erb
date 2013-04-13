@@ -1,10 +1,6 @@
-<%= simple_form_for @course, :html => {:class => 'form-stacked'} do |f| -%>	
-  <%= f.error_notification %>
-	<%= f.input :name, :class=>'xlarge', :label => '名称' %>
-	<%= f.input :avatar, :label => '图标' %>
-	<%# f.input :kind_id, :label => t('kind'), :collection => Group.Kinds, :include_blank => false, :required => true %>
-	<%= f.input :body, label: '简介' %>
-	<div class="actions">
-	  <%= f.submit '创建', :class=>'btn btn-primary' %>
-	</div>
+<%= simple_form_for @slot, url: webclass_webclass_courses_path(@current_webclass), validate: true, remote: true, :html => {:class => 'form-horizontal', id: 'slot-form', data: {type: "script", method: :post}} do |f| %>
+  <%= f.input :name, label: '名称' %>
+  <%= f.input :week, as: :radio_buttons, :item_wrapper_class => 'inline', collection: weeks, label: '周时' %>
+  <%= f.association :section, as: :radio_buttons, label: '课时', :item_wrapper_class => 'inline', collection: @sections %>
+  <%= f.button :submit, value: '添加课程', class: 'btn btn-info' %>
 <% end %>

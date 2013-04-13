@@ -11,12 +11,13 @@ class Webclass < ActiveRecord::Base
 
   mount_uploader :avatar, ImageUploader
   has_many :terms
+  has_many :slots
   has_many :categories, as: :categoryable
   has_many :folders, as: :folderable
   belongs_to :creator, foreign_key: "creator_id", class_name: 'User'
   before_validation :generate_slug
 
-  after_create :create_admin, :create_default_category_and_folder
+  after_create :create_admin, :create_default_category_and_folder, :current_term
 
   def current_term
     if Date.current > Date.new(Time.now.year, 3, 1) and Date.current <= Date.new(Time.now.year, 8, 1)

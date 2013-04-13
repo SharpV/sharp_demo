@@ -191,6 +191,9 @@ SharpLink::Application.routes.draw do
 
       resources :media
 
+      resources :sections do
+        get :admin, on: :collection
+      end
 
       member do 
         get :admin

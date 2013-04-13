@@ -13,7 +13,6 @@
 //= require rails.validations
 //= require rails.validations.simple_form
 //= require jquery.ui.nestedSortable
-//= require sortable_tree/initializer
 //= bootstrap-dropdown
 //= require rails-timeago
 //= require locales/jquery.timeago.zh-CN.js

@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130411150146) do
+ActiveRecord::Schema.define(:version => 20130413021647) do
 
   create_table "active_admin_comments", :force => true do |t|
     t.string   "resource_id",   :null => false
@@ -136,21 +136,20 @@ ActiveRecord::Schema.define(:version => 20130411150146) do
   add_index "connections", ["user_id"], :name => "index_connections_on_user_id"
 
   create_table "courses", :force => true do |t|
-    t.integer  "creator_id",                        :null => false
-    t.datetime "created_at",                        :null => false
-    t.datetime "updated_at",                        :null => false
+    t.integer  "creator_id",                       :null => false
+    t.datetime "created_at",                       :null => false
+    t.datetime "updated_at",                       :null => false
     t.string   "slug"
-    t.string   "name",                              :null => false
+    t.string   "name",                             :null => false
     t.text     "body"
-    t.boolean  "published",      :default => false
-    t.integer  "comments_count", :default => 0
-    t.integer  "sections_count", :default => 0
-    t.integer  "slot_id",                           :null => false
-    t.integer  "webclass_id",                       :null => false
+    t.boolean  "published",     :default => false
+    t.integer  "lessons_count", :default => 0
+    t.integer  "webclass_id",                      :null => false
+    t.integer  "term_id",                          :null => false
   end
 
   add_index "courses", ["creator_id"], :name => "index_courses_on_creator_id"
-  add_index "courses", ["slot_id"], :name => "index_courses_on_slot_id"
+  add_index "courses", ["term_id"], :name => "index_courses_on_term_id"
   add_index "courses", ["webclass_id"], :name => "index_courses_on_webclass_id"
 
   create_table "courses_members", :force => true do |t|
@@ -231,11 +230,12 @@ ActiveRecord::Schema.define(:version => 20130411150146) do
   add_index "groups", ["creator_id"], :name => "index_groups_on_creator_id"
 
   create_table "lessons", :force => true do |t|
-    t.integer  "slot_id",     :null => false
-    t.integer  "course_id",   :null => false
-    t.string   "webclass_id", :null => false
+    t.integer  "slot_id",         :null => false
+    t.integer  "course_id",       :null => false
+    t.string   "webclass_id",     :null => false
     t.datetime "start_at"
     t.datetime "created_at"
+    t.integer  "slots_course_id", :null => false
   end
 
   add_index "lessons", ["slot_id"], :name => "index_lessons_on_slot_id"
@@ -378,16 +378,18 @@ ActiveRecord::Schema.define(:version => 20130411150146) do
   add_index "school_grades", ["school_id"], :name => "index_school_grades_on_school_id"
 
   create_table "sections", :force => true do |t|
-    t.string  "title",                    :null => false
-    t.integer "course_id",                :null => false
-    t.integer "position",  :default => 0
-    t.integer "parent_id"
-    t.integer "lft"
-    t.integer "rgt"
-    t.integer "depth"
+    t.integer  "term_id",                    :null => false
+    t.string   "timeslot"
+    t.string   "title"
+    t.datetime "created_at"
+    t.datetime "start_at"
+    t.integer  "seq",         :default => 0
+    t.integer  "creator_id",                 :null => false
+    t.datetime "end_at"
+    t.integer  "webclass_id",                :null => false
   end
 
-  add_index "sections", ["course_id"], :name => "index_sections_on_course_id"
+  add_index "sections", ["term_id"], :name => "index_slots_on_term_id"
 
   create_table "shares", :force => true do |t|
     t.integer  "creator_id"
@@ -403,20 +405,14 @@ ActiveRecord::Schema.define(:version => 20130411150146) do
   end
 
   create_table "slots", :force => true do |t|
-    t.integer  "term_id",                    :null => false
-    t.integer  "week",                       :null => false
-    t.string   "timeslot"
-    t.string   "title"
-    t.string   "webclass_id",                :null => false
-    t.datetime "created_at"
-    t.datetime "start_at"
-    t.integer  "seq",         :default => 0
-    t.integer  "creator_id",                 :null => false
+    t.integer "course_id",  :null => false
+    t.integer "section_id", :null => false
+    t.integer "week",       :null => false
+    t.integer "term_id",    :null => false
   end
 
-  add_index "slots", ["term_id"], :name => "index_slots_on_term_id"
-  add_index "slots", ["webclass_id"], :name => "index_slots_on_webclass_id"
-  add_index "slots", ["week"], :name => "index_slots_on_week"
+  add_index "slots", ["course_id", "section_id"], :name => "index_slots_courses_on_course_id_and_slot_id"
+  add_index "slots", ["section_id", "course_id"], :name => "index_slots_on_section_id_and_course_id"
 
   create_table "taggings", :force => true do |t|
     t.integer  "tag_id"

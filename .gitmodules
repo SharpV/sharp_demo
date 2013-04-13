@@ -13,3 +13,6 @@
 [submodule "lib/assets/jScroll"]
 	path = lib/assets/jScroll
 	url = git@github.com:wduffy/jScroll.git
+[submodule "lib/assets/jQuery-Timepicker-Addon"]
+	path = lib/assets/jQuery-Timepicker-Addon
+	url = git@github.com:trentrichardson/jQuery-Timepicker-Addon.git

@@ -75,6 +75,10 @@ div.field_with_errors, div.ui-effects-wrapper {
     text-shadow: none;
 }
 
+.table thead tr.success > th {
+    background-color: #DFF0D8;
+}
+
 td{
     vertical-align: top;
 }

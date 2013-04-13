@@ -1,9 +1,23 @@
 class Section < ActiveRecord::Base
-  belongs_to :course, counter_cache: true  
-  has_many :slots, order: :position
+  attr_accessible :title, :start_at, :end_at
+  default_scope where("webclass_id is not null and term_id is not null")
 
-  include TheSortableTree::Scopes
+  belongs_to :term
+  belongs_to :webclass
 
-  validates :title, :presence => true, :length => {:within => 1..30}
+  has_many :slots
+  has_many :courses, :through => :slots
+
+  mount_uploader :file, FileUploader 
+
+  validates :title, :uniqueness => {:scope => :webclass_id}
+  validates :title, :presence => true, :length => {:within => 1..10}
+  validates :start_at, presence: true
+
+  belongs_to :creator,  :class_name => "User"
+
+  def get_slot week
+    Slot.where(section_id: id, week: week).first
+  end
 
 end

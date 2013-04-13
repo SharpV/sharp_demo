@@ -58,6 +58,7 @@ gem 'omniauth-qq-connect'
 gem 'omniauth-weibo-oauth2'
 gem 'thin'
 gem "friendly_id"
+gem 'jquery-ui-rails'
 gem "cancan"
 gem "escape"
 gem 'kaminari'
@@ -76,7 +77,7 @@ gem 'react_reporter', :git => "git://github.com/reactualize/react_reporter.git"
 gem 'sidekiq'
 gem 'acts_as_commentable'
 gem 'linkser'
-gem 'binding_of_caller'
+gem 'stamp'
 gem 'redis-rails'
 gem 'redis-rack'
 gem 'redis-rack-cache'
