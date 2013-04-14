@@ -12,11 +12,11 @@
 }
 
 .span-r .span-l{
-  width: 600px;
+  width: 620px;
 }
 
 .span-r .span-r{
-  width: 155px;
+  width: 135px;
 }
 
 [class*="span"] {

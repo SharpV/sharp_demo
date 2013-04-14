@@ -1,0 +1,2 @@
+module Webclass::MessagesHelper
+end

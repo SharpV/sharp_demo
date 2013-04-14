@@ -11,6 +11,7 @@ class WebclassController < ApplicationController
     @current_webclass = Webclass.find(params[:webclass_id])
     @current_term = @current_webclass.current_term
     @current_webclass_member = current_user.member(@current_webclass)
+    @current_webclass_teachers = @current_webclass.members.teacher
   rescue    
     @current_webclass = nil
     @current_webclass_member = nil

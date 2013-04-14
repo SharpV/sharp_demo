@@ -1,0 +1,13 @@
+<tr id='member-<%= member.id %>'>
+  <td><%= member.name %></td>
+  <td><%= member.name %></td>
+  <td><%= member.role_name %></td>
+  <td><%= format_datetime member.created_at %></td>
+  <td><%= member.note %></td>
+
+  <td>
+    <%= link_to '同意', agree_webclass_webclass_member_path(@current_webclass, member), class: 'btn btn-success btn-small', remote: true, data: {type: "script"} %> 
+      &nbsp; &nbsp;
+    <%= link_to '拒绝', reject_webclass_webclass_member_path(@current_webclass, member), class: 'btn btn-danger btn-small', remote: true, data: {type: "script"} %>
+  </td>
+</tr>

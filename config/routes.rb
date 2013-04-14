@@ -151,10 +151,19 @@ SharpLink::Application.routes.draw do
       resources :posts
 
       resources :lessons
-
+      resources :messages do
+        collection do 
+          get :draft
+          get :send
+        end
+      end
       resources :members do
         collection do 
           get :admin
+        end
+        member do 
+          get :agree
+          get :reject
         end
       end
 
@@ -194,15 +203,9 @@ SharpLink::Application.routes.draw do
       resources :sections do
         get :admin, on: :collection
       end
-
       resources :assignments
-
       resources :reports
 
-      member do 
-        get :admin
-        get :apply
-      end
     end
   end
 
@@ -212,7 +215,13 @@ SharpLink::Application.routes.draw do
       get :unfollow
     end 
   end
-  resources :webclasses
+  resources :webclasses do
+    member do 
+      get :admin
+      get :apply
+      get :logout
+    end
+  end
 
   resources :shares
   

@@ -1,19 +1,25 @@
 <%= tabs_tag(:namespace => :webclass_nav, :open_tabs => {:class => "nav nav-tabs"}, :builder => MenuTabBuilder) do |tab| %>
   <%= tab.index "主页", @current_webclass %>
   <%= tab.discusses "话题", webclass_webclass_posts_path(@current_webclass) %>
-  <%= tab.folders "相册", webclass_webclass_courses_path(@current_webclass) %>
+  <%= tab.albums "相册", webclass_webclass_courses_path(@current_webclass) %>
   <%= tab.folders "课件", webclass_webclass_folders_path(@current_webclass) %>
   <%= tab.slots "课程", webclass_webclass_slots_path(@current_webclass) %>
   <%= tab.assigmments "作业", webclass_webclass_assignments_path(@current_webclass) %>
   <%= tab.reports "成绩", webclass_webclass_reports_path(@current_webclass) %>
-  <%= tab.members "家校联系", webclass_webclass_members_path(@current_webclass) %>
+  <%= tab.messages "信箱", webclass_webclass_messages_path(@current_webclass) %>
+  <%= tab.members "成员", webclass_webclass_members_path(@current_webclass) %>
   <%- if @current_webclass_member and @current_webclass_member.admin %>
     <%= tab.admin "管理", admin_webclass_webclass_settings_path(@current_webclass) %>
   <% end %>
-  <%- if current_user.has_role? :mmeber, @current_webclass %>
-    <%= link_to "发起讨论", new_webclass_webclass_post_path(@current_webclass), class: 'btn btn-info pull-right span' %>
-    <%= link_to "共享文件", new_webclass_webclass_medium_path(@current_webclass), class: 'btn btn-sucess pull-right span' %>
+  <%- if @current_webclass_member and @current_webclass_member.active %>
+    <%- if current_user.has_role? :admin, @current_webclass  %>
+      <%= link_to "班级管理", admin_webclass_path(@current_webclass), class: 'btn btn-success pull-right span' %>
+    <% else %>
+      <%= link_to "退出班级", logout_webclass_path(@current_webclass), class: 'btn btn-inverse pull-right span' %>
+    <% end %>
+  <% elsif @current_webclass_member %>
+    <%= link_to "正在申请", "#", class: 'btn btn-info pull-right span' %>
   <% else %>
-    <%= link_to "申请加入", apply_webclass_webclass_path(@current_webclass), remote: true, class: 'btn btn-info pull-right span' %>
+    <%= link_to "申请加入", apply_webclass_webclass_path(@current_webclass), remote: true, class: 'btn btn-info pull-right btn-success' %>
   <% end %>
 <% end %>

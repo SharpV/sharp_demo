@@ -19,3 +19,9 @@
 [submodule "lib/sharp_social"]
 	path = lib/sharp_social
 	url = git@github.com:SharpV/sharp_social.git
+[submodule "lib/mutil_select"]
+	path = lib/mutil_select
+	url = git@github.com:lou/multi-select.git
+[submodule "lib/assets/mutil_select"]
+	path = lib/assets/mutil_select
+	url = git@github.com:lou/multi-select.git

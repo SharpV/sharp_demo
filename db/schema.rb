@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130414072933) do
+ActiveRecord::Schema.define(:version => 20130414135246) do
 
   create_table "active_admin_comments", :force => true do |t|
     t.string   "resource_id",   :null => false
@@ -185,21 +185,6 @@ ActiveRecord::Schema.define(:version => 20130414072933) do
   add_index "followings", ["followed_user_id"], :name => "index_followings_on_followed_user_id"
   add_index "followings", ["follower_id"], :name => "index_followings_on_follower_id"
 
-  create_table "group_topics", :force => true do |t|
-    t.integer  "user_id",                          :null => false
-    t.integer  "group_id",                         :null => false
-    t.string   "title"
-    t.text     "body"
-    t.integer  "readings_count", :default => 0
-    t.integer  "comments_count", :default => 0
-    t.datetime "created_at"
-    t.datetime "updated_at"
-    t.boolean  "published",      :default => true
-  end
-
-  add_index "group_topics", ["group_id"], :name => "index_group_topics_on_group_id"
-  add_index "group_topics", ["user_id"], :name => "index_group_topics_on_user_id"
-
   create_table "groups", :force => true do |t|
     t.integer  "creator_id"
     t.datetime "created_at"
@@ -262,6 +247,20 @@ ActiveRecord::Schema.define(:version => 20130414072933) do
     t.datetime "created_at"
     t.datetime "updated_at"
     t.string   "role",            :limit => 10, :default => "teacher", :null => false
+  end
+
+  create_table "messages", :force => true do |t|
+    t.text     "body"
+    t.string   "title",                           :null => false
+    t.datetime "send_at"
+    t.integer  "member_id"
+    t.integer  "recipient_id"
+    t.boolean  "read",         :default => false
+    t.integer  "sender_id",                       :null => false
+    t.datetime "created_at",                      :null => false
+    t.datetime "updated_at",                      :null => false
+    t.boolean  "is_draft",     :default => false
+    t.boolean  "is_delete",    :default => false
   end
 
   create_table "posts", :force => true do |t|
