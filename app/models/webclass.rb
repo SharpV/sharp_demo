@@ -2,8 +2,8 @@
 
 class Webclass < ActiveRecord::Base
   # attr_accessible :title, :body
-  mount_uploader :avatar, ImageUploader
-
+  resourcify
+  
   has_many :members, as: :memberable
   has_many :users, through: :members
   validates :name, :presence => true, :length => {:within => 1..30}

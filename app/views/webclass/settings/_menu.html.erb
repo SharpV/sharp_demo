@@ -3,10 +3,10 @@
     <%= tabs_tag(:namespace => :webclass_admin_nav, :open_tabs => {:class => "nav nav-tabs nav-stacked"}, :builder =>     MenuTabBuilder) do |tab| %>
       <%= tab.index "基本设置", webclass_webclass_settings_path(@current_webclass) %>
       <%= tab.categories "分类管理", admin_webclass_webclass_categories_path(@current_webclass) %>
+      <%= tab.folders "目录管理", admin_webclass_webclass_folders_path(@current_webclass) %>
+      <%= tab.members "成员管理", admin_webclass_webclass_members_path(@current_webclass) %>
       <%= tab.sections "课时管理", admin_webclass_webclass_sections_path(@current_webclass) %>
       <%= tab.courses "课程管理", admin_webclass_webclass_courses_path(@current_webclass) %>
-      <%= tab.folders "目录管理", admin_webclass_webclass_folders_path(@current_webclass) %>
-      <%= tab.members "学员管理", admin_webclass_webclass_members_path(@current_webclass) %>
     <% end %>
   </div>
 </div>

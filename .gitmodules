@@ -16,3 +16,6 @@
 [submodule "lib/assets/jQuery-Timepicker-Addon"]
 	path = lib/assets/jQuery-Timepicker-Addon
 	url = git@github.com:trentrichardson/jQuery-Timepicker-Addon.git
+[submodule "lib/sharp_social"]
+	path = lib/sharp_social
+	url = git@github.com:SharpV/sharp_social.git

@@ -1,5 +1,5 @@
 <tr id='section-<%= section.id %>'>
-  <td><%= section.title %></td>
+  <td><%= section.title %> <%= format_time section.start_at %> </td>
   <% (1..6).to_a.each do |week| %>
     <td id="week<%= week %>-section<%=section.id%>">
       <%- if slot = section.get_slot(week) %>

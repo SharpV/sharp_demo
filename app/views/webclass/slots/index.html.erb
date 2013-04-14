@@ -14,14 +14,11 @@
         </tr>
       </thead>
       <tbody id='slot-list'>
-        <%= render partial: 'section', collection: @sections %>
+        <%= render partial: 'webclass/courses/section', collection: @sections %>
       </tbody>
     </table>
-    <%= render 'form' %>
-
   </div>
   <div class='span-r pull-right'>
-    <%= render 'webclass/settings/menu' %>
   </div>
 </div>
 

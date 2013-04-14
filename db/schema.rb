@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130413021647) do
+ActiveRecord::Schema.define(:version => 20130414072933) do
 
   create_table "active_admin_comments", :force => true do |t|
     t.string   "resource_id",   :null => false
@@ -62,21 +62,6 @@ ActiveRecord::Schema.define(:version => 20130413021647) do
   end
 
   add_index "answers", ["question_id"], :name => "index_answers_on_ask_id"
-
-  create_table "assets", :force => true do |t|
-    t.integer  "assetable_id"
-    t.string   "assetable_type"
-    t.string   "file_name"
-    t.integer  "file_size"
-    t.string   "file_type"
-    t.string   "file"
-    t.string   "play_path"
-    t.datetime "created_at",     :null => false
-    t.datetime "updated_at",     :null => false
-  end
-
-  add_index "assets", ["assetable_id"], :name => "index_assets_on_assetable_id"
-  add_index "assets", ["assetable_type"], :name => "index_assets_on_assetable_type"
 
   create_table "assignments", :force => true do |t|
     t.boolean  "admin",       :default => false
@@ -152,19 +137,6 @@ ActiveRecord::Schema.define(:version => 20130413021647) do
   add_index "courses", ["term_id"], :name => "index_courses_on_term_id"
   add_index "courses", ["webclass_id"], :name => "index_courses_on_webclass_id"
 
-  create_table "courses_members", :force => true do |t|
-    t.boolean  "admin",      :default => false
-    t.boolean  "active",     :default => false
-    t.integer  "user_id",                       :null => false
-    t.integer  "course_id",                     :null => false
-    t.string   "note"
-    t.datetime "created_at"
-    t.datetime "updated_at"
-  end
-
-  add_index "courses_members", ["course_id"], :name => "index_courses_members_on_course_id"
-  add_index "courses_members", ["user_id"], :name => "index_courses_members_on_user_id"
-
   create_table "courses_properties", :force => true do |t|
     t.string  "property_id", :null => false
     t.integer "course_id",   :null => false
@@ -172,6 +144,22 @@ ActiveRecord::Schema.define(:version => 20130413021647) do
 
   add_index "courses_properties", ["course_id"], :name => "index_courses_properties_on_course_id"
   add_index "courses_properties", ["property_id"], :name => "index_courses_properties_on_property_id"
+
+  create_table "exams", :force => true do |t|
+    t.string   "title",       :null => false
+    t.text     "body"
+    t.datetime "start_at"
+    t.datetime "end_at"
+    t.integer  "webclass_id", :null => false
+    t.integer  "term_id",     :null => false
+    t.integer  "creator",     :null => false
+    t.datetime "created_at",  :null => false
+    t.datetime "updated_at",  :null => false
+  end
+
+  add_index "exams", ["term_id"], :name => "index_exams_on_term_id"
+  add_index "exams", ["webclass_id", "term_id"], :name => "index_exams_on_webclass_id_and_term_id"
+  add_index "exams", ["webclass_id"], :name => "index_exams_on_webclass_id"
 
   create_table "folders", :force => true do |t|
     t.integer "user_id"
@@ -265,14 +253,15 @@ ActiveRecord::Schema.define(:version => 20130413021647) do
   add_index "media", ["mediumable_type", "mediumable_id"], :name => "index_media_on_mediumable_type_and_mediumable_id"
 
   create_table "members", :force => true do |t|
-    t.boolean  "admin",           :default => false
-    t.boolean  "active",          :default => false
-    t.integer  "user_id",                            :null => false
-    t.integer  "memberable_id",                      :null => false
-    t.string   "memberable_type",                    :null => false
+    t.boolean  "admin",                         :default => false
+    t.boolean  "active",                        :default => false
+    t.integer  "user_id",                                              :null => false
+    t.integer  "memberable_id",                                        :null => false
+    t.string   "memberable_type",                                      :null => false
     t.string   "note"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.string   "role",            :limit => 10, :default => "teacher", :null => false
   end
 
   create_table "posts", :force => true do |t|
@@ -326,13 +315,6 @@ ActiveRecord::Schema.define(:version => 20130413021647) do
 
   add_index "profiles", ["user_id"], :name => "index_profiles_on_actor_id"
 
-  create_table "properties", :force => true do |t|
-    t.string "key",   :null => false
-    t.string "value", :null => false
-  end
-
-  add_index "properties", ["key"], :name => "index_properties_on_key"
-
   create_table "questions", :force => true do |t|
     t.text     "body"
     t.boolean  "published",      :default => true
@@ -352,6 +334,20 @@ ActiveRecord::Schema.define(:version => 20130413021647) do
   end
 
   add_index "questions", ["user_id"], :name => "index_asks_on_user_id"
+
+  create_table "reports", :force => true do |t|
+    t.integer  "course_id",   :null => false
+    t.integer  "exam_id",     :null => false
+    t.integer  "value"
+    t.integer  "term_id",     :null => false
+    t.integer  "webclass_id", :null => false
+    t.datetime "created_at",  :null => false
+    t.datetime "updated_at",  :null => false
+  end
+
+  add_index "reports", ["term_id"], :name => "index_reports_on_term_id"
+  add_index "reports", ["webclass_id", "term_id"], :name => "index_reports_on_webclass_id_and_term_id"
+  add_index "reports", ["webclass_id"], :name => "index_reports_on_webclass_id"
 
   create_table "roles", :force => true do |t|
     t.string   "name"
@@ -471,6 +467,7 @@ ActiveRecord::Schema.define(:version => 20130413021647) do
     t.string   "name"
     t.integer  "up_votes",                              :default => 0,           :null => false
     t.integer  "down_votes",                            :default => 0,           :null => false
+    t.string   "role",                   :limit => 10,  :default => "teacher",   :null => false
   end
 
   add_index "users", ["email"], :name => "index_users_on_email"

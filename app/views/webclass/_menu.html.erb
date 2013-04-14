@@ -2,15 +2,15 @@
   <%= tab.index "主页", @current_webclass %>
   <%= tab.discusses "话题", webclass_webclass_posts_path(@current_webclass) %>
   <%= tab.folders "相册", webclass_webclass_courses_path(@current_webclass) %>
-
   <%= tab.folders "课件", webclass_webclass_folders_path(@current_webclass) %>
-  <%= tab.slots "课程表", webclass_webclass_slots_path(@current_webclass) %>
-
+  <%= tab.slots "课程", webclass_webclass_slots_path(@current_webclass) %>
+  <%= tab.assigmments "作业", webclass_webclass_assignments_path(@current_webclass) %>
+  <%= tab.reports "成绩", webclass_webclass_reports_path(@current_webclass) %>
   <%= tab.members "家校联系", webclass_webclass_members_path(@current_webclass) %>
   <%- if @current_webclass_member and @current_webclass_member.admin %>
     <%= tab.admin "管理", admin_webclass_webclass_settings_path(@current_webclass) %>
   <% end %>
-  <%- if @current_webclass_member %>
+  <%- if current_user.has_role? :mmeber, @current_webclass %>
     <%= link_to "发起讨论", new_webclass_webclass_post_path(@current_webclass), class: 'btn btn-info pull-right span' %>
     <%= link_to "共享文件", new_webclass_webclass_medium_path(@current_webclass), class: 'btn btn-sucess pull-right span' %>
   <% else %>

@@ -5,6 +5,7 @@ require 'uuid'
 require 'devise/orm/active_record'
 class User < ActiveRecord::Base
   rolify
+  acts_as_actor
   # Include default devise modules. Others available are:
   # :token_authenticatable, :confirmable,
   # :lockable, :timeoutable and :omniauthable

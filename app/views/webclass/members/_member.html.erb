@@ -1,0 +1,11 @@
+<tr id='member-<%= member.id %>'>
+  <td><%= member.name %></td>
+  <td><%= member.name %></td>
+  <td><%= member.role_name %></td>
+  <td><%= format_datetime member.created_at %></td>
+  <td>
+    <%= link_to '关注', follow_user_path(member.user_id), class: 'pull-left btn btn-success btn-small' %>
+    <%= link_to '修改角色', follow_user_path(member.user_id), class: 'pull-left span btn btn-info btn-small' %>
+    <%= link_to '发送信息', follow_user_path(member.user_id), class: 'pull-left span btn btn-primary btn-small' %>
+  </td>
+</tr>

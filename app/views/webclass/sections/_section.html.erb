@@ -1,6 +1,7 @@
-<tr id='section-<%= section.id %>'>
-  <td><%= section.title %></td>
-  <td><%= format_time section.start_at %></td>
-  <td><%= format_time section.end_at %></td>
-  <td></td>
-</tr>
+<td><%= section.title %></td>
+<td><%= format_time section.start_at %></td>
+<td><%= format_time section.end_at %></td>
+<td>
+  <%= link_to '修改', edit_webclass_webclass_section_path(@current_webclass, section), remote: true, data: {type: "script"} %>
+  <%= link_to '删除', webclass_webclass_section_path(@current_webclass, section), remote: true, method: :delete, data: {type: "script"} %>
+</td>

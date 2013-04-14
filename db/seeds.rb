@@ -1,4 +1,9 @@
 #encoding: utf-8
+=begin
+  
+rescue Exception => e
+  
+end
 Grade.delete_all
 Subject.delete_all
 Settings.grades.to_hash.each do |key, value|
@@ -19,3 +24,4 @@ Settings.subjects.to_hash.each do |key, value|
   end
 end
 
+=end

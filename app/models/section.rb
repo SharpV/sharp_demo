@@ -8,8 +8,6 @@ class Section < ActiveRecord::Base
   has_many :slots
   has_many :courses, :through => :slots
 
-  mount_uploader :file, FileUploader 
-
   validates :title, :uniqueness => {:scope => :webclass_id}
   validates :title, :presence => true, :length => {:within => 1..10}
   validates :start_at, presence: true

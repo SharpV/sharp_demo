@@ -12,6 +12,15 @@ class Webclass::SectionsController < WebclassController
     @sections = @current_webclass.current_term.sections.order(:start_at)
   end
 
+  def edit
+    @section = Section.find params[:id]
+  end
+
+  def update
+    @section = Section.find params[:id]
+    @section.update_attributes params[:section]
+  end
+
 
   def create
     @section = Section.new params[:section]
@@ -21,5 +30,10 @@ class Webclass::SectionsController < WebclassController
     unless @section.save
       nil
     end
+  end
+
+  def destroy
+    @section = Section.find params[:id]
+    @section.destroy
   end
 end

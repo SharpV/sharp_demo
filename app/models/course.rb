@@ -9,9 +9,8 @@ class Course < ActiveRecord::Base
 
   belongs_to :term
 
-
-  def member(user)
-    CoursesMember.where(user_id: user.id, course_id: self.id).first
+  def week
+    Date.today.cwday
   end
 
 end

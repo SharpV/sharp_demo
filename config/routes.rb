@@ -195,6 +195,10 @@ SharpLink::Application.routes.draw do
         get :admin, on: :collection
       end
 
+      resources :assignments
+
+      resources :reports
+
       member do 
         get :admin
         get :apply
@@ -202,7 +206,12 @@ SharpLink::Application.routes.draw do
     end
   end
 
-  resources :users
+  resources :users do
+    member do
+      get :follow
+      get :unfollow
+    end 
+  end
   resources :webclasses
 
   resources :shares

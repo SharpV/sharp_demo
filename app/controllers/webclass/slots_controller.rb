@@ -3,7 +3,9 @@ class Webclass::SlotsController < WebclassController
   
   set_tab :admin, :webclass_nav, only: [:admin]
   set_tab :slots, :webclass_admin_nav
+  set_tab :slots, :webclass_nav, only: [:index]
   def index
+    @sections = @current_webclass.current_term.sections.order(:start_at)
   end
 
   def admin

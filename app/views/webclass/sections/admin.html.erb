@@ -12,7 +12,11 @@
           </tr>
         </thead>
         <tbody id='section-list'>
-          <%= render @sections %>
+          <%- @sections.each do |section| %>
+            <tr id='section-<%= section.id %>'>
+              <%= render 'section', section: section %>
+            </tr>
+          <% end %>
           <tr>
             <td>
               <%= f.text_field :title %>
@@ -25,7 +29,7 @@
             </td>
             
             <td>
-              <%= f.submit '添加课时', class: 'btn btn-success', html: {disable_with: "正在提交..."}  %>
+              <%= f.submit '添加课时', class: 'btn btn-success', disable_with: "正在提交..."  %>
           </td>
           </tr>
 
