@@ -6,7 +6,7 @@
   <%= tab.slots "课程", webclass_webclass_slots_path(@current_webclass) %>
   <%= tab.assigmments "作业", webclass_webclass_assignments_path(@current_webclass) %>
   <%= tab.reports "成绩", webclass_webclass_reports_path(@current_webclass) %>
-  <%= tab.messages "信箱", webclass_webclass_messages_path(@current_webclass) %>
+  <%= tab.messages "班邮", webclass_webclass_messages_path(@current_webclass) %>
   <%= tab.members "成员", webclass_webclass_members_path(@current_webclass) %>
   <%- if @current_webclass_member and @current_webclass_member.admin %>
     <%= tab.admin "管理", admin_webclass_webclass_settings_path(@current_webclass) %>

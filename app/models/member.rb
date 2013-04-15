@@ -3,8 +3,6 @@
 class Member < ActiveRecord::Base
   belongs_to :user
   belongs_to :memberable, :polymorphic => true
-
-  has_many :messages
   
   scope :apply, where(:active => false)
   scope :active, where(:active => true)

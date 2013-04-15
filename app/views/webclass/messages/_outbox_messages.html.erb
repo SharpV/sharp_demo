@@ -1,0 +1,6 @@
+<tr id='message-<%= message.id %>'>
+  <td><%=link_to message.recipient.nickname,  message.recipient %></td> 
+  <td><%=link_to message.title, [:webclass, @current_webclass, message] %> </td>
+  <td><%= format_datetime message.created_at %> </td>
+  <td></td>
+</tr>

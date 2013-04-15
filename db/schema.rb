@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130414135246) do
+ActiveRecord::Schema.define(:version => 20130415150158) do
 
   create_table "active_admin_comments", :force => true do |t|
     t.string   "resource_id",   :null => false
@@ -253,7 +253,7 @@ ActiveRecord::Schema.define(:version => 20130414135246) do
     t.text     "body"
     t.string   "title",                           :null => false
     t.datetime "send_at"
-    t.integer  "member_id"
+    t.integer  "webclass_id"
     t.integer  "recipient_id"
     t.boolean  "read",         :default => false
     t.integer  "sender_id",                       :null => false
@@ -261,11 +261,13 @@ ActiveRecord::Schema.define(:version => 20130414135246) do
     t.datetime "updated_at",                      :null => false
     t.boolean  "is_draft",     :default => false
     t.boolean  "is_delete",    :default => false
+    t.integer  "parent_id"
   end
+
+  add_index "messages", ["parent_id"], :name => "index_messages_on_parent_id"
 
   create_table "posts", :force => true do |t|
     t.text     "body"
-    t.boolean  "published",                       :default => true
     t.string   "kind",              :limit => 10
     t.string   "title"
     t.string   "url"
@@ -276,13 +278,13 @@ ActiveRecord::Schema.define(:version => 20130414135246) do
     t.integer  "comments_count",                  :default => 0
     t.integer  "likes_count",                     :default => 0
     t.integer  "collections_count",               :default => 0
-    t.string   "file"
     t.integer  "postable_id"
     t.string   "postable_type"
     t.string   "slug"
     t.integer  "category_id"
     t.boolean  "is_public",                       :default => false
     t.integer  "creator_id",                                         :null => false
+    t.boolean  "is_delete",                       :default => false
   end
 
   add_index "posts", ["category_id"], :name => "index_posts_on_category_id"

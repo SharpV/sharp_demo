@@ -1,3 +1,5 @@
+ #encoding: utf-8
+
 class Webclass::MembersController < WebclassController
   set_tab :members, :webclass_nav
   set_tab :admin, :webclass_nav, only: [:admin]

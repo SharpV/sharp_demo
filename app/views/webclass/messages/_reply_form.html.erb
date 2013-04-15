@@ -1,0 +1,10 @@
+<%= simple_form_for Message.new(parent_id: @message.id, member: @message.sender.member(@current_webclass)), url: webclass_webclass_messages_path(@current_webclass), :html => {:class => 'form-stacked'}, validate: true do |f| -%> 
+  <%= f.error_notification %>
+  <%= f.hidden_field :parent_id %>
+  <%= f.association :member %>
+  <%= f.input :title, :class=>'xlarge', :label => '标题' %>
+  <%= f.input :body, label: '内容' %>
+  <div class="actions">
+    <%= f.submit '创建', :class=>'btn btn-primary', disable_with: "正在提交..." %>
+  </div>
+<% end %>

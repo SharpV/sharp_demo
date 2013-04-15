@@ -3,11 +3,14 @@
 class Webclass < ActiveRecord::Base
   # attr_accessible :title, :body
   resourcify
-  
-  has_many :members, as: :memberable
-  has_many :users, through: :members
+
   validates :name, :presence => true, :length => {:within => 1..30}
   validates :body, :slug, :presence => true
+
+  has_many :messages
+
+  has_many :members, as: :memberable
+  has_many :users, through: :members
 
   mount_uploader :avatar, ImageUploader
   has_many :terms
@@ -27,6 +30,10 @@ class Webclass < ActiveRecord::Base
     else
       find_or_create_current_term(Time.now.year-1, 1)
     end
+  end
+
+  def group_members(role)
+    members.select{|m|m.role == role.to_s}
   end
 
   private

@@ -4,6 +4,5 @@ class MeController < ApplicationController
   set_tab :index, :site_nav
   
   layout "me"
-  def index
-  end
+  
 end

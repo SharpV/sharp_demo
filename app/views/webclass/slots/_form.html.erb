@@ -1,0 +1,17 @@
+<%= form_for Slot.new, :url => webclass_webclass_slots_path(@current_webclass), :validate => true, remote: true, :html => {:class => 'form-horizontal', id: 'slot-form', data: {type: "script", method: :post}} do |f| %>
+<tr>
+  <td>
+    <%= f.text_field :title %>
+  </td>
+  <td>
+    <%= f.text_field :start_at, class: 'timepicker' %>
+  </td>
+  <td>
+    <%= f.text_field :end_at, class: 'timepicker' %>
+  </td>
+  
+  <td>
+    <%= f.submit '添加课时', class: 'btn btn-success', html: {disable_with: "正在提交..."}  %>
+  </td>
+</tr>
+<% end %>

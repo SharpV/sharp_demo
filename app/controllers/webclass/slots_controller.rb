@@ -1,3 +1,5 @@
+ #encoding: utf-8
+
 class Webclass::SlotsController < WebclassController
   respond_to :html, :js
   

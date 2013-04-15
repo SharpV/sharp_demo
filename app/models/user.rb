@@ -17,8 +17,7 @@ class User < ActiveRecord::Base
 
   make_voter
   has_many :connects, dependent: :destroy
-  has_many :groups_members, dependent: :destroy
-  has_many :courses_members, dependent: :destroy
+
   has_many :questions
   has_many :answers
   has_many :members
@@ -27,6 +26,8 @@ class User < ActiveRecord::Base
 
   has_many :courses, through: :courses_members
   has_many :bookmarks
+  has_many :messages, as: :sender
+  has_many :messages, as: :recipient
   has_many :posts, as: :postable
   has_many :media, as: :mediumable
   has_many :categories, as: :categoryable

@@ -1,3 +1,5 @@
+ #encoding: utf-8
+
 class Webclass::SettingsController < WebclassController
   set_tab :index, :setting_nav
   set_tab :admin, :webclass_nav

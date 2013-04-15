@@ -1,9 +1,5 @@
 SharpLink::Application.routes.draw do
 
-  ActiveAdmin.routes(self)
-
-  devise_for :admin_users, ActiveAdmin::Devise.config
-
   devise_for :users, :controllers => {:registrations => "registrations", :passwords => "passwords", :sessions => "sessions", :omniauth_callbacks => 'omniauth_callbacks'}
   match "errors/routing", :to => "errors#routing"
   match "tags/:tag/posts",  :to => "posts#show",:as => "tag_posts"
@@ -20,8 +16,6 @@ SharpLink::Application.routes.draw do
     root :to => 'dashboard#show'
   end
   
-  match "me" => "me#index"
-
   namespace :me do
     resources :bookmarks
     resources :likes
@@ -154,7 +148,7 @@ SharpLink::Application.routes.draw do
       resources :messages do
         collection do 
           get :draft
-          get :send
+          get :sendout
         end
       end
       resources :members do

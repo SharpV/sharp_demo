@@ -1,15 +1,13 @@
 <div class='row'>
   <div class='span2'>
     <%= tabs_tag(:namespace => :me_nav, :open_tabs => {:class => "nav nav-tabs nav-stacked" }, :builder => MenuTabBuilder)    do |tab| %>
-      <%= tab.home raw("<i class='icon icon-comments'></i> 我的关注"), me_activities_path %>
+      <%= tab.activities raw("<i class='icon icon-comments'></i> 我的关注"), me_activities_path %>
       <%= tab.notifications raw("<i class='icon icon-bullhorn'></i> 我的提醒"), me_notifications_path %>
      	<%= tab.posts raw("<i class='icon icon-edit'></i> 我的文章"), me_posts_path %>
       <%= tab.media raw("<i class='icon icon-file-alt'></i> 我的课件"), me_folders_path %>
       <%= tab.questions raw("<i class='icon icon-question-sign'></i> 我的问答"), me_questions_path %>
-      <%= tab.bookmark raw("<i class='icon icon-bookmark'></i> 我的书签"), me_bookmarks_path %>
-    	<%= tab.groups raw("<i class='icon icon-group'></i> 我的群组"), me_groups_path %>
-    	<%= tab.webclasses raw("<i class='icon icon-facetime-video'></i> 我的班级"), me_webclasses_path %>
-    	<%= tab.like raw("<i class='icon icon-heart'></i> 我的收藏"), me_likes_path %>
+      <%= tab.bookmarks raw("<i class='icon icon-bookmark'></i> 我的书签"), me_bookmarks_path %>
+    	<%= tab.likes raw("<i class='icon icon-heart'></i> 我的收藏"), me_likes_path %>
     	<%= tab.settings raw("<i class='icon icon-cog'></i> 个人设置"), me_settings_path %>    
     <% end %>
   </div>

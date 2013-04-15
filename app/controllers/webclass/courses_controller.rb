@@ -1,3 +1,5 @@
+ #encoding: utf-8
+
 class Webclass::CoursesController < WebclassController
   respond_to :html, :js
   
