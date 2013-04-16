@@ -1,0 +1,8 @@
+<div id='message-<%= message.id %>'>
+  <div class='item item-info clearfix'>
+    来自: <%= message.sender.nickname %>
+    <div class='pull-right text-right'> <%= format_datetime @message.created_at %></div>
+  </div>
+  <div class='content'><p><%= message.body %></p></div>
+</div>
+<br />

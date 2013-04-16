@@ -1,6 +1,7 @@
  #encoding: utf-8
 require 'ostruct'
 class Webclass::MessagesController < WebclassController
+  respond_to :html, :js
   set_tab :messages, :webclass_nav
   set_tab :sendout, :webclass_messages_nav, only: [:sendout]
   set_tab :index, :webclass_messages_nav, only: [:index]
@@ -16,7 +17,6 @@ class Webclass::MessagesController < WebclassController
       group.name = role_name
       group.members = @current_webclass.group_members(role)
       @group_members << group
-      puts group.inspect
     end
   end
 
@@ -26,19 +26,33 @@ class Webclass::MessagesController < WebclassController
 
   def show
     @message = Message.find params[:id]
+    @replies = @message.replies
+    if @message.sender_id == current_user.id
+      set_tab :sendout, :webclass_messages_nav
+    else
+      set_tab :index, :webclass_messages_nav
+    end
+      
     unless @message.sender_id == current_user.id or @message.recipient_id == current_user.id 
       redirect_to [:webclass, @current_webclass, 'messages']
     end
   end
 
+  def reply
+    @message = Message.new params[:message]
+    @message.sender = current_user
+    @message.save
+  end
+
   def create
-    message = Message.new params[:message]
-    message.sender = current_user
-    message.webclass = @current_webclass
-    if  message.save
-      redirect_to [:webclass, @current_webclass, 'messages']
-    else
-      render action: :new
+    recipient_ids = params[:message].delete :recipient_id
+    recipient_ids.each do |recipient_id|  
+      message = Message.new params[:message]
+      message.sender = current_user
+      message.webclass = @current_webclass
+      message.recipient_id = recipient_id
+      message.save
     end
+    redirect_to [:webclass, @current_webclass, :messages]
   end
 end

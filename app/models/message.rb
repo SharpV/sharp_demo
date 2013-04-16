@@ -7,7 +7,8 @@ class Message < ActiveRecord::Base
   belongs_to :recipient, class_name: 'User', foreign_key: :recipient_id
   scope :webclass, where('webclass_id is not null and recipient_id is not null and sender_id is not null')
 
-  def create_reply
-    Message.new parent_id: self.id, sender_id: recipient_id, webclass_id: webclass_id, title: title
+
+  def replies
+    Message.where parent_id: id
   end
 end

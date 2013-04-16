@@ -1,0 +1,3 @@
+$('#reply-list').append("<%= escape_javascript render('reply', message: @message) %>");
+$('#message-<%= @message.id %>').effect("highlight", {}, 2000);
+$('#reply-form').trigger('reset');

@@ -150,6 +150,9 @@ SharpLink::Application.routes.draw do
           get :draft
           get :sendout
         end
+        member do
+          post :reply
+        end
       end
       resources :members do
         collection do 

@@ -1,0 +1,49 @@
+<script>
+$(document).ready(function() {
+  $('#recipient_ids').multiSelect({
+    selectableHeader: "<div class='custom-header'>成员列表</div>",
+    selectionHeader: "<div class='custom-header'>已选择成员</div>",
+    selectableOptgroup: true 
+  })
+
+  $('#select-all').click(function(){
+    $('input:checkbox').removeAttr('checked');
+    $('#recipient_ids').multiSelect('select_all');
+    $(this).prop('checked', true);
+  });
+  $('#deselect-all').click(function(){
+    $('input:checkbox').removeAttr('checked');
+    $('#recipient_ids').multiSelect('deselect_all');
+    $(this).prop('checked', true);
+  });
+  $('#select-teachers').click(function(){
+    var mode = 'deselect'
+    if($(this).is(':checked')){
+      mode = 'select';
+    }
+    $('#recipient_ids').multiSelect(mode, [<%= select_members(:teacher).html_safe %>]);
+  
+  });
+  $('#select-parents').click(function(){
+    var mode = 'deselect'
+    if($(this).is(':checked')){
+      mode = 'select';
+    }
+    $('#recipient_ids').multiSelect(mode, [<%= select_members(:parent).html_safe %>]);
+
+  });
+  $('#select-students').click(function(){
+    var mode = 'deselect'
+    if($(this).is(':checked')){
+      mode = 'select';
+    }
+    $('#recipient_ids').multiSelect(mode, [<%= select_members(:student).html_safe %>]);
+  
+  });
+});
+
+  </script>
+  收件人
+  <%- {'select-all' => '所有成员', 'select-teachers' => '所有老师', 'select-students' => '所有学生', 'select-parents' => '所有家长', 'deselect-all' => '清空所有' }.each do |key, value|  %>
+    <input type="checkbox" name='contact-select' id="<%= key %>"> <%= value %>
+  <% end %>
