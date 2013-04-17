@@ -1,7 +1,5 @@
-<p>
-  <%= link_to "写信", new_webclass_webclass_message_path(@current_webclass), class: 'btn btn-small btn-success' %>
-</p>
 <%= tabs_tag(:namespace => :webclass_messages_nav, :open_tabs => {:class => "nav nav-tabs nav-stacked"}, :builder =>     MenuTabBuilder) do |tab| %>
+  <%= tab.write "写信", new_webclass_webclass_message_path(@current_webclass) %>
   <%= tab.index "收件箱", webclass_webclass_messages_path(@current_webclass) %>
   <%= tab.sendout "发件箱", sendout_webclass_webclass_messages_path(@current_webclass) %>
   <%= tab.draft "草稿箱", draft_webclass_webclass_messages_path(@current_webclass) %>

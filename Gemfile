@@ -68,7 +68,7 @@ gem 'client_side_validations'
 gem 'client_side_validations-simple_form'
 gem 'exception_notification'
 gem "rails_config"
-gem "annotate"
+gem 'gravatar_image_tag'
 gem 'redis_voteable'
 gem "bcrypt-ruby", :require => "bcrypt"
 gem "friendly_id"

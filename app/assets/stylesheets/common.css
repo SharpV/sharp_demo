@@ -1,3 +1,23 @@
+ul, ol {
+    margin: 0 0 5px 5px;
+}
+
+li .avatar{
+    float:left;
+    width: 60px;
+}    
+
+li .content{
+    float: none;
+    overflow: hidden;
+    width: auto;
+}
+
+li .content span.time{
+    float: right;
+    color: #777;
+}
+
 h4.border {
     border-bottom: 1px solid #AAAAAA;
     padding-bottom: 6px;

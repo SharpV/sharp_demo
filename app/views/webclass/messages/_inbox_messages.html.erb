@@ -1,4 +1,4 @@
-<tr id='message-<%= message.id %>'>
+<tr id='message-<%= message.id %>' class=<%= message.read ? '' : 'warning' %> >
   <td><%=link_to message.recipient.nickname,  message.recipient %></td> 
   <td><%=link_to message.title, [:webclass, @current_webclass, message] %> </td>
   <td><%= format_datetime message.created_at %> </td>

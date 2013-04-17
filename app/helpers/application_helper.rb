@@ -13,10 +13,6 @@ module ApplicationHelper
     @devise_mapping ||= Devise.mappings[:user]
   end
 
-  def author
-    Struct.new(:name, :email).new(enki_config[:author][:name], enki_config[:author][:email])
-  end
-
   def notice_message
     flash_messages = []
     flash.each do |type, message|
@@ -28,16 +24,30 @@ module ApplicationHelper
     flash_messages.join("\n").html_safe
   end
 
-  def avatar_url(model,mode='m')
-     model.avatar and !model.avatar.blank? ? model.avatar.url(mode) : default_avatar_url(model.class.to_s.downcase, mode)
+  def size_by_mode(mode)
+    case mode
+    when 'm' then 75
+    when 'b' then 125
+    when 's' then 45
+    end
   end
 
-  def default_avatar_url(kclass, mode)
-    "default_#{kclass}_#{mode}.gif"
+  def user_avatar_tag(user, mode='m')
+    if user.avatar and !user.avatar.blank?
+      image_tag user.avatar.url(mode)
+    else
+      gravatar_image_tag(user.email.gsub('spam', 'mdeering'), :alt => user.nickname, 
+        :gravatar => {:size => size_by_mode(mode), default: :identicon })
+    end
   end
 
-  def avatar_image(user, size = 52, type = :user)
-    image_tag user.gravatar(size), size: [size, size].join('x')
+
+  def avatar_tag(model, mode='m')
+     if model.avatar and !model.avatar.blank? 
+      image_tag model.avatar.url(mode) 
+    else
+      gravatar_image_tag('', :gravatar => {:size => size_by_mode(mode)})
+    end
   end
   
   def link_to_bookmark(post)

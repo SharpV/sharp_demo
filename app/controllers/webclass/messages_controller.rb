@@ -5,6 +5,8 @@ class Webclass::MessagesController < WebclassController
   set_tab :messages, :webclass_nav
   set_tab :sendout, :webclass_messages_nav, only: [:sendout]
   set_tab :index, :webclass_messages_nav, only: [:index]
+  set_tab :write, :webclass_messages_nav, only: [:new]
+
   def index
     @messages = Message.webclass.where(recipient_id: current_user.id).page params[:page]
   end 
@@ -26,6 +28,7 @@ class Webclass::MessagesController < WebclassController
 
   def show
     @message = Message.find params[:id]
+    @message.update_attributes read: true
     @replies = @message.replies
     if @message.sender_id == current_user.id
       set_tab :sendout, :webclass_messages_nav
