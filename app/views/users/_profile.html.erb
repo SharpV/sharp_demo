@@ -1,11 +1,11 @@
 <div id='profile_info' class='content'>
 	<table>
 		<tr>
-			<td><%= image_tag avatar_url(current_user, :b) %></td>
+			<td><%= user_avatar_tag(@current_user, :b) %></td>
 		</tr>
 		<tr>
 			<td>
-				<p><%= current_user.nickname %></p>
+				<p><%= @current_user.nickname %></p>
 			</td>
 		</tr>
 	</table>

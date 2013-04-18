@@ -1,50 +1,81 @@
-class Group::QuestionsController < GroupController
-  before_filter :set_group_tab
-  set_tab :question, :group_menus
-  set_tab :question, :group_actions, :only => %w(new edit)
-  
-  
+class Me::QuestionsController < MeController
+
+  set_tab 'questions', :me_nav
+  set_tab 'index', :question_nav
+
   def index
-    @questions = Group::Question.all
+    @questions = current_user.questions.page params[:page]
+
   end
-  
-  
+
+  # GET /me/notes/1
+  # GET /me/notes/1.json
   def show
-    @question = Group::Question.find(params[:id])
+    @post = Post::Note.find(params[:id])
+
+    respond_to do |format|
+      format.html # show.html.erb
+      format.json { render json: @post }
+    end
   end
 
-
+  # GET /me/notes/new
+  # GET /me/notes/new.json
   def new
-    @question = Group::Qustion.new
+    @post = Post::Note.new
+
+    respond_to do |format|
+      format.html # new.html.erb
+      format.json { render json: @post }
+    end
   end
-  
+
+  # GET /me/notes/1/edit
   def edit
-    @question = Group::Question.find(params[:id])
+    @me_note = Me::Note.find(params[:id])
   end
 
+  # POST /me/notes
+  # POST /me/notes.json
   def create
-    @question = current_user.questions.build params[:group_question]
-    if @question.save
-      redirect_to group_question_path(@current_group, @question)
-    else
-      render :action => :new
+    @post = Post::Note.new(params[:post_note])
+    @post.postable = current_user
+    respond_to do |format|
+      if @post.save
+        format.html { redirect_to me_note_path(@post), notice: 'Note was successfully created.' }
+        format.json { render json: @post, status: :created, location: @post }
+      else
+        format.html { render action: "new" }
+        format.json { render json: @post.errors, status: :unprocessable_entity }
+      end
     end
   end
 
-
+  # PUT /me/notes/1
+  # PUT /me/notes/1.json
   def update
-    @question = Group::Question.find(params[:id])
-    if @Group::Question.update_attributes(params[:forum_topic])
-      redirect_to group_question_path(@current_group, @question)
-    else
-      render :action => :edit
+    @post = Post::Note.find(params[:id])
+
+    respond_to do |format|
+      if @post.update_attributes(params[:post_note])
+        format.html { redirect_to @post, notice: 'Note was successfully updated.' }
+        format.json { head :no_content }
+      else
+        format.html { render action: "edit" }
+        format.json { render json: @post.errors, status: :unprocessable_entity }
+      end
     end
   end
 
-
+  # DELETE /me/notes/1
+  # DELETE /me/notes/1.json
   def destroy
-    @question = Group::Question.find(params[:id])
-    @question.destroy
+    @post = Post::Note.find(params[:id])
+    @post.destroy
+
+    respond_to do |format|
+      format.html { redirect_to me_notes_url }
+      format.json { head :no_content }
+    end
   end
 end
-

@@ -1,5 +1,0 @@
-<%= tabs_tag(:namespace => :activity_menus, :open_tabs => { :id => "activity_nav", :class => "nav nav-tabs" }, :builder => MenuTabBuilder) do |tab| %>
-  <%= tab.home raw("所有动态"), me_activities_path %>
-  <%= tab.post raw("好友动态"), me_activities_path('f') %>
-  <%= tab.question raw("我的动态"), me_activities_path('m') %>
-<% end %>

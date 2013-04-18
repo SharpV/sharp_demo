@@ -1,6 +1,4 @@
 class UsersController < ApplicationController
-
-  layout "user"
   
   def search
     if params[:q].present?
@@ -12,6 +10,12 @@ class UsersController < ApplicationController
       format.js {}
       format.html { render :index }
     end
+  end
+
+  def show
+    @my_webclasses = current_user.webclasses
+    @my_groups = current_user.groups
+    render layout: 'user'
   end
 
   def new

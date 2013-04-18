@@ -3,7 +3,7 @@
   <ul>
     <%- @my_webclasses.each do |webclass| %>
       <li>  
-        <%= link_to image_tag(avatar_url(webclass), placeholder: 'logo.png'), webclass, target: '_blank' %>
+        <%= link_to avatar_tag(webclass, 'm'), webclass, target: '_blank' %>
       </li>
     <% end %>
   </ul>

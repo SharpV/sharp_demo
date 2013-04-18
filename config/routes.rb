@@ -16,41 +16,43 @@ SharpLink::Application.routes.draw do
     root :to => 'dashboard#show'
   end
   
-  namespace :me do
-    resources :bookmarks
-    resources :likes
-    resources :posts
-    resources :comments
+  namespace :user, path: 'space' do
     resources :settings 
-    resources :photos
-    resources :certifications
-    resources :groups
-    resources :courses do
-      collection do
-        get :admin
-      end
-    end
-    resources :webclasses
-    resources :questions
-    resources :answers
-    resources :passwords
-    resources :notifications
-    resources :activities
-    resources :media
-    resources :collections
-    resources :folders do
-      collection do
-        get :admin
-      end
-      resources :media
-    end
-
-    resources :categories do
-      collection do
-        get :admin
-        post :rebuild
-      end
+    resources :users do 
+      resources :bookmarks
+      resources :likes
       resources :posts
+      resources :comments
+      resources :photos
+      resources :certifications
+      resources :groups
+      resources :courses do
+        collection do
+          get :admin
+        end
+      end
+      resources :webclasses
+      resources :questions
+      resources :answers
+      resources :passwords
+      resources :notifications
+      resources :activities
+      resources :media
+      resources :collections
+      resources :folders do
+        collection do
+          get :admin
+        end
+        resources :media
+      end
+  
+      resources :categories do
+        collection do
+          get :admin
+          post :rebuild
+        end
+        resources :posts
+      end
     end
   end
 
