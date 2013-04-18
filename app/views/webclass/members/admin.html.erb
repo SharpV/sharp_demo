@@ -1,6 +1,8 @@
 <div class='row'>
   <div class='span-l'>
-    <h4><%= @current_webclass.current_term.name %></h4>
+    <h4>
+      成员列表
+    </h4>
     
     <%= render 'list' %>
 
@@ -9,7 +11,3 @@
     <%= render 'webclass/settings/menu' %>
   </div>
 </div>
-
-<%- content_for :left do %>
-  <h3><%= @current_webclass.name %></h3>
-<% end %>

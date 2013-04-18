@@ -1,3 +1,6 @@
+select {
+    width: auto;
+}
 ul, ol {
     margin: 0 0 5px 5px;
 }

@@ -66,28 +66,6 @@ SharpLink::Application.routes.draw do
   
   resources :schools
 
-  resources :users do 
-    resources :activities
-    resources :posts
-    resources :groups
-    resources :questions
-    resources :settings
-    resources :comments
-    resources :passwords
-    resources :likes
-    resources :profiles
-    resources :courses
-    resources :notifications
-  end
-
-  resources :courses do
-    resources :slots 
-    resources :sections
-    resources :questions 
-    resources :comments
-    get :admin, on: :member
-  end
-
   resources :groups do
     get :apply, on: :member
     post :email_members, on: :member
@@ -163,6 +141,7 @@ SharpLink::Application.routes.draw do
         member do 
           get :agree
           get :reject
+          get :change_role
         end
       end
 

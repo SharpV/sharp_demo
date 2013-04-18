@@ -2,5 +2,5 @@
   <%= f.input :name, label: '名称' %>
   <%= f.input :week, as: :radio_buttons, :item_wrapper_class => 'inline', collection: weeks, label: '周时' %>
   <%= f.association :sections, as: :check_boxes, label: '课时', :item_wrapper_class => 'inline', collection: @sections %>
-  <%= f.submit, value: '添加课程', class: 'btn btn-info' %>
+  <%= f.submit value: '添加课程', class: 'btn btn-info' %>
 <% end %>

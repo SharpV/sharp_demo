@@ -1,22 +1,14 @@
 <tr id='member-<%= member.id %>'>
+  <td><%= link_to user_avatar_tag(member.user, 's'), member.user %></td>
   <td><%= member.name %></td>
-  <td><%= member.name %></td>
-  <td><%= member.role_name %></td>
+  <td></td>
+  <td>
+    <%= select_tag :role, options_for_select([['老师', 'teacher'], ['学生', 'student'], ['家长', 'parent']], member.role), :onchange => "change_role(#{member.id}, this.value)" %>
+    <p id='ajax-tip-<%= member.id %>' class='pull-right text-success'></p>
+  </td>
   <td><%= format_datetime member.created_at %></td>
   <td>
-    <%- if current_user.has_role? :admin, @current_webclass %>
-      <p>
-        <%= link_to '修改角色', follow_user_path(member.user_id), class: 'btn btn-info btn-small' %>
-        &nbsp; &nbsp;
-        <%= link_to '删除', follow_user_path(member.user_id), class: 'btn btn-warning btn-small' %>
-      </p>
-    <% end %>
-    <%- if current_user.has_role? :member, @current_webclass %>
-      <p>
-        <%= link_to '发送信息', follow_user_path(member.user_id), class: 'btn btn-success btn-small' %> 
-        &nbsp; &nbsp;
-        <%= link_to '关注', follow_user_path(member.user_id), class: 'btn btn-primary btn-small' %>
-      </p>
-    <% end %>
+    <%= link_to '更新', '', disable_with: "更新中...", class: 'btn btn-info' %>
   </td>
 </tr>
+

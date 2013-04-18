@@ -32,8 +32,16 @@ class Webclass < ActiveRecord::Base
     end
   end
 
+  def to_param
+    slug ? "#{id}-#{slug.parameterize}" : id.to_s
+  end
+
+  def teachers
+    group_members(:teacher)
+  end
+
   def group_members(role)
-    members.select{|m|m.role == role.to_s}
+    members.select{|m|m.role == role.to_s and m.active}
   end
 
   private

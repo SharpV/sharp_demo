@@ -8,17 +8,25 @@
     <div id="page" class="container">
       <div class="row">
         <div class='span-l'>
-           <%= avatar_tag(@current_webclass, 'b') %>
-           <h4><%= @current_webclass.name %></h4>
-           <p><%= @current_webclass.body %></p>
-           <h4 class='border'>
+          <%= avatar_tag(@current_webclass, 'b') %>
+          <h4><%= @current_webclass.name %></h4>
+          <p><%= @current_webclass.body %></p>
+          <h4 class='border'>
             班主任
-           </h4>
-           <%= user_avatar_tag(@current_webclass.creator, 'm') %>
+          </h4>
+          <%= user_avatar_tag(@current_webclass.creator, 'm') %>
+          <h4 class='border'>
+            任课老师
+          </h4>
+          <%- @current_webclass.teachers.each_with_index do |teacher, index| %>
+            <div class="<%= index.odd? ? '' : 'pull-right' %>">
+              <%= user_avatar_tag(teacher.user, 'm') %>
+              <p><%= teacher.name %></p>
+            </div>  
+          <% end %>
         </div>
-
         <div class='span-r'>
-          <%= render 'webclass/menu' %>
+          <%= render 'webclasses/menu' %>
           <%= bootstrap_flash %>
           <%= yield %>
         </div>
