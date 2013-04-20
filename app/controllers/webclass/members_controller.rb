@@ -6,20 +6,23 @@ class Webclass::MembersController < WebclassController
   set_tab :admin, :webclass_nav, only: [:admin]
   set_tab :members, :webclass_admin_nav, only: [:admin]
   def index
-    @members = @current_webclass.members.active
+    @members = @current_webclass.members.includes(:user).active.order(:role)
     @students = @members.collect{|m|m.role == 'student'}
     @parents = @members.collect{|m|m.role == 'parent'}
   end 
 
   def admin
-    @members = @current_webclass.members.active.order(:role)
+    @members = @current_webclass.members.includes(:user).active.order(:role)
   end
 
-  def update
+  def set_admin
     @member = Member.find params[:id]
-    if @member.update_attributes params[:member]
-      render
+    if @member.admin 
+      @member.admin = false
+    else
+      @member.admin = true
     end
+    @member.save
   end
 
   def change_role

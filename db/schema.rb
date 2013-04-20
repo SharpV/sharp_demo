@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130415150158) do
+ActiveRecord::Schema.define(:version => 20130420105122) do
 
   create_table "active_admin_comments", :force => true do |t|
     t.string   "resource_id",   :null => false
@@ -64,7 +64,6 @@ ActiveRecord::Schema.define(:version => 20130415150158) do
   add_index "answers", ["question_id"], :name => "index_answers_on_ask_id"
 
   create_table "assignments", :force => true do |t|
-    t.boolean  "admin",       :default => false
     t.boolean  "active",      :default => false
     t.integer  "creator_id",                     :null => false
     t.integer  "webclass_id",                    :null => false
@@ -72,6 +71,8 @@ ActiveRecord::Schema.define(:version => 20130415150158) do
     t.datetime "created_at"
     t.datetime "submit_at"
     t.text     "body"
+    t.integer  "course_id"
+    t.integer  "term_id",                        :null => false
   end
 
   add_index "assignments", ["active"], :name => "index_groups_members_on_active"
@@ -152,9 +153,10 @@ ActiveRecord::Schema.define(:version => 20130415150158) do
     t.datetime "end_at"
     t.integer  "webclass_id", :null => false
     t.integer  "term_id",     :null => false
-    t.integer  "creator",     :null => false
+    t.integer  "creator_id",  :null => false
     t.datetime "created_at",  :null => false
     t.datetime "updated_at",  :null => false
+    t.integer  "course_id"
   end
 
   add_index "exams", ["term_id"], :name => "index_exams_on_term_id"
@@ -247,6 +249,7 @@ ActiveRecord::Schema.define(:version => 20130415150158) do
     t.datetime "created_at"
     t.datetime "updated_at"
     t.string   "role",            :limit => 10, :default => "teacher", :null => false
+    t.integer  "student_id"
   end
 
   create_table "messages", :force => true do |t|
@@ -344,6 +347,7 @@ ActiveRecord::Schema.define(:version => 20130415150158) do
     t.integer  "webclass_id", :null => false
     t.datetime "created_at",  :null => false
     t.datetime "updated_at",  :null => false
+    t.integer  "member_id",   :null => false
   end
 
   add_index "reports", ["term_id"], :name => "index_reports_on_term_id"

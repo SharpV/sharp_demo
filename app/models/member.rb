@@ -8,6 +8,18 @@ class Member < ActiveRecord::Base
   scope :active, where(:active => true)
   scope :teacher, where(:role => 'teacher')
 
+  def teacher?
+    role == 'teacher'
+  end
+
+  def parent?
+    role == 'parent'
+  end
+
+  def student?
+    role == 'student'
+  end
+
   def name
     user.nickname
   end
@@ -17,7 +29,7 @@ class Member < ActiveRecord::Base
     when 'teacher' then '老师'
     when 'student' then '学生'
     when 'parent' then '家长'
-    end 
+    end   
   end
   
 end

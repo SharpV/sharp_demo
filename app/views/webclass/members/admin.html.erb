@@ -1,10 +1,40 @@
+<script>
+  function change_role(member_id, role) {  
+    jQuery.ajax({
+      url: "<%= change_role_webclass_webclass_member_path(@current_webclass, 0) %>",
+      type: "GET",
+      dataType: "script",
+      data: {"role" : role, "member_id": member_id},
+      success: function(data) {
+        
+      }
+    });
+  }
+</script>
+
 <div class='row'>
   <div class='span-l'>
     <h4>
       成员列表
     </h4>
-    
-    <%= render 'list' %>
+
+    <table class='table table-bordered'>
+      <thead>
+        <tr class="success">
+          <th width='80'>成员</th>
+          <th>管理员</th>
+          <th>姓名</th>  
+          <th>角色</th>
+          <th>加入时间</th>
+          <th>操作</th>
+        </tr>
+      </thead>
+      <tbody id='member-list'>
+        <form>
+          <%= render partial: 'member', collection: @members %>
+        </form>
+      </tbody>
+    </table>
 
   </div>
   <div class='span-r pull-right'>

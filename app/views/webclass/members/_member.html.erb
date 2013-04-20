@@ -1,14 +1,4 @@
 <tr id='member-<%= member.id %>'>
-  <td><%= link_to user_avatar_tag(member.user, 's'), member.user %></td>
-  <td><%= member.name %></td>
-  <td></td>
-  <td>
-    <%= select_tag :role, options_for_select([['老师', 'teacher'], ['学生', 'student'], ['家长', 'parent']], member.role), :onchange => "change_role(#{member.id}, this.value)" %>
-    <p id='ajax-tip-<%= member.id %>' class='pull-right text-success'></p>
-  </td>
-  <td><%= format_datetime member.created_at %></td>
-  <td>
-    <%= link_to '更新', '', disable_with: "更新中...", class: 'btn btn-info' %>
-  </td>
+  <%= render partial: 'member_content', locals: {member: member} %>
 </tr>
 

@@ -142,10 +142,13 @@ SharpLink::Application.routes.draw do
           get :agree
           get :reject
           get :change_role
+          get :set_admin
         end
       end
 
       resources :courses do
+        resources :assignments
+
         collection do 
           get :admin
         end
@@ -182,7 +185,10 @@ SharpLink::Application.routes.draw do
         get :admin, on: :collection
       end
       resources :assignments
-      resources :reports
+
+      resources :exams do
+        resources :reports
+      end
 
     end
   end

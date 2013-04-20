@@ -23,7 +23,7 @@ class User < ActiveRecord::Base
   has_many :members
   has_many :groups, through: :members, source: :memberable, source_type: 'Group'
   has_many :webclasses, through: :members, source: :memberable, source_type: 'Webclass'
-
+  has_many :exams, as: :creator
   has_many :courses, through: :courses_members
   has_many :bookmarks
   has_many :messages, as: :sender

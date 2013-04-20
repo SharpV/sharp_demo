@@ -3,16 +3,18 @@
 class Webclass < ActiveRecord::Base
   # attr_accessible :title, :body
   resourcify
-
+  mount_uploader :avatar, ImageUploader
+  
   validates :name, :presence => true, :length => {:within => 1..30}
   validates :body, :slug, :presence => true
 
   has_many :messages
-
+  has_many :exams
   has_many :members, as: :memberable
   has_many :users, through: :members
-
-  mount_uploader :avatar, ImageUploader
+  has_many :courses
+  has_many :assignments
+  
   has_many :terms
   has_many :slots
   has_many :categories, as: :categoryable
@@ -30,10 +32,6 @@ class Webclass < ActiveRecord::Base
     else
       find_or_create_current_term(Time.now.year-1, 1)
     end
-  end
-
-  def to_param
-    slug ? "#{id}-#{slug.parameterize}" : id.to_s
   end
 
   def teachers

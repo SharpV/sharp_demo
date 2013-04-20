@@ -5,7 +5,7 @@
   <%= tab.folders "课件", webclass_webclass_folders_path(@current_webclass) %>
   <%= tab.slots "课程", webclass_webclass_slots_path(@current_webclass) %>
   <%= tab.assigmments "作业", webclass_webclass_assignments_path(@current_webclass) %>
-  <%= tab.reports "成绩", webclass_webclass_reports_path(@current_webclass) %>
+  <%= tab.exams "成绩", webclass_webclass_exams_path(@current_webclass) %>
   <%= tab.messages "班邮", webclass_webclass_messages_path(@current_webclass) %>
   <%= tab.members "成员", webclass_webclass_members_path(@current_webclass) %>
   <%- if @current_webclass_member and @current_webclass_member.admin %>

@@ -6,8 +6,9 @@ class Course < ActiveRecord::Base
   belongs_to :creator, foreign_key: "creator_id", class_name: 'User'
   has_many :slots
   has_many :sections, order: :start_at, :through => :slots
-
+  has_many :exams
   belongs_to :term
+  has_many :assignments
 
   def week
     Date.today.cwday
