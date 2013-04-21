@@ -1,0 +1,19 @@
+<div class='row'>
+  <div class='span-l'>
+    <h4 class='border'>
+      <%= @album.name %>
+      <%= link_to [:edit, :webclass, @current_webclass, @album], class: 'btn btn-info pull-right btn-small span', remote: true, data: {type: 'script'} do %>
+        <i class="icon-edit icon-white"></i>
+        <span>修改相册</span>
+      <% end %>
+      <%= link_to [:webclass, @current_webclass, @album, :images], class: 'btn btn-info pull-right btn-small span' do %>
+        <i class="icon-plus icon-white"></i>
+        <span>添加照片</span>
+      <% end %>
+    </h4>
+    <%= render 'images' %>
+  </div>
+  <div class='span-r pull-right'>
+    <%= render 'webclass/albums/albums' %>
+  </div>
+</div>

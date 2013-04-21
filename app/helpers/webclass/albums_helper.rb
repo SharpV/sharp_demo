@@ -1,0 +1,2 @@
+module Webclass::AlbumsHelper
+end

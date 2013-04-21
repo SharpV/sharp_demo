@@ -1,0 +1,2 @@
+module Webclass::PostsHelper
+end

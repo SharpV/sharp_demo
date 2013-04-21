@@ -180,7 +180,7 @@ SharpLink::Application.routes.draw do
       resources :media
 
       resources :albums do
-        resources :media
+        resources :images
         get :admin, on: :collection
       end
 
@@ -212,6 +212,7 @@ SharpLink::Application.routes.draw do
 
   resources :shares
   resources :media
+  resources :images
   
   root :to => 'home#index'
 end

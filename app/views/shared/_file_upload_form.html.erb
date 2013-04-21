@@ -1,16 +1,15 @@
-<%= javascript_include_tag "jquery-fileupload" %>
-
 <div class='content'>
   <%= form_for record, url: url, :html => { :multipart => true, :id => "fileupload"  } do |f| %>
     <!-- The fileupload-buttonbar contains buttons to add/delete files and start/cancel the upload -->
     <div class="row fileupload-buttonbar">
       <div class="span7">
         <!-- The fileinput-button span is used to style the file input field as button -->
-        <span class="btn btn-success fileinput-button btn-small">
+        <span class="btn btn-info fileinput-button btn-small">
           <i class="icon-plus icon-white"></i>
           <span>添加文件</span>
-          <%= f.file_field field %>
+          <input type="file" multiple="" name="files[]">
         </span>
+
         <button type="submit" class="btn btn-primary start  btn-small">
           <i class="icon-upload icon-white"></i>
           <span>开始上传</span>
@@ -20,10 +19,6 @@
           <span>取消上传</span>
         </button>
 
-        <%= link_to [:webclass, @current_webclass, @course, :media], class:"btn btn-info btn-small" do %>
-          <i class="icon-ok icon-white"></i>
-          <span>完成上传</span>
-        <% end %>
       </div>
       <!-- 
       <div class="span5">

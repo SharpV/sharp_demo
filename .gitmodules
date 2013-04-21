@@ -28,3 +28,9 @@
 [submodule "lib/assets/file-icons"]
 	path = lib/assets/file-icons
 	url = git@github.com:teambox/Free-file-icons.git
+[submodule "lib/assets/galleria"]
+	path = lib/assets/galleria
+	url = git@github.com:aino/galleria.git
+[submodule "lib/assets/gallery"]
+	path = lib/assets/gallery
+	url = git@github.com:blueimp/Bootstrap-Image-Gallery.git

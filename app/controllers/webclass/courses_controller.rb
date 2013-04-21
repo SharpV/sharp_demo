@@ -16,6 +16,14 @@ class Webclass::CoursesController < WebclassController
     @course = Course.new
   end
 
+  def show
+    @courses = @current_webclass.courses
+    @course = Course.find params[:id]
+    @media = @course.media.page params[:page]
+    @medium = Medium.new
+    self.try :set_tab, "course_#{@course.id}", :webclass_courses_nav
+  end
+
   def create
     @slots = []
     week = params[:course].delete :week

@@ -17,7 +17,7 @@
 <h4>课件分类</h4>
 <%= tabs_tag(:namespace => :webclass_courses_nav, :open_tabs => {:class => "nav nav-tabs nav-stacked"}, :builder =>     MenuTabBuilder) do |tab| %>
   <%- @courses.each do |course| %>
-    <%= tab.try "course_#{course.id}",  course.name, webclass_webclass_course_media_path(@current_webclass, course) %>
+    <%= tab.try "course_#{course.id}",  course.name, webclass_webclass_course_path(@current_webclass, course) %>
   <% end %>
 <% end %>
 

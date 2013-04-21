@@ -1,6 +1,9 @@
 select {
     width: auto;
 }
+.nav {
+    margin-bottom: 10px;
+}
 ul, ol {
     margin: 0 0 5px 5px;
 }
@@ -22,8 +25,8 @@ li .content span.time{
 
 h4.border {
     border-bottom: 1px solid #AAAAAA;
-    padding-bottom: 6px;
-    padding-top: 6px;
+    padding-bottom: 8px;
+    padding-top: 8px;
 }
 .item .line{
     border-bottom: dashed 1px #ccc;

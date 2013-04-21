@@ -17,7 +17,7 @@ class Webclass < ActiveRecord::Base
   
   has_many :terms
   has_many :slots
-  has_many :categories, as: :categoryable
+  has_many :albums, as: :albumable
   has_many :folders, as: :folderable
   belongs_to :creator, foreign_key: "creator_id", class_name: 'User'
   before_validation :generate_slug
