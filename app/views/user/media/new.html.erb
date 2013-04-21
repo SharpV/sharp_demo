@@ -3,4 +3,4 @@
   <h3 class='span'>添加文件到<%= @folder.name %></h3>
   <%= link_to "上传完成", [:me, @folder], class: 'btn btn-info pull-right' %>
 </div>
-<%= render 'form' %>
+<%= render 'shared/file_upload_form', url: [:me, @folder, @folder, @medium] %>

@@ -25,3 +25,6 @@
 [submodule "lib/assets/mutil_select"]
 	path = lib/assets/mutil_select
 	url = git@github.com:lou/multi-select.git
+[submodule "lib/assets/file-icons"]
+	path = lib/assets/file-icons
+	url = git@github.com:teambox/Free-file-icons.git

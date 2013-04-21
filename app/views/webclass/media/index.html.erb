@@ -1,0 +1,24 @@
+<div class='row'>
+  <div class='span-l'>
+    <h4 class='border'>[<%= @course.name %>] 文件上传</h4>
+    <%= render 'shared/file_upload_form', record: @medium, field: :file, url: [:webclass, @current_webclass, @course, :media]%>
+    <table class='table'>
+      <thead>
+        <tr class="success">
+          <th width='60'></th>
+          <th>文件名</th>  
+          <th width='60'>大小</th>
+          <th width='100'>创建时间</th>
+          <th width='100'>操作</th>
+        </tr>
+      </thead>
+      <tbody id='media-list'>
+        <%= render @media %>
+      </tbody>
+    </table>
+    <%= paginate @media %>
+  </div>
+  <div class='span-r pull-right'>
+    <%= render 'webclass/courses/courses' %>
+  </div>
+</div>

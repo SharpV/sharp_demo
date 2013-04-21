@@ -1,10 +1,9 @@
 <%= tabs_tag(:namespace => :webclass_nav, :open_tabs => {:class => "nav nav-tabs"}, :builder => MenuTabBuilder) do |tab| %>
   <%= tab.index "主页", @current_webclass %>
-  <%= tab.discusses "话题", webclass_webclass_posts_path(@current_webclass) %>
-  <%= tab.albums "相册", webclass_webclass_courses_path(@current_webclass) %>
-  <%= tab.folders "课件", webclass_webclass_folders_path(@current_webclass) %>
-  <%= tab.slots "课程", webclass_webclass_slots_path(@current_webclass) %>
-  <%= tab.assigmments "作业", webclass_webclass_assignments_path(@current_webclass) %>
+  <%= tab.posts "话题", webclass_webclass_posts_path(@current_webclass) %>
+  <%= tab.albums "相册", webclass_webclass_albums_path(@current_webclass) %>
+  <%= tab.courses "课程", webclass_webclass_courses_path(@current_webclass) %>
+  <%= tab.assignments "作业", webclass_webclass_assignments_path(@current_webclass) %>
   <%= tab.exams "成绩", webclass_webclass_exams_path(@current_webclass) %>
   <%= tab.messages "班邮", webclass_webclass_messages_path(@current_webclass) %>
   <%= tab.members "成员", webclass_webclass_members_path(@current_webclass) %>

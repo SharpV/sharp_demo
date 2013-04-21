@@ -12,6 +12,8 @@ class WebclassesController < ApplicationController
     else
       @current_webclass_member = nil
     end
+    @sections = @current_webclass.current_term.sections.order(:start_at)
+
     render layout: 'webclass'
   end
 end

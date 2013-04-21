@@ -4,9 +4,11 @@ class Webclass::CoursesController < WebclassController
   respond_to :html, :js
   
   set_tab :admin, :webclass_nav, only: [:admin]
-  set_tab :courses, :webclass_admin_nav
+  set_tab :courses, :webclass_nav
 
   def index
+    @courses = @current_webclass.courses
+    @sections = @current_webclass.current_term.sections.order(:start_at)
   end
 
   def admin

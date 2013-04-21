@@ -9,6 +9,7 @@ class Course < ActiveRecord::Base
   has_many :exams
   belongs_to :term
   has_many :assignments
+  has_many :media, as: :mediumable
 
   def week
     Date.today.cwday

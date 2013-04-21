@@ -4,12 +4,9 @@
       <h4>有<%= @apply_members.size %>位成员申请加入</h4>
       <%= render 'apply_members' %>
     <% end %>
-    
+    <%= render 'slots' %>
   </div>
   <div class='span-r pull-right'>
+    <%= render 'meta' %>
   </div>
 </div>
-
-<%- content_for :left do %>
-  <h3><%= @current_webclass.name %></h3>
-<% end %>

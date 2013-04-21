@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130420105122) do
+ActiveRecord::Schema.define(:version => 20130421033122) do
 
   create_table "active_admin_comments", :force => true do |t|
     t.string   "resource_id",   :null => false
@@ -45,6 +45,19 @@ ActiveRecord::Schema.define(:version => 20130420105122) do
 
   add_index "admin_users", ["email"], :name => "index_admin_users_on_email", :unique => true
   add_index "admin_users", ["reset_password_token"], :name => "index_admin_users_on_reset_password_token", :unique => true
+
+  create_table "albums", :force => true do |t|
+    t.integer  "creator_id"
+    t.string   "name"
+    t.integer  "albumable_id"
+    t.boolean  "is_public",      :default => true
+    t.string   "albumable_type"
+    t.integer  "media_count",    :default => 0
+    t.datetime "created_at"
+  end
+
+  add_index "albums", ["albumable_type", "albumable_id"], :name => "index_albums_on_albumable_type_and_albumable_id"
+  add_index "albums", ["creator_id"], :name => "index_albums_on_creator_id"
 
   create_table "answers", :force => true do |t|
     t.text     "body"
@@ -164,17 +177,16 @@ ActiveRecord::Schema.define(:version => 20130420105122) do
   add_index "exams", ["webclass_id"], :name => "index_exams_on_webclass_id"
 
   create_table "folders", :force => true do |t|
-    t.integer "user_id"
-    t.integer "creator_id"
-    t.string  "name"
-    t.integer "folderable_id"
-    t.boolean "is_public",       :default => false
-    t.string  "folderable_type"
-    t.integer "media_count",     :default => 0
+    t.integer  "creator_id"
+    t.string   "name"
+    t.integer  "folderable_id"
+    t.boolean  "is_public",       :default => false
+    t.string   "folderable_type"
+    t.integer  "media_count",     :default => 0
+    t.datetime "created_at"
   end
 
   add_index "folders", ["folderable_type", "folderable_id"], :name => "index_folders_on_folderable_type_and_folderable_id"
-  add_index "folders", ["user_id"], :name => "index_folders_on_user_id"
 
   create_table "followings", :force => true do |t|
     t.integer  "follower_id"
@@ -204,6 +216,33 @@ ActiveRecord::Schema.define(:version => 20130420105122) do
 
   add_index "groups", ["creator_id"], :name => "index_groups_on_creator_id"
 
+  create_table "guests", :force => true do |t|
+    t.integer  "user_id"
+    t.datetime "created_at",     :null => false
+    t.datetime "updated_at",     :null => false
+    t.integer  "guestable_id"
+    t.string   "guestable_type"
+  end
+
+  add_index "guests", ["guestable_type", "guestable_id"], :name => "index_guests_on_guestable_type_and_guestable_id"
+  add_index "guests", ["user_id"], :name => "index_guests_on_user_id"
+
+  create_table "images", :force => true do |t|
+    t.integer  "creator_id"
+    t.string   "file_name"
+    t.integer  "file_size"
+    t.string   "content_type"
+    t.string   "file"
+    t.boolean  "is_public",      :default => true
+    t.integer  "imageable_id"
+    t.string   "imageable_type"
+    t.integer  "likes_count",    :default => 0
+    t.integer  "comments_count", :default => 0
+    t.integer  "readings_count", :default => 0
+    t.datetime "created_at",                       :null => false
+    t.datetime "updated_at",                       :null => false
+  end
+
   create_table "lessons", :force => true do |t|
     t.integer  "slot_id",         :null => false
     t.integer  "course_id",       :null => false
@@ -218,25 +257,22 @@ ActiveRecord::Schema.define(:version => 20130420105122) do
 
   create_table "media", :force => true do |t|
     t.integer  "creator_id"
-    t.integer  "folder_id"
     t.string   "file_name"
     t.integer  "file_size"
     t.string   "content_type"
     t.string   "file"
     t.string   "play_path"
-    t.datetime "created_at",                           :null => false
-    t.datetime "updated_at",                           :null => false
-    t.boolean  "is_public",         :default => false
-    t.integer  "comments_count",    :default => 0
+    t.datetime "created_at",                         :null => false
+    t.datetime "updated_at",                         :null => false
+    t.boolean  "is_public",       :default => false
+    t.integer  "comments_count",  :default => 0
     t.integer  "mediumable_id"
     t.string   "mediumable_type"
-    t.integer  "likes_count",       :default => 0
-    t.integer  "collections_count", :default => 0
-    t.integer  "readings_count",    :default => 0
+    t.integer  "likes_count",     :default => 0
+    t.integer  "readings_count",  :default => 0
   end
 
   add_index "media", ["creator_id"], :name => "index_medias_on_user_id"
-  add_index "media", ["folder_id"], :name => "index_medias_on_folder_id"
   add_index "media", ["mediumable_type", "mediumable_id"], :name => "index_media_on_mediumable_type_and_mediumable_id"
 
   create_table "members", :force => true do |t|

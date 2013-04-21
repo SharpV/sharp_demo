@@ -1,0 +1,14 @@
+<tr id='medium-<%= medium.id %>'>
+  <td width='60'>
+    <%= image_tag medium.thumbnail_url %>
+  </td>
+  <td><%= link_to medium.file_name, medium.file_url %></td>  
+  <td><%= number_to_human_size medium.file_size %></td>
+  <td><%= format_datetime medium.created_at %></td>
+  <td>
+    <%- if medium.creator_id == current_user.id or @current_member.admin %>
+      <%= link_to '删除', [:webclass, @current_webclass, @course, medium], method: :delete, remote: true, data: {type: 'script'}, class: 'btn btn-danger btn-small', confirm: "是否确定删除 #{medium.file_name}" %>
+    <% end %>
+    <%= link_to '下载', medium.file_url, class: 'btn btn-info btn-small' %>
+  </td>
+</tr>

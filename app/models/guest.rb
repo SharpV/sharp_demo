@@ -1,3 +1,3 @@
-class Post::Video < Post
+class Guest < ActiveRecord::Base
   # attr_accessible :title, :body
 end

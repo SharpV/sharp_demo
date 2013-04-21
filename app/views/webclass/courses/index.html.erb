@@ -1,10 +1,24 @@
-<div class='left'>
-  <%= link_to '发布课程', new_course_path, class: 'btn btn-primary' %>
-</div>
-<div class='right'>
-  <div class="discover-courses-list-mask">
-    <ul class="discover-courses-list" style="margin-left: 0px;">
-        <%= render @courses %>
-    </ul>
+<div class='row'>
+  <div class='span-l'>
+    <h4><%= @current_webclass.current_term.name %>课程表</h4>
+    <table class='table table-bordered'>
+      <thead>
+        <tr class="success">
+          <th width='80'>课程</th>
+          <th>周一</th>  
+          <th>周二</th>
+          <th>周三</th>
+          <th>周四</th>
+          <th>周五</th>
+          <th>周六</th>
+        </tr>
+      </thead>
+      <tbody id='slot-list'>
+        <%= render partial: 'webclass/courses/section', collection: @sections %>
+      </tbody>
+    </table>
+  </div>
+  <div class='span-r pull-right'>
+    <%= render 'courses' %>
   </div>
 </div>

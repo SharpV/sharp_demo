@@ -9,7 +9,7 @@ class Folder < ActiveRecord::Base
 
   belongs_to :folderable, :polymorphic => true
   
-  has_many :media
+  has_many :media, as: :mediumable
 
   validates :name, :presence => true
       

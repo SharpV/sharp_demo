@@ -125,6 +125,7 @@ SharpLink::Application.routes.draw do
       resources :posts
 
       resources :lessons
+
       resources :messages do
         collection do 
           get :draft
@@ -148,7 +149,10 @@ SharpLink::Application.routes.draw do
 
       resources :courses do
         resources :assignments
-
+        resources :media do
+          get :admin, on: :collection
+        end
+        resources :posts
         collection do 
           get :admin
         end
@@ -158,12 +162,6 @@ SharpLink::Application.routes.draw do
         collection do 
           get :admin
         end
-      end
-
-      resources :folders do
-        collection do 
-          get :admin
-        end        
       end
 
       resources :categories do
@@ -180,6 +178,11 @@ SharpLink::Application.routes.draw do
       resources :posts
 
       resources :media
+
+      resources :albums do
+        resources :media
+        get :admin, on: :collection
+      end
 
       resources :sections do
         get :admin, on: :collection
@@ -208,6 +211,7 @@ SharpLink::Application.routes.draw do
   end
 
   resources :shares
+  resources :media
   
   root :to => 'home#index'
 end
