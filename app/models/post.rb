@@ -2,6 +2,9 @@ class Post < ActiveRecord::Base
 
   scope :share, where(is_public: true)
 
+  acts_as_commentable
+  acts_as_taggable
+
   default_scope where("postable_id is not null and slug is not null and postable_type is not null")
 
   validates :title, :slug, :presence => true
@@ -16,7 +19,7 @@ class Post < ActiveRecord::Base
 
   belongs_to :category, foreign_key: :category_id
 
-  paginates_per 30
+  #paginates_per 30
   
   def to_param
     slug ? "#{id}-#{slug.parameterize}" : id.to_s

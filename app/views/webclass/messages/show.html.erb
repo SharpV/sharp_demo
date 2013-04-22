@@ -6,7 +6,9 @@
     </ul>
     
     <h4 class='border'>回复列表</h4>
-    <%= render 'replies' %>
+    <ul id='reply-list'>
+      <%= render partial: 'reply', collection: @replies, as: :message %>
+    </ul>
 
     <%= render 'reply_form', url: reply_webclass_webclass_message_path(@current_webclass, @message) %>
   </div>

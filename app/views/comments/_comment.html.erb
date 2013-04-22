@@ -1,1 +1,17 @@
-<%= simple_format auto_link(comment.text) %>
+<li id='comment-<%= comment.id %>'>
+  <div class='avatar'>
+    <%= user_avatar_tag comment.user, 's' %>
+  </div>
+  <div class='content'>
+    <div class='item item-info clearfix'>
+      <%= comment.user.nickname %>
+      <div class='pull-right'>
+        <%= format_datetime comment.created_at %>
+      </div>
+    </div>
+    <p>
+      <%= comment.comment %>
+    </p>
+  </div>
+  <br />
+</li>

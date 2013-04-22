@@ -1,23 +1,15 @@
 class CommentsController < ApplicationController
-  include TheSortableTreeController::Rebuild
-
-  def index
-    @comments = Comment.nested_set.all
-  end
-
-  def manage
-    @comments = Comment.nested_set.all
-  end
-
-  def comments
-    @comments = Comment.nested_set.all
-  end
+  respond_to :html, :js
 
   def create
-    @comment = Comment.new params[:comment]
-    @comment.user = current_user
-    @comment.name = current_user.login
-    @comment.save!
-    redirect_to(request.referer || '/')
+    if ['Post', 'Image', 'Medium'].include? params[:comment][:commentable_type]
+      @comment = Comment.new params[:comment]
+      @comment.user = current_user
+      if @comment.save
+
+      else
+
+      end
+    end
   end
 end

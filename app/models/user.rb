@@ -32,7 +32,7 @@ class User < ActiveRecord::Base
   has_many :media, as: :mediumable
   has_many :categories, as: :categoryable
   has_many :folders, as: :folderable
-
+  has_many :comments
   # Setup accessible (or protected) attributes for your model
   attr_accessible :name, :email, :password, :password_confirmation, :login, :remember_me, :avatar, :nickname
 

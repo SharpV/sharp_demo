@@ -209,7 +209,7 @@ SharpLink::Application.routes.draw do
       get :logout
     end
   end
-
+  resources :comments
   resources :shares
   resources :media
   resources :images
