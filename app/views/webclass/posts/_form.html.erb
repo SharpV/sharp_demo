@@ -8,10 +8,12 @@
     <%= f.submit '提交', disable_with: "正在提交...", class: 'btn btn-info' %>
 <% end %>
 
-<script>
+<%= javascript_tag do %>
 $(document).ready(function() {
   $("#post-tags").tagit({
-    availableTags: ["c++", "java", "php", "javascript", "ruby", "python", "c"]
+    singleFieldDelimiter: ' ',
+    tagLimit: 3,
+    availableTags: [<%= raw post_tags(@current_webclass.owned_tags) %>]
   });
 });
-</script>
+<% end %>

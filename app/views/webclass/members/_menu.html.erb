@@ -1,6 +1,0 @@
-<%= tabs_tag(:namespace => :webclass_members_nav, :open_tabs => {:class => "nav nav-tabs nav-stacked"}, :builder =>     MenuTabBuilder) do |tab| %>
-  <%= tab.sections "所有成员", webclass_webclass_members_path(@current_webclass) %>
-  <%= tab.index "老师", webclass_webclass_members_path(@current_webclass) %>
-  <%= tab.categories "家长", webclass_webclass_members_path(@current_webclass) %>
-  <%= tab.sections "学生", webclass_webclass_members_path(@current_webclass),  id: 'member-nav-student' %>
-<% end %>

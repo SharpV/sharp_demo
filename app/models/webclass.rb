@@ -2,6 +2,8 @@
 
 class Webclass < ActiveRecord::Base
   # attr_accessible :title, :body
+  acts_as_commentable
+  acts_as_tagger
   resourcify
   mount_uploader :avatar, ImageUploader
   

@@ -34,3 +34,6 @@
 [submodule "lib/assets/gallery"]
 	path = lib/assets/gallery
 	url = git@github.com:blueimp/Bootstrap-Image-Gallery.git
+[submodule "lib/assets/hint-css"]
+	path = lib/assets/hint-css
+	url = git@github.com:chinchang/hint.css.git

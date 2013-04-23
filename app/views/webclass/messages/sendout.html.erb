@@ -14,7 +14,7 @@
         <%= render partial: 'outbox_messages', collection: @messages, as: :message %>
       </tbody>
     </table>
-
+    <%= paginate @messages %>
   </div>
   <div class='span-r pull-right'>
     <%= render 'menu' %>

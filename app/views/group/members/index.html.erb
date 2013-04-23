@@ -17,27 +17,28 @@
     <h4>
       成员列表
     </h4>
-
     <table class='table table-bordered'>
       <thead>
         <tr class="success">
-          <th width='80'>成员</th>
-          <th>管理员</th>
-          <th>姓名</th>  
-          <th>角色</th>
+          <th width='80'>学生</th>
+          <th>姓名</th>
+          <th>加入时间</th>  
+          <th>家长</th>
           <th>加入时间</th>
           <th>操作</th>
         </tr>
       </thead>
       <tbody id='member-list'>
         <form>
-          <%= render partial: 'member', collection: @members %>
+          <%= render partial: 'member', collection: @students, as: :member %>
         </form>
       </tbody>
     </table>
-
   </div>
-  <div class='span-r pull-right'>
-    <%= render 'webclass/settings/menu' %>
+  <div class='span-r'>
+    <h4>
+      老师列表
+    </h4>
+    <%= render 'teachers' %>
   </div>
 </div>

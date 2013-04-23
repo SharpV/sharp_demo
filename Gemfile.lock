@@ -15,15 +15,15 @@ GIT
 
 GIT
   remote: git@github.com:Macrow/rails_kindeditor.git
-  revision: 385cb4cd5cef7deb7801ec62d61896c7de641df1
+  revision: 8a2e0e8b93e8ed6ace46a5daa4b0dee598cf78a4
   specs:
-    rails_kindeditor (0.3.14)
+    rails_kindeditor (0.3.15)
       carrierwave
       mini_magick
 
 GIT
   remote: git@github.com:basho/ripple.git
-  revision: 7bb742e92c6c7cefab51eace40abd700749f8b64
+  revision: 20c7dba18448437930136f3a6da57d8d091a63a5
   specs:
     ripple (1.0.0.beta2)
       activemodel (>= 3.0.0, < 3.3.0)
@@ -79,7 +79,7 @@ GEM
     activesupport (3.2.13)
       i18n (= 0.6.1)
       multi_json (~> 1.0)
-    acts-as-taggable-on (2.3.3)
+    acts-as-taggable-on (2.4.0)
       rails (~> 3.0)
     acts_as_commentable (4.0.0)
     acts_as_list (0.2.0)
@@ -98,7 +98,7 @@ GEM
     bootstrap-addons-rails (0.1.2)
       rails
     bootstrap_form (0.3.2)
-    bourbon (3.1.2.1)
+    bourbon (3.1.4)
       sass (>= 3.2.0)
       thor
     builder (3.0.4)
@@ -197,9 +197,9 @@ GEM
       actionpack (>= 3.0.0)
       activesupport (>= 3.0.0)
     lazybox (0.2.5)
-    less (2.3.1)
+    less (2.3.2)
       commonjs (~> 0.2.6)
-    less-rails (2.3.2)
+    less-rails (2.3.3)
       actionpack (>= 3.1)
       less (~> 2.3.1)
     libv8 (3.3.10.4)
@@ -228,7 +228,7 @@ GEM
       activerecord (~> 3.1)
       activesupport (~> 3.1)
       polyamorous (~> 0.5.0)
-    mime-types (1.22)
+    mime-types (1.23)
     mini_magick (3.5.0)
       subexec (~> 0.2.1)
     mobile-fu (1.1.1)
@@ -291,14 +291,14 @@ GEM
       railties (= 3.2.13)
     rails-i18n (0.7.3)
       i18n (~> 0.5)
-    rails-timeago (2.2.2)
+    rails-timeago (2.2.3)
       actionpack (>= 3.1)
       activesupport (>= 3.1)
     rails3-jquery-autocomplete (1.0.11)
       rails (~> 3.0)
     rails_autolink (1.0.9)
       rails (~> 3.1)
-    rails_config (0.3.2)
+    rails_config (0.3.3)
       activesupport (>= 3.0)
     railties (3.2.13)
       actionpack (= 3.2.13)
@@ -375,7 +375,7 @@ GEM
     ruby-imagespec (0.2.0)
     ruby_parser (3.1.3)
       sexp_processor (~> 4.1)
-    sass (3.2.7)
+    sass (3.2.8)
     sass-rails (3.2.6)
       railties (~> 3.2.0)
       sass (>= 3.1.10)
@@ -409,8 +409,8 @@ GEM
     subexec (0.2.3)
     systemu (2.5.2)
     tabs_on_rails (2.2.0)
-    temple (0.6.3)
-    the_sortable_tree (2.3.0)
+    temple (0.6.4)
+    the_sortable_tree (2.3.2)
       rails (>= 3.1)
     therubyracer (0.10.2)
       libv8 (~> 3.3.10)

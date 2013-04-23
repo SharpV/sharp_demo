@@ -3,8 +3,11 @@ class Webclass::PostsController < WebclassController
   set_tab :posts, :webclass_nav
 
   def index
-    @posts = @current_webclass.posts.page params[:page]
-
+    if params[:tag]
+      @posts = Post.tagged_with(params[:tag], :on => :tags, :owned_by => @current_webclass).page params[:page]
+    else
+      @posts = @current_webclass.posts.includes(:creator).page params[:page]
+    end
   end
 
   def new
@@ -23,6 +26,10 @@ class Webclass::PostsController < WebclassController
   def update
     @post = Post.find params[:id]
     if @post.creator_id == current_user.id and @post.update_attributes params[:post] 
+      if @post.tag_list.size > 0
+        @current_webclass.tag_list.add(@post.tag_list) 
+        @current_webclass.save
+      end
       redirect_to [:webclass, @current_webclass, @post]
     else
       render action: :new
@@ -30,10 +37,15 @@ class Webclass::PostsController < WebclassController
   end 
 
   def create
+    tag_list = params[:post].delete(:tag_list)
     @post = Post.new params[:post]
     @post.creator = current_user
     @post.postable = @current_webclass
     if @post.save
+      if tag_list
+        @current_webclass.tag(@post, :with => tag_list, on: :tags) 
+        @current_webclass.save
+      end
       redirect_to [:webclass, @current_webclass, @post]
     else
       render action: :new

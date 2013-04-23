@@ -66,7 +66,7 @@ module SharpLink
     config.app_generators.scaffold_controller = :scaffold_controller    
     config.active_record.whitelist_attributes = false
     config.generators do |g|
-        g.test_framework :rspec
+      g.test_framework :rspec
     end
   end
 end

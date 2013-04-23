@@ -1,0 +1,8 @@
+<ul>
+<%- @current_webclass.teachers.each_with_index do |teacher, index| %>
+  <li>
+    <%= user_avatar_tag(teacher.user, 'm') %>
+    <p><%= teacher.name %></p>
+  </li>  
+<% end %>
+<ul>

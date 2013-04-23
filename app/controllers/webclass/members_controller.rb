@@ -7,8 +7,9 @@ class Webclass::MembersController < WebclassController
   set_tab :members, :webclass_admin_nav, only: [:admin]
   def index
     @members = @current_webclass.members.includes(:user).active.order(:role)
-    @students = @members.collect{|m|m.role == 'student'}
-    @parents = @members.collect{|m|m.role == 'parent'}
+    @students = @members.select{|m|m.role == 'student'}
+    @teachers = @members.select{|m|m.role == 'teacher'}
+    @parents = @members.select{|m|m.role == 'parent'}
   end 
 
   def admin
@@ -23,6 +24,33 @@ class Webclass::MembersController < WebclassController
       @member.admin = true
     end
     @member.save
+  end
+
+  def new_message
+    @member = Member.find(params[:id])
+    @message = Message.new 
+  end
+
+  def create_message
+    @member = Member.find(params[:id])
+    send_to_parent = params[:message].delete(:send_to_parent)
+    if @member.memberable_id == @current_webclass.id and @member.memberable_type == @current_webclass.class.name
+      @message = Message.new params[:message]
+      if send_to_parent
+        parents = @current_webclass.members.select{|member|member.student_id == @member.id}
+        parents.each do |parent| 
+          message.sender = current_user
+          message.webclass = @current_webclass
+          message.recipient_id = parent.user_id
+          message.save
+        end
+      end
+      @message.sender = current_user
+      @message.webclass = @current_webclass
+      @message.recipient_id = @member.user_id
+      @message.save
+      puts @message.inspect
+    end
   end
 
   def change_role

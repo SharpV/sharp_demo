@@ -121,6 +121,9 @@ SharpLink::Application.routes.draw do
   namespace :webclass do
 
     resources :webclasses do
+      resources :tags do
+        resources :posts
+      end   
 
       resources :posts
 
@@ -144,6 +147,8 @@ SharpLink::Application.routes.draw do
           get :reject
           get :change_role
           get :set_admin
+          get :new_message
+          post :create_message
         end
       end
 
@@ -163,13 +168,6 @@ SharpLink::Application.routes.draw do
           get :admin
         end
       end
-
-      resources :categories do
-        resources :posts
-        collection do 
-          get :admin
-        end
-      end   
 
       resources :settings do
         get :admin, on: :collection

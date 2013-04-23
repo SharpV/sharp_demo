@@ -2,3 +2,10 @@
   <i class="icon-plus icon-white"></i>
   <span>发表话题</span>
 <% end %>
+<br />
+<h4 class='border clearfix'>标签分类</h4>
+<ul>
+  <%- @current_webclass.owned_tags.each do |tag| %>
+    <li><%= link_to tag.name, webclass_webclass_posts_path(@current_webclass, tag: tag.name) %></li>
+  <% end %>
+</ul>
