@@ -4,7 +4,7 @@ require 'digest/sha1'
 require 'uuid'
 require 'devise/orm/active_record'
 class User < ActiveRecord::Base
-  rolify
+  
   acts_as_actor
   # Include default devise modules. Others available are:
   # :token_authenticatable, :confirmable,
@@ -34,7 +34,7 @@ class User < ActiveRecord::Base
   has_many :folders, as: :folderable
   has_many :comments
   # Setup accessible (or protected) attributes for your model
-  attr_accessible :name, :email, :password, :password_confirmation, :login, :remember_me, :avatar, :nickname
+  attr_accessible :name, :email, :password, :password_confirmation, :login, :remember_me, :avatar, :nickname, :role
 
   validates_presence_of :email, :nickname
 

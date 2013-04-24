@@ -37,3 +37,6 @@
 [submodule "lib/assets/hint-css"]
 	path = lib/assets/hint-css
 	url = git@github.com:chinchang/hint.css.git
+[submodule "lib/assets/sco"]
+	path = lib/assets/sco
+	url = git@github.com:terebentina/sco.js.git

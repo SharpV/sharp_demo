@@ -1,8 +1,13 @@
-<%= link_to "导入成绩单", new_webclass_webclass_exam_path(@current_webclass), class: 'btn btn-info' %>
+<p>
+  <%= link_to "导入成绩单", new_webclass_webclass_exam_path(@current_webclass), class: 'btn btn-success pull-right' %>
+</p>
+<br />
 <h4>我的成绩单</h4>
-<%= tabs_tag(:namespace => :webclass_exams_nav, :open_tabs => {:class => "nav nav-tabs nav-stacked"}, :builder =>     MenuTabBuilder) do |tab| %>
-  <%- @current_webclass.exams.each do |exam| %>
-    <%= tab.try "exam_#{exam.id}",  exam.title, webclass_webclass_exam_path(@current_webclass, exam) %>
+<%- if @current_webclass.exams.size > 0 %>
+  <%= tabs_tag(:namespace => :webclass_exams_nav, :open_tabs => {:class => "nav nav-tabs nav-stacked"}, :builder =>     MenuTabBuilder) do |tab| %>
+    <%- @current_webclass.exams.each do |exam| %>
+      <%= tab.try "exam_#{exam.id}",  exam.title, webclass_webclass_exam_path(@current_webclass, exam) %>
+    <% end %>
   <% end %>
 <% end %>
 

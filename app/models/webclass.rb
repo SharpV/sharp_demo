@@ -36,11 +36,11 @@ class Webclass < ActiveRecord::Base
   end
 
   def teachers
-    group_members(:teacher)
+    Member.includes(:user).where role: 'teacher', memberable_type: self.class.name, memberable_id: self.id
   end
 
   def group_members(role)
-    members.select{|m|m.role == role.to_s and m.active}
+    members.includes(:user).select{|m|m.role == role.to_s and m.active}
   end
 
   private

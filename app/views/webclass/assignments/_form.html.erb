@@ -3,5 +3,5 @@
   <%= f.association :course, collection: @courses, label: '相关科目', :include_blank => "请选择相关科目" %>
   <%= f.input :submit_at, label: '提交时间' %>
   <%= f.input :body, label: '内容' %>
-  <%= f.submit value: '发布作业', class: 'btn btn-info', disable_with: "正在提交..." %>
+  <%= f.submit value: '发布作业', class: 'btn btn-primary', disable_with: "正在提交..." %>
 <% end %>

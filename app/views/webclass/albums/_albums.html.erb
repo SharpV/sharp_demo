@@ -1,9 +1,12 @@
-<%= link_to "创建相册", new_webclass_webclass_album_path(@current_webclass), class: 'btn btn-success', remote: true, data: {type: 'script'} %>
-<h4>相册列表</h4>
+<p>
+  <%= link_to "创建相册", new_webclass_webclass_album_path(@current_webclass), class: 'btn btn-success pull-right', remote: true, data: {type: 'script'} %>
+</p>
+<br />
+<h4 class='border'>相册列表</h4>
 <% if @albums.count > 0 %>
   <%= tabs_tag(:namespace => :webclass_albums_nav, :open_tabs => {:class => "nav nav-tabs nav-stacked"}, :builder =>     MenuTabBuilder) do |tab| %>
     <% @albums.each do |album| %>
-      <%= tab.try "album", album.name, webclass_webclass_album_images_path(@current_webclass, album) %>
+      <%= tab.try "album", album.name, webclass_webclass_album_path(@current_webclass, album) %>
     <% end %>
   <% end %>
 <% end %>

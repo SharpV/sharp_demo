@@ -12,11 +12,12 @@
 //= require lazybox
 //= require rails.validations
 //= require rails.validations.simple_form
-//= require jquery.ui.nestedSortable
+//= require sco/js/sco.tooltip
 //= bootstrap-dropdown
 //= require rails-timeago
 //= require locales/jquery.timeago.zh-CN.js
 //= require scrollTo-min
+//= require_self 
 
 $(document).ready(function() {
   $('.images a').lazybox({closeImg: true});
@@ -26,6 +27,11 @@ $.lazybox.settings = {cancelClass: "button gray", submitClass: 'button gray', op
 
 $('.dropdown-toggle').dropdown();
 
+$('.tooltips').scojs_tooltip({
+  content: "Tooltip content",
+  cssclass: 'pretty',
+  delay: 1000
+});
 
 
 

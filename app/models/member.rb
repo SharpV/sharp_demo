@@ -31,5 +31,9 @@ class Member < ActiveRecord::Base
     when 'parent' then '家长'
     end   
   end
+
+  def admin?
+    admin || webclass.creator_id == self.user_id
+  end
   
 end

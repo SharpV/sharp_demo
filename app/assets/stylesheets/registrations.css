@@ -1,0 +1,39 @@
+/*
+  ref: http://soziev.com/themes/preview/theme_venera
+*/
+
+#page {
+    background-color: #EBEDE3;
+    background-image: none;
+    width: 860px;
+    padding: 20px;
+}
+
+.white-card {
+    background-color: #F8F9F4;
+    background-image: linear-gradient(#F8F9F4, #FDFDFB);
+    box-shadow: 0 1px 4px 1px #B4B6A9, 2px 2px 1px 0 #FFFFFF inset;
+    margin-bottom: 20px;
+    padding: 20px;
+    width: 480px;
+}
+
+.widget-filled {
+    background-color: #FFFFFF;
+    box-shadow: 2px 2px 2px rgba(0, 0, 0, 0.07);
+    margin-bottom: 40px;
+    padding: 20px;
+    width: 266px;
+    background-color: #FFFDE3;
+
+}
+.widget-filled h3 {
+    border-bottom: 1px dashed #D5D9C4;
+    color: #7B7972;
+    font-size: 24px;
+    line-height: 26px;
+    margin-bottom: 10px;
+    margin-top: 0;
+    padding-bottom: 10px;
+    text-transform: uppercase;
+}

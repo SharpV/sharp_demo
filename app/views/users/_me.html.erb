@@ -1,0 +1,12 @@
+<div class='span-l'>
+  
+  <%- if @recommand_users.size > 10 %>
+  	<%= render 'recommand_users' %>
+  <% else %>
+			<%= render 'user/activities/nav' %>
+  <% end %>
+</div>
+<div class='span-r pull-right'>
+  <%= render 'webclasses' %>
+  <%= render 'groups' %>
+</div>

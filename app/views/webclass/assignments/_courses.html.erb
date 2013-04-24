@@ -1,4 +1,7 @@
-<%= link_to "发布作业", new_webclass_webclass_assignment_path(@current_webclass), class: 'btn btn-info' %>
+<p>
+  <%= link_to "发布作业", new_webclass_webclass_assignment_path(@current_webclass), class: 'btn btn-success pull-right' %>
+</p>
+<br />
 <h4>科目列表</h4>
 <%= tabs_tag(:namespace => :webclass_courses_nav, :open_tabs => {:class => "nav nav-tabs nav-stacked"}, :builder =>     MenuTabBuilder) do |tab| %>
   <%- @courses.each do |course| %>

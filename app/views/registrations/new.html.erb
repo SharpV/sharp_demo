@@ -1,4 +1,4 @@
-<div class='span6'>
+<div class='white-card span'>
   <h3>注册好班级</h3>
 
   <%= simple_form_for(resource, :as => resource_name, validate: true, :url => registration_path(resource_name)) do |f| %>
@@ -7,12 +7,35 @@
     <%= f.input :nickname, label: '昵称' %>
     <%= f.input :password, label: '密码' %>
     <%= f.input :password_confirmation, label: '重复密码' %>
-    <%= f.button :submit, "注 册" %>
+    <%= f.button :submit, "注 册", class: 'btn btn-primary', disable_with: "正在提交..." %>
   <% end %>
 </div>
 
-<div class='span4'>
-  <h3>利用社交网络登录</h3>
+<div class="widget-filled pull-right">
+<h3>Some Tips:</h3>
+<ul class="big-iconed-tips">
+<li>
+<i class="icon-credit-card"></i>
+Registration is free
+</li>
+<li>
+<i class="icon-lock"></i>
+100% Secured
+</li>
+<li>
+<i class="icon-comments"></i>
+24 Hours online support
+</li>
+<li>
+<i class="icon-cogs"></i>
+Customizable
+</li>
+<li>
+<i class="icon-github"></i>
+Host it on github
+</li>
+</ul>
+<p>Ut diam arcu, dictum ut vulputate sed, iaculis nec lorem. Fusce pharetra nisl vitae nisl ultricies ut malesuada leo fringilla.</p>
 </div>
 
 

@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130422115526) do
+ActiveRecord::Schema.define(:version => 20130424120157) do
 
   create_table "active_admin_comments", :force => true do |t|
     t.string   "resource_id",   :null => false
@@ -27,6 +27,16 @@ ActiveRecord::Schema.define(:version => 20130422115526) do
   add_index "active_admin_comments", ["author_type", "author_id"], :name => "index_active_admin_comments_on_author_type_and_author_id"
   add_index "active_admin_comments", ["namespace"], :name => "index_active_admin_comments_on_namespace"
   add_index "active_admin_comments", ["resource_type", "resource_id"], :name => "index_admin_notes_on_resource_type_and_resource_id"
+
+  create_table "activities", :force => true do |t|
+    t.integer  "actor_id",   :null => false
+    t.string   "actor_type", :null => false
+    t.text     "content"
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
+  end
+
+  add_index "activities", ["actor_id", "actor_type"], :name => "index_activities_on_actor_id_and_actor_type"
 
   create_table "admin_users", :force => true do |t|
     t.string   "email",                  :default => "", :null => false
@@ -213,6 +223,19 @@ ActiveRecord::Schema.define(:version => 20130422115526) do
   add_index "followings", ["followed_user_id", "follower_id"], :name => "index_followings_on_followed_user_id_and_follower_id", :unique => true
   add_index "followings", ["followed_user_id"], :name => "index_followings_on_followed_user_id"
   add_index "followings", ["follower_id"], :name => "index_followings_on_follower_id"
+
+  create_table "follows", :force => true do |t|
+    t.integer  "actor_id",                         :null => false
+    t.string   "actor_type",                       :null => false
+    t.integer  "follower_id",                      :null => false
+    t.string   "follower_type",                    :null => false
+    t.boolean  "blocked",       :default => false, :null => false
+    t.datetime "created_at",                       :null => false
+    t.datetime "updated_at",                       :null => false
+  end
+
+  add_index "follows", ["actor_id", "actor_type"], :name => "index_follows_on_actor_id_and_actor_type"
+  add_index "follows", ["follower_id", "follower_type"], :name => "index_follows_on_follower_id_and_follower_type"
 
   create_table "groups", :force => true do |t|
     t.integer  "creator_id"

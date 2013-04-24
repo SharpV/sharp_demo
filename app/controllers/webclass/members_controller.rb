@@ -67,7 +67,7 @@ class Webclass::MembersController < WebclassController
     if @member.memberable_id == @current_webclass.id and @member.memberable_type == @current_webclass.class.name
       @member.active = true
       if @member.save
-        @member.user.add_role @member.role, @current_webclass
+        
       end
     end
     @apply_members = @current_webclass.members.apply

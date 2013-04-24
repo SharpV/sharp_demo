@@ -10,7 +10,7 @@
     <p>
     <%- @parents.select{|parent| parent.student_id == member.id}.each do |parent| %>
       <p>
-        <%= parent.name %> &nbsp; &nbsp;    <%= format_datetime parent.created_at %>
+        <%= link_to parent.name, parent.user %> &nbsp; &nbsp;    <%= format_datetime parent.created_at %>
       </p>
     <% end %>
   </td>

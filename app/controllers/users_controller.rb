@@ -15,6 +15,11 @@ class UsersController < ApplicationController
   def show
     @my_webclasses = current_user.webclasses
     @my_groups = current_user.groups
+    if current_user.followings_count < 10
+      @recommand_users = User.limit(15)
+    else
+      @recommand_users = User.limit(5)
+    end
     render layout: 'user'
   end
 
