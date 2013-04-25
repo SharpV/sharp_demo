@@ -1,6 +1,10 @@
-<%= tabs_tag(:namespace => :category_nav, :open_tabs => {:class => "nav nav-tabs nav-stacked"}, :builder => MenuTabBuilder) do |tab| %>
-  <% @categories.each do |c| %>
-    <%= tab.try "c_#{c.id}", c.name, [:me, c] %>
-  <%- end %>
+<%- if @categories.size > 0 %>
+  <p>
+    <%= tabs_tag(:namespace => :category_nav, :open_tabs => {:class => "nav nav-tabs nav-stacked"}, :builder =>     MenuTabBuilder) do |tab| %>
+      <% @categories.each do |c| %>
+        <%= tab.try "c_#{c.id}", c.name, [:user, @current_user, c] %>
+      <%- end %>
+    <% end %>
+  </p>
 <% end %>
 

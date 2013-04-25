@@ -1,4 +1,4 @@
-class Me::PostsController < MeController
+class User::PostsController < UserController
   set_tab :posts, :me_nav
   set_tab :index, :post_nav
 	def index

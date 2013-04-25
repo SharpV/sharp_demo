@@ -1,14 +1,14 @@
 class Section < ActiveRecord::Base
   attr_accessible :title, :start_at, :end_at
-  default_scope where("webclass_id is not null and term_id is not null")
+  default_scope where("group_id is not null and term_id is not null")
 
   belongs_to :term
-  belongs_to :webclass
+  belongs_to :group
 
   has_many :slots
   has_many :courses, :through => :slots
 
-  validates :title, :uniqueness => {:scope => :webclass_id}
+  validates :title, :uniqueness => {:scope => :group_id}
   validates :title, :presence => true, :length => {:within => 1..10}
   validates :start_at, presence: true
 

@@ -1,12 +1,23 @@
 <div class='span-l'>
   
   <%- if @recommand_users.size > 10 %>
-  	<%= render 'recommand_users' %>
+    <h4>您可能感兴趣的人</h4>
+    <table class='table'>
+      <tbody>
+  	   <%= render partial: 'follow', collection: @recommand_users, as: :user %>
+      </tbody>
+    </table>
   <% else %>
 			<%= render 'user/activities/nav' %>
   <% end %>
 </div>
 <div class='span-r pull-right'>
-  <%= render 'webclasses' %>
-  <%= render 'groups' %>
+  <%- if @recommand_users.size > 10 %>
+    <div class='tip'>
+
+    </div>
+  <% else %>
+    <%= render 'webclasses' %>
+    <%= render 'groups' %>
+  <% end %>
 </div>

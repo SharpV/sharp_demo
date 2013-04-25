@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130424120157) do
+ActiveRecord::Schema.define(:version => 20130425142244) do
 
   create_table "active_admin_comments", :force => true do |t|
     t.string   "resource_id",   :null => false
@@ -87,22 +87,23 @@ ActiveRecord::Schema.define(:version => 20130424120157) do
   add_index "answers", ["question_id"], :name => "index_answers_on_ask_id"
 
   create_table "assignments", :force => true do |t|
-    t.boolean  "active",      :default => false
-    t.integer  "creator_id",                     :null => false
-    t.integer  "webclass_id",                    :null => false
+    t.boolean  "active",     :default => false
+    t.integer  "creator_id",                    :null => false
+    t.integer  "group_id",                      :null => false
     t.string   "title"
     t.datetime "created_at"
     t.datetime "submit_at"
     t.text     "body"
     t.integer  "course_id"
-    t.integer  "term_id",                        :null => false
+    t.integer  "term_id",                       :null => false
   end
 
   add_index "assignments", ["active"], :name => "index_groups_members_on_active"
-  add_index "assignments", ["creator_id", "webclass_id"], :name => "index_groups_members_on_user_id_and_group_id"
+  add_index "assignments", ["creator_id", "group_id"], :name => "index_groups_members_on_user_id_and_group_id"
   add_index "assignments", ["creator_id"], :name => "index_groups_members_on_user_id"
-  add_index "assignments", ["webclass_id"], :name => "index_assignments_on_webclass_id"
-  add_index "assignments", ["webclass_id"], :name => "index_groups_members_on_group_id"
+  add_index "assignments", ["group_id"], :name => "index_assignments_on_group_id"
+  add_index "assignments", ["group_id"], :name => "index_assignments_on_webclass_id"
+  add_index "assignments", ["group_id"], :name => "index_groups_members_on_group_id"
 
   create_table "bookmarks", :force => true do |t|
     t.text     "body"
@@ -168,13 +169,14 @@ ActiveRecord::Schema.define(:version => 20130424120157) do
     t.text     "body"
     t.boolean  "published",     :default => false
     t.integer  "lessons_count", :default => 0
-    t.integer  "webclass_id",                      :null => false
+    t.integer  "group_id",                         :null => false
     t.integer  "term_id",                          :null => false
   end
 
   add_index "courses", ["creator_id"], :name => "index_courses_on_creator_id"
+  add_index "courses", ["group_id"], :name => "index_courses_on_group_id"
+  add_index "courses", ["group_id"], :name => "index_courses_on_webclass_id"
   add_index "courses", ["term_id"], :name => "index_courses_on_term_id"
-  add_index "courses", ["webclass_id"], :name => "index_courses_on_webclass_id"
 
   create_table "courses_properties", :force => true do |t|
     t.string  "property_id", :null => false
@@ -185,21 +187,22 @@ ActiveRecord::Schema.define(:version => 20130424120157) do
   add_index "courses_properties", ["property_id"], :name => "index_courses_properties_on_property_id"
 
   create_table "exams", :force => true do |t|
-    t.string   "title",       :null => false
+    t.string   "title",      :null => false
     t.text     "body"
     t.datetime "start_at"
     t.datetime "end_at"
-    t.integer  "webclass_id", :null => false
-    t.integer  "term_id",     :null => false
-    t.integer  "creator_id",  :null => false
-    t.datetime "created_at",  :null => false
-    t.datetime "updated_at",  :null => false
+    t.integer  "group_id",   :null => false
+    t.integer  "term_id",    :null => false
+    t.integer  "creator_id", :null => false
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
     t.integer  "course_id"
   end
 
+  add_index "exams", ["group_id", "term_id"], :name => "index_exams_on_webclass_id_and_term_id"
+  add_index "exams", ["group_id"], :name => "index_exams_on_group_id"
+  add_index "exams", ["group_id"], :name => "index_exams_on_webclass_id"
   add_index "exams", ["term_id"], :name => "index_exams_on_term_id"
-  add_index "exams", ["webclass_id", "term_id"], :name => "index_exams_on_webclass_id_and_term_id"
-  add_index "exams", ["webclass_id"], :name => "index_exams_on_webclass_id"
 
   create_table "folders", :force => true do |t|
     t.integer  "creator_id"
@@ -238,21 +241,24 @@ ActiveRecord::Schema.define(:version => 20130424120157) do
   add_index "follows", ["follower_id", "follower_type"], :name => "index_follows_on_follower_id_and_follower_type"
 
   create_table "groups", :force => true do |t|
-    t.integer  "creator_id"
-    t.datetime "created_at"
-    t.datetime "updated_at"
-    t.string   "name"
-    t.text     "body"
-    t.integer  "members_count",         :default => 0
+    t.integer  "creator_id",                        :null => false
+    t.integer  "members_count",  :default => 0
     t.string   "avatar"
-    t.boolean  "published",             :default => true
+    t.datetime "created_at",                        :null => false
+    t.datetime "updated_at",                        :null => false
     t.string   "slug"
-    t.boolean  "need_check_when_apply", :default => false
-    t.integer  "posts_count",           :default => 0
-    t.integer  "media_count",           :default => 0
+    t.string   "name",                              :null => false
+    t.text     "body"
+    t.boolean  "published",      :default => false
+    t.integer  "readings_count", :default => 0
+    t.integer  "media_count",    :default => 0
+    t.integer  "likes_count",    :default => 0
+    t.integer  "posts_count",    :default => 0
+    t.integer  "sections_count", :default => 0
+    t.integer  "adviser_id"
+    t.integer  "year",           :default => 2013
+    t.boolean  "is_class",       :default => false
   end
-
-  add_index "groups", ["creator_id"], :name => "index_groups_on_creator_id"
 
   create_table "guests", :force => true do |t|
     t.integer  "user_id"
@@ -284,14 +290,15 @@ ActiveRecord::Schema.define(:version => 20130424120157) do
   create_table "lessons", :force => true do |t|
     t.integer  "slot_id",         :null => false
     t.integer  "course_id",       :null => false
-    t.string   "webclass_id",     :null => false
+    t.string   "group_id",        :null => false
     t.datetime "start_at"
     t.datetime "created_at"
     t.integer  "slots_course_id", :null => false
   end
 
+  add_index "lessons", ["group_id"], :name => "index_lessons_on_group_id"
+  add_index "lessons", ["group_id"], :name => "index_lessons_on_webclass_id"
   add_index "lessons", ["slot_id"], :name => "index_lessons_on_slot_id"
-  add_index "lessons", ["webclass_id"], :name => "index_lessons_on_webclass_id"
 
   create_table "media", :force => true do |t|
     t.integer  "creator_id"
@@ -314,23 +321,24 @@ ActiveRecord::Schema.define(:version => 20130424120157) do
   add_index "media", ["mediumable_type", "mediumable_id"], :name => "index_media_on_mediumable_type_and_mediumable_id"
 
   create_table "members", :force => true do |t|
-    t.boolean  "admin",                         :default => false
-    t.boolean  "active",                        :default => false
-    t.integer  "user_id",                                              :null => false
-    t.integer  "memberable_id",                                        :null => false
-    t.string   "memberable_type",                                      :null => false
+    t.boolean  "admin",                    :default => false
+    t.boolean  "active",                   :default => false
+    t.integer  "user_id",                                         :null => false
+    t.integer  "group_id",                                        :null => false
     t.string   "note"
     t.datetime "created_at"
     t.datetime "updated_at"
-    t.string   "role",            :limit => 10, :default => "teacher", :null => false
+    t.string   "role",       :limit => 10, :default => "teacher", :null => false
     t.integer  "student_id"
   end
+
+  add_index "members", ["group_id"], :name => "index_members_on_group_id"
 
   create_table "messages", :force => true do |t|
     t.text     "body"
     t.string   "title",                           :null => false
     t.datetime "send_at"
-    t.integer  "webclass_id"
+    t.integer  "group_id"
     t.integer  "recipient_id"
     t.boolean  "read",         :default => false
     t.integer  "sender_id",                       :null => false
@@ -341,6 +349,7 @@ ActiveRecord::Schema.define(:version => 20130424120157) do
     t.integer  "parent_id"
   end
 
+  add_index "messages", ["group_id"], :name => "index_messages_on_group_id"
   add_index "messages", ["parent_id"], :name => "index_messages_on_parent_id"
 
   create_table "posts", :force => true do |t|
@@ -414,19 +423,20 @@ ActiveRecord::Schema.define(:version => 20130424120157) do
   add_index "questions", ["user_id"], :name => "index_asks_on_user_id"
 
   create_table "reports", :force => true do |t|
-    t.integer  "course_id",   :null => false
-    t.integer  "exam_id",     :null => false
+    t.integer  "course_id",  :null => false
+    t.integer  "exam_id",    :null => false
     t.integer  "value"
-    t.integer  "term_id",     :null => false
-    t.integer  "webclass_id", :null => false
-    t.datetime "created_at",  :null => false
-    t.datetime "updated_at",  :null => false
-    t.integer  "member_id",   :null => false
+    t.integer  "term_id",    :null => false
+    t.integer  "group_id",   :null => false
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
+    t.integer  "member_id",  :null => false
   end
 
+  add_index "reports", ["group_id", "term_id"], :name => "index_reports_on_webclass_id_and_term_id"
+  add_index "reports", ["group_id"], :name => "index_reports_on_group_id"
+  add_index "reports", ["group_id"], :name => "index_reports_on_webclass_id"
   add_index "reports", ["term_id"], :name => "index_reports_on_term_id"
-  add_index "reports", ["webclass_id", "term_id"], :name => "index_reports_on_webclass_id_and_term_id"
-  add_index "reports", ["webclass_id"], :name => "index_reports_on_webclass_id"
 
   create_table "roles", :force => true do |t|
     t.string   "name"
@@ -453,17 +463,18 @@ ActiveRecord::Schema.define(:version => 20130424120157) do
   add_index "school_grades", ["school_id"], :name => "index_school_grades_on_school_id"
 
   create_table "sections", :force => true do |t|
-    t.integer  "term_id",                    :null => false
+    t.integer  "term_id",                   :null => false
     t.string   "timeslot"
     t.string   "title"
     t.datetime "created_at"
     t.datetime "start_at"
-    t.integer  "seq",         :default => 0
-    t.integer  "creator_id",                 :null => false
+    t.integer  "seq",        :default => 0
+    t.integer  "creator_id",                :null => false
     t.datetime "end_at"
-    t.integer  "webclass_id",                :null => false
+    t.integer  "group_id",                  :null => false
   end
 
+  add_index "sections", ["group_id"], :name => "index_sections_on_group_id"
   add_index "sections", ["term_id"], :name => "index_slots_on_term_id"
 
   create_table "shares", :force => true do |t|
@@ -507,13 +518,14 @@ ActiveRecord::Schema.define(:version => 20130424120157) do
   end
 
   create_table "terms", :force => true do |t|
-    t.integer  "year",                     :null => false
-    t.integer  "part",        :limit => 2, :null => false
+    t.integer  "year",                    :null => false
+    t.integer  "part",       :limit => 2, :null => false
     t.datetime "created_at"
-    t.integer  "creator_id",               :null => false
-    t.integer  "webclass_id",              :null => false
+    t.integer  "creator_id",              :null => false
+    t.integer  "group_id",                :null => false
   end
 
+  add_index "terms", ["group_id"], :name => "index_terms_on_group_id"
   add_index "terms", ["year", "part"], :name => "index_terms_on_year_and_part"
 
   create_table "users", :force => true do |t|
@@ -574,24 +586,5 @@ ActiveRecord::Schema.define(:version => 20130424120157) do
   add_index "votings", ["voteable_type", "voteable_id", "voter_type", "voter_id"], :name => "unique_voters", :unique => true
   add_index "votings", ["voteable_type", "voteable_id"], :name => "index_votings_on_voteable_type_and_voteable_id"
   add_index "votings", ["voter_type", "voter_id"], :name => "index_votings_on_voter_type_and_voter_id"
-
-  create_table "webclasses", :force => true do |t|
-    t.integer  "creator_id",                           :null => false
-    t.integer  "members_count",     :default => 0
-    t.string   "avatar"
-    t.datetime "created_at",                           :null => false
-    t.datetime "updated_at",                           :null => false
-    t.string   "slug"
-    t.string   "name",                                 :null => false
-    t.text     "body"
-    t.boolean  "published",         :default => false
-    t.integer  "readings_count",    :default => 0
-    t.integer  "comments_count",    :default => 0
-    t.integer  "likes_count",       :default => 0
-    t.integer  "collections_count", :default => 0
-    t.integer  "sections_count",    :default => 0
-    t.integer  "adviser_id"
-    t.integer  "year",              :default => 2013
-  end
 
 end

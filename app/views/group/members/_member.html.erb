@@ -1,25 +1,21 @@
 <tr id='member-<%= member.id %>'>
   <td><%= link_to user_avatar_tag(member.user, 's'), member.user %></td>
-  <td><%= member.name %></td>
+  <td>
+    <%= member.name %>
+  </td>
   <td>
     <%= format_datetime member.created_at %>
   </td>
   <td>
-    <%# select_tag :role, options_for_select([['老师', 'teacher'], ['学生', 'student'], ['家长', 'parent']], member.role), :onchange => "change_role(#{member.id}, this.value)" %>
-    <p id='ajax-tip-<%= member.id %>' class='pull-right text-success'></p>
-  </td>
-  <td>
+    <p>
     <%- @parents.select{|parent| parent.student_id == member.id}.each do |parent| %>
-      <%= link_to user_avatar_tag(parent.user, 's'), parent.user %>
-      <%= parent.name %> &nbsp; &nbsp;
+      <p>
+        <%= link_to parent.name, parent.user %> &nbsp; &nbsp;    <%= format_datetime parent.created_at %>
+      </p>
     <% end %>
   </td>
   <td>
-    <%- if member.admin %>
-      <%= link_to '取消管理员', [:set_admin, :webclass, @current_webclass, member], disable_with: "更新中...", class: 'btn btn-error', remote: true, data: 'script' %>
-    <% else %>
-      <%= link_to '设为管理员', [:set_admin, :webclass, @current_webclass, member], disable_with: "更新中...", class: 'btn btn-success', remote: true, data: 'script' %>
-   <% end %>
+    <%= link_to '发送班邮', [:new_message, :webclass, @current_webclass, member], disable_with: "请稍后...", class: 'btn btn-success btn-small', remote: true, data: {type: 'script'} %>
   </td>
 </tr>
 

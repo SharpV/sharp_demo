@@ -1,0 +1,13 @@
+<p>
+  <%= link_to "创建相册", new_group_group_album_path(@current_group), class: 'btn btn-success pull-right', remote: true, data: {type: 'script'} %>
+</p>
+<br />
+<h4 class='border'>相册列表</h4>
+<% if @albums.count > 0 %>
+  <%= tabs_tag(:namespace => :group_albums_nav, :open_tabs => {:class => "nav nav-tabs nav-stacked"}, :builder =>     MenuTabBuilder) do |tab| %>
+    <% @albums.each do |album| %>
+      <%= tab.try "album", album.name, group_group_album_path(@current_group, album) %>
+    <% end %>
+  <% end %>
+<% end %>
+

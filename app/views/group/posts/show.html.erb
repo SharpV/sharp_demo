@@ -1,4 +1,16 @@
-<h3><%= @post.title %></h3>
-<p>
-	<%= @post.body %>
-<p>
+<div class='row'>
+  <div class='span-l'>
+    <ul>
+      <%= render 'shared/post', post: @post, namespace: [:webclass, @current_webclass], truncate_size: nil %>
+    </ul>
+    <h4 class='border'>回复列表</h4>
+    <ul id='comment-list' class='unstyled'>
+      <%= render partial: 'comments/comment', collection: @comments %>
+    </ul>
+    <%= render 'comments/form', record: @post %>
+    <ul>
+  </div>
+  <div class='span-r pull-right'>
+    <%= render 'slide' %>
+  </div>
+</div>

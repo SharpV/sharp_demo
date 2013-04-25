@@ -1,4 +1,12 @@
-<%= render 'nav' %>
-<ul class='inline'>
-  <%= render @groups %>
-</ul>
+<div class='row'>
+  <div class='span-l'>
+    <h4 class='border'>群组动态</h4>
+    <%= %>
+  </div>
+  <div class='span-r pull-right'>
+    <p>
+    <%= link_to "创建群组", [:new, :user, current_user, :group], class: 'btn btn-success pull-right', disable_with: '请稍后...' %>
+    </p>
+    <%= render @groups %>
+  </div>
+</div>

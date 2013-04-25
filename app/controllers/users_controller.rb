@@ -1,4 +1,6 @@
 class UsersController < ApplicationController
+
+  respond_to :html, :js
   
   def search
     if params[:q].present?
@@ -13,12 +15,14 @@ class UsersController < ApplicationController
   end
 
   def show
-    @my_webclasses = current_user.webclasses
-    @my_groups = current_user.groups
+    @current_user = User.find params[:id]
+    @webclasses = @current_user.groups.webclass
+    @groups = @current_user.groups.webgroup
+
     if current_user.followings_count < 10
-      @recommand_users = User.limit(15)
+      @recommand_users = User.includes(:follows).limit(15)
     else
-      @recommand_users = User.limit(5)
+      @recommand_users = User.includes(:follows).limit(5)
     end
     render layout: 'user'
   end
@@ -27,8 +31,14 @@ class UsersController < ApplicationController
     @user = User.new
   end
 
-  def reputation
+  def follow
     @user = User.find(params[:id])
+    current_user.follow!(@user)
+  end
+
+  def unfollow
+    @user = User.find(params[:id])
+    current_user.unfollow!(@user)
   end
 
 end

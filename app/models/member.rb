@@ -2,7 +2,7 @@
 
 class Member < ActiveRecord::Base
   belongs_to :user
-  belongs_to :memberable, :polymorphic => true
+  belongs_to :group
   
   scope :apply, where(:active => false)
   scope :active, where(:active => true)

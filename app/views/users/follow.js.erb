@@ -1,0 +1,5 @@
+<% if current_user.followings_count > 10 %>
+  window.location.reload();
+<% else %>
+  $('#user-<%= @user.id %>').hide();
+<% end %>

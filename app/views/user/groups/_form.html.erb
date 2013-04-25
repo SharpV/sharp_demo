@@ -1,5 +1,5 @@
 <%= javascript_include_tag "js/tag-it.min" %>
-<%= simple_form_for [:me, @group], :validate => true, :html => {:class => 'form-horizontal'} do |f| %>
+<%= simple_form_for [:user, current_user, @group], :validate => true, :html => {:class => 'form-horizontal'} do |f| %>
   <% @group.errors.full_messages.each do |msg| %>
       <p><%= msg %></p>
     <% end %>
@@ -9,5 +9,5 @@
     <%= f.input :body, :label => '简介' %>
     <%= f.input :tag_list, label: '标签' %>
 
-    <%= f.submit '创建', disable_with: "正在提交...", class: 'btn' %>
+    <%= f.submit '创建', disable_with: "正在提交...", class: 'btn btn-primary' %>
 <% end %>

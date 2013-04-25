@@ -1,34 +1,24 @@
 class Group::MediaController < GroupController
-  
-  set_tab :media, :group_nav
-
-  skip_before_filter :verify_authenticity_token
-
-  respond_to :html, :json
+  set_tab :courses, :webclass_nav
 
   def index
-    @folder = Folder.find params[:folder_id]
-    @media = @folder.media
-    respond_to do |format|
-      format.html # index.html.erb
-      format.json { render json: @media.map{|upload| upload.to_jq_upload } }
-    end
+    @courses = @current_group.courses
+    @course = Course.find params[:course_id]
+    @media = @course.media.page params[:page]
+    @medium = Medium.new
+    self.try :set_tab, "course_#{@course.id}", :webclass_courses_nav
   end
 
-  def new
-    @folder = Folder.find(params[:folder_id])
-    @medium = Medium.new folder: @folder 
-  end
 
   def create
-    @folder = Folder.find params[:folder_id]
-    @medium = @folder.media.build params[:medium]
-    @medium.mediumable = @group
-    @medium.folder = @folder
+    @course = Course.find params[:course_id]
+    @medium = Medium.new
+    @medium.file = params[:files].first
     respond_to do |format|
       @medium.creator = current_user
+      @medium.mediumable = @course
       if @medium.save
-        format.json { render json: [@medium.to_jq_upload].to_json, status: :created, location: [:me, @medium] }
+        format.json { render json: [@medium.to_jq_upload].to_json, status: :created, location: [@medium] }
       else
         render json: @medium.errors.to_json
       end
@@ -38,7 +28,6 @@ class Group::MediaController < GroupController
   def destroy
     @medium = Medium.find(params[:id])
     @medium.destroy
-    render :json => true
   end
 
 end

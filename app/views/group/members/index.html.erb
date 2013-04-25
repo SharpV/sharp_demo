@@ -1,7 +1,7 @@
 <script>
   function change_role(member_id, role) {  
     jQuery.ajax({
-      url: "<%= change_role_webclass_webclass_member_path(@current_webclass, 0) %>",
+      url: "<%= change_role_group_group_member_path(@current_group, 0) %>",
       type: "GET",
       dataType: "script",
       data: {"role" : role, "member_id": member_id},
@@ -24,7 +24,6 @@
           <th>姓名</th>
           <th>加入时间</th>  
           <th>家长</th>
-          <th>加入时间</th>
           <th>操作</th>
         </tr>
       </thead>

@@ -1,2 +1,11 @@
-<%= render 'nav' %>
-<%= render 'form' %>
+<div class='row'>
+  <div class='span-l'>
+    <h4 class='border'>创建群组</h4>
+    <%= render 'form' %>
+  </div>
+  <div class='span-r pull-right'>
+    <p>
+      <%= link_to "返回", [:user, current_user, :groups], class: 'btn btn-success pull-right', disable_with: '请稍后...' %>
+    </p>
+  </div>
+</div>

@@ -1,0 +1,28 @@
+<div class='row'>
+  <div class='span-l'>
+    <h4>我收到信件</h4>
+    <table class='table'>
+      <thead>
+        <tr class="success">
+          <th>发件人</th>  
+          <th>标题</th>
+          <th>发送时间</th>
+          <th>操作</th>
+        </tr>
+      </thead>
+      <tbody id='message-list'>
+        <%= render partial: 'inbox_messages', collection: @messages, as: :message %>
+      </tbody>
+    </table>
+    <%= paginate @messages %>
+  </div>
+  <div class='span-r pull-right'>
+    <%= tabs_tag(:namespace => :group_messages_nav, :open_tabs => {:class => "nav nav-tabs nav-stacked"}, builder: MenuTabBuilder) do |tab| %>
+      <%= tab.write "写信", new_group_group_message_path(@current_group) %>
+      <%= tab.index "收件箱", group_group_messages_path(@current_group) %>
+      <%= tab.sendout "发件箱", sendout_group_group_messages_path(@current_group) %>
+      <%= tab.draft "草稿箱", draft_group_group_messages_path(@current_group) %>
+      <%= tab.contacts "所有联系人", group_group_members_path(@current_group) %>
+    <% end %>
+  </div>
+</div>

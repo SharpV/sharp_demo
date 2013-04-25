@@ -1,12 +1,12 @@
 #encoding: utf-8
 
-class Me::GroupsController < MeController
+class User::GroupsController < UserController
 
   set_tab :group, :me_nav
   set_tab :index, :group_nav
 
   def index
-    @groups = current_user.groups
+    @groups = current_user.groups.webgroup
   end
 
   def new

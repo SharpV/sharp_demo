@@ -1,9 +1,9 @@
-<%- if @my_groups.size > 0 %>
+<%- if @groups.size > 0 %>
   <h4>我的群组</h4>
   <ul>
-    <%- @my_groups.each do |group| %>
+    <%- @groups.each do |group| %>
       <li>  
-        <%= link_to image_tag(avatar_url(group), placeholder: 'logo.png'), group, target: '_blank' %>
+        <%= link_to avatar_tag(group, 'm'), group, target: '_blank' %>
       </li>
     <% end %>
   </ul>

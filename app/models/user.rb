@@ -4,8 +4,11 @@ require 'digest/sha1'
 require 'uuid'
 require 'devise/orm/active_record'
 class User < ActiveRecord::Base
+
+  include Role
   
   acts_as_actor
+  has_many :follows, as: :actor
   # Include default devise modules. Others available are:
   # :token_authenticatable, :confirmable,
   # :lockable, :timeoutable and :omniauthable
@@ -21,8 +24,7 @@ class User < ActiveRecord::Base
   has_many :questions
   has_many :answers
   has_many :members
-  has_many :groups, through: :members, source: :memberable, source_type: 'Group'
-  has_many :webclasses, through: :members, source: :memberable, source_type: 'Webclass'
+  has_many :groups, through: :members
   has_many :exams, as: :creator
   has_many :courses, through: :courses_members
   has_many :bookmarks
@@ -69,8 +71,8 @@ class User < ActiveRecord::Base
     Group.where creator_id: self.id
   end
 
-  def member(memberable)
-    Member.where(memberable_type: memberable.class.name, memberable_id: memberable.id, user_id: id).first
+  def member(group)
+    Member.where(group_id: group.id, user_id: self.id).first
   end
   
   def flow
@@ -84,10 +86,10 @@ class User < ActiveRecord::Base
   end
     
   def to_param
-    "#{login}"
+    "#{id}"
   end
 
-  
+  alias_attribute :name, :nickname
 
   protected
   

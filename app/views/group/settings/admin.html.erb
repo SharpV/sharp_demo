@@ -3,6 +3,10 @@
     <%= render 'form' %>
   </div>
   <div class='span-r pull-right'>
-    <%= render 'nav' %>
+    <%= render 'menu' %>
   </div>
 </div>
+
+<%- content_for :left do %>
+  <h3><%= @current_webclass.name %></h3>
+<% end %>

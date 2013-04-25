@@ -11,5 +11,6 @@ class Group::UsersController < GroupController
     @user = User.find_by_login(params[:id])
     @user.count_view! unless current_user == @user
   end
+
 end
 

@@ -1,15 +1,10 @@
-<table class='table content'>
-  <thead>
-    <tr>
-      <th>话题</th>
-      <th>作者</th>
-      <th>阅读</th>
-      <th>回复</th>
-      <th>最后更新时间</th>
-    </tr>
-  </thead>
-  <tbody>
-    <%# @topics.inspect %>
-    <%= render partial: 'post', collection: @posts, as: :post %>
-  </tbody>
-</table>
+<div class='row'>
+  <div class='span-l'>
+    <ul>
+      <%= render partial: 'shared/post', collection: @posts, locals: {namespace: [:webclass, @current_webclass], truncate_size: 172} %>
+    </ul>
+  </div>
+  <div class='span-r pull-right'>
+    <%= render 'right' %>
+  </div>
+</div>

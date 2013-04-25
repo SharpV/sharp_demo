@@ -2,7 +2,7 @@
 
 class Term < ActiveRecord::Base
   # attr_accessible :title, :body
-  belongs_to :webclass
+  belongs_to :group
   belongs_to :creator, foreign_key: "creator_id", class_name: 'User'
   has_many :sections
   has_many :courses

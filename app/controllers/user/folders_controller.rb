@@ -1,4 +1,4 @@
-class Me::FoldersController < MeController
+class User::FoldersController < UserController
 
   respond_to :html, :json
   

@@ -19,18 +19,20 @@ SharpLink::Application.routes.draw do
   namespace :user, path: 'space' do
     resources :settings 
     resources :users do 
-      resources :bookmarks
+      resources :albums do
+        resources :images
+      end
       resources :likes
       resources :posts
       resources :comments
-      resources :photos
+      resources :messages
       resources :certifications
       resources :groups
-      resources :courses do
-        collection do
-          get :admin
-        end
+      resources :followings do
+        get :activities, on: :collection
       end
+
+      resources :followers
       resources :webclasses
       resources :questions
       resources :answers
@@ -38,7 +40,7 @@ SharpLink::Application.routes.draw do
       resources :notifications
       resources :activities
       resources :media
-      resources :collections
+      resources :webclasses
       resources :folders do
         collection do
           get :admin
@@ -47,11 +49,12 @@ SharpLink::Application.routes.draw do
       end
   
       resources :categories do
-        collection do
-          get :admin
-          post :rebuild
-        end
         resources :posts
+      end
+
+      member do
+        get :follow
+        get :unfollow
       end
     end
   end
@@ -62,43 +65,13 @@ SharpLink::Application.routes.draw do
   end
   resources :comments
   resources :categories
-  resources :sections
+  resources :webclasses
   
   resources :schools
-
-  resources :groups do
-    get :apply, on: :member
-    post :email_members, on: :member
-    get :admin, on: :member
-  end
-
-  namespace :group  do
-    resources :groups do
-      resources :posts
-      resources :media
-      resources :members do
-        get :admin, on: :collection
-      end
-      resources :settings do
-        get :admin, on: :collection
-      end
-      resources :folders do
-        resources :media
-        get :admin, on: :collection
-      end
-      resources :categories do
-        resources :posts
-        get :admin, on: :collection
-      end
-    end
-  end
-
   resources :pages do      
     resources :comments
   end
-  delete 'likes/:resource_name/:resource_id' => "my/likes#destroy", :as => 'like'
-  post 'likes/:resource_name/:resource_id' => "my/likes#create",  :as => 'like'
-
+  
   resources :grades do
     resources :subjects do
       collection do
@@ -118,9 +91,8 @@ SharpLink::Application.routes.draw do
   end
   resources :answers
 
-  namespace :webclass do
-
-    resources :webclasses do
+  namespace :group do
+    resources :groups do
       resources :tags do
         resources :posts
       end   
@@ -200,7 +172,7 @@ SharpLink::Application.routes.draw do
       get :unfollow
     end 
   end
-  resources :webclasses do
+  resources :groups do
     member do 
       get :admin
       get :apply
