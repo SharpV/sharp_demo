@@ -1,24 +1,22 @@
-<tr id='user-<%= user.id %>'>
-  <td><%= link_to user_avatar_tag(user, 's'), user %></td>
-  <td>
-    <%= user.name %>
-  </td>
-  <td>
-    <%= format_datetime user.created_at %>
-  </td>
-  <td>
-    <%= user.role_name %>
-  </td>
-  <td>
-    <%- if current_user.is_friend?(user) %>
-      相互关注
-    <% elsif current_user.is_following?(user) %>
+<li id='user-<%= user.id %>' class='list-item'>
+  <div class='avatar'>
+    <%= link_to user_avatar_tag(user, 'm'), user %>
+  </div>
+  <div class='content'>
+    <p>
+      <%= user.name %>
+    </p>
+    <p>
+      <%- if current_user.is_friend?(user) %>
+        相互关注
+      <% elsif current_user.is_following?(user) %>
 
-    <%- elsif current_user.is_followed?(user) %>
+      <%- elsif current_user.is_followed?(user) %>
 
-    <% else %>
-      <%= link_to '关注TA', [:follow, user], disable_with: "请稍后...", class: 'btn btn-success btn-small', remote: true, data: {type: 'script'} %>
-    <% end %>
-  </td>
-</tr>
+      <% else %>
+        <%= link_to '关注TA', [:follow, user], disable_with: "请稍后...", class: 'btn btn-success btn-small', remote: true, data: {type: 'script'} %>
+      <% end %>
+    </p>
+  </div>
+</li>
 

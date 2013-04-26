@@ -6,9 +6,10 @@ class UserController < ApplicationController
 
   def set_current_context
     if params[:user_id]
-      @current_user = User.where(login: params[:user_id]).first || nil
+      @current_user = User.find params[:user_id]
     else
-      @@current_user = nil
+      @current_user = nil
+      redirect_to root_path
     end
   end
   

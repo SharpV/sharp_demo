@@ -7,12 +7,12 @@
     <%= render "layouts/header" %>
     <div id="page" class="container">
       <div class="row">
-        <%= bootstrap_flash %>
         <div class='span-l'>
           <%= render 'users/profile' %>
           <%= render 'users/menu' %>
         </div>
         <div class='span-r'>
+          <%= bootstrap_flash %>
           <%= yield %>
         </div>
       </div>

@@ -1,5 +1,9 @@
 class UsersController < ApplicationController
 
+  set_tab :index, :user_nav
+  set_tab :index, :site_nav
+
+
   respond_to :html, :js
   
   def search
@@ -20,7 +24,7 @@ class UsersController < ApplicationController
     @groups = @current_user.groups.webgroup
 
     if current_user.followings_count < 10
-      @recommand_users = User.includes(:follows).limit(15)
+      @recommand_users = User.includes(:follows).where("id not in (?)", current_user.followings.map(&:actor_id)).limit(18)
     else
       @recommand_users = User.includes(:follows).limit(5)
     end
@@ -34,6 +38,7 @@ class UsersController < ApplicationController
   def follow
     @user = User.find(params[:id])
     current_user.follow!(@user)
+    @new_user = User.where("id not in (?)", current_user.followings.map(&:actor_id)).first
   end
 
   def unfollow

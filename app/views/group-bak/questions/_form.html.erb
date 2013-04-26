@@ -1,9 +1,0 @@
-<%= simple_form_for @question, :html => {:class => 'form-stacked, new-share'} do |f| -%>	
-	<%= f.error_notification %>
-	<%= f.input :title, :class=>'xlarge', :label => '标题' %>
-	<%= f.input :body, :as => :kindeditor, :label => '内容', :input_html => { :width => 650, :height => 450 } %>
-	<%= f.input :tag_list, :class=>'input_field', :label => "标签" %>
-	<div class="actions">
-		<%= f.submit "Save", :class=>'btn primary' %>&nbsp;<button class="btn" type="reset">Cancel</button>
-	</div>
-<% end %>

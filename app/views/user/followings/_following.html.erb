@@ -1,0 +1,17 @@
+<li id='actor-<%= follow.actor.id %>' class='list-item'>
+  <div class='avatar'>
+    <%= link_to user_avatar_tag(follow.actor, 'm'), follow.actor %>
+  </div>
+  <div class='content'>
+    <p>
+      <%= link_to follow.actor do %>
+        <i class='icon icon-resize-horizontal'></i>
+        <%= follow.actor.name %>
+      <% end %>
+    </p>
+    <p>
+      <%= link_to '取消关注', user_user_following_path(current_user, follow), method: :delete, disable_with: "请稍后...", class: 'btn btn-danger btn-small', remote: true, data: {type: 'script'} %>
+    </p>
+  </div>
+</li>
+

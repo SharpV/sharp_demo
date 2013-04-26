@@ -1,5 +1,7 @@
 <% if current_user.followings_count > 10 %>
   window.location.reload();
-<% else %>
-  $('#user-<%= @user.id %>').hide();
+<% elsif @new_user %>
+  $('#user-<%= @user.id %>').attr("id", "user-<%= @new_user.id %>");
+  $('#user-<%= @new_user.id %>').html("<%= escape_javascript render(partial: 'following', locals: {user: @new_user}) %>");
+  $('#user-<%= @new_user.id %>').effect("highlight", {}, 2000);
 <% end %>

@@ -1,6 +1,6 @@
 class Follow < SharpSocial::Models::Follow
 
-  belongs_to :followable, polymorphic: true
+  belongs_to :actor, polymorphic: true
   belongs_to :follower, polymorphic: true
 
   def block!

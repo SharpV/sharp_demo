@@ -1,4 +1,4 @@
-class Me::CategoriesController < MeController
+class User::CategoriesController < UserController
   
   respond_to :html, :json
   

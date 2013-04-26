@@ -1,7 +1,0 @@
-<tr>
-  <td><%= link_to post.title, [:group, @current_group, post] %></td>
-  <td><%= post.creator.nickname if post.creator %></td>
-  <td><%= post.readings_count %></td>
-  <td><%= post.comments_count %></td>
-  <td><%= timeago_tag post.updated_at, lang: 'zh-CN' %></td>
-</tr>

@@ -9,5 +9,17 @@ module Role
     when 'parent' then '家长'
     end   
   end
+
+  def teacher?
+    role == 'teacher'
+  end
+
+  def parent?
+    role == 'parent'
+  end
+
+  def student?
+    role == 'student'
+  end
   
 end

@@ -1,6 +1,9 @@
 #encoding: utf-8
 
 class Member < ActiveRecord::Base
+
+  include Role 
+  
   belongs_to :user
   belongs_to :group
   
@@ -8,17 +11,6 @@ class Member < ActiveRecord::Base
   scope :active, where(:active => true)
   scope :teacher, where(:role => 'teacher')
 
-  def teacher?
-    role == 'teacher'
-  end
-
-  def parent?
-    role == 'parent'
-  end
-
-  def student?
-    role == 'student'
-  end
 
   def name
     user.nickname

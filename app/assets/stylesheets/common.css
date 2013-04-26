@@ -8,15 +8,29 @@ ul, ol {
     margin: 0 0 5px 5px;
 }
 
+li.list-item{
+    float:left;
+    margin-bottom: 10px;
+    background-color: #F8F9F4;
+    -webkit-border-radius: 5px; 
+    border-radius: 5px;
+    border: 1px solid #fff; 
+}
+
+li.list-item:hover {
+    background-color: #fff;
+    border: 1px solid #CEF7C3; 
+}
+
 li .avatar{
     float:left;
-    width: 60px;
 }    
 
 li .content{
-    float: none;
+    float: left;
     overflow: hidden;
     width: auto;
+    margin-left: 10px;
 }
 
 li .content span.time{
@@ -136,6 +150,11 @@ a {
 
 #gallery a {
     margin-top: 10px;
+}
+
+div.margin{
+    margin-top: 10px;
+    clear: both;
 }
 
 .btn-custom { background-color: hsl(145, 62%, 68%) !important; background-repeat: repeat-x; filter: progid:DXImageTransform.Microsoft.gradient(startColorstr="#cdf3dd", endColorstr="#7adfa4"); background-image: -khtml-gradient(linear, left top, left bottom, from(#cdf3dd), to(#7adfa4)); background-image: -moz-linear-gradient(top, #cdf3dd, #7adfa4); background-image: -ms-linear-gradient(top, #cdf3dd, #7adfa4); background-image: -webkit-gradient(linear, left top, left bottom, color-stop(0%, #cdf3dd), color-stop(100%, #7adfa4)); background-image: -webkit-linear-gradient(top, #cdf3dd, #7adfa4); background-image: -o-linear-gradient(top, #cdf3dd, #7adfa4); background-image: linear-gradient(#cdf3dd, #7adfa4); border-color: #7adfa4 #7adfa4 hsl(145, 62%, 63%); color: #333 !important; text-shadow: 0 1px 1px rgba(255, 255, 255, 0.33); -webkit-font-smoothing: antialiased; }

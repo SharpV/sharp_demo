@@ -20,7 +20,7 @@ class User < ActiveRecord::Base
 
   make_voter
   has_many :connects, dependent: :destroy
-
+  has_many :albums, as: :albumable
   has_many :questions
   has_many :answers
   has_many :members

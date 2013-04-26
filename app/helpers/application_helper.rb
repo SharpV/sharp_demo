@@ -34,10 +34,10 @@ module ApplicationHelper
 
   def user_avatar_tag(user, mode='m')
     if user.avatar and !user.avatar.blank?
-      image_tag user.avatar.url(mode)
+      image_tag user.avatar.url(mode), class: 'img-rounded'
     else
       gravatar_image_tag(user.email.gsub('spam', 'mdeering'), :alt => user.nickname, 
-        :gravatar => {:size => size_by_mode(mode), default: :identicon })
+        :gravatar => {:size => size_by_mode(mode), default: :identicon }, class: 'img-rounded')
     end
   end
 

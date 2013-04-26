@@ -1,7 +1,0 @@
-<tr>
-  <td><%= link_to topic.title, [@group, topic] %></td>
-  <td><%= topic.user.nickname %></td>
-  <td><%= topic.readings_count %></td>
-  <td><%= topic.comments_count %></td>
-  <td><%= timeago_tag topic.updated_at, lang: 'zh-CN' %></td>
-</tr>
