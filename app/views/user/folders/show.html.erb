@@ -1,2 +1,12 @@
-<%= render 'me/media/nav' %>
-<%= render 'media', media: @media %>
+<div class='row'>
+  <div class='span-l'>
+    <h4 class='border'>
+      <%= @folder.name %>
+      <%= render partial: 'shared/media/add', locals: {namespace: [:user, current_user], folders: @folders} %>
+    </h4>
+    <%= render 'shared/media/list' %>
+  </div>
+  <div class='span-r pull-right'>
+    <%= render 'shared/folders/list' %>
+  </div>
+</div>

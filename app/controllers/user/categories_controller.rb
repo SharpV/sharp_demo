@@ -2,40 +2,45 @@ class User::CategoriesController < UserController
   
   respond_to :html, :json
   
-  set_tab :category, :post_nav
+  set_tab :posts, :user_nav
   
   def index
-    @categories = current_user.post_categories.nested_set.all
-  end
-
-  def admin
-    @category = Category.new
+    @category = Category.new 
     @categories = current_user.categories
   end
 
+  def show
+    @category = Category.find params[:id]
+    @posts = @category.posts.page params[:page]
+    @categories = @category.categoryable.categories
+    render template: 'user/posts/index'
+  end
+
   def new
-    @category = PostCategory.new 
-    respond_to do |format|
-      format.js
-    end
+    @category = Category.new 
   end
 
   def edit
-    @category = PostCategory.find params[:id]
+    @category = Category.find params[:id]
   end
 
   def create
-    @category = current_user.categories.build(params[:category])
+    @category = Category.new(params[:category])
     @category.creator = current_user
+    @category.categoryable = current_user
     if @category.save
-      respond_with do |format|
-        format.js
-      end
     end
   end
 
   def update
-    @category = PostCategory.find params[:id]
-    @category.update_attributes! params[:post_category]
+    @category = Category.find params[:id]
+    @category.update_attributes! params[:category]
+  end
+
+  def destroy
+    @category = Category.find params[:id]
+    if @category.destroy
+
+    end
   end
 end

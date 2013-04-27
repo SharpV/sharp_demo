@@ -9,7 +9,7 @@ class User::AlbumsController < UserController
   end
 
   def show
-    @albums = @current_group.albums
+    @albums = @current_user.albums
     @album = Album.find params[:id]
     @images = @album.images
   end
@@ -24,10 +24,17 @@ class User::AlbumsController < UserController
 
   def create
     @album = Album.new params[:album]
-    @album.albumable = @current_group
+    @album.albumable = current_user
     @album.creator = current_user
     if @album.save
-      redirect_to [:webclass, @current_group, @album]
+      redirect_to [:user, current_user, @album]
+    end
+  end
+
+  def update
+    @album = Album.find params[:id]
+    if @album.update_attributes params[:album]
+      redirect_to [:user, current_user, @album]
     end
   end
 end

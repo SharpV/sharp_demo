@@ -2,13 +2,11 @@ class User::FoldersController < UserController
 
   respond_to :html, :json
   
-  set_tab :media, :me_nav
-  set_tab :media, :media_nav
-  set_tab :folder, :media_nav, only: [:admin]
+  set_tab :folders, :user_nav
 
   def index
-    @folders = current_user.folders
-    @media = current_user.media
+    @folders = @current_user.folders
+    @media = current_user.media.page params[:page]
   end
 
   def admin
@@ -26,7 +24,8 @@ class User::FoldersController < UserController
 
   def show
     @folder = Folder.find params[:id]
-    @media = current_user.media
+    @media = current_user.media.page params[:page]
+    @folders = @current_user.folders
   end
 
 end

@@ -1,5 +1,23 @@
-<p id="notice"><%= notice %></p>
-
-
-<%= link_to 'Edit', edit_me_school_class_path(@me_school_class) %> |
-<%= link_to 'Back', me_school_classes_path %>
+<%= render 'user/albums/nav' %>
+<div class='row'>
+  <div class='span-l'>
+    <h4 class='border'>
+      <%= @album.name %>
+      <%- if @current_user.id == current_user.id %>
+        <%= link_to [:edit, :user, current_user, @album], class: 'btn btn-info pull-right btn-small span', remote: true, data: {type: 'script'} do %>
+          <i class="icon-edit icon-white"></i>
+          <span>修改相册</span>
+        <% end %>
+      
+        <%= link_to [:user, current_user, @album, :images], class: 'btn btn-success pull-right btn-small span'  do %>
+          <i class="icon-plus icon-white"></i>
+          <span>添加照片</span>
+        <% end %>
+      <% end %>
+    </h4>
+    <%= render 'user/albums/images' %>
+  </div>
+  <div class='span-r pull-right'>
+    <%= render 'user/albums/albums' %>
+  </div>
+</div>

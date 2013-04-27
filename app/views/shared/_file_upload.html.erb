@@ -2,7 +2,7 @@
   var fileUploadErrors = {
   maxFileSize: 'File is too big',
   minFileSize: 'File is too small',
-  acceptFileTypes: 'Filetype not allowed',
+  acceptFileTypes: '文件类型不正确',
   maxNumberOfFiles: 'Max number of files exceeded',
   uploadedBytes: 'Uploaded bytes exceed file size',
   emptyResult: 'Empty file upload result'
@@ -18,7 +18,8 @@
 
     {% if (file.error) { %}
       <td class="error" colspan="1">
-        <span class="label label-important">{%=locale.fileupload.error%}</span> {%=locale.fileupload.errors[file.error] || file.error%}
+        <span class="label label-important">{%=locale.fileupload.error%}</span>
+        {%=locale.fileupload.errors[file.error] || file.error%}
       </td>
     {% } 
     else if (o.files.valid && !i) { %}
@@ -51,6 +52,4 @@
 
 <%= render 'shared/file_upload_list' %>
 
-<script type="text/javascript" charset="utf-8">
-  
-</script>
+

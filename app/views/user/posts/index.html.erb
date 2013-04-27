@@ -1,22 +1,11 @@
-<%= render 'nav' %>
+<%= render '/user/posts/nav' %>
 <div class='row'>
   <div class='span-l'>
-    <%= raw(render(@posts) || "<p>暂无文章显示</p>") %>
+    <ul>
+      <%= render partial: 'shared/post', collection: @posts, locals: {namespace: [:user, @current_user], truncate_size: 172} %>
+    </ul>
   </div>
   <div class='span-r pull-right'>
-    <div class="btn-group pull-right clearfix">
-      <button data-toggle="dropdown" class="span btn btn-success dropdown-toggle">
-        创建纪录 
-        <span class="caret"></span>
-      </button>
-      <ul class="dropdown-menu">
-        <li><b>请您先选择分类</b></li>
-        <%- @categories.each do |c| %>
-          <li><%= link_to c.name, [:new, :user, @current_user, c, :post] %></li>
-        <% end %>
-      </ul>
-    </div>
-    <br /><br />
-    <%= render 'categories' %>
+    <%= render 'user/posts/categories' %>
   </div>
 </div>

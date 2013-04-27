@@ -1,13 +1,12 @@
-<p>
-  <%= link_to "创建相册", [:new, :user, current_user, :album], class: 'btn btn-success pull-right', remote: true, data: {type: 'script'} %>
-</p>
-<br />
-<h4 class='border'>相册列表</h4>
-<% if @albums.count > 0 %>
-  <%= tabs_tag(:namespace => :group_albums_nav, :open_tabs => {:class => "nav nav-tabs nav-stacked"}, :builder =>     MenuTabBuilder) do |tab| %>
+<%- if @albums.size > 0 %>
+  <h4>相册列表</h4>
+  <ul>
     <% @albums.each do |album| %>
-      <%= tab.try "album_#{album.id}", album.name, [:user, @current_user, album] %>
+      <li>
+        <%= link_to avatar_tag(album, 'm'), [:user, @current_user, album] %>
+        <p><%= album.name %></p>
+      </li>
     <% end %>
-  <% end %>
+  </ul>
 <% end %>
 

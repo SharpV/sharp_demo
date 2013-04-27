@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130425142244) do
+ActiveRecord::Schema.define(:version => 20130427131638) do
 
   create_table "active_admin_comments", :force => true do |t|
     t.string   "resource_id",   :null => false
@@ -62,8 +62,9 @@ ActiveRecord::Schema.define(:version => 20130425142244) do
     t.integer  "albumable_id"
     t.boolean  "is_public",      :default => true
     t.string   "albumable_type"
-    t.integer  "media_count",    :default => 0
+    t.integer  "images_count",   :default => 0
     t.datetime "created_at"
+    t.integer  "image_id"
   end
 
   add_index "albums", ["albumable_type", "albumable_id"], :name => "index_albums_on_albumable_type_and_albumable_id"

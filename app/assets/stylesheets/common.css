@@ -1,3 +1,6 @@
+.dropdown-menu{
+    min-width: 100px;
+}
 select {
     width: auto;
 }
@@ -24,10 +27,11 @@ li.list-item:hover {
 
 li .avatar{
     float:left;
+    width: 60px;
 }    
 
 li .content{
-    float: left;
+    float: none;
     overflow: hidden;
     width: auto;
     margin-left: 10px;

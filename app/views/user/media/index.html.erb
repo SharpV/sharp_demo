@@ -1,16 +1,14 @@
-<%= render 'nav' %>
-<table class="table">
-  <thead>
-    <tr>
-      <th>#</th>
-      <th>LOGO</th>
-      <th>名称</th>
-      <th>当前版本</th>  
-      <th>文件大小</th>
-      <th>下载地址</th>
-      <th>备注</th>
-      <th>操作</th>
-    </tr>
-  </thead>
-  <%= render @media %>
-</table>
+<div class='row'>
+  <div class='span-l'>
+    <h4 class='border'>
+      <%= @folder.name %>
+      <%= render partial: 'shared/media/add', locals: {namespace: [:user, current_user], folders: @folders} %>
+    </h4>
+    <%= render 'shared/file_upload_form', record: Medium.new, url: [:user, current_user, @folder, :media] %>
+  </div>
+  <div class='span-r pull-right'>
+    <p class="text-warning">
+      支持doc/excel/ppt/pdf等格式的文件，文件大小不超过30M
+    </p>
+  </div>
+</div>

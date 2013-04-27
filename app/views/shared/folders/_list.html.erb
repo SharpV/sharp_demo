@@ -1,0 +1,14 @@
+<table class='table'>
+  <tbody id='folder-list'>
+    <%- @folders.each do |folder| %>
+      <tr>
+        <td>
+          <%= link_to [:user, @current_user, folder] do %>
+            <i class='icon icon-folder-close'></i>
+            <span><%= folder.name %></span>
+          <% end %>
+        </td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
