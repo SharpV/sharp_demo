@@ -1,1 +1,1 @@
-$.lazybox("#{j(render :partial => 'form')}");
+$.lazybox("#{j(render partial: 'shared/albums/form', locals: {namespace: [:user, current_user]})}");

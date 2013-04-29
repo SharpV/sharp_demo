@@ -11,7 +11,7 @@
 #   WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 #   See the License for the specific language governing permissions and
 #   limitations under the License.
-module ActivityFeedHelper
+module BtnLinkHelper
   
   def display_like_text(activity)
 		if current_user.like_this?(activity) == true

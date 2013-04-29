@@ -3,7 +3,7 @@ en:
     "yes": 'Yes'
     "no": 'No'
     required:
-      text: 'required'
+      text: '必须'
       mark: '*'
       # You can uncomment the line below if you need to overwrite the whole required html.
       # When using html, text and mark won't be used.
@@ -23,4 +23,7 @@ en:
     #   defaults:
     #     username: 'User name to sign in.'
     #     password: 'No special characters, please.'
+    submit:
+      create: "创建"
+      update: "更新"
 

@@ -1,6 +1,14 @@
-<%= render 'nav' %>
-<div class='content clearfix'>
-  <h3 class='span'>添加文件到<%= @folder.name %></h3>
-  <%= link_to "上传完成", [:me, @folder], class: 'btn btn-info pull-right' %>
+<div class='row'>
+  <div class='span-l'>
+    <h4 class='border'>
+      <%= @folder.name %>
+      <%= render partial: 'shared/folders/add', locals: {namespace: [:user, current_user], folders: @folders} %>
+    </h4>
+    <%= render 'shared/file_upload_form', record: Medium.new, url: [:user, current_user, @folder, :media] %>
+  </div>
+  <div class='span-r pull-right'>
+    <p class="text-warning">
+      支持doc/excel/ppt/pdf等格式的文件，文件大小不超过30M
+    </p>
+  </div>
 </div>
-<%= render 'shared/file_upload_form', url: [:me, @folder, @folder, @medium] %>

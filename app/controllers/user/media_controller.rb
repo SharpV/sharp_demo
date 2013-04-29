@@ -4,15 +4,16 @@ class User::MediaController < UserController
 
   respond_to :html, :json
 
-  set_tab :folders, :user_nav
+  set_tab :media, :user_nav
   
   def index
-    @folders = current_user.folders
-    @folder = Folder.find params[:folder_id]
+    @folders = @current_user.folders
+    @media = current_user.media.folder.page params[:page]
   end
 
   def new
     @medium = Medium.new
+    @folders = current_user.folders
     @folder = Folder.find params[:folder_id]
   end
 

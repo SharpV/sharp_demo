@@ -7,6 +7,7 @@ class UserController < ApplicationController
   def set_current_context
     if params[:user_id]
       @current_user = User.find params[:user_id]
+      @current_namespace = [:user, @current_user]
     else
       @current_user = nil
       redirect_to root_path

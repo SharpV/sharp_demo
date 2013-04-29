@@ -4,7 +4,9 @@ class Message < ActiveRecord::Base
   default_scope  { order('created_at DESC') }
 
 
-  scope :webclass, where('webclass_id is not null and recipient_id is not null and sender_id is not null')
+  scope :webclass, where('group_id is not null and recipient_id is not null and sender_id is not null')
+  scope :user, where('group_id is null and recipient_id is not null and sender_id is not null')
+
 
   validates :title, :body, :recipient_id, :presence => true
 

@@ -22,10 +22,19 @@ SharpLink::Application.routes.draw do
       resources :albums do
         resources :images
       end
+      resources :images
       resources :likes
       resources :posts
       resources :comments
-      resources :messages
+      resources :messages do
+        collection do 
+          get :draft
+          get :sendout
+        end
+        member do
+          post :reply
+        end
+      end
       resources :certifications
       resources :groups
       resources :followings do

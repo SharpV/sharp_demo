@@ -1,0 +1,22 @@
+<h4>我收到信件</h4>
+<table class='table'>
+  <thead>
+    <tr class="success">
+      <th>发件人</th>  
+      <th>标题</th>
+      <th>发送时间</th>
+      <th>操作</th>
+    </tr>
+  </thead>
+  <tbody id='message-list'>
+    <%- @messages.each do |message| %>
+      <tr id='message-<%= message.id %>' class=<%= message.read ? '' : 'warning' %> >
+        <td><%=link_to message.recipient.nickname,  message.recipient %></td> 
+        <td><%=link_to message.title, [@current_namespace, message].flatten %> </td>
+        <td><%= format_datetime message.created_at %> </td>
+        <td></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+<%= paginate @messages %>

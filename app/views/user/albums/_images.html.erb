@@ -1,9 +1,4 @@
-<%= render 'shared/gallery' %>
-
-<div id="gallery" data-toggle="modal-gallery" data-target="#modal-gallery">
-  <%- @images.each do |image| %>
-    <%= link_to image.file_url, 'data-gallery' => 'gallery', class: 'span thumbnail tooltips', 'data-trigger' => "tooltip", 'data-content' => "#{image.file_name}" do %>
-        <%= image_tag image.file_url(:m) %>
-    <% end %>
-  <% end %>
-</div>
+<h4>
+  <%= @current_user.name %>的相册
+  
+</h4>

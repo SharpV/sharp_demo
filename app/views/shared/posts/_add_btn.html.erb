@@ -1,12 +1,13 @@
 <div class="btn-group pull-right">
   <a class="btn dropdown-toggle btn-success btn-small" data-toggle="dropdown" href="#">
-    添加课件
+    <i class="icon-plus icon-white"></i>
+    <span>添加文章</span>
     <span class="caret"></span>
   </a>
   <ul class="dropdown-menu">
-    <%- folders.each do |folder| %>
+    <%- categories.each do |category| %>
       <li>
-        <%=link_to folder.name, [namespace, folder, :media].flatten %>
+        <%=link_to category.name, [:new, namespace, category, :post].flatten %>
       </li>
     <% end %>
   </ul>

@@ -1,0 +1,14 @@
+<div class="btn-group pull-right">
+  <a class="btn dropdown-toggle btn-success btn-small" data-toggle="dropdown" href="#">
+    <i class="icon-plus icon-white"></i>
+    <span>添加照片</span>
+    <span class="caret"></span>
+  </a>
+  <ul class="dropdown-menu">
+    <%- albums.each do |album| %>
+      <li>
+        <%=link_to album.name, [:new, namespace, album, :image].flatten %>
+      </li>
+    <% end %>
+  </ul>
+</div>

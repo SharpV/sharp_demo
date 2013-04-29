@@ -1,15 +1,17 @@
 <div class='row'>
   <div class='span-l'>
     <h4 class='border'>
-      [<%= @album.name %>] 文件上传
-      <%= link_to [:user, current_user, @album], class: "btn btn-success btn-small pull-right" do %>
-        <i class="icon-ok icon-white"></i>
-        <span>完成上传</span>
+      最新照片
+      <%- if @current_user.id == current_user.id %>
+        <%= render partial: 'shared/images/add_btn', locals: {namespace: [:user, current_user], albums: @albums} %>
       <% end %>
     </h4>
-    <%= render 'shared/file_upload_form', record: @image, url: [:user, current_user, @album, :images]%>
+    <%= render partial: 'shared/albums/images', locals: {namespace: [:user, @current_user]} %>
   </div>
   <div class='span-r pull-right'>
-    <%= render 'user/albums/albums' %>
+    <%- if @current_user.id == current_user.id %>
+      <%= link_to "相册管理", [:user, current_user, :albums], class: 'btn btn-info' %>
+    <% end %>
+    <%= render partial: 'shared/albums/list', locals: {namespace: [:user, @current_user], albums: @albums} %>
   </div>
 </div>

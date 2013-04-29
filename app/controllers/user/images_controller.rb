@@ -2,12 +2,18 @@
 
 class User::ImagesController < UserController
   
-  set_tab :albums, :user_nav
+  set_tab :images, :user_nav
 
   def index
-    @albums = current_user.albums
+    @albums = @current_user.albums
+    @images = Image.where imageable_type: 'album', imageable_id: @albums.collect{|a|a.id}
+  end
+
+  def new 
     @album = Album.find params[:album_id]
     @image = Image.new
+    @albums = @current_user.albums
+    @images = Image.where imageable_type: 'album', imageable_id: @albums.collect{|a|a.id}
   end
 
 

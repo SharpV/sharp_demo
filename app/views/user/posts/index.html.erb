@@ -1,11 +1,17 @@
-<%= render '/user/posts/nav' %>
 <div class='row'>
   <div class='span-l'>
+    <h4 class='border'>
+      全部文章
+      <%= render partial: 'shared/posts/add_btn', locals: {namespace: [:user, @current_user], categories: @categories} %>
+    </h4>
     <ul>
-      <%= render partial: 'shared/post', collection: @posts, locals: {namespace: [:user, @current_user], truncate_size: 172} %>
+      <%= render partial: 'shared/posts/post', collection: @posts, locals: {namespace: [:user, @current_user], truncate_size: 172} %>
     </ul>
   </div>
   <div class='span-r pull-right'>
-    <%= render 'user/posts/categories' %>
+    <%- if current_user.id == @current_user.id  %>
+      <%= link_to "分类管理", [:user, current_user, :categories], class: 'btn btn-info' %>
+    <% end %>
+    <%= render 'shared/categories/list' %>
   </div>
 </div>

@@ -1,4 +1,4 @@
-<%= simple_form_for [:webclass, @current_webclass, @message], :html => {:class => 'form-stacked'}, validate: true do |f| -%> 
+<%= simple_form_for [:reply, @current_namespace, @message], :html => {:class => 'form-stacked'}, validate: true do |f| -%> 
   <%= f.error_notification %>
   <%= f.association :recipient, :label => render('contacts'), :collection => @group_members, as: :grouped_select, group_method: :members, group_label_method: :name, value_method: :user_id, input_html: {multiple: 'multiple', id: 'recipient_ids'} %>
 

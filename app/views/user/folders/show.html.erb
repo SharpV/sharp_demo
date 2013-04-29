@@ -4,9 +4,25 @@
       <%= @folder.name %>
       <%= render partial: 'shared/media/add', locals: {namespace: [:user, current_user], folders: @folders} %>
     </h4>
-    <%= render 'shared/media/list' %>
+    <table class='table'>
+      <thead>
+        <tr class="success">
+          <th width='60'></th>
+          <th>文件名</th>  
+          <th width='60'>大小</th>
+          <th width='60'>目录</th>
+          <th width='100'>创建时间</th>
+          <th width='100'>操作</th>
+        </tr>
+      </thead>
+      <tbody id='media-list'>
+        <%= render partial: 'shared/media/medium', collection: @media, locals: {namespace: [:user, current_user]} %>
+      </tbody>
+    </table>
+    <%= paginate @media %>
   </div>
+
   <div class='span-r pull-right'>
-    <%= render 'shared/folders/list' %>
+    <%= render partial: 'shared/folders/list', locals: {namespace: [:user, current_user], folders: @folders}  %>
   </div>
 </div>

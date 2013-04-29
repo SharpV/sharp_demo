@@ -1,0 +1,6 @@
+<%= tabs_tag(:namespace => :messages_nav, :open_tabs => {:class => "nav nav-tabs nav-stacked"}, :builder => MenuTabBuilder) do |tab| %>
+  <%= tab.write "写信", [:new, @current_namespace, :message].flatten %>
+  <%= tab.index "收件箱", [@current_namespace, :messages].flatten %>
+  <%= tab.sendout "发件箱", [:sendout, @current_namespace, :messages].flatten %>
+  <%= tab.draft "草稿箱", [:draft, @current_namespace, :messages].flatten %>
+<% end %>

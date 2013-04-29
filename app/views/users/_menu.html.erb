@@ -4,8 +4,8 @@
       <%= tab.home raw("<i class='icon icon-user'></i> 我的主页"), @current_user %>
       <%= tab.activities raw("<i class='icon icon-envelope'></i> 我的私信"), [:user, @current_user, :messages] %>
      	<%= tab.posts raw("<i class='icon icon-edit'></i> 我的文章"), [:user, @current_user, :posts] %>
-      <%= tab.albums raw("<i class='icon icon-picture'></i> 我的相册"), [:user, @current_user, :albums] %>
-      <%= tab.folders raw("<i class='icon icon-folder-open'></i> 我的课件"), [:user, @current_user, :folders] %>
+      <%= tab.images raw("<i class='icon icon-picture'></i> 我的相册"), [:user, @current_user, :images] %>
+      <%= tab.media raw("<i class='icon icon-folder-open'></i> 我的课件"), [:user, @current_user, :media] %>
       <%= tab.questions raw("<i class='icon icon-question-sign'></i> 我的问答"), [:user, @current_user, @questions] %>
       <%= tab.groups raw("<i class='icon icon-group'></i> 我的群组"), [:user, @current_user, :groups] %>
       <%= tab.webclasses raw("<i class='icon icon-calendar'></i> 我的班级"), [:user, @current_user, :webclasses] %>

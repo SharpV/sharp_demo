@@ -1,11 +1,11 @@
 class User::AlbumsController < UserController
 
   respond_to :html, :js
-  set_tab :albums, :user_nav
+  set_tab :images, :user_nav
 
   def index
     @albums = @current_user.albums
-    @images = Image.where imageable_type: 'album', imageable_id: @albums.collect{|a|a.id}
+    @album = Album.new
   end
 
   def show
@@ -27,14 +27,13 @@ class User::AlbumsController < UserController
     @album.albumable = current_user
     @album.creator = current_user
     if @album.save
-      redirect_to [:user, current_user, @album]
     end
   end
 
   def update
     @album = Album.find params[:id]
     if @album.update_attributes params[:album]
-      redirect_to [:user, current_user, @album]
+      @albums = current_user.albums
     end
   end
 end

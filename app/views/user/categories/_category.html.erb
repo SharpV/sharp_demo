@@ -1,3 +1,9 @@
 <tr id='category-<%= category.id %>'>
-  <%= render 'category_content', category: category %>
+  <td><%= category.name %></td>
+  <td>
+    <%= link_to "编辑", [:edit, :user, current_user, category], remote: true, data: {type: 'script'} %>
+  </td>
+  <td>
+    <%= link_to "删除", [:user, current_user, category], method: :delete, remote: true, data: {type: 'script'}, confirm: "是否确定删除 #{category.name}" %>
+  </td>
 </tr>

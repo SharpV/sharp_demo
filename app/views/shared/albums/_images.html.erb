@@ -1,0 +1,9 @@
+<%= render 'shared/albums/gallery' %>
+
+<div id="gallery" data-toggle="modal-gallery" data-target="#modal-gallery">
+  <%- @images.each do |image| %>
+    <%= link_to image.file_url, 'data-gallery' => 'gallery', class: 'span thumbnail tooltips', 'data-trigger' => "tooltip", 'data-content' => "#{image.file_name}" do %>
+        <%= image_tag image.file_url(:m) %>
+    <% end %>
+  <% end %>
+</div>

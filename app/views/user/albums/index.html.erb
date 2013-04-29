@@ -1,16 +1,20 @@
-<%= render 'user/albums/nav' %>
 <div class='row'>
-  
-  <div class='span-l'>
-    <ul>
-      <%- @images.each do |image| %>
-        <li>
-          <%= image_tag image.file_url(:s) %>
-        </li>
-      <% end %>
-    </ul>
+    <div class='span-l'>
+    <h4 class='border'>
+      相册管理
+      <%= render 'shared/images/show_btn' %>
+    </h4>
+    <div id='album-list'>
+      <%= render 'list' %>
+    </div>
+    <%= render partial: 'shared/albums/form' %>
   </div>
+
   <div class='span-r pull-right'>
-    <%= render 'albums' %>
+    <%- if @current_user.id == current_user.id %>
+      <%= link_to "相册管理", [:user, current_user, :albums], class: 'btn btn-info' %>
+    <% end %>
+    <%= render 'shared/albums/list' %>
   </div>
 </div>
+

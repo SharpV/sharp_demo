@@ -1,17 +1,16 @@
 <div class='row'>
   <div class='span-l'>
-    <h4 class='border'>
-      全部课件
+    <h4>
+      目录管理
       <%= render partial: 'shared/media/add', locals: {namespace: [:user, current_user], folders: @folders} %>
     </h4>
-    <%= render 'shared/media/list' %>
+    <div class='folder-list'>
+      <%= render 'list' %>
+    </div>
+    <%= render 'form' %>
   </div>
 
   <div class='span-r pull-right'>
-    <%= link_to '目录管理', [:admin, :user, current_user, :folders], class: 'btn btn-info pull-right' %>
-    <%- if @folders.size > 0 %>
-      <h4>目录列表</h4>
-      <%= render 'shared/folders/list' %>
-    <% end %>
+    <%= render 'shared/folders/list' %>
   </div>
 </div>

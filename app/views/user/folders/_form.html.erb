@@ -1,4 +1,4 @@
-<%= simple_form_for Folder.new, :url => me_folders_path, :validate => true, remote: true, :html => {:class => 'form-horizontal', id: 'folder-form', data: {type: "script", method: :post}} do |form| %>
+<%= simple_form_for @folder, :url => [:user, current_user, @folder], :validate => true, remote: true, :html => {:class => 'form-horizontal', id: 'folder-form', data: {type: "script"}} do |form| %>
   <%= form.input :name, label: '名称' %>
-  <%= form.submit '创建', :class=>'btn btn-primary inline', disable_with: "正在提交..." %>
+  <%= form.submit :class=>'btn btn-primary inline', disable_with: "正在提交..." %>
 <% end %>

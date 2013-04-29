@@ -2,10 +2,11 @@
 class Medium < ActiveRecord::Base
 
   default_scope where("mediumable_id is not null and mediumable_type is not null")
+  scope :folder, where(mediumable_type: 'Folder')
 
   include Rails.application.routes.url_helpers
   # attr_accessible :title, :body
-  belongs_to :creator, class_name: 'User'
+  belongs_to :creator, class_name: 'User', foreign_key: :creator_id
 
   belongs_to :mediumable, :polymorphic => true
 

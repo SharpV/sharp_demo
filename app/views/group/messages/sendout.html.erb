@@ -11,12 +11,12 @@
         </tr>
       </thead>
       <tbody id='message-list'>
-        <%= render partial: 'outbox_messages', collection: @messages, as: :message %>
+        <%= render partial: 'shared/messages/outbox', collection: @messages, as: :message %>
       </tbody>
     </table>
     <%= paginate @messages %>
   </div>
   <div class='span-r pull-right'>
-    <%= render 'menu' %>
+    <%= render 'shared/messages/actions' %>
   </div>
 </div>

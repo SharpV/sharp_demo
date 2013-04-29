@@ -3,7 +3,7 @@
   <ul>
     <% @albums.each do |album| %>
       <li>
-        <%= link_to avatar_tag(album, 'm'), [:user, @current_user, album] %>
+        <%= link_to avatar_tag(album, 'm'), [@current_namespace, album].flatten %>
         <p><%= album.name %></p>
       </li>
     <% end %>

@@ -13,7 +13,6 @@ class User::CategoriesController < UserController
     @category = Category.find params[:id]
     @posts = @category.posts.page params[:page]
     @categories = @category.categoryable.categories
-    render template: 'user/posts/index'
   end
 
   def new

@@ -1,5 +1,10 @@
 <tr id='folder-<%= folder.id %>'>
-  <td><%= folder.name %></td>
-  <td></td>
-  <td></td>
+  <td>
+    <i class='icon icon-folder-close'></i>
+    <span><%= folder.name %></span>
+  </td>
+  <td>
+    <%= link_to '编辑', [:edit, :user, current_user, folder], remote: true, data: {type: 'script'}, class: 'btn btn-info btn-small span', disable_with: '请稍后...' %>
+    <%= link_to '删除', [:user, current_user, folder], method: :delete, remote: true, data: {type: 'script'}, class: 'btn btn-danger btn-small span', confirm: "是否确定删除 #{folder.name}", disable_with: '请稍后...' %>
+  </td>
 </tr>

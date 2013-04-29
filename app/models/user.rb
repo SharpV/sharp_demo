@@ -8,6 +8,7 @@ class User < ActiveRecord::Base
   include Role
   
   acts_as_actor
+  make_voter
   has_many :follows, as: :actor
   # Include default devise modules. Others available are:
   # :token_authenticatable, :confirmable,
@@ -17,8 +18,7 @@ class User < ActiveRecord::Base
 
   # Setup accessible (or protected) attributes for your model
   attr_accessible :email, :password, :password_confirmation, :remember_me, :description, :nickname
-
-  make_voter
+  
   has_many :connects, dependent: :destroy
   has_many :albums, as: :albumable
   has_many :questions
@@ -31,7 +31,7 @@ class User < ActiveRecord::Base
   has_many :messages, as: :sender
   has_many :messages, as: :recipient
   has_many :posts, as: :postable
-  has_many :media, as: :mediumable
+  has_many :media, :foreign_key => :creator_id
   has_many :categories, as: :categoryable
   has_many :folders, as: :folderable
   has_many :comments
