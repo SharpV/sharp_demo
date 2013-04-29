@@ -1,12 +1,11 @@
 <h2>修改个人基本信息</h2>
 
-<%= simple_form_for(current_user, url: me_setting_path(current_user)) do |f| %>
+<%= simple_form_for(current_user, url: user_user_setting_path(current_user, current_user), validate: true) do |f| %>
   <%= f.error_notification %>
 
-  <%= f.input :nickname, :required => true, :autofocus => true, label: '昵称' %>
+  <%= f.input :nickname, :required => true, label: '真实姓名' %>
+  <%= f.input :avatar, label: '头像' %>
   <%= f.input :description, label: '一句话介绍自己' %>
+  <%= f.button :submit, "更新", class: 'btn btn-primary', disable_with: '更新中...' %>
 
-  <div class="form-actions">
-    <%= f.button :submit, "更新" %>
-  </div>
 <% end %>

@@ -17,8 +17,8 @@ SharpLink::Application.routes.draw do
   end
   
   namespace :user, path: 'space' do
-    resources :settings 
     resources :users do 
+      resources :settings 
       resources :albums do
         resources :images
       end

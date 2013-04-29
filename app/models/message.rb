@@ -1,5 +1,5 @@
 class Message < ActiveRecord::Base
-  attr_accessible :send_to_parent, :recipient_id, :title, :body
+  attr_accessible :send_to_parent, :recipient_id, :title, :body, :read, :parent_id
 
   default_scope  { order('created_at DESC') }
 

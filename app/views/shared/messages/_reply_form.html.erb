@@ -1,10 +1,9 @@
-<%= simple_form_for [:reply, @current_namespace, @message], :html => {:class => 'form-stacked'}, validate: true do |f| -%> 
+<h4 class='border'></h4>
+<%= simple_form_for Message.new(parent_id: @message.id, recipient_id: @message.recipient_id == current_user.id ? @message.sender_id : current_user.id, title: @message.title), url: [:reply, @current_namespace, @message].flatten, remote: true, validate: true, :html => {id: 'reply-form', data: {type: "script"}} do |f| -%> 
   <%= f.error_notification %>
-  <%= f.association :recipient, :label => render('contacts'), :collection => @group_members, as: :grouped_select, group_method: :members, group_label_method: :name, value_method: :user_id, input_html: {multiple: 'multiple', id: 'recipient_ids'} %>
-
-  <%= f.input :title, :class=>'xlarge', :label => '标题' %>
-  <%= f.input :body, label: '内容' %>
-  <div class="actions">
-    <%= f.submit '创建', :class=>'btn btn-primary', disable_with: "正在提交..." %>
-  </div>
-<% end %>
+  <%= f.input :parent_id, as: :hidden %>
+  <%= f.association :recipient, as: :hidden %>
+  <%= f.input :title, as: :hidden %>
+  <%= f.input :body, label: '直接回复' %>
+  <%= f.submit '创建', :class=>'btn btn-primary', disable_with: "正在提交..." %>
+<% end %> 

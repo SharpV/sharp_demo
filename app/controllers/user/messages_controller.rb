@@ -2,7 +2,7 @@
 
 class User::MessagesController < UserController
   respond_to :html, :js
-  set_tab :messages, :group_nav
+  set_tab :messages, :user_nav
   set_tab :sendout, :messages_nav, only: [:sendout]
   set_tab :index, :messages_nav, only: [:index]
   set_tab :write, :messages_nav, only: [:new]
@@ -24,13 +24,13 @@ class User::MessagesController < UserController
     @message.update_attributes read: true
     @replies = @message.replies
     if @message.sender_id == current_user.id
-      set_tab :sendout, :group_messages_nav
+      set_tab :sendout, :messages_nav
     else
-      set_tab :index, :group_messages_nav
+      set_tab :index, :messages_nav
     end
       
     unless @message.sender_id == current_user.id or @message.recipient_id == current_user.id 
-      redirect_to [:group, @current_group, 'messages']
+      redirect_to root_path
     end
   end
 
@@ -45,11 +45,10 @@ class User::MessagesController < UserController
     recipient_ids.each do |recipient_id|  
       message = Message.new params[:message]
       message.sender = current_user
-      message.group = @current_group
       message.recipient_id = recipient_id
       message.save
     end
-    redirect_to [:group, @current_group, :messages]
+    redirect_to [@current_namespace, :messages].flatten
   end
   
 end
