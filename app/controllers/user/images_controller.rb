@@ -6,14 +6,14 @@ class User::ImagesController < UserController
 
   def index
     @albums = @current_user.albums
-    @images = Image.where imageable_type: 'album', imageable_id: @albums.collect{|a|a.id}
+    @images = Image.where imageable_type: 'album', imageable_id: @albums.map(&:id)
   end
 
   def new 
     @album = Album.find params[:album_id]
     @image = Image.new
     @albums = @current_user.albums
-    @images = Image.where imageable_type: 'album', imageable_id: @albums.collect{|a|a.id}
+    @images = Image.where imageable_type: 'album', imageable_id: @albums.map(&:id)
   end
 
 

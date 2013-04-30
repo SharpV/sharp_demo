@@ -9,40 +9,37 @@ class User::FoldersController < UserController
     @folder = Folder.new
   end
 
-  def admin
-    @folders = current_user.folders
+  def show
+    @folder = Folder.find params[:id]
+    @media = Medium.where(mediumable_type: Folder.to_s, mediumable_id: @folder.id).page params[:page]
+    @folders = @current_user.folders
   end
 
   def edit
     @folder = Folder.find params[:id]
+    render 'shared/folders/edit'
   end
 
   def update
     @folder = Folder.find params[:id]
     if @folder.update_attributes params[:folder]
       @folders = current_user.folders
+      render 'shared/folders/update'
     end
   end
 
   def destroy
     @folder = Folder.find params[:id]
     if @folder.destroy
+      render 'shared/folders/destroy'
     end
   end
 
   def create
     @folder = current_user.folders.build params[:folder]
     if @folder.save
-      respond_with do |format|
-        format.js
-      end
+      render 'shared/folders/create'
     end
-  end
-
-  def show
-    @folder = Folder.find params[:id]
-    @media = current_user.media.folder.page params[:page]
-    @folders = @current_user.folders
   end
 
 end

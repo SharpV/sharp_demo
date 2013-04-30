@@ -3,15 +3,15 @@
     <h4 class='border'>
       最新照片
       <%- if @current_user.id == current_user.id %>
-        <%= render partial: 'shared/images/add_btn', locals: {namespace: [:user, current_user], albums: @albums} %>
+        <%= render 'shared/images/add_btn' %>
       <% end %>
     </h4>
-    <%= render partial: 'shared/albums/images', locals: {namespace: [:user, @current_user]} %>
+    <%= render 'shared/albums/images' %>
   </div>
   <div class='span-r pull-right'>
     <%- if @current_user.id == current_user.id %>
-      <%= link_to "相册管理", [:user, current_user, :albums], class: 'btn btn-info' %>
+      <%= link_to "相册管理", [:user, current_user, :albums], class: 'btn btn-info btn-small' %>
     <% end %>
-    <%= render partial: 'shared/albums/list', locals: {namespace: [:user, @current_user], albums: @albums} %>
+    <%= render 'shared/albums/list' %>
   </div>
 </div>

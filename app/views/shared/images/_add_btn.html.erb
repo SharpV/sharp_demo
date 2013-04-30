@@ -5,9 +5,9 @@
     <span class="caret"></span>
   </a>
   <ul class="dropdown-menu">
-    <%- albums.each do |album| %>
+    <%- @albums.each do |album| %>
       <li>
-        <%=link_to album.name, [:new, namespace, album, :image].flatten %>
+        <%=link_to album.name, [:new, @current_namespace, album, :image].flatten %>
       </li>
     <% end %>
   </ul>

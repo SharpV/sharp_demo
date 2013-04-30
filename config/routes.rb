@@ -162,8 +162,9 @@ SharpLink::Application.routes.draw do
 
       resources :albums do
         resources :images
-        get :admin, on: :collection
       end
+
+      resources :images
 
       resources :sections do
         get :admin, on: :collection

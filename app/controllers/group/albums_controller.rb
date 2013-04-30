@@ -1,11 +1,11 @@
 class Group::AlbumsController < GroupController
 
   respond_to :html, :js
-  set_tab :albums, :group_nav
+  set_tab :images, :group_nav
 
   def index
     @albums = @current_group.albums
-    @images = Image.where imageable_type: 'album', imageable_id: @albums.collect{|a|a.id}
+    @album = Album.new
   end
 
   def show
@@ -20,6 +20,15 @@ class Group::AlbumsController < GroupController
 
   def edit
     @album = Album.find params[:id]
+    render 'shared/albums/edit'
+  end
+
+  def update
+    @album = Album.find params[:id]
+    if @album.update_attributes params[:album]
+      @albums = @current_group.albums
+      render 'shared/albums/update'
+    end
   end
 
   def create
@@ -27,7 +36,7 @@ class Group::AlbumsController < GroupController
     @album.albumable = @current_group
     @album.creator = current_user
     if @album.save
-      redirect_to [:webclass, @current_group, @album]
+      render 'shared/albums/create'
     end
   end
 

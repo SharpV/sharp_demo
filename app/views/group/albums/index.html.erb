@@ -1,15 +1,16 @@
 <div class='row'>
-  <div class='span-l'>
-    <h4 class='border'>最新上传</h4>
-    <ul>
-      <%- @images.each do |image| %>
-        <li>
-          <%= image_tag image.file_url(:s) %>
-        </li>
-      <% end %>
-    </ul>
+    <div class='span-l'>
+    <h4 class='border'>
+      相册管理
+      <%= render 'shared/images/show_btn' %>
+    </h4>
+    <div id='album-list'>
+      <%= render 'shared/albums/admin_list' %>
+    </div>
+    <%= render 'shared/albums/form' %>
   </div>
+
   <div class='span-r pull-right'>
-    <%= render 'albums' %>
   </div>
 </div>
+

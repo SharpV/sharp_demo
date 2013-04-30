@@ -1,15 +1,15 @@
 <div class='row'>
   <div class='span-l'>
     <h4 class='border'>
-      [<%= @album.name %>] 文件上传
-      <%= link_to [:webclass, @current_webclass, @album], class: "btn btn-success btn-small pull-right" do %>
-        <i class="icon-ok icon-white"></i>
-        <span>完成上传</span>
-      <% end %>
+      最新照片
+      <%= render 'shared/images/add_btn' %>
     </h4>
-    <%= render 'shared/file_upload_form', record: @image, url: [:webclass, @current_webclass, @album, :images]%>
+    <%= render 'shared/albums/images' %>
   </div>
   <div class='span-r pull-right'>
-    <%= render 'webclass/albums/albums' %>
+    <%- if @current_group_member.admin? %>
+      <%= link_to "相册管理", [@current_namespace, :albums].flatten, class: 'btn btn-info btn-small' %>
+    <% end %>
+    <%= render partial: 'shared/albums/list' %>
   </div>
 </div>

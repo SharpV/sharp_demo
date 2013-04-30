@@ -2,12 +2,12 @@
   <div class='span-l'>
     <h4 class='border'>
       <%= @folder.name %>
-      <%= render partial: 'shared/folders/add', locals: {namespace: [:user, current_user], folders: @folders} %>
+      <%= render partial: 'shared/folders/show_btn' %>
     </h4>
     <%= render 'shared/file_upload_form', record: Medium.new, url: [:user, current_user, @folder, :media] %>
   </div>
   <div class='span-r pull-right'>
-    <p class="text-warning">
+    <p class="tip">
       支持doc/excel/ppt/pdf等格式的文件，文件大小不超过30M
     </p>
   </div>

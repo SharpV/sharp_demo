@@ -1,11 +1,15 @@
 class Group::ImagesController < GroupController
-  set_tab :albums, :groups_nav
+
+  set_tab :images, :group_nav
 
   def index
-    @albums = @current_webclass.albums
+    @albums = @current_group.albums
+    @images = Image.where imageable_type: Album.to_s, imageable_id: @albums.map(&:id)
+  end
+
+  def new 
     @album = Album.find params[:album_id]
     @image = Image.new
-    self.try :set_tab, "album_#{@album.id}", :webclass_courses_nav
   end
 
 
@@ -28,5 +32,6 @@ class Group::ImagesController < GroupController
     @image = Image.find(params[:id])
     @image.destroy
   end
+
 
 end

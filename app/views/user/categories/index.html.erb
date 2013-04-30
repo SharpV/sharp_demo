@@ -3,14 +3,7 @@
     分类管理
     <%= link_to "返回", [:user, current_user, :posts], class: 'btn btn-success btn-small pull-right' %>
   </h4>
-  <table class='table content'>
-    <thead>
-      <tr>
-        <th>名称</th>
-        <th>编辑</th>
-        <th>删除</th>
-      </tr>
-    </thead>
+  <table class='table'>
     <tbody id='category-list'>
       <%= render @categories %>
     </tbody>

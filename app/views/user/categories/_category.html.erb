@@ -1,9 +1,12 @@
 <tr id='category-<%= category.id %>'>
-  <td><%= category.name %></td>
   <td>
-    <%= link_to "编辑", [:edit, :user, current_user, category], remote: true, data: {type: 'script'} %>
+    <%=link_to [@current_namespace, category].flatten do %>
+      <i class='icon icon-list'></i>
+      <%= category.name %>
+    <% end %>
   </td>
   <td>
-    <%= link_to "删除", [:user, current_user, category], method: :delete, remote: true, data: {type: 'script'}, confirm: "是否确定删除 #{category.name}" %>
+    <%= link_to "编辑", [:edit, :user, current_user, category].flatten, remote: true, data: {type: 'script'}, class: 'btn btn-small btn-info span' %>
+    <%= link_to "删除", [:user, current_user, category], method: :delete, remote: true, data: {type: 'script'}, confirm: "是否确定删除 #{category.name}", class: 'btn btn-danger btn-small span' %>
   </td>
 </tr>

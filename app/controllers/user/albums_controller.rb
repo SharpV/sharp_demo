@@ -20,6 +20,7 @@ class User::AlbumsController < UserController
 
   def edit
     @album = Album.find params[:id]
+    render 'shared/albums/edit'
   end
 
   def create
@@ -27,6 +28,7 @@ class User::AlbumsController < UserController
     @album.albumable = current_user
     @album.creator = current_user
     if @album.save
+      render 'shared/albums/create'
     end
   end
 
@@ -34,6 +36,13 @@ class User::AlbumsController < UserController
     @album = Album.find params[:id]
     if @album.update_attributes params[:album]
       @albums = current_user.albums
+      render 'shared/albums/update'
     end
+  end
+
+  def destroy
+    @album = Album.find(params[:id])
+    @album.destroy
+    render 'shared/albums/destroy'
   end
 end

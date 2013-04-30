@@ -8,7 +8,7 @@ class User::MediaController < UserController
   
   def index
     @folders = @current_user.folders
-    @media = Media.where(folder_id: @folders.map(&:id).page params[:page]
+    @media = Medium.where(mediumable_type: Folder.to_s, mediumable_id: @folders.map(&:id)).page params[:page]
   end
 
   def new

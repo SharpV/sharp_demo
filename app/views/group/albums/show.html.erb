@@ -2,18 +2,14 @@
   <div class='span-l'>
     <h4 class='border'>
       <%= @album.name %>
-      <%= link_to [:edit, :webclass, @current_webclass, @album], class: 'btn btn-info pull-right btn-small span', remote: true, data: {type: 'script'} do %>
-        <i class="icon-edit icon-white"></i>
-        <span>修改相册</span>
-      <% end %>
-      <%= link_to [:webclass, @current_webclass, @album, :images], class: 'btn btn-success pull-right btn-small span' do %>
-        <i class="icon-plus icon-white"></i>
-        <span>添加照片</span>
-      <% end %>
+      <%= render 'shared/images/add_btn' %>
     </h4>
-    <%= render 'images' %>
+    <%= render 'shared/albums/images' %>
   </div>
   <div class='span-r pull-right'>
-    <%= render 'webclass/albums/albums' %>
+    <%- if @current_group_member.admin? %>
+      <%= link_to "相册管理", [@current_namespace, :albums].flatten, class: 'btn btn-info btn-small' %>
+    <% end %>
+    <%= render partial: 'shared/albums/list' %>
   </div>
 </div>
