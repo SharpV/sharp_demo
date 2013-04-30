@@ -1,0 +1,4 @@
+<%= simple_form_for @folder, :url => [@current_namespace, @folder].flatten, :validate => true, remote: true, :html => {:class => 'form-horizontal', id: 'folder-form', data: {type: "script"}} do |form| %>
+  <%= form.input :name, label: '名称' %>
+  <%= form.submit :class=>'btn btn-primary', disable_with: "正在提交..." %>
+<% end %>

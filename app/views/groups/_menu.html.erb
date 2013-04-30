@@ -2,19 +2,20 @@
   <%= tab.index "主页", @current_group %>
   <%= tab.posts "话题", group_group_posts_path(@current_group) %>
   <%= tab.albums "相册", group_group_albums_path(@current_group) %>
-  <%= tab.courses "课程", group_group_courses_path(@current_group) %>
-  <%= tab.assignments "作业", group_group_assignments_path(@current_group) %>
-  <%= tab.exams "成绩", group_group_exams_path(@current_group) %>
-  <%= tab.messages "班邮", group_group_messages_path(@current_group) %>
   <%= tab.members "成员", group_group_members_path(@current_group) %>
-  <%- if @current_group_member and @current_group_member.admin %>
-    <%= tab.admin "管理", admin_group_group_settings_path(@current_group) %>
+  <% if @current_group.is_class %>
+    <%= tab.courses "课程", group_group_courses_path(@current_group) %>
+    <%= tab.assignments "作业", group_group_assignments_path(@current_group) %>
+    <%= tab.exams "成绩", group_group_exams_path(@current_group) %>
+    <%= tab.messages "班邮", group_group_messages_path(@current_group) %>
+  <% else %>
+    <%= tab.media "资源共享", group_group_media_path(@current_group) %>
   <% end %>
   <%- if @current_group_member and @current_group_member.active %>
     <%- if current_user.id == @current_group.creator_id  %>
-      <%= link_to "班级管理", admin_group_group_settings_path(@current_group), class: 'btn btn-info pull-right span' %>
+      <%= link_to "#{@current_group.title}管理", admin_group_group_settings_path(@current_group), class: 'btn btn-info pull-right span' %>
     <% else %>
-      <%= link_to "退出班级", logout_group_path(@current_group), class: 'btn btn-inverse pull-right span' %>
+      <%= link_to "退出#{@current_group.title}", logout_group_path(@current_group), class: 'btn btn-inverse pull-right span' %>
     <% end %>
   <% elsif @current_group_member %>
     <%= link_to "正在申请", "#", class: 'btn btn-info pull-right span' %>

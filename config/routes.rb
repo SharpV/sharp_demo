@@ -135,9 +135,7 @@ SharpLink::Application.routes.draw do
 
       resources :courses do
         resources :assignments
-        resources :media do
-          get :admin, on: :collection
-        end
+
         resources :posts
         collection do 
           get :admin
@@ -155,6 +153,10 @@ SharpLink::Application.routes.draw do
       end
 
       resources :posts
+
+      resources :folders do
+        resources :media
+      end
 
       resources :media
 

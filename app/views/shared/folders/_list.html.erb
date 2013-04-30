@@ -1,12 +1,11 @@
-<%= link_to '目录管理', [:user, current_user, :folders], class: 'btn btn-info' %>
 <%- if @folders.size > 0 %>
   <h4>目录列表</h4>
   <table class='table'>
-    <tbody id='folder-list'>
+    <tbody>
       <%- @folders.each do |folder| %>
         <tr>
           <td>
-            <%= link_to [:user, @current_user, folder] do %>
+            <%= link_to [@current_namespace, folder].flatten do %>
               <i class='icon icon-folder-close'></i>
               <span><%= folder.name %></span>
             <% end %>

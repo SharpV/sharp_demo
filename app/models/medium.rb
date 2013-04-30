@@ -40,6 +40,8 @@ class Medium < ActiveRecord::Base
       "#{mime_icons_folder}/otp.png"
     elsif content_type.include? 'rar'
       "#{mime_icons_folder}/rar.png"
+    elsif content_type.include? "jpeg"
+      "#{mime_icons_folder}/jpg.png"
     end
   end
 

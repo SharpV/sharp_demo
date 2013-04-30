@@ -1,10 +1,17 @@
 <div class='row'>
   <div class='span-l'>
+    <h4 class='border'>
+      所有话题
+      <%= link_to [:new, @current_namespace, :post].flatten, class: 'btn btn-small pull-right btn-success' do %>
+        <i class='icon icon-plus'></i>
+        <span>发表话题</span>
+      <% end %>
+    </h4>
     <ul>
-      <%= render partial: 'shared/post', collection: @posts, locals: {namespace: [:webclass, @current_webclass], truncate_size: 172} %>
+      <%= render partial: 'shared/posts/post', collection: @posts, locals: {truncate_size: 172} %>
     </ul>
   </div>
   <div class='span-r pull-right'>
-    <%= render 'right' %>
+    <%= render 'tags' %>
   </div>
 </div>

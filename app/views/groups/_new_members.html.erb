@@ -1,0 +1,8 @@
+<ul class='inline'>
+  <%- @new_members.each do |member| %>
+    <li>
+      <%= link_to avatar_tag(member.user, 's'), member.user %>
+      <p><%= member.user.name %></p>
+    </li>
+  <% end %>
+</ul>

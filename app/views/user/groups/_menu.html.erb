@@ -3,12 +3,9 @@
   <%= tab.posts "话题", webclass_webclass_posts_path(@current_webclass) %>
   <%= tab.albums "相册", webclass_webclass_albums_path(@current_webclass) %>
   <%= tab.members "成员", webclass_webclass_members_path(@current_webclass) %>
-  <%- if @current_webclass_member and @current_webclass_member.admin %>
-    <%= tab.admin "管理", admin_webclass_webclass_settings_path(@current_webclass) %>
-  <% end %>
   <%- if @current_webclass_member and @current_webclass_member.active %>
     <%- if current_user.id == @current_webclass.creator_id  %>
-      <%= link_to "班级管理", admin_webclass_webclass_settings_path(@current_webclass), class: 'btn btn-info pull-right span' %>
+      <%= link_to "#{current_group.title}管理", admin_webclass_webclass_settings_path(@current_webclass), class: 'btn btn-info pull-right span' %>
     <% else %>
       <%= link_to "退出班级", logout_webclass_path(@current_webclass), class: 'btn btn-inverse pull-right span' %>
     <% end %>

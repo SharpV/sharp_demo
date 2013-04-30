@@ -1,22 +1,25 @@
 class Group::MediaController < GroupController
-  set_tab :courses, :webclass_nav
+  
+  set_tab :media, :group_nav
 
   def index
-    @courses = @current_group.courses
-    @course = Course.find params[:course_id]
-    @media = @course.media.page params[:page]
+    @folders = @current_group.folders
+    @media = Medium.where(mediumable_type: Folder.to_s, mediumable_id: @folders.map(&:id)).page params[:page]
+  end
+
+  def new
+    @folder = Folder.find params[:folder_id]
     @medium = Medium.new
-    self.try :set_tab, "course_#{@course.id}", :webclass_courses_nav
   end
 
 
   def create
-    @course = Course.find params[:course_id]
+    @folder = Folder.find params[:folder_id]
     @medium = Medium.new
     @medium.file = params[:files].first
     respond_to do |format|
       @medium.creator = current_user
-      @medium.mediumable = @course
+      @medium.mediumable = @folder
       if @medium.save
         format.json { render json: [@medium.to_jq_upload].to_json, status: :created, location: [@medium] }
       else

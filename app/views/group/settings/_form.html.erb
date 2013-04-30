@@ -1,4 +1,4 @@
-<%= simple_form_for [:webclass, @current_webclass], :html => {:class => 'form-stacked'}, validate: true do |f| -%> 
+<%= simple_form_for @current_group, :html => {:class => 'form-stacked'}, validate: true do |f| -%> 
   <%= f.error_notification %>
   <%= f.input :name, :class=>'xlarge', :label => '名称' %>
   <%= f.input :avatar, :label => '图标' %>

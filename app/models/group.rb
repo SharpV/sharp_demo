@@ -26,6 +26,7 @@ class Group < ActiveRecord::Base
   has_many :assignments
   has_many :posts, as: :postable
   has_many :terms
+  has_many :media, as: :mediumable
   has_many :slots
   has_many :albums, as: :albumable
   belongs_to :creator, foreign_key: "creator_id", class_name: 'User'
@@ -49,6 +50,10 @@ class Group < ActiveRecord::Base
 
   def group_members(role)
     members.includes(:user).select{|m|m.role == role.to_s and m.active}
+  end
+
+  def title
+    is_class ? "班级" : "小组"
   end
 
   private

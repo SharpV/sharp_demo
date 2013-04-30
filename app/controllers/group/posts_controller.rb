@@ -30,7 +30,7 @@ class Group::PostsController < GroupController
         @current_group.tag_list.add(@post.tag_list) 
         @current_group.save
       end
-      redirect_to [:webclass, @current_group, @post]
+      redirect_to [@current_namespace, @post].flatten
     else
       render action: :new
     end
@@ -40,13 +40,13 @@ class Group::PostsController < GroupController
     tag_list = params[:post].delete(:tag_list)
     @post = Post.new params[:post]
     @post.creator = current_user
-    @post.postable = @current_webclass
+    @post.postable = @current_group
     if @post.save
       if tag_list
         @current_group.tag(@post, :with => tag_list, on: :tags) 
         @current_group.save
       end
-      redirect_to [:webclass, @current_group, @post]
+      redirect_to [@current_namespace, @post].flatten
     else
       render action: :new
     end

@@ -1,15 +1,30 @@
 <div class='row'>
   <div class='span-l'>
     <h4 class='border'>
-      [<%= @course.name %>] 文件上传
-      <%= link_to [:webclass, @current_webclass, @course], class: "btn btn-success btn-small pull-right" do %>
-        <i class="icon-ok icon-white"></i>
-        <span>完成上传</span>
-      <% end %>
+      所有课件
+      <%= render 'shared/media/add_btn' %>
     </h4>
-    <%= render 'shared/file_upload_form', record: @medium, url: [:webclass, @current_webclass, @course, :media] %>
+    <table class='table'>
+      <thead>
+        <tr class="success">
+          <th width='60'></th>
+          <th>文件名</th>  
+          <th width='60'>大小</th>
+          <th width='100'>创建时间</th>
+          <th width='60'>目录</th>
+          <th width='100'>操作</th>
+        </tr>
+      </thead>
+      <tbody id='media-list'>
+        <%= render partial: 'shared/media/medium', collection: @media %>
+      </tbody>
+    </table>
+    <%= paginate @media %>
   </div>
   <div class='span-r pull-right'>
-    <%= render 'webclass/courses/courses' %>
+    <%- if @current_group_member.admin? %>
+      <%= link_to '目录管理', [@current_namespace, :folders].flatten, class: 'btn btn-info btn-small' %>
+    <% end %>
+    <%= render 'shared/folders/list' %>
   </div>
 </div>

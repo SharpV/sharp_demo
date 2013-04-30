@@ -1,7 +1,7 @@
 <div class='row'>
   <div class='span-l'>
     <ul>
-      <%= render 'shared/post', post: @post, namespace: [:webclass, @current_webclass], truncate_size: nil %>
+      <%= render 'shared/posts/post', post: @post, truncate_size: nil %>
     </ul>
     <h4 class='border'>回复列表</h4>
     <ul id='comment-list' class='unstyled'>
@@ -11,6 +11,5 @@
     <ul>
   </div>
   <div class='span-r pull-right'>
-    <%= render 'slide' %>
   </div>
 </div>

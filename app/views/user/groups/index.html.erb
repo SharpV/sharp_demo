@@ -4,9 +4,12 @@
     <%= %>
   </div>
   <div class='span-r pull-right'>
-    <p>
-    <%= link_to "创建群组", [:new, :user, current_user, :group], class: 'btn btn-success pull-right', disable_with: '请稍后...' %>
-    </p>
-    <%= render @groups %>
+    <%= link_to "创建群组", [:new, :user, current_user, :group], class: 'btn btn-success', disable_with: '请稍后...' %>
+    <%- if @groups.size > 0 %>
+      <h4>我的群组</h4>
+      <ul>
+        <%= render @groups %>
+      </ul>
+    <% end %>
   </div>
 </div>
