@@ -4,5 +4,5 @@
       <p><%= msg %></p>
     <% end %>
     <%= f.input :body, as: :kindeditor, label: false, input_html: {simple_mode: true, width: 500, height: 200 }, :validate => {presence: true}  %>
-    <%= f.button :wrapped, value: '提交', :cancel => me_posts_path, disable_with: "正在提交..." %>
+    <%= f.submit disable_with: "正在提交...", class: 'btn btn-primary' %>
 <% end %>

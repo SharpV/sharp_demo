@@ -1,0 +1,68 @@
+@import "vertical_menu";
+
+
+.list-item{
+    float:left;
+    margin-bottom: 10px;
+    background-color: #F8F9F4;
+    -webkit-border-radius: 5px; 
+    border-radius: 5px;
+    border: 1px solid #fff; 
+}
+
+.list-item:hover {
+    background-color: #fff;
+    border: 1px solid #CEF7C3; 
+}
+
+ul#post{
+  li .avatar{
+      float:left;
+      width: 60px;
+      margin-right: 10px;
+  }    
+  
+  li .content{
+      float: none;
+      overflow: hidden;
+      width: auto;
+      margin-left: 10px;
+  }
+}
+
+li .content span.time{
+    color: #999;
+}
+
+li .content .item span{
+    margin-right: 10px;
+    font-size: 12px;
+}
+
+.item_tag, .item_title {
+    color: #333;
+    font-weight:13px;
+    font-weight:bold;
+    display: inline;
+    padding:5px;
+    width: 100%;
+}
+
+.pagination span {
+  border-bottom: 1px dotted #999999;
+  float: left;
+  overflow: hidden;
+  padding: 10px 0;
+}
+
+span.tag a{
+    font-size: 14px;
+    padding: 5px;
+}
+
+
+li.tags{
+    list-style: none;
+    margin:10px;
+    clear:both;
+}

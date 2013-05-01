@@ -1,0 +1,47 @@
+
+.row {
+    margin-left: -15px;
+}
+
+[class*="span"] {
+    float: left;
+    margin-left: 15px;
+    min-height: 1px;
+}
+
+#user-page, #group-page{
+  .span-l {
+      width: 175px;
+  }
+  
+  .span-r {
+      width: 770px;
+  }
+  
+  .span-r .span-l{
+    width: 620px;
+  }
+  
+  .span-r .span-r{
+    width: 135px;
+  }
+}
+
+#index-page{
+  .span-l {
+      width: 770px;
+  }
+
+  .span-l .span-r{
+    width: 620px;
+  }
+  
+  .span-l .span-l{
+    width: 135px;
+  }
+  
+  .span-r {
+      width: 175px;
+  }
+}
+

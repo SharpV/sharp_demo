@@ -1,4 +1,10 @@
-<%= render :partial => 'objects/show',
-           :locals  => { :object => @post } %>
-
-<%= render @post.post_activity %>
+<div class='span-l'>
+  <h4><%= @post.title %></h4>
+  <p>
+    <%= raw @post.body %>
+  </p>
+</div>
+<div class='span-r'>
+  <%= link_to '我要提问', new_question_path, class: 'btn btn-success pull-right' %>
+</div>
+ 

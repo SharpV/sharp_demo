@@ -55,7 +55,7 @@ body{
     padding-right: 7px;
 }
 
-#page {
+#user-page, #index-page, #group-page {
     background-color: #F6F6F6;
     background-image: -moz-linear-gradient(center bottom , rgba(0, 0, 0, 0.1) 0%, rgba(255, 255, 255, 0.1) 100%);
     border-bottom: 1px solid #8A94A0;

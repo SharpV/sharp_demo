@@ -1,4 +1,4 @@
-class Me::ActivitiesController < MeController
+class Admin::ColumnsController < AdminController
   set_tab :activities, :me_nav
   set_tab :index, :site_nav
   def index

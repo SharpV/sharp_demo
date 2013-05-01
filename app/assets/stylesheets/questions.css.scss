@@ -1,0 +1,16 @@
+@import "vertical_menu"
+
+ul#questions{
+  li .left{
+      float:left;
+      width: 60px;
+      margin-right: 10px;
+  }    
+  
+  li .content{
+      float: none;
+      overflow: hidden;
+      width: auto;
+      margin-left: 10px;
+  }
+}

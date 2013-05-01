@@ -1,6 +1,6 @@
 class Post < ActiveRecord::Base
 
-  scope :share, where(is_public: true)
+  scope :share, where("grade_id is not null")
 
   acts_as_commentable
   acts_as_taggable
@@ -19,6 +19,10 @@ class Post < ActiveRecord::Base
 
   belongs_to :category, foreign_key: :category_id
 
+  belongs_to :grade
+
+  belongs_to :subject
+  
   #paginates_per 30
   
   def to_param

@@ -1,11 +1,16 @@
 class PostsController < ApplicationController
-  #before_filter :set_group_tab
-  set_tab :post, :group_menus
-  set_tab :post, :group_actions, :only => %w(new edit)
+
+  set_tab :posts, :site_nav
 
   
   def index
-    @posts = Post.share.page params[:page]
+    if params[:grade_id]
+      @posts = Post.share.where(grade_id: params[:grade_id]).page params[:page]
+    elsif params[:subject_id]
+      @posts = Post.share.where(subject_id: params[:subject_id]).page params[:page]
+    else
+      @posts = Post.share.page params[:page]
+    end
   end
   
   def new
@@ -28,7 +33,6 @@ class PostsController < ApplicationController
       render :action => :new
     end
   end
-
 
   def update
     @post = Post.find(params[:id])

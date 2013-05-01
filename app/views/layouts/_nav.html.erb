@@ -1,6 +1,6 @@
 <%= tabs_tag(:namespace => :site_nav, :open_tabs => {:id => "site_nav", :class => "nav" }, :builder => MenuTabBuilder) do |tab| %>
   <%= tab.index user_signed_in? ? '我的空间' : '首页', root_path %>
-  <%= tab.shares '文章', shares_path %>
+  <%= tab.posts '文章', posts_path %>
   <%= tab.media '资源', media_path %>
   <%= tab.questions '问答', questions_path %>
   <%= tab.groups '群组', groups_path %>

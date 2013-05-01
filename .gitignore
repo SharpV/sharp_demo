@@ -14,6 +14,7 @@ vendor/bundle/
 db/development
 *#
 #*
+public/tmp/*
 public/system
 public/uploads
 *~

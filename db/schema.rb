@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130427131638) do
+ActiveRecord::Schema.define(:version => 20130501131032) do
 
   create_table "active_admin_comments", :force => true do |t|
     t.string   "resource_id",   :null => false
@@ -105,24 +105,6 @@ ActiveRecord::Schema.define(:version => 20130427131638) do
   add_index "assignments", ["group_id"], :name => "index_assignments_on_group_id"
   add_index "assignments", ["group_id"], :name => "index_assignments_on_webclass_id"
   add_index "assignments", ["group_id"], :name => "index_groups_members_on_group_id"
-
-  create_table "bookmarks", :force => true do |t|
-    t.text     "body"
-    t.boolean  "published",         :default => true
-    t.string   "title"
-    t.string   "slug"
-    t.datetime "created_at"
-    t.datetime "updated_at"
-    t.boolean  "is_public",         :default => false
-    t.integer  "readings_count",    :default => 0
-    t.integer  "comments_count",    :default => 0
-    t.integer  "likes_count",       :default => 0
-    t.integer  "collections_count", :default => 0
-    t.string   "origin_url"
-    t.integer  "user_id",                              :null => false
-  end
-
-  add_index "bookmarks", ["user_id"], :name => "index_bookmarks_on_user_id"
 
   create_table "categories", :force => true do |t|
     t.string  "name"
@@ -241,6 +223,18 @@ ActiveRecord::Schema.define(:version => 20130427131638) do
   add_index "follows", ["actor_id", "actor_type"], :name => "index_follows_on_actor_id_and_actor_type"
   add_index "follows", ["follower_id", "follower_type"], :name => "index_follows_on_follower_id_and_follower_type"
 
+  create_table "grades", :force => true do |t|
+    t.string  "name"
+    t.integer "parent_id"
+    t.integer "position",        :default => 0
+    t.integer "posts_count",     :default => 0
+    t.integer "media_count",     :default => 0
+    t.integer "questions_count", :default => 0
+    t.integer "lft"
+    t.integer "rgt"
+    t.integer "depth"
+  end
+
   create_table "groups", :force => true do |t|
     t.integer  "creator_id",                        :null => false
     t.integer  "members_count",  :default => 0
@@ -316,10 +310,14 @@ ActiveRecord::Schema.define(:version => 20130427131638) do
     t.string   "mediumable_type"
     t.integer  "likes_count",     :default => 0
     t.integer  "readings_count",  :default => 0
+    t.integer  "grade_id"
+    t.integer  "subject_id"
   end
 
   add_index "media", ["creator_id"], :name => "index_medias_on_user_id"
+  add_index "media", ["grade_id"], :name => "index_media_on_grade_id"
   add_index "media", ["mediumable_type", "mediumable_id"], :name => "index_media_on_mediumable_type_and_mediumable_id"
+  add_index "media", ["subject_id"], :name => "index_media_on_subject_id"
 
   create_table "members", :force => true do |t|
     t.boolean  "admin",                    :default => false
@@ -372,11 +370,15 @@ ActiveRecord::Schema.define(:version => 20130427131638) do
     t.boolean  "is_public",                       :default => false
     t.integer  "creator_id",                                         :null => false
     t.boolean  "is_delete",                       :default => false
+    t.integer  "grade_id"
+    t.integer  "subject_id"
   end
 
   add_index "posts", ["category_id"], :name => "index_posts_on_category_id"
+  add_index "posts", ["grade_id"], :name => "index_posts_on_grade_id"
   add_index "posts", ["kind"], :name => "index_posts_on_kind"
   add_index "posts", ["postable_type", "postable_id"], :name => "index_posts_on_postable_type_and_postable_id"
+  add_index "posts", ["subject_id"], :name => "index_posts_on_subject_id"
 
   create_table "profiles", :force => true do |t|
     t.integer  "user_id"
@@ -419,8 +421,12 @@ ActiveRecord::Schema.define(:version => 20130427131638) do
     t.integer  "user_id",                           :null => false
     t.integer  "up_votes",       :default => 0,     :null => false
     t.integer  "down_votes",     :default => 0,     :null => false
+    t.integer  "grade_id"
+    t.integer  "subject_id"
   end
 
+  add_index "questions", ["grade_id"], :name => "index_questions_on_grade_id"
+  add_index "questions", ["subject_id"], :name => "index_questions_on_subject_id"
   add_index "questions", ["user_id"], :name => "index_asks_on_user_id"
 
   create_table "reports", :force => true do |t|
@@ -450,19 +456,6 @@ ActiveRecord::Schema.define(:version => 20130427131638) do
   add_index "roles", ["name", "resource_type", "resource_id"], :name => "index_roles_on_name_and_resource_type_and_resource_id"
   add_index "roles", ["name"], :name => "index_roles_on_name"
 
-  create_table "school_grades", :force => true do |t|
-    t.integer "parent_id"
-    t.string  "name"
-    t.integer "lft"
-    t.integer "rgt"
-    t.integer "school_id"
-    t.integer "creator_id"
-  end
-
-  add_index "school_grades", ["creator_id"], :name => "index_school_grades_on_creator_id"
-  add_index "school_grades", ["parent_id"], :name => "index_school_grades_on_parent_id"
-  add_index "school_grades", ["school_id"], :name => "index_school_grades_on_school_id"
-
   create_table "sections", :force => true do |t|
     t.integer  "term_id",                   :null => false
     t.string   "timeslot"
@@ -478,19 +471,6 @@ ActiveRecord::Schema.define(:version => 20130427131638) do
   add_index "sections", ["group_id"], :name => "index_sections_on_group_id"
   add_index "sections", ["term_id"], :name => "index_slots_on_term_id"
 
-  create_table "shares", :force => true do |t|
-    t.integer  "creator_id"
-    t.boolean  "is_public",         :default => false
-    t.string   "shareable_type",                       :null => false
-    t.integer  "shareable_id",                         :null => false
-    t.integer  "readings_count",    :default => 0
-    t.integer  "comments_count",    :default => 0
-    t.integer  "likes_count",       :default => 0
-    t.integer  "collections_count", :default => 0
-    t.datetime "created_at",                           :null => false
-    t.datetime "updated_at",                           :null => false
-  end
-
   create_table "slots", :force => true do |t|
     t.integer "course_id",  :null => false
     t.integer "section_id", :null => false
@@ -500,6 +480,15 @@ ActiveRecord::Schema.define(:version => 20130427131638) do
 
   add_index "slots", ["course_id", "section_id"], :name => "index_slots_courses_on_course_id_and_slot_id"
   add_index "slots", ["section_id", "course_id"], :name => "index_slots_on_section_id_and_course_id"
+
+  create_table "subjects", :force => true do |t|
+    t.string  "name"
+    t.integer "grade_id"
+    t.integer "position",        :default => 0
+    t.integer "posts_count",     :default => 0
+    t.integer "media_count",     :default => 0
+    t.integer "questions_count", :default => 0
+  end
 
   create_table "taggings", :force => true do |t|
     t.integer  "tag_id"

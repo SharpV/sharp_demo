@@ -4,10 +4,11 @@ class User::PostsController < UserController
 
 	def index
 		@posts = current_user.posts
-    @categories = current_user.categories
+    @categories = @current_user.categories
 	end
 
   def show
+    @categories = @current_user.categories
     @post = Post.find(params[:id])
   end
 
@@ -20,8 +21,6 @@ class User::PostsController < UserController
     @post = Post.find(params[:id])
   end
 
-  # POST /me/notes
-  # POST /me/notes.json
   def create
     @post = Post.new params[:post]
     @post.creator = current_user
@@ -33,8 +32,6 @@ class User::PostsController < UserController
     end
   end
 
-  # PUT /me/notes/1
-  # PUT /me/notes/1.json
   def update
     @post = Post.find(params[:id])
 

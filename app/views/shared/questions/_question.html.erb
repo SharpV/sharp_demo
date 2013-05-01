@@ -1,0 +1,36 @@
+<li id='question-<%= question.id %>'>
+  <div class='left'>
+    <br />
+    <%= link_to user_avatar_tag(question.user, 's'), question.user %>
+  </div>
+  <div class='content'>    
+    <h4 class='border'>
+      <%= link_to question.title, question %>
+
+      <%= link_to question, method: :delete, class: 'btn btn-small btn-danger pull-right span', confirm: "是否删除 #{question.title}" do %>
+        <i class='icon icon-ban-circle'></i>
+        <span>删除</span>
+      <% end %>
+
+      <%= link_to [:edit, question], class: 'btn btn-small btn-info pull-right span' do %>
+        <i class='icon icon-edit'></i>
+        <span>编辑</span>
+      <% end %>
+    </h4>
+    <p>
+      <%- if truncate_size %>
+        <%= truncate question.body, :length => truncate_size, :omission => '......' %>
+      <% else %>
+        <%= raw question.body %>
+      <% end %>
+    </p>
+    <div class='item item-info clearfix'>
+      <span>作者(<%= link_to question.user.nickname, question.user %>)</span> 
+      <span>阅读(<%= question.readings_count %>)</span>
+      <span>评论(<%= question.answers_count %>)</span>
+      <div class='pull-right'>
+        <%= format_datetime question.created_at %>
+      </div>
+    </div>
+  </div>
+</li>

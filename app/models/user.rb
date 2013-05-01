@@ -3,6 +3,8 @@
 require 'digest/sha1'
 require 'uuid'
 require 'devise/orm/active_record'
+require 'open-uri'
+
 class User < ActiveRecord::Base
 
   include Role
@@ -90,6 +92,20 @@ class User < ActiveRecord::Base
   end
 
   alias_attribute :name, :nickname
+
+  def generate_avatar(image)
+    uploader = ImageUploader.new
+    path = "#{Rails.root.to_s}/public/tmp/#{login.to_s}.#{image.split('.').last}"
+
+    open(URI::encode(image)) do |f|
+      File.open(path, "wb") do |file|
+        file.puts f.read
+      end      
+      self.avatar = File.open path
+      self.save         
+    end
+    
+  end
 
   protected
   

@@ -1,6 +1,10 @@
 SharpLink::Application.routes.draw do
 
+  #devise_for :admin_users, ActiveAdmin::Devise.config
+  #ActiveAdmin.routes(self)
+
   devise_for :users, :controllers => {:registrations => "registrations", :passwords => "passwords", :sessions => "sessions", :omniauth_callbacks => 'omniauth_callbacks'}
+  #ActiveAdmin.routes(self)
   match "errors/routing", :to => "errors#routing"
   match "tags/:tag/posts",  :to => "posts#show",:as => "tag_posts"
   match "/ajax/get_subjects_by_grade/:grade_id", :to => "ajax#get_subjects_by_grade"
@@ -68,37 +72,6 @@ SharpLink::Application.routes.draw do
     end
   end
 
-  resources :posts do 
-    resources :assets
-    resources :topics
-  end
-  resources :comments
-  resources :categories
-  resources :webclasses
-  
-  resources :schools
-  resources :pages do      
-    resources :comments
-  end
-  
-  resources :grades do
-    resources :subjects do
-      collection do
-        get :hot
-        get :recommand
-      end
-    end
-  end
-
-  resources :tags, :only => [:index] do
-    get :subscribe, :on => :member
-  end
-
-  resources :pages
-  resources :questions do
-    resources :answers
-  end
-  resources :answers
 
   namespace :group do
     resources :groups do
@@ -191,8 +164,39 @@ SharpLink::Application.routes.draw do
       get :logout
     end
   end
+
+
   resources :comments
-  resources :shares
+  resources :webclasses
+  
+  resources :schools
+  resources :pages 
+  
+  resources :tags, :only => [:index] do
+    get :subscribe, :on => :member
+  end
+
+  resources :pages
+  resources :questions do
+    resources :answers
+  end
+  resources :answers
+
+  resources :posts
+  resources :grades do
+    resources :subjects
+  end
+
+  resources :subjects do
+    resources :posts
+    resources :media
+    resources :questions
+  end
+  resources :grades do
+    resources :posts
+    resources :media
+    resources :questions
+  end
   resources :media
   resources :images
   

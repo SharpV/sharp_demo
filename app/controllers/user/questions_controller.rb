@@ -1,81 +1,42 @@
-class Me::QuestionsController < MeController
+class User::QuestionsController < UserController
 
-  set_tab 'questions', :me_nav
-  set_tab 'index', :question_nav
+  set_tab :questions, :user_nav
 
   def index
     @questions = current_user.questions.page params[:page]
 
   end
 
-  # GET /me/notes/1
-  # GET /me/notes/1.json
-  def show
-    @post = Post::Note.find(params[:id])
-
-    respond_to do |format|
-      format.html # show.html.erb
-      format.json { render json: @post }
-    end
-  end
-
-  # GET /me/notes/new
-  # GET /me/notes/new.json
   def new
-    @post = Post::Note.new
-
-    respond_to do |format|
-      format.html # new.html.erb
-      format.json { render json: @post }
-    end
+    @question = Question.new
   end
 
-  # GET /me/notes/1/edit
   def edit
-    @me_note = Me::Note.find(params[:id])
+    @question = Question.find(params[:id])
   end
 
-  # POST /me/notes
-  # POST /me/notes.json
   def create
-    @post = Post::Note.new(params[:post_note])
-    @post.postable = current_user
-    respond_to do |format|
-      if @post.save
-        format.html { redirect_to me_note_path(@post), notice: 'Note was successfully created.' }
-        format.json { render json: @post, status: :created, location: @post }
-      else
-        format.html { render action: "new" }
-        format.json { render json: @post.errors, status: :unprocessable_entity }
-      end
+    @question = current_user.questions.build params[:question]
+    if @question.save
+      redirect_to @question
+    else
+      render action: :new
     end
   end
 
-  # PUT /me/notes/1
-  # PUT /me/notes/1.json
   def update
-    @post = Post::Note.find(params[:id])
-
-    respond_to do |format|
-      if @post.update_attributes(params[:post_note])
-        format.html { redirect_to @post, notice: 'Note was successfully updated.' }
-        format.json { head :no_content }
-      else
-        format.html { render action: "edit" }
-        format.json { render json: @post.errors, status: :unprocessable_entity }
-      end
+    @question = Question.find params [:id]
+    if @question.update_attributes params[:question]
+      redirect_to @question
+    else
+      render action: :edit
     end
   end
 
-  # DELETE /me/notes/1
-  # DELETE /me/notes/1.json
   def destroy
-    @post = Post::Note.find(params[:id])
-    @post.destroy
-
-    respond_to do |format|
-      format.html { redirect_to me_notes_url }
-      format.json { head :no_content }
-    end
+    @question = Question.find params [:id]
+    @question.destroy
+    redirect_to params[:return] || me_questions_path
+  end
   end
 end
