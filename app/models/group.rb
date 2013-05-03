@@ -3,6 +3,9 @@
 class Group < ActiveRecord::Base
   # attr_accessible :title, :body
 
+  default_scope  { order('created_at DESC') }
+
+
   scope :webclass, where(is_class: true)
 
   scope :webgroup, where(is_class: false)

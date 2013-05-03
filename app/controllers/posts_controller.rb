@@ -5,11 +5,11 @@ class PostsController < ApplicationController
   
   def index
     if params[:grade_id]
-      @posts = Post.share.where(grade_id: params[:grade_id]).page params[:page]
+      @posts = Post.share.includes(:creator).where(grade_id: params[:grade_id]).page params[:page]
     elsif params[:subject_id]
-      @posts = Post.share.where(subject_id: params[:subject_id]).page params[:page]
+      @posts = Post.share.includes(:creator).where(subject_id: params[:subject_id]).page params[:page]
     else
-      @posts = Post.share.page params[:page]
+      @posts = Post.share.includes(:creator).page params[:page]
     end
   end
   

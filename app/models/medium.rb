@@ -1,8 +1,16 @@
 
 class Medium < ActiveRecord::Base
 
+  paginates_per 20
+
+  default_scope  { order('created_at DESC') }
+
   default_scope where("mediumable_id is not null and mediumable_type is not null")
+  
   scope :folder, where(mediumable_type: 'Folder')
+
+  scope :share, where("grade_id is not null")
+
 
   include Rails.application.routes.url_helpers
   # attr_accessible :title, :body
@@ -10,9 +18,14 @@ class Medium < ActiveRecord::Base
 
   belongs_to :mediumable, :polymorphic => true
 
+  belongs_to :grade
+
+  belongs_to :subject
+
   mount_uploader :file, FileUploader
 
   before_save :update_file_attributes
+
 
 
   def to_jq_upload

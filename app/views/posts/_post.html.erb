@@ -1,31 +1,36 @@
-<div id="post-<%= post.id %>" class="post">
-  <header>
-    <h3>
-      <%= link_to post.title.strip, post %>
-    </h3>
-  </header>
-  <div class="avatar">
-    <%= link_to image_tag(post.user.avatar.url(:s)), post.user %>
-    <span class="rating">
+<li id='post-<%= post.id %>'>
+  <div class='avatar'>
+    <br />
+    <%= link_to user_avatar_tag(post.creator, 's'), post.creator %>
   </div>
-  <div class="preview markdown group">
-    <%= post.body %>
-  </div>
-  <footer class="post-footer">
-    <div class="left">
-      <%= post_timestamp(post) %>
-    </div>
-    <div class="right">
-      <div class="btn-group">
-        <%= link_to post, class: 'btn' do %>
-          <i class="icon-align-left"></i>
-        <% end %>
-        <%= link_to post, class: 'btn' do %>
-          <i class="icon-align-center"></i>
-        <% end %>
-        <%= link_to_like post %>
-        <%= link_to_comments post %>
+  <div class='content'>    
+    <h4 class='border'>
+      <%= link_to post.title, [@current_namespace, post].flatten %>
+
+      <%= link_to [@current_namespace, post].flatten, method: :delete, class: 'btn btn-small btn-danger pull-right span', confirm: "是否删除 #{post.title}" do %>
+        <i class='icon icon-ban-circle'></i>
+        <span>删除</span>
+      <% end %>
+
+      <%= link_to [:edit, @current_namespace, post].flatten, class: 'btn btn-small btn-info pull-right span' do %>
+        <i class='icon icon-edit'></i>
+        <span>编辑</span>
+      <% end %>
+    </h4>
+    <p>
+      <%- if truncate_size %>
+        <%= truncate post.body, :length => truncate_size, :omission => '......' %>
+      <% else %>
+        <%= raw post.body %>
+      <% end %>
+    </p>
+    <div class='item item-info clearfix'>
+      <span>作者(<%= link_to post.creator.nickname, post.creator %>)</span> 
+      <span>阅读(<%= post.readings_count %>)</span>
+      <span>评论(<%= post.comments_count %>)</span>
+      <div class='pull-right'>
+        <%= format_datetime post.created_at %>
       </div>
     </div>
-  </footer>
-</article>
+  </div>
+</li>

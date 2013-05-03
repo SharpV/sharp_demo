@@ -1,0 +1,21 @@
+<div class='span-l'>
+  <div class='row'>
+    <div class='span-l'>
+    </div>
+    <div class='span-r'>
+      <ul id='posts'>
+        <%- @groups.each do |group| %>
+          <li>
+            <%= link_to group.name, group %>
+          </li>
+        <% end %>
+      </ul>
+      <%= paginate @groups %>
+
+    </div>
+  </div>
+</div>
+<div class='span-r'>
+  <%= link_to '我要提问', new_question_path, class: 'btn btn-success pull-right' %>
+</div>
+ 

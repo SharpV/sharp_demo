@@ -1,22 +1,7 @@
 @import "vertical_menu";
 
-
-.list-item{
-    float:left;
-    margin-bottom: 10px;
-    background-color: #F8F9F4;
-    -webkit-border-radius: 5px; 
-    border-radius: 5px;
-    border: 1px solid #fff; 
-}
-
-.list-item:hover {
-    background-color: #fff;
-    border: 1px solid #CEF7C3; 
-}
-
-ul#post{
-  li .avatar{
+ul#posts{
+  li .left{
       float:left;
       width: 60px;
       margin-right: 10px;

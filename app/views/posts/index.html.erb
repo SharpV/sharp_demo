@@ -4,13 +4,8 @@
       <%= render 'subjects' %>
     </div>
     <div class='span-r'>
-      <ul>
-        <%- @posts.each do |post| %>
-          <li>
-            <%= link_to post.title, [:user, post.creator, post] %>
-          <li>
-        <% end %>
-        <%# render partial: 'shared/posts/post', collection: @posts, truncate_size: 172} %>
+      <ul id='posts'>
+        <%= render partial: 'shared/posts/post', collection: @posts, locals: {truncate_size: 172} %>
       </ul>
       <%= paginate @posts %>
 

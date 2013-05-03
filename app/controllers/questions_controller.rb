@@ -3,11 +3,17 @@ class QuestionsController < ApplicationController
 
   respond_to :js
 
-  set_tab :question, :site_nav
+  set_tab :questions, :site_nav
 
 
   def index
-   @questions = Question.all
+   if params[:grade_id]
+      @questions = Question.share.includes(:user).where(grade_id: params[:grade_id]).page params[:page]
+    elsif params[:subject_id]
+      @questions = Question.share.includes(:user).where(subject_id: params[:subject_id]).page params[:page]
+    else
+      @questions = Question.share.includes(:user).page params[:page]
+    end
   end
 
   def new

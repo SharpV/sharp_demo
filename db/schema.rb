@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130501131032) do
+ActiveRecord::Schema.define(:version => 20130503114516) do
 
   create_table "active_admin_comments", :force => true do |t|
     t.string   "resource_id",   :null => false
@@ -280,6 +280,7 @@ ActiveRecord::Schema.define(:version => 20130501131032) do
     t.integer  "readings_count", :default => 0
     t.datetime "created_at",                       :null => false
     t.datetime "updated_at",                       :null => false
+    t.string   "title"
   end
 
   create_table "lessons", :force => true do |t|
@@ -312,6 +313,7 @@ ActiveRecord::Schema.define(:version => 20130501131032) do
     t.integer  "readings_count",  :default => 0
     t.integer  "grade_id"
     t.integer  "subject_id"
+    t.string   "title"
   end
 
   add_index "media", ["creator_id"], :name => "index_medias_on_user_id"

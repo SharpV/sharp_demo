@@ -1,13 +1,21 @@
 
-li.list-item{
-  width: 177px;
+#item-list li {
+  width: 152px;
   height: 70px;
-  margin-right: 22px;
+  margin-right: 10px;
   padding: 10px;
 }
 
-li.list-item .avatar{
+#item-list li .avatar{
     width: 60px;
     height: 60px;
-    padding-left: 5px;
+    overflow: hidden;
 }
+
+#item-list li .content{
+    float: none;
+    overflow: hidden;
+    width: auto;
+}
+
+

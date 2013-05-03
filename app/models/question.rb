@@ -1,8 +1,20 @@
 class Question < ActiveRecord::Base
+
+  paginates_per 20
+
   acts_as_taggable_on :tags
   make_voteable
+
+  default_scope  { order('created_at DESC') }
+
+  scope :share, where("grade_id is not null")
+
   belongs_to :user
   has_many :answers
+
+  belongs_to :grade
+
+  belongs_to :subject
 
   validates :title, :slug, :presence => true
 

@@ -1,7 +1,7 @@
 <div class='span9'>
-  <h3><%= @question.title %></h3>
-  <p><%= @question.body %></p>
-  <%= render 'meta', question: @question %>
+  <ul id='questions'>
+    <%= render partial: 'shared/questions/question', locals: {truncate_size: nil, question: @question} %>
+  </ul>
   <%= render 'answer_list' if @question.answers_count > 0 %>
   <%= render 'answer_form' %>
 

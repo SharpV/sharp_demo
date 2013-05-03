@@ -1,18 +1,18 @@
 <li id='post-<%= post.id %>'>
-  <div class='avatar'>
+  <div class='left'>
     <br />
     <%= link_to user_avatar_tag(post.creator, 's'), post.creator %>
   </div>
   <div class='content'>    
     <h4 class='border'>
-      <%= link_to post.title, [@current_namespace, post].flatten %>
+      <%= link_to post.title, [@current_namespace||[:user, post.creator], post].flatten %>
 
-      <%= link_to [@current_namespace, post].flatten, method: :delete, class: 'btn btn-small btn-danger pull-right span', confirm: "是否删除 #{post.title}" do %>
+      <%= link_to [@current_namespace||[:user, post.creator], post].flatten, method: :delete, class: 'btn btn-small btn-danger pull-right span', confirm: "是否删除 #{post.title}" do %>
         <i class='icon icon-ban-circle'></i>
         <span>删除</span>
       <% end %>
 
-      <%= link_to [:edit, @current_namespace, post].flatten, class: 'btn btn-small btn-info pull-right span' do %>
+      <%= link_to [:edit, @current_namespace||[:user, post.creator], post].flatten, class: 'btn btn-small btn-info pull-right span' do %>
         <i class='icon icon-edit'></i>
         <span>编辑</span>
       <% end %>

@@ -1,0 +1,33 @@
+
+<div class='span-l'>
+  <div class='row'>
+    <div class='span-l'>
+      <%= render 'subjects' %>
+    </div>
+    <div class='span-r'>
+      <h4 class='border'>
+        全部课件
+      </h4>
+      <table class='table'>
+        <thead>
+          <tr class="success">
+            <th width='60'></th>
+            <th>文件名</th>  
+            <th width='60'>大小</th>
+            <th width='60'>目录</th>
+            <th width='100'>创建时间</th>
+            <th width='100'>操作</th>
+          </tr>
+        </thead>
+        <tbody id='media-list'>
+          <%= render partial: 'shared/media/medium', collection: @media %>
+        </tbody>
+      </table>
+      <%= paginate @media %>
+    </div>
+  </div>
+</div>
+<div class='span-r'>
+  <%= link_to '我要提问', new_question_path, class: 'btn btn-success pull-right' %>
+</div>
+ 

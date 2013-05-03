@@ -1,3 +1,17 @@
+.list-item-li{
+    float:left;
+    margin-bottom: 10px;
+    background-color: #F8F9F4;
+    -webkit-border-radius: 5px; 
+    border-radius: 5px;
+    border: 1px solid #fff; 
+}
+
+.list-item-li:hover {
+    background-color: #fff;
+    border: 1px solid #CEF7C3; 
+}
+
 .tip {
     background-color: #FFEFC6;
     border-radius: 5px 5px 5px 5px;

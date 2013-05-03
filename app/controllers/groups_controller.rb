@@ -1,7 +1,9 @@
 class GroupsController < ApplicationController
   respond_to :html, :js
   set_tab :index, :group_nav, only: [:show]
+  set_tab :groups, :site_nav
   def index
+    @groups = Group.page(params[:page])
   end
 
   def show

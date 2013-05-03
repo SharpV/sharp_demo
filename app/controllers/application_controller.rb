@@ -1,7 +1,7 @@
 class ApplicationController < ActionController::Base
       
   protect_from_forgery
-  after_filter :set_content_type
+  after_filter :set_content_type, :set_current_context
 
   protected
 
@@ -9,8 +9,8 @@ class ApplicationController < ActionController::Base
     headers['Content-Type'] ||= 'text/html; charset=utf-8'
   end
   
-  def set_current_user
-    @user = current_user if current_user
+  def set_current_context
+    @current_namespace = nil
   end
   
   def resource_name

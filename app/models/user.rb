@@ -138,6 +138,9 @@ class User < ActiveRecord::Base
   
   class << self
 
+    def random
+      User.offset(rand(User.count)).first
+    end
    # Overwrite devise default find method to support login with email,
     # presence ID and login
     def find_for_authentication(conditions)

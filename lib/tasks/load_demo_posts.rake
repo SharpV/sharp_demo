@@ -36,7 +36,7 @@ namespace :demo do
 
             puts "create user #{user.name} #{user.avatar_url}"
 
-            user.generate_avatar("http://blog.ntjy.net#{photo}")
+            user.remote_avatar_url ＝ "http://blog.ntjy.net#{photo}"
 
             category_name = post_page.css('#in_tablem div').first.content.split(' ')[1]
             puts "category is #{category_name}"

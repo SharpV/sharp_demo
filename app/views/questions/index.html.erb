@@ -5,6 +5,7 @@
 	    <ul id='questions'>
         <%= render partial: 'shared/questions/question', collection: @questions, locals: {truncate_size: 172} %>
       </ul>
+      <%= paginate @questions %>
     </div>
   </div>
 </div>

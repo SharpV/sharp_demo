@@ -3,7 +3,7 @@
   <%- if @recommand_users.size > 10 %>
     <h4>您可能感兴趣的人<p class="text-warning">您关注的人少于10人， 系统为您推荐感兴趣的人</p>
 </h4>
-    <ul class='inline'>
+    <ul id='item-list' class='inline'>
   	  <%= render partial: 'follow', collection: @recommand_users, as: :user %>
     </ul>
   <% else %>

@@ -1,5 +1,7 @@
 class Post < ActiveRecord::Base
 
+  paginates_per 20
+
   scope :share, where("grade_id is not null")
 
   acts_as_commentable
@@ -23,8 +25,7 @@ class Post < ActiveRecord::Base
 
   belongs_to :subject
   
-  #paginates_per 30
-  
+
   def to_param
     slug ? "#{id}-#{slug.parameterize}" : id.to_s
   end

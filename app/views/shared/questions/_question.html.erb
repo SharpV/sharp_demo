@@ -27,7 +27,7 @@
     <div class='item item-info clearfix'>
       <span>作者(<%= link_to question.user.nickname, question.user %>)</span> 
       <span>阅读(<%= question.readings_count %>)</span>
-      <span>评论(<%= question.answers_count %>)</span>
+      <span>回答(<%= question.answers_count %>)</span>
       <div class='pull-right'>
         <%= format_datetime question.created_at %>
       </div>

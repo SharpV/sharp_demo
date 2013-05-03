@@ -20,6 +20,6 @@
   <% elsif @current_group_member %>
     <%= link_to "正在申请", "#", class: 'btn btn-info pull-right span' %>
   <% else %>
-    <%= link_to "申请加入", apply_group_group_path(@current_group), remote: true, class: 'btn btn-info pull-right btn-success' %>
+    <%= link_to "申请加入", [:apply, @current_group], remote: true, class: 'btn btn-info pull-right btn-success' %>
   <% end %>
 <% end %>
