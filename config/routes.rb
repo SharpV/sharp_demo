@@ -176,13 +176,31 @@ SharpLink::Application.routes.draw do
     get :subscribe, :on => :member
   end
 
+  resources :answers do
+    collection do
+      get :my
+    end
+  end
+
   resources :pages
   resources :questions do
     resources :answers
+    collection do
+      get :my
+      get :top
+      get :hot
+      get :latest
+    end
   end
   resources :answers
 
-  resources :posts
+  resources :posts do
+    collection do
+      get :latest
+      get :hot
+      get :top
+    end
+  end
   resources :grades do
     resources :subjects
   end
@@ -197,7 +215,13 @@ SharpLink::Application.routes.draw do
     resources :media
     resources :questions
   end
-  resources :media
+  resources :media do
+    collection do
+      get :latest
+      get :hot
+      get :top
+    end
+  end
   resources :images
   
   root :to => 'home#index'

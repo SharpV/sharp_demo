@@ -11,6 +11,7 @@ class PostsController < ApplicationController
     else
       @posts = Post.share.includes(:creator).page params[:page]
     end
+    @top_users = Post.top_users
   end
   
   def new

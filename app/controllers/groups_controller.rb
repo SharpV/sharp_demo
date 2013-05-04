@@ -4,6 +4,9 @@ class GroupsController < ApplicationController
   set_tab :groups, :site_nav
   def index
     @groups = Group.page(params[:page])
+    @hot_groups = Group.hot_groups
+    @hot_topics = Group.hot_topics
+    @hot_media = Group.hot_media
   end
 
   def show

@@ -1,0 +1,12 @@
+<%= tabs_tag(:namespace => :questions_nav, :open_tabs => {:class => "nav nav-tabs"}, :builder => MenuTabBuilder) do |tab| %>
+  <%= tab.index "推荐文章", :posts %>
+  <%= tab.hot "热点文章", [:hot, :posts] %>
+  <%= tab.latest "最新文章", [:latest, :posts] %>
+  <%= tab.top "排行榜", [:top, :posts] %>
+  <%- if current_user %>
+    <%= link_to '发表文章', [:new, :user, current_user, :post], class: 'btn btn-success pull-right' %>
+  <% else %>
+    <%= link_to '立即注册', new_user_registration_path, class: 'btn btn-success pull-right' %>
+  <% end %>
+<% end %>
+

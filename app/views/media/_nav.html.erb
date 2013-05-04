@@ -1,0 +1,12 @@
+<%= tabs_tag(:namespace => :media_nav, :open_tabs => {:class => "nav nav-tabs"}, :builder => MenuTabBuilder) do |tab| %>
+  <%= tab.index "推荐资源", [:media] %>
+  <%= tab.hot "热点资源", [:hot, :media] %>
+  <%= tab.latest "最新资源", [:latest, :media] %>
+  <%= tab.top "排行榜", [:top, :media] %>
+  <%- if current_user %>
+    <%= link_to '分享资源', [:new, :user, current_user, :medium], class: 'btn btn-success pull-right' %>
+  <% else %>
+    <%= link_to '立即注册', new_user_registration_path, class: 'btn btn-success pull-right' %>
+  <% end %>
+<% end %>
+

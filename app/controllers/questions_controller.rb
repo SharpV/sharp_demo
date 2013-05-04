@@ -14,6 +14,7 @@ class QuestionsController < ApplicationController
     else
       @questions = Question.share.includes(:user).page params[:page]
     end
+    @top_users = Question.top_users
   end
 
   def new

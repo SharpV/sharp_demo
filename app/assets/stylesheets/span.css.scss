@@ -29,19 +29,20 @@
 
 #index-page{
   .span-l {
-      width: 770px;
+      width: 135px;
+  }
+  .span-r {
+      width: 810px;
   }
 
-  .span-l .span-r{
+  .span-r .span-l{
     width: 620px;
   }
   
-  .span-l .span-l{
-    width: 135px;
+  .span-r .span-r{
+    width: 175px;
   }
   
-  .span-r {
-      width: 175px;
-  }
+
 }
 

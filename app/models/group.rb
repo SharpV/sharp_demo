@@ -79,4 +79,18 @@ class Group < ActiveRecord::Base
   def generate_slug
     self.slug = Hz2py.do(self.name, :join_with => '-', :to_simplified => true).gsub(/\W/, "-").gsub(/(-){2,}/, '-').to_s
   end
+
+  class << self
+    def hot_groups
+      Group.webgroup.order('readings_count desc').limit(10)
+    end
+
+    def hot_topics
+      Post.where(postable_type: Group.to_s).order('comments_count desc').limit(10)
+    end
+
+    def hot_media
+      Medium.where(mediumable_type: Group.to_s).order('downloads_count desc').limit(10)
+    end
+  end
 end

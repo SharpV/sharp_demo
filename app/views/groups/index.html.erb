@@ -1,12 +1,31 @@
 <div class='span-l'>
   <div class='row'>
     <div class='span-l'>
+      <h4 class='border'>分类标签<h4>
+      <h4 class='border'>热点小组<h4>
+      <ul>
+        <%- @hot_groups.each do |group| %>
+          <li>
+            <%= link_to avatar_tag(group), group %>
+            <p><%= link_to group.name, group %></p>
+          </li>
+        <% end %>
+      </ul>
     </div>
     <div class='span-r'>
-      <ul id='posts'>
+      <h4 class='border'>群组列表</h4>
+      <ul id='image-text-list' class='inline'>
         <%- @groups.each do |group| %>
           <li>
-            <%= link_to group.name, group %>
+            <div class='image'>
+              <%= link_to avatar_tag(group), group %>
+            </div>
+            <div class='content'>
+              <%= link_to group.name, group %>
+              <p>
+                <%= truncate group.body, :length => 142, :omission => '......' %>
+              </p>
+            </div>
           </li>
         <% end %>
       </ul>
@@ -16,6 +35,26 @@
   </div>
 </div>
 <div class='span-r'>
-  <%= link_to '我要提问', new_question_path, class: 'btn btn-success pull-right' %>
+  <%- if current_user %>
+    <%= link_to '创建小组', [:new, :user, current_user, :group], class: 'btn btn-success pull-right' %>
+  <% end %>
+  <h4 class='border'>热点话题</h4>
+  <ul>
+    <%- @hot_topics.each do |post| %>
+      <li class='dashed'>
+        <span class="badge badge-info"><%= post.comments_count %></span>
+        <%= link_to post.title, [:group, post.postable, post] %>
+      </li>
+    <% end %>
+  </ul>
+  <h4 class='border'>热点资源</h4>
+  <ul>
+    <%- @hot_media.each do |medium| %>
+      <li class='dashed'>
+        <span class="badge badge-success"><%= medium.downloads_count %></span>
+        <%= link_to medium.title, [:group, medium.mediumable, medium] %>
+      </li>
+    <% end %>
+  </ul>
 </div>
  

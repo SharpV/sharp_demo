@@ -1,0 +1,16 @@
+<ul id='top_users'>
+  <%- @top_users.each do |user| %>
+    <li>
+      <div class='avatar'>
+        <%= link_to user_avatar_tag(user, 's'), user %>
+      </div>
+
+      <div class='content'>
+        <%= link_to user.name, user %>
+        <p>
+          <%= user.questions_value %>
+        </p>
+      </div>
+    </li>
+  <% end %>
+</ul>

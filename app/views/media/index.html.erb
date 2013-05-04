@@ -1,10 +1,12 @@
 
 <div class='span-l'>
+  <%= render partial: 'shared/subjects', locals: {resource: :media} %>
+</div>
+ 
+<div class='span-r'>
+  <%= render 'nav' %>
   <div class='row'>
     <div class='span-l'>
-      <%= render 'subjects' %>
-    </div>
-    <div class='span-r'>
       <h4 class='border'>
         全部课件
       </h4>
@@ -25,9 +27,9 @@
       </table>
       <%= paginate @media %>
     </div>
+    <div class='span-r'>
+      <h4 class='border'>资源专家</h4>
+      <%= render 'top_users' %>
+    </div>
   </div>
 </div>
-<div class='span-r'>
-  <%= link_to '我要提问', new_question_path, class: 'btn btn-success pull-right' %>
-</div>
- 

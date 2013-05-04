@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130503114516) do
+ActiveRecord::Schema.define(:version => 20130504070342) do
 
   create_table "active_admin_comments", :force => true do |t|
     t.string   "resource_id",   :null => false
@@ -142,6 +142,13 @@ ActiveRecord::Schema.define(:version => 20130503114516) do
   add_index "connections", ["provider"], :name => "index_connections_on_provider"
   add_index "connections", ["uid"], :name => "index_connections_on_uid"
   add_index "connections", ["user_id"], :name => "index_connections_on_user_id"
+
+  create_table "consumes", :force => true do |t|
+    t.string   "value_type", :null => false
+    t.integer  "user_id",    :null => false
+    t.integer  "value",      :null => false
+    t.datetime "created_at", :null => false
+  end
 
   create_table "courses", :force => true do |t|
     t.integer  "creator_id",                       :null => false
@@ -314,6 +321,7 @@ ActiveRecord::Schema.define(:version => 20130503114516) do
     t.integer  "grade_id"
     t.integer  "subject_id"
     t.string   "title"
+    t.integer  "downloads_count", :default => 0
   end
 
   add_index "media", ["creator_id"], :name => "index_medias_on_user_id"
@@ -430,6 +438,13 @@ ActiveRecord::Schema.define(:version => 20130503114516) do
   add_index "questions", ["grade_id"], :name => "index_questions_on_grade_id"
   add_index "questions", ["subject_id"], :name => "index_questions_on_subject_id"
   add_index "questions", ["user_id"], :name => "index_asks_on_user_id"
+
+  create_table "readings", :force => true do |t|
+    t.integer  "readable_id",   :null => false
+    t.string   "readable_type", :null => false
+    t.integer  "user_id"
+    t.datetime "created_at",    :null => false
+  end
 
   create_table "reports", :force => true do |t|
     t.integer  "course_id",  :null => false
@@ -548,9 +563,10 @@ ActiveRecord::Schema.define(:version => 20130503114516) do
     t.string   "avatar"
     t.string   "description"
     t.string   "name"
-    t.integer  "up_votes",                              :default => 0,           :null => false
-    t.integer  "down_votes",                            :default => 0,           :null => false
+    t.integer  "questions_value",                       :default => 0,           :null => false
+    t.integer  "posts_value",                           :default => 0,           :null => false
     t.string   "role",                   :limit => 10,  :default => "teacher",   :null => false
+    t.integer  "media_value",                           :default => 0
   end
 
   add_index "users", ["email"], :name => "index_users_on_email"

@@ -1,18 +1,22 @@
+
 <div class='span-l'>
+  <%= render partial: 'shared/subjects', locals: {resource: :posts}  %>
+</div>
+ 
+<div class='span-r'>
+  <%= render 'nav' %>
   <div class='row'>
     <div class='span-l'>
-      <%= render 'subjects' %>
-    </div>
-    <div class='span-r'>
       <ul id='posts'>
         <%= render partial: 'shared/posts/post', collection: @posts, locals: {truncate_size: 172} %>
       </ul>
       <%= paginate @posts %>
 
     </div>
+    <div class='span-r'>
+      <h4 class='border'>文章专家</h4>
+      <%= render 'top_users' %>
+    </div>
   </div>
 </div>
-<div class='span-r'>
-  <%= link_to '我要提问', new_question_path, class: 'btn btn-success pull-right' %>
-</div>
- 
+

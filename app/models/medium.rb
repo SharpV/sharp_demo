@@ -68,4 +68,10 @@ class Medium < ActiveRecord::Base
       self.file_name = read_attribute(:file)
     end
   end
+
+  class << self
+    def top_users 
+      @users = User.order("media_value").limit(10)
+    end
+  end
 end

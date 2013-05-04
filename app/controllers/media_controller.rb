@@ -12,6 +12,8 @@ class MediaController < ApplicationController
     else
       @media = Medium.share.includes(:creator).page params[:page]
     end
+    @top_users = Medium.top_users
+
   end
 
   def destroy

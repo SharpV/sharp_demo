@@ -38,4 +38,10 @@ class Post < ActiveRecord::Base
     postable_id == actor.id && postable_type == actor.class.to_s.classify
   end
 
+  class << self
+    def top_users 
+      @users = User.order("posts_value").limit(10)
+    end
+  end
+
 end

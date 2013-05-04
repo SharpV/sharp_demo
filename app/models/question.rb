@@ -30,4 +30,10 @@ class Question < ActiveRecord::Base
   def generate_slug
     self.slug = Hz2py.do(self.title, :join_with => '-', :to_simplified => true).gsub(/\W/, "-").gsub(/(-){2,}/, '-').to_s
   end
+
+  class << self
+    def top_users 
+      @users = User.order("questions_value").limit(10)
+    end
+  end
 end
