@@ -1,0 +1,9 @@
+<h4 class='border'>热点群组<h4>
+<ul>
+  <%- @hot_groups.each do |group| %>
+    <li>
+      <%= link_to avatar_tag(group), group %>
+      <p><%= link_to group.name, group %></p>
+    </li>
+  <% end %>
+</ul>

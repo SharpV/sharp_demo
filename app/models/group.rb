@@ -4,8 +4,7 @@ class Group < ActiveRecord::Base
   # attr_accessible :title, :body
   mount_uploader :avatar, ImageUploader
 
-
-  default_scope  { order('created_at DESC') }
+  paginates_per 20
 
   scope :webclass, where(is_class: true)
 
@@ -59,6 +58,10 @@ class Group < ActiveRecord::Base
     is_class ? "班级" : "小组"
   end
 
+  def school_name
+    school ? school.name : ''
+  end
+
   private
 
   def find_or_create_current_term(year, part)
@@ -91,6 +94,9 @@ class Group < ActiveRecord::Base
 
     def hot_media
       Medium.where(mediumable_type: Group.to_s).order('downloads_count desc').limit(10)
+    end
+    def hot_webclasses
+      Group.webclass.order('members_count desc').limit(10)
     end
   end
 end

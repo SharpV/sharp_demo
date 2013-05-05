@@ -163,11 +163,22 @@ SharpLink::Application.routes.draw do
       get :apply
       get :logout
     end
+    collection do
+      get :latest
+      get :hot
+      get :top
+    end
   end
 
 
   resources :comments
-  resources :webclasses
+  resources :webclasses do
+    collection do
+      get :latest
+      get :hot
+      get :top
+    end
+  end
   
   resources :schools
   resources :pages 
@@ -221,6 +232,16 @@ SharpLink::Application.routes.draw do
       get :hot
       get :top
     end
+  end
+
+  resources :provinces do
+    resources :webclasses
+  end
+  resources :cities do
+    resources :webclasses
+  end
+  resources :zones do
+    resources :webclasses
   end
   resources :images
   

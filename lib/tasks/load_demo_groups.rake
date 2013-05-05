@@ -47,8 +47,7 @@ namespace :demo do
 
               subject = grade.random_subject
 
-              group = Group.new name: title.strip, body: body, remote_avatar_url: avatar
-
+              group = Group.new name: title.strip, body: body, remote_avatar_url: avatar, readings_count: rand(100000)
 
               group.creator = user
 

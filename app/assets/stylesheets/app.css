@@ -1,4 +1,4 @@
-html, body, p, table, dl, ul, section{
+html, body, p, table, dl, ul, section, a{
     color: #333;
     font-family: Arial,Helvetica,sans-serif;
     font-size: 13px;
@@ -29,6 +29,10 @@ body{
     box-shadow: 0 3px 8px rgba(0, 0, 0, 0.125) inset;
     color: #4FD687;
     text-decoration: none;
+}
+
+.nav a{
+    font-size: 14px;
 }
 
 .brand img{
@@ -137,8 +141,13 @@ h3{
     color: #333;
     font-size: 18px;
 }
-h4{
 
+h4 a{
+    font-size: 13px;
+    font-weight: bold;
+}
+
+h4{
     color: #333;
     font-size: 15px;
 }

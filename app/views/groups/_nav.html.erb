@@ -1,0 +1,12 @@
+<%= tabs_tag(:namespace => :groups_nav, :open_tabs => {:class => "nav nav-tabs"}, :builder => MenuTabBuilder) do |tab| %>
+  <%= tab.index "推荐群组", :groups %>
+  <%= tab.hot "热点群组", [:hot, :groups] %>
+  <%= tab.latest "最新群组", [:latest, :groups] %>
+  <%= tab.top "排行榜", [:top, :groups] %>
+
+  <%- if current_user %>
+    <%= link_to '创建群组', [:new, :user, current_user, :group], class: 'btn btn-success pull-right' %>
+  <% else %>
+    <%= link_to '立即注册', new_user_registration_path, class: 'btn btn-success pull-right' %>
+  <% end %>
+<% end %>

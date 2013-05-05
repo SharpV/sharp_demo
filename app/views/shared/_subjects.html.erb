@@ -1,7 +1,10 @@
-<ul id="subjects_nav" class="mega-menu">
+<ul id="subjects_nav" class="mega-menu right">
   <%- Grade.child_grade.each do |grade| %>
-    <li>
-      <%= link_to grade.name, [grade, resource] %>
+    <li class='dc-mega-li'>
+      <%= link_to [grade, resource], class: 'dc-mega' do %>
+        <%= grade.name %>
+        <span class="dc-mega-icon"></span>
+      <% end %>
       <ul>
         <%- grade.subjects.each do |subject| %>
           <li>

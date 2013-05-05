@@ -5,7 +5,7 @@ class Member < ActiveRecord::Base
   include Role 
   
   belongs_to :user
-  belongs_to :group
+  belongs_to :group, counter_cache: true
   
   scope :apply, where(:active => false)
   scope :active, where(:active => true)

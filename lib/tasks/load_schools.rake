@@ -16,12 +16,8 @@ namespace :db do
     end
     
     def load_schools
-      Province.delete_all
-      City.delete_all
-      Zone.delete_all
-      School.delete_all
       index = "http://banji.tongyi.com/index/school/0/0/0/0/?sort=1&mode=0&per_page="
-      page = 677630
+      page = 659030#677630
       while (page > 0)
         begin
           url = URI::encode "#{index}#{page}"

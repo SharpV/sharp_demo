@@ -1,5 +1,7 @@
+@import "vertical_menu";
 
 ul#image-text-list{
+    margin-top: 10px;
     @extend .clearfix;
 }
 
@@ -68,8 +70,13 @@ ul#top_users{
 
 li.dashed{
     border-bottom: dashed 1px #ccc;
-    padding: 5px 0px
+    padding: 5px 0px;
+    a {
+        font-size: 12px;
+    }
 }
+
+
 
 .item .title{
     word-wrap:break-word;

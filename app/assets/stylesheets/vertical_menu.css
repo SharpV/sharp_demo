@@ -37,8 +37,8 @@
 .mega-menu li .sub-container {
   position: absolute; /* Required */
   background: #4B4B4B;
-  padding: 10px 10px 0 10px;
-  overflow: hidden;
+  padding: 10px;
+  overflow:scroll;
   border: 1px solid #4b4b4b;
   border-left: none;
 }
@@ -47,13 +47,13 @@
 }
 .mega-menu li .sub li {
   float: none;
-  width: 100px;
+  width: 80px;
   font-size: 1em;
   font-weight: normal;
 }
 .mega-menu li .sub li.mega-hdr {
   float: left; /* Required */
-  margin: 0 5px 10px 5px;
+  margin: 0 5px 5px 5px;
 }
 .mega-menu li .sub a, .mega-menu.left li .sub a {
   background: none;
@@ -61,7 +61,7 @@
   text-shadow: none;
   float: none;
   color: #fff;
-  padding: 7px 10px;
+  padding: 7px;
   display: block;
   text-decoration: none;
   font-size: 0.9em;

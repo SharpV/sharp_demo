@@ -1,0 +1,31 @@
+<ul id="areas_nav" class="mega-menu right">
+  <%- Province.includes(:cities).all.each do |province| %>
+    <li class='dc-mega-li'>
+      <%= link_to [province, resource], class: 'dc-mega' do %>
+      	<%= province.name %>
+				<span class="dc-mega-icon"></span>
+      <% end %>
+      <div class="sub-container mega" style="height: 480px; margin-top: 1px; z-index: 1000; width: <%= province_city_width(province)+80 %>px; display: none; left: 209px; padding: 10px;">
+      	<ul class="sub inline">
+					<div class="row last first" style="width: <%= province_city_width(province)+50 %>px;">
+						<%- province.cities.includes(:zones).each_with_index do |city, index| %>
+							<%- if index % 5 ==0 %>
+								<div class='clearfix'></div>
+							<% end %>
+							<li class="mega-unit mega-hdr">
+								<%= link_to city.name, [city, resource], class: 'mega-hdr-a' %>
+								<ul>
+									<%- city.zones.each do |zone| %>
+										<li>
+											<%= link_to zone.name, [zone, resource] %>
+										</li>
+									<% end %>
+								</ul>
+							</li>
+						<% end %>
+					</div>
+				</ul>
+			</div>
+    </li>
+  <% end %>
+</ul>

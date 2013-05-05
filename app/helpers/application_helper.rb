@@ -101,31 +101,12 @@ module ApplicationHelper
       options
   end
   
-  def link_to_unsubscribe(tag, options = {})
-    default_options = {
-      class: 'button subscribe replaceable active',
-      method: :delete
-    }
-    link_to_subscribe(tag, default_options.merge(options))
-  end
-  
-  def link_to_follow(user, name = 'Follow', method = :post)
-    link_to name, account_follow_path(user),
-      { :remote    => true,
-        :method    => method,
-        :class     => 'button follow replaceable',
-        :'data-id' => user.id }
-  end
-  
-  def link_to_unfollow(user)
-    link_to_follow user, 'Unfollow', :delete
-  end
-  
-  def link_to_tag(tag)
-    link_to tag.with_sign, tag
-  end
-  
-  def link_to_comments(post)
-    link_to '', post, class: 'button comment', title: 'Comments'
+  def province_city_width(province)
+    cities_size = province.cities.count
+    if cities_size > 5
+      400
+    else
+      cities_size * 80
+    end
   end
 end

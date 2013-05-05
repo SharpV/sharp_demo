@@ -3,10 +3,33 @@ class GroupsController < ApplicationController
   set_tab :index, :group_nav, only: [:show]
   set_tab :groups, :site_nav
   def index
-    @groups = Group.page(params[:page])
+    @groups = Group.webgroup.order('members_count desc, readings_count desc').page(params[:page])
     @hot_groups = Group.hot_groups
     @hot_topics = Group.hot_topics
     @hot_media = Group.hot_media
+    set_tab :index, :groups_nav
+  end
+
+  def hot
+    @groups = Group.webgroup.order('readings_count desc').page(params[:page])
+    @hot_groups = Group.hot_groups
+    @hot_topics = Group.hot_topics
+    @hot_media = Group.hot_media
+    set_tab :hot, :groups_nav
+    render 'groups/index'
+  end
+
+  def latest
+    @groups = Group.webgroup.order('created_at desc').page(params[:page])
+    @hot_groups = Group.hot_groups
+    @hot_topics = Group.hot_topics
+    @hot_media = Group.hot_media
+    set_tab :latest, :groups_nav
+    render 'groups/index'
+  end
+
+  def top
+
   end
 
   def show

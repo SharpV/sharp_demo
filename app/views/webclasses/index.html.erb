@@ -1,0 +1,35 @@
+<div class='span-l'>
+  <%= render partial: 'shared/areas', locals: {resource: :webclasses} %>
+</div>
+<div class='span-r'>
+	<%= render 'nav' %>
+  <div class='row'>
+    <div class='span-l'>
+      <ul id='image-text-list' class='inline'>
+        <%- @webclasses.each do |webclass| %>
+          <li class='hover'>
+            <div class='image'>
+              <%= link_to avatar_tag(webclass), webclass %>
+            </div>
+            <div class='content'>
+              <h4><%= link_to webclass.name, webclass %></h4>
+              <p>
+                <%= webclass.school_name %>
+              </p>
+              <p>
+              	成员(<%= webclass.members_count %>) 访问(<%= webclass.readings_count %>)
+              </p>
+            </div>
+          </li>
+        <% end %>
+      </ul>
+      <%= paginate @webclasses %>
+
+    </div>
+    <div class='span-r'>
+      <%= render 'hot_webclasses' %>
+    </div>
+  </div>
+</div>
+
+ 

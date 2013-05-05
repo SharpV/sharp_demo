@@ -1,4 +1,4 @@
-<%= tabs_tag(:namespace => :questions_nav, :open_tabs => {:class => "nav nav-tabs"}, :builder => MenuTabBuilder) do |tab| %>
+<%= tabs_tag(:namespace => :posts_nav, :open_tabs => {:class => "nav nav-tabs"}, :builder => MenuTabBuilder) do |tab| %>
   <%= tab.index "推荐文章", :posts %>
   <%= tab.hot "热点文章", [:hot, :posts] %>
   <%= tab.latest "最新文章", [:latest, :posts] %>
