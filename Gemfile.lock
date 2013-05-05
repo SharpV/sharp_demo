@@ -36,6 +36,13 @@ PATH
   specs:
     sharp_social (0.0.1)
 
+PATH
+  remote: ./lib/sharp_zones
+  specs:
+    sharp_zones (0.0.1)
+      rails (> 3.0.0)
+      sequel
+
 GEM
   remote: http://rubygems.org/
   specs:
@@ -526,6 +533,7 @@ DEPENDENCIES
   sequel
   settingslogic
   sharp_social!
+  sharp_zones!
   sidekiq
   simple_form (~> 2.0.2)
   slim

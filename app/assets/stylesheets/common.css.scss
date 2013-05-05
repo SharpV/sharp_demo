@@ -1,8 +1,9 @@
+
 ul#image-text-list{
     @extend .clearfix;
 }
 
-ul#image-text-list li{
+ul li.hover{
     margin-bottom: 10px;
     background-color: #F8F9F4;
     -webkit-border-radius: 5px; 
@@ -10,7 +11,7 @@ ul#image-text-list li{
     border: 1px solid #fff; 
 }
 
-ul#image-text-list li:hover {
+ul li.hover:hover {
     background-color: #fff;
     border: 1px solid #CEF7C3; 
 }

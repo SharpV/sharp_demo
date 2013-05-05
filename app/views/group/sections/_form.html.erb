@@ -1,5 +1,5 @@
 <h4>修改课时</h4>
-<%= form_for @section, :url => webclass_webclass_section_path(@current_webclass, @section), validate: true, remote: true, :html => {:class => 'form-horizontal', id: 'section-form', data: {type: "script"}} do |f| %>
+<%= form_for @section, :url => [:group, @current_group, @section], validate: true, remote: true, :html => {:class => 'form-horizontal', id: 'section-form', data: {type: "script"}} do |f| %>
     <%= f.text_field :title, label: '课时' %>
     <%= f.text_field :start_at, class: 'timepicker', label: '开始时间' %>
     <%= f.text_field :end_at, class: 'timepicker', label: '结束时间' %>

@@ -6,11 +6,11 @@ SharpLink::Application.routes.draw do
   devise_for :users, :controllers => {:registrations => "registrations", :passwords => "passwords", :sessions => "sessions", :omniauth_callbacks => 'omniauth_callbacks'}
   #ActiveAdmin.routes(self)
   match "errors/routing", :to => "errors#routing"
-  match "tags/:tag/posts",  :to => "posts#show",:as => "tag_posts"
-  match "/ajax/get_subjects_by_grade/:grade_id", :to => "ajax#get_subjects_by_grade"
-  match "/ajax/get_cities_by_province/:province_code", :to => "ajax#get_cities_by_province"
 
-  match "/admin", :to => "admin#index"    
+  match "/ajax/get_subjects_by_grade/:grade_id", :to => "ajax#get_subjects_by_grade"
+  match "/ajax/get_cities_by_province", :to => "ajax#get_cities_by_province"
+  match "/ajax/get_zones_by_city", :to => "ajax#get_zones_by_city"
+  match "/ajax/get_schools_by_zone", :to => "ajax#get_schools_by_zone"
                                  
   namespace :admin do
     resources :comments
@@ -53,7 +53,7 @@ SharpLink::Application.routes.draw do
       resources :notifications
       resources :activities
       resources :media
-      resources :webclasses
+      resources :groups
       resources :folders do
         collection do
           get :admin

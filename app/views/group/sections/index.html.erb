@@ -1,7 +1,7 @@
 <div class='row'>
   <div class='span-l'>
-    <h4><%= @current_webclass.current_term.name %></h4>
-    <%= form_for @section, :url => webclass_webclass_sections_path(@current_webclass), validate: true, remote: true, :html => {:class => 'form-horizontal', id: 'section-form', data: {type: "script", method: :post}} do |f| %>
+    <h4><%= @current_group.current_term.name %></h4>
+    <%= form_for @section, :url => [:group, @current_group, :sections], validate: true, remote: true, :html => {:class => 'form-horizontal', id: 'section-form', data: {type: "script", method: :post}} do |f| %>
       <table class='table content'>
         <thead>
           <tr>
@@ -39,10 +39,6 @@
     <% end %>
   </div>
   <div class='span-r pull-right'>
-    <%= render 'webclass/settings/menu' %>
+    <%= render 'group/settings/menu' %>
   </div>
 </div>
-
-<%- content_for :left do %>
-  <h3><%= @current_webclass.name %></h3>
-<% end %>

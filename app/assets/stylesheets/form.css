@@ -16,3 +16,14 @@
     text-align: left;
     width: 45px;
 }
+
+textarea{
+    height: 120px;
+    width: 280px;
+    margin-bottom: 10px;
+ }
+ select, input[type="file"] {
+    height: 30px;
+    line-height: 30px;
+    margin-bottom: 10px;
+}

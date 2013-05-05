@@ -2,7 +2,7 @@
 
 class Group::SettingsController < GroupController
   set_tab :index, :setting_nav
-  set_tab :admin, :webclass_nav
+  set_tab :admin, :group_nav
 
   def admin
 

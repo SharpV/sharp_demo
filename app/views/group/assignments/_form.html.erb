@@ -1,4 +1,4 @@
-<%= simple_form_for @assignment, url: webclass_webclass_assignments_path(@current_webclass, @assignment), validate: true do |f| %>
+<%= simple_form_for @assignment, url: [:group, @current_group, @group], validate: true do |f| %>
   <%= f.input :title, label: '名称' %>
   <%= f.association :course, collection: @courses, label: '相关科目', :include_blank => "请选择相关科目" %>
   <%= f.input :submit_at, label: '提交时间' %>

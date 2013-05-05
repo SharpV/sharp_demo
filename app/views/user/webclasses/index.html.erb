@@ -5,14 +5,8 @@
   </div>
   
   <div class='span-r'>
-    <%= link_to '创建班级', new_me_webclass_path, :class => 'btn btn-success pull-right span' %>
+    <%= link_to '创建班级', [:new, :user, current_user, :webclass], :class => 'btn btn-success pull-right span' %>
   
-    <ul>
-      <%- @webclasses.each do |c| %>
-        <li>
-          <%= link_to image_tag(c.avatar_url(:m)), c %>
-        <li>
-      <% end %>
-    </ul>
+
   </div>
 </div>

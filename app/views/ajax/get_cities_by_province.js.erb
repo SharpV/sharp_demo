@@ -1,0 +1,3 @@
+$("#zone-list").empty();
+$("#school-list").empty();
+$("#city-list").empty().append("<%= escape_javascript(options_for_select(@cities.map{|i|[i.name, i.id]})) %>");

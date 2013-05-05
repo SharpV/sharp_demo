@@ -1,2 +1,0 @@
-module Webclass::CoursesHelper
-end

@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130504070342) do
+ActiveRecord::Schema.define(:version => 20130505013057) do
 
   create_table "active_admin_comments", :force => true do |t|
     t.string   "resource_id",   :null => false
@@ -115,6 +115,16 @@ ActiveRecord::Schema.define(:version => 20130504070342) do
   end
 
   add_index "categories", ["categoryable_id", "categoryable_type"], :name => "index_categories_on_categoryable_id_and_categoryable_type"
+
+  create_table "cities", :force => true do |t|
+    t.integer  "province_id",                  :null => false
+    t.string   "name"
+    t.datetime "created_at",                   :null => false
+    t.datetime "updated_at",                   :null => false
+    t.integer  "schools_count", :default => 0
+  end
+
+  add_index "cities", ["province_id"], :name => "index_cities_on_province_id"
 
   create_table "comments", :force => true do |t|
     t.string   "title",            :limit => 50, :default => ""
@@ -260,6 +270,7 @@ ActiveRecord::Schema.define(:version => 20130504070342) do
     t.integer  "adviser_id"
     t.integer  "year",           :default => 2013
     t.boolean  "is_class",       :default => false
+    t.integer  "school_id"
   end
 
   create_table "guests", :force => true do |t|
@@ -415,6 +426,13 @@ ActiveRecord::Schema.define(:version => 20130504070342) do
 
   add_index "profiles", ["user_id"], :name => "index_profiles_on_actor_id"
 
+  create_table "provinces", :force => true do |t|
+    t.string   "name"
+    t.datetime "created_at",                   :null => false
+    t.datetime "updated_at",                   :null => false
+    t.integer  "schools_count", :default => 0
+  end
+
   create_table "questions", :force => true do |t|
     t.text     "body"
     t.boolean  "published",      :default => true
@@ -472,6 +490,25 @@ ActiveRecord::Schema.define(:version => 20130504070342) do
 
   add_index "roles", ["name", "resource_type", "resource_id"], :name => "index_roles_on_name_and_resource_type_and_resource_id"
   add_index "roles", ["name"], :name => "index_roles_on_name"
+
+  create_table "schools", :force => true do |t|
+    t.string   "name"
+    t.integer  "province_id"
+    t.integer  "city_id"
+    t.integer  "zone_id"
+    t.text     "address"
+    t.string   "phone"
+    t.datetime "created_at",                                 :null => false
+    t.datetime "updated_at",                                 :null => false
+    t.integer  "level",          :limit => 2
+    t.integer  "groups_counter",              :default => 0
+    t.string   "avatar"
+  end
+
+  add_index "schools", ["city_id"], :name => "index_schools_on_city_id"
+  add_index "schools", ["level"], :name => "index_schools_on_level"
+  add_index "schools", ["province_id"], :name => "index_schools_on_province_id"
+  add_index "schools", ["zone_id"], :name => "index_schools_on_zone_id"
 
   create_table "sections", :force => true do |t|
     t.integer  "term_id",                   :null => false
@@ -567,12 +604,18 @@ ActiveRecord::Schema.define(:version => 20130504070342) do
     t.integer  "posts_value",                           :default => 0,           :null => false
     t.string   "role",                   :limit => 10,  :default => "teacher",   :null => false
     t.integer  "media_value",                           :default => 0
+    t.integer  "zone_id"
+    t.integer  "city_id"
+    t.integer  "province_id"
   end
 
+  add_index "users", ["city_id"], :name => "index_users_on_city_id"
   add_index "users", ["email"], :name => "index_users_on_email"
   add_index "users", ["login"], :name => "index_users_on_login"
+  add_index "users", ["province_id"], :name => "index_users_on_province_id"
   add_index "users", ["reset_password_token"], :name => "index_users_on_reset_password_token"
   add_index "users", ["status"], :name => "index_users_on_status"
+  add_index "users", ["zone_id"], :name => "index_users_on_zone_id"
 
   create_table "users_roles", :id => false, :force => true do |t|
     t.integer "user_id"
@@ -594,5 +637,15 @@ ActiveRecord::Schema.define(:version => 20130504070342) do
   add_index "votings", ["voteable_type", "voteable_id", "voter_type", "voter_id"], :name => "unique_voters", :unique => true
   add_index "votings", ["voteable_type", "voteable_id"], :name => "index_votings_on_voteable_type_and_voteable_id"
   add_index "votings", ["voter_type", "voter_id"], :name => "index_votings_on_voter_type_and_voter_id"
+
+  create_table "zones", :force => true do |t|
+    t.string   "name",                         :null => false
+    t.integer  "city_id",                      :null => false
+    t.datetime "created_at",                   :null => false
+    t.datetime "updated_at",                   :null => false
+    t.integer  "schools_count", :default => 0
+  end
+
+  add_index "zones", ["city_id"], :name => "index_zones_on_city_id"
 
 end

@@ -1,21 +1,26 @@
 
-#item-list li {
-  width: 152px;
+ul#users li {
+  width: 162px;
   height: 70px;
   margin-right: 10px;
   padding: 10px;
 }
 
-#item-list li .avatar{
+ul#users
+{ 
+  li .avatar{
     width: 60px;
     height: 60px;
     overflow: hidden;
+    float: left;
+    margin-right: 10px;
 }
 
-#item-list li .content{
+  li .content{
     float: none;
     overflow: hidden;
     width: auto;
+  }
 }
 
 

@@ -8,7 +8,7 @@ class Group::SectionsController < GroupController
   def index
   end
 
-  def admin
+  def index
     @section = Section.new
     @terms = @current_group.terms
     @sections = @current_group.current_term.sections.order(:start_at)

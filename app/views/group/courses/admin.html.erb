@@ -1,6 +1,6 @@
 <div class='row'>
   <div class='span-l'>
-    <h4><%= @current_webclass.current_term.name %></h4>
+    <h4><%= @current_group.current_term.name %></h4>
     <table class='table table-bordered'>
       <thead>
         <tr class="success">
@@ -21,10 +21,6 @@
 
   </div>
   <div class='span-r pull-right'>
-    <%= render 'webclass/settings/menu' %>
+    <%= render 'group/settings/menu' %>
   </div>
 </div>
-
-<%- content_for :left do %>
-  <h3><%= @current_webclass.name %></h3>
-<% end %>

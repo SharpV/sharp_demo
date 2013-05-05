@@ -6,8 +6,8 @@
   <h4 class='border'>
     任课老师
   </h4>
-  <%- @current_webclass.teachers.each_with_index do |teacher, index| %>
-    <div class="<%= index.odd? ? '' : 'pull-right' %>">
+  <%- @current_group.teachers.each_with_index do |teacher, index| %>
+    <div class="<%= index.odd? ? 'pull-right' : '' %>">
       <%= user_avatar_tag(teacher.user, 'm') %>
       <p><%= teacher.name %></p>
     </div>  

@@ -2,9 +2,10 @@
 
 class Group < ActiveRecord::Base
   # attr_accessible :title, :body
+  mount_uploader :avatar, ImageUploader
+
 
   default_scope  { order('created_at DESC') }
-
 
   scope :webclass, where(is_class: true)
 
@@ -14,11 +15,10 @@ class Group < ActiveRecord::Base
   acts_as_commentable
   acts_as_tagger
   acts_as_taggable_on :tags
-  mount_uploader :avatar, ImageUploader
   
   validates :name, :presence => true, :length => {:within => 1..30}
-  validates :body, :slug, :presence => true
-
+  validates :body, :presence => true
+  belongs_to :school
   has_many :messages
   has_many :folders, as: :folderable  
   has_many :categories, as: :categoryable
@@ -33,7 +33,7 @@ class Group < ActiveRecord::Base
   has_many :slots
   has_many :albums, as: :albumable
   belongs_to :creator, foreign_key: "creator_id", class_name: 'User'
-  before_validation :generate_slug
+  before_validation :set_webclass
 
   after_create :create_admin, :create_default_category_and_folder, :current_term
 
@@ -76,8 +76,8 @@ class Group < ActiveRecord::Base
     Member.create group_id: self.id, user_id: self.creator_id, admin: true, active: true
   end
   
-  def generate_slug
-    self.slug = Hz2py.do(self.name, :join_with => '-', :to_simplified => true).gsub(/\W/, "-").gsub(/(-){2,}/, '-').to_s
+  def set_webclass
+    self.is_class = true if self.school_id
   end
 
   class << self

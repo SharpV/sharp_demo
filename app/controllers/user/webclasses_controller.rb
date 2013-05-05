@@ -1,13 +1,13 @@
-class Me::WebclassesController < MeController
-  set_tab :webclasses, :me_nav
+class User::WebclassesController < UserController
+  set_tab :webclasses, :user_nav
   set_tab :index, :webclass_nav
   
   def index
-    @webclasses = current_user.webclasses.page params[:page]
+    @groups = current_user.groups.webclass.page params[:page]
   end 
 
   def new
-    @webclass = Webclass.new
+    @webclass = Group.new
   end
 
   def create 

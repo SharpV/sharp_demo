@@ -1,6 +1,6 @@
-<%= simple_form_for [:webclass, @current_webclass, @exam], validate: true, html: {class: 'span'} do |f| %>
+<%= simple_form_for [:group, @current_group, @exam], validate: true, html: {class: 'span'} do |f| %>
   <%= f.input :title, label: '名称' %>
   <%= f.input :start_at, label: '开始时间' %>
-  <%= f.association :course, collection: (@current_webclass.courses.collect{|c|[c.name, c.id]}), :include_blank => "所有科目", label: '科目' %>
+  <%= f.association :course, collection: (@current_group.courses.collect{|c|[c.name, c.id]}), :include_blank => "所有科目", label: '科目' %>
   <%= f.submit '创建', class: 'btn btn-info', disable_with: "正在提交..." %>
 <% end %>

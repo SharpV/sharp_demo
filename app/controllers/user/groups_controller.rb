@@ -19,6 +19,8 @@ class User::GroupsController < UserController
     if @group.save
       flash[:success] = "您的小组已被成功创建！"
       redirect_to @group
+    elsif @group.school_id
+      render template: 'user/webclasses/new'
     else
       render action: :new
     end
