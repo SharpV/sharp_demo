@@ -1,21 +1,22 @@
 <li id='question-<%= question.id %>'>
-  <div class='left'>
+  <div class='avatar'>
     <br />
     <%= link_to user_avatar_tag(question.user, 's'), question.user %>
   </div>
   <div class='content'>    
     <h4 class='border'>
       <%= link_to question.title, question %>
-
-      <%= link_to question, method: :delete, class: 'btn btn-small btn-danger pull-right span', confirm: "是否删除 #{question.title}" do %>
-        <i class='icon icon-ban-circle'></i>
-        <span>删除</span>
-      <% end %>
-
-      <%= link_to [:edit, question], class: 'btn btn-small btn-info pull-right span' do %>
-        <i class='icon icon-edit'></i>
-        <span>编辑</span>
-      <% end %>
+      <%- if current_user and current_user.id == question.user_id %>
+        <%= link_to question, method: :delete, class: 'btn btn-small btn-danger pull-right span', confirm: "是否删除 #{ question.title}" do %>
+          <i class='icon icon-ban-circle'></i>
+          <span>删除</span>
+        <% end %>
+  
+        <%= link_to [:edit, question], class: 'btn btn-small btn-info pull-right span' do %>
+          <i class='icon icon-edit'></i>
+          <span>编辑</span>
+        <% end %>
+        <% end %>
     </h4>
     <p>
       <%- if truncate_size %>

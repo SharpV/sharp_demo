@@ -1,5 +1,5 @@
 <ul id="subjects_nav" class="mega-menu right">
-  <%- Grade.child_grade.each do |grade| %>
+  <%- Grade.child_grade.includes(:subjects).each do |grade| %>
     <li class='dc-mega-li'>
       <%= link_to [grade, resource], class: 'dc-mega' do %>
         <%= grade.name %>

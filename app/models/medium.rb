@@ -26,8 +26,6 @@ class Medium < ActiveRecord::Base
 
   before_save :update_file_attributes
 
-
-
   def to_jq_upload
     {
       "name" => read_attribute(:file),

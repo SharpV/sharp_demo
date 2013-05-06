@@ -10,7 +10,7 @@
         <div class='span-l'>
           <%= avatar_tag(@current_group, 'b') %>
           <%- if @current_group.is_class %>
-            <p><%= @current_group.school.name %></p>
+            <p><%= @current_group.school_name %></p>
           <% end %>
           <h4><%= @current_group.name %></h4>
           <p><%= @current_group.body %></p>

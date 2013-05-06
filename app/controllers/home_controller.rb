@@ -7,7 +7,7 @@ class HomeController < ApplicationController
   
   def index
     if current_user 
-      redirect_to current_user
+      redirect_to [:me, :users]
     else
       redirect_to new_session_path(resource_name)
     end

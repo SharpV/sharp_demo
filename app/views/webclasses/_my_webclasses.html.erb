@@ -1,6 +1,6 @@
-<h4 class='border'>活跃班级<h4>
+<h4 class='border'>我的班级<h4>
 <ul>
-  <%- @hot_webclasses.each do |group| %>
+  <%- current_user.groups.webclass.each do |group| %>
     <li>
       <%= link_to avatar_tag(group), group %>
       <p><%= link_to group.name, group %></p>

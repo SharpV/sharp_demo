@@ -1,4 +1,4 @@
-html, body, p, table, dl, ul, section, a{
+html, body, p, table, dl, ul, section{
     color: #333;
     font-family: Arial,Helvetica,sans-serif;
     font-size: 13px;
@@ -29,6 +29,11 @@ body{
     box-shadow: 0 3px 8px rgba(0, 0, 0, 0.125) inset;
     color: #4FD687;
     text-decoration: none;
+}
+
+.navbar-search {
+    margin-top: 10px;
+    position: relative;
 }
 
 .nav a{
@@ -197,21 +202,3 @@ ul.inline > li, ol.inline > li {
     line-height:22px; 
 }
 
-.video-js{
-    margin-top: 5px;
-    margin-bottom: 40px;
-}
-
-li.cover {
-    float:left;
-    width: 145px;
-    height: 150px;
-    overflow:hidden;
-    background-color: #fff;
-}
-
-#jwplayer{
-    width: 580px;
-    height:500px;
-    _height: 480px;
-}

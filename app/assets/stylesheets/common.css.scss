@@ -76,32 +76,40 @@ li.dashed{
     }
 }
 
-
-
-.item .title{
-    word-wrap:break-word;
-    word-break:break-all;
-    overflow:hidden;
-    font-size: 15px;
-    line-height: 22px;
-    font-weight: bold;
-    float: left;
-    height: 25px;
+ul.image-text-list{
+    clear:both;
+    margin-top:10px;
 }
 
-.item-info {
+ul.image-text-list li {
+  width: 275px;
+  height: 125px;
+  margin-right: 10px;
+  padding: 10px;
+  overflow: hidden;
+  float:left;
+}
+
+ul.image-text-list li .image{
+    width: 60px;
+    height: 60px;
+    overflow: hidden;
+    float:left;
+    margin-top:10px;
+}
+
+ul.image-text-list li .content{
+    float: none;
+    overflow: hidden;
+    width: auto;
+    padding-left:10px;
+}
+
+ul li .item-info {
     background-color: #D9EDF7;
     border-color: #BCE8F1;
     color: #3A87AD;
-}
-
-.item {
-    background-color: #FCF8E3;
-    border: 1px solid #FBEED5;
-    border-radius: 4px 4px 4px 4px;
-    margin-bottom: 20px;
     padding: 5px;
-    margin-bottom: 10px;
 }
 
 div.field_with_errors .message {

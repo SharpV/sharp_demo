@@ -8,13 +8,38 @@ class QuestionsController < ApplicationController
 
   def index
    if params[:grade_id]
-      @questions = Question.share.includes(:user).where(grade_id: params[:grade_id]).page params[:page]
+      @questions = Question.share.includes(:user).where(grade_id: params[:grade_id]).order('answers_count desc, created_at desc').page params[:page]
     elsif params[:subject_id]
-      @questions = Question.share.includes(:user).where(subject_id: params[:subject_id]).page params[:page]
+      @questions = Question.share.includes(:user).where(subject_id: params[:subject_id]).order('answers_count desc, created_at desc').page params[:page]
     else
-      @questions = Question.share.includes(:user).page params[:page]
+      @questions = Question.share.includes(:user).order('answers_count desc, created_at desc').page params[:page]
     end
     @top_users = Question.top_users
+    set_tab :index, :questions_nav
+
+  end
+
+  def hot
+    @questions = Question.share.includes(:user).order('readings_count desc, answers_count desc').page params[:page]
+    @top_users = Question.top_users
+    set_tab :hot, :questions_nav
+
+    render 'questions/index'
+  end
+
+  def latest
+    @questions = Question.share.includes(:user).order('created_at desc').page params[:page]
+    @top_users = Question.top_users
+    set_tab :latest, :questions_nav
+
+    render 'questions/index'
+  end
+
+  def my
+    @questions = current_user.questions.includes(:user).order('created_at desc').page params[:page]
+    @top_users = Question.top_users
+    set_tab :my, :questions_nav
+    render 'questions/index'
   end
 
   def new

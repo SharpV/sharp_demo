@@ -1,0 +1,8 @@
+<h4 class='border'>最新开通<h4>
+<ul>
+  <%- @latest_webclasses.each do |group| %>
+    <li class='dashed'>
+      <%= link_to group.name, group %>
+    </li>
+  <% end %>
+</ul>

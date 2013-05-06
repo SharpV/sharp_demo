@@ -16,7 +16,7 @@ class Term < ActiveRecord::Base
   end
 
   def get_course name
-    options = {webclass_id: webclass_id, term_id: id, name: name}
+    options = {group_id: group_id, term_id: id, name: name}
     course =  Course.where(options).first_or_create options.merge(creator_id: creator_id) 
   end
 end

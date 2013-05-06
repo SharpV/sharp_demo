@@ -1,11 +1,11 @@
 <div class='span-l'>
-  <%= render partial: 'shared/areas', locals: {resource: :webclasses} %>
+  <%= render 'hot_webclasses' %>
 </div>
 <div class='span-r'>
 	<%= render 'nav' %>
   <div class='row'>
     <div class='span-l'>
-      <ul id='image-text-list' class='inline'>
+      <ul id='webclasses' class='inline image-text-list clearfix'>
         <%- @webclasses.each do |webclass| %>
           <li class='hover'>
             <div class='image'>
@@ -27,7 +27,10 @@
 
     </div>
     <div class='span-r'>
-      <%= render 'hot_webclasses' %>
+      <%- if current_user and current_user.groups.webclass.count > 0 %>
+        <%= render 'my_webclasses' %>
+      <% end %>
+      <%= render 'latest_webclasses' %>
     </div>
   </div>
 </div>

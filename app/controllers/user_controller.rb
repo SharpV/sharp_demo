@@ -13,5 +13,11 @@ class UserController < ApplicationController
       redirect_to root_path
     end
   end
+
+  def check_owner
+    if !current_user or @current_user.id != current_user.id
+      redirect_to @current_user
+    end
+  end
   
 end

@@ -6,8 +6,8 @@
   <td><%= member.note %></td>
 
   <td>
-    <%= link_to '同意', agree_webclass_webclass_member_path(@current_webclass, member), class: 'btn btn-success btn-small', remote: true, data: {type: "script"}, disable_with: "..." %> 
+    <%= link_to '同意', [:agree, :group, @current_group, member], class: 'btn btn-success btn-small', remote: true, data: {type: "script"}, disable_with: "..." %> 
       &nbsp; &nbsp;
-    <%= link_to '拒绝', reject_webclass_webclass_member_path(@current_webclass, member), class: 'btn btn-danger btn-small', remote: true, data: {type: "script"}, disable_with: "..."  %>
+    <%= link_to '拒绝', [:reject, :group, @current_group, member], class: 'btn btn-danger btn-small', remote: true, data: {type: "script"}, disable_with: "..."  %>
   </td>
 </tr>

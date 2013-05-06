@@ -1,6 +1,7 @@
 class AnswersController < ApplicationController
-  def index
-    @authentications = current_user.authentications if current_user
+  def my
+    @answers = current_user.answers.includes(:question).order('created_at desc').page params[:page]
+    set_tab :answers, :questions_nav
   end
   
   def create

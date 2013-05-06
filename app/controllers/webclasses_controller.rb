@@ -5,6 +5,7 @@ class WebclassesController < ApplicationController
   def index
     @webclasses = Group.webclass.includes(:school).order('members_count desc, readings_count desc').page params[:page]
     @hot_webclasses = Group.hot_webclasses
+    @latest_webclasses = Group.latest_webclasses
     set_tab :index, :webclasses_nav
   end
   
@@ -13,6 +14,8 @@ class WebclassesController < ApplicationController
   def hot
     @webclasses = Group.webclass.includes(:school).order('readings_count desc').page params[:page]
     @hot_webclasses = Group.hot_webclasses
+    @latest_webclasses = Group.latest_webclasses
+
     set_tab :hot, :webclasses_nav
     render template: 'webclasses/index'
   end
@@ -23,6 +26,8 @@ class WebclassesController < ApplicationController
     @webclasses = Group.webclass.includes(:school).order('created_at desc').page params[:page]
     @hot_webclasses = Group.hot_webclasses
     set_tab :latest, :webclasses_nav
+    @latest_webclasses = Group.latest_webclasses
+
     render template: 'webclasses/index'
   end
   

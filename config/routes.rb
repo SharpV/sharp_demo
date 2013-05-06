@@ -156,6 +156,9 @@ SharpLink::Application.routes.draw do
       get :follow
       get :unfollow
     end 
+    collection do
+      get :me
+    end
   end
   resources :groups do
     member do 
@@ -180,7 +183,9 @@ SharpLink::Application.routes.draw do
     end
   end
   
-  resources :schools
+  resources :schools do
+    resources :webclasses
+  end
   resources :pages 
   
   resources :tags, :only => [:index] do
@@ -235,13 +240,13 @@ SharpLink::Application.routes.draw do
   end
 
   resources :provinces do
-    resources :webclasses
+    resources :schools
   end
   resources :cities do
-    resources :webclasses
+    resources :schools
   end
   resources :zones do
-    resources :webclasses
+    resources :schools
   end
   resources :images
   

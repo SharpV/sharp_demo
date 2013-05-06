@@ -2,8 +2,10 @@
   <%= tab.index "推荐问题", :questions %>
   <%= tab.hot "热点回答", [:hot, :questions] %>
   <%= tab.latest "最新问题", [:latest, :questions] %>
-  <%= tab.my "我的问题", [:my, :questions] %>
-  <%= tab.my "我的回答", [:my, :answers] %>
+  <%- if current_user %>
+    <%= tab.my "我的问题", [:my, :questions] %>
+    <%= tab.answers "我的回答", [:my, :answers] %>
+  <% end %>
   <%= tab.top "排行榜", [:top, :questions] %>
   <%- if current_user %>
     <%= link_to '我要提问', new_question_path, class: 'btn btn-success pull-right' %>

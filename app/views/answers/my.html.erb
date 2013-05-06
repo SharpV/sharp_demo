@@ -1,0 +1,21 @@
+<div class='span-l'>
+  <%= render partial: 'shared/subjects', locals: {resource: :questions} %>
+</div>
+<div class='span-r'>
+  <%= render 'questions/nav' %>
+  <div class='row'>
+    <div class='span-l'>
+      <ul id='questions'>
+        <%- @answers.each do |answer| %>
+          <%= render partial: 'shared/questions/question', locals: {question: answer.question, truncate_size: 172} %>
+        <% end %>
+      </ul>
+      <div class='cleaxfix'>
+        <%= paginate @answers %>
+      </div>
+    </div>
+    <div class='span-r'>
+    </div>
+  </div>
+</div>
+ 

@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130505013057) do
+ActiveRecord::Schema.define(:version => 20130506114527) do
 
   create_table "active_admin_comments", :force => true do |t|
     t.string   "resource_id",   :null => false
@@ -501,8 +501,9 @@ ActiveRecord::Schema.define(:version => 20130505013057) do
     t.datetime "created_at",                                 :null => false
     t.datetime "updated_at",                                 :null => false
     t.integer  "level",          :limit => 2
-    t.integer  "groups_counter",              :default => 0
+    t.integer  "groups_count",                :default => 0
     t.string   "avatar"
+    t.integer  "readings_count",              :default => 0
   end
 
   add_index "schools", ["city_id"], :name => "index_schools_on_city_id"

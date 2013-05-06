@@ -1,7 +1,7 @@
 <div class='row'>
   <div class='span2'>
     <%= tabs_tag(:namespace => :user_nav, :open_tabs => {:class => "nav nav-tabs nav-stacked" }, :builder => MenuTabBuilder)    do |tab| %>
-      <%= tab.home raw("<i class='icon icon-user'></i> 我的主页"), @current_user %>
+      <%= tab.index raw("<i class='icon icon-user'></i> 我的主页"), @current_user %>
       <%= tab.messages raw("<i class='icon icon-envelope'></i> 我的私信"), [:user, @current_user, :messages] %>
      	<%= tab.posts raw("<i class='icon icon-edit'></i> 我的文章"), [:user, @current_user, :posts] %>
       <%= tab.images raw("<i class='icon icon-picture'></i> 我的相册"), [:user, @current_user, :images] %>

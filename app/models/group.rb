@@ -4,7 +4,7 @@ class Group < ActiveRecord::Base
   # attr_accessible :title, :body
   mount_uploader :avatar, ImageUploader
 
-  paginates_per 20
+  paginates_per 18
 
   scope :webclass, where(is_class: true)
 
@@ -84,6 +84,11 @@ class Group < ActiveRecord::Base
   end
 
   class << self
+
+    def latest_groups
+      Group.webgroup.order('created_at desc').limit(10)
+    end
+
     def hot_groups
       Group.webgroup.order('readings_count desc').limit(10)
     end
@@ -95,8 +100,14 @@ class Group < ActiveRecord::Base
     def hot_media
       Medium.where(mediumable_type: Group.to_s).order('downloads_count desc').limit(10)
     end
+
     def hot_webclasses
-      Group.webclass.order('members_count desc').limit(10)
+      Group.webclass.order('readings_count desc').limit(10)
     end
+
+    def latest_webclasses
+      Group.webclass.order('created_at desc').limit(20)
+    end
+
   end
 end
