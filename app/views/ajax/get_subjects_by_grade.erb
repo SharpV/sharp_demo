@@ -1,0 +1,4 @@
+$("#question_subject_id").empty().append("<option>请选择学科</option>");
+<%- if @subjects.size > 0 %>
+ $("#question_subject_id").empty().append("<%= escape_javascript(options_for_select(@subjects.map{|i|[i.name, i.id]})) %>");
+<% end %>

@@ -7,17 +7,6 @@
     <h4 class='border'>
       <%= link_to post.title, [@current_namespace||[:user, post.creator], post].flatten %>
 
-      <%- if current_user and current_user.id == post.creator.id %>
-        <%= link_to [@current_namespace||[:user, post.creator], post].flatten, method: :delete, class: 'btn btn-small btn-  danger pull-right span', confirm: "是否删除 #{post.title}" do %>
-          <i class='icon icon-ban-circle'></i>
-          <span>删除</span>
-        <% end %>
-  
-        <%= link_to [:edit, @current_namespace||[:user, post.creator], post].flatten, class: 'btn btn-small btn-info pull-  right span' do %>
-          <i class='icon icon-edit'></i>
-          <span>编辑</span>
-        <% end %>
-      <% end %>
     </h4>
     <p>
       <%- if truncate_size %>
@@ -30,6 +19,17 @@
       <span>作者(<%= link_to post.creator.nickname, post.creator %>)</span> 
       <span>阅读(<%= post.readings_count %>)</span>
       <span>评论(<%= post.comments_count %>)</span>
+      <%- if current_user and current_user.id == post.creator_id %>
+        <%= link_to [@current_namespace||[:user, post.creator], post].flatten, method: :delete, confirm: "是否删除 #{post.title}" do %>
+          <i class='icon icon-ban-circle'></i>
+          <span>删除</span>
+        <% end %>
+  
+        <%= link_to [:edit, @current_namespace||[:user, post.creator], post].flatten do %>
+          <i class='icon icon-edit'></i>
+          <span>编辑</span>
+        <% end %>
+      <% end %>
       <div class='pull-right'>
         <%= format_datetime post.created_at %>
       </div>

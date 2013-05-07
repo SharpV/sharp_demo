@@ -7,7 +7,7 @@ SharpLink::Application.routes.draw do
   #ActiveAdmin.routes(self)
   match "errors/routing", :to => "errors#routing"
 
-  match "/ajax/get_subjects_by_grade/:grade_id", :to => "ajax#get_subjects_by_grade"
+  match "/ajax/get_subjects_by_grade", :to => "ajax#get_subjects_by_grade"
   match "/ajax/get_cities_by_province", :to => "ajax#get_cities_by_province"
   match "/ajax/get_zones_by_city", :to => "ajax#get_zones_by_city"
   match "/ajax/get_schools_by_zone", :to => "ajax#get_schools_by_zone"
@@ -227,7 +227,7 @@ SharpLink::Application.routes.draw do
   resources :grades  do
     resources :questions
   end
-  
+
   resources :columns do
     resources :posts
     resources :media

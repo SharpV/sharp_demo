@@ -22,4 +22,11 @@ class AjaxController < ApplicationController
   def get_schools_by_zone
     @schools = School.where zone_id: params[:zone_id]
   end
+
+  def get_subjects_by_grade
+    if params[:question]
+      grade_id = params[:question][:grade_id]
+    end
+    @subjects = Subject.where grade_id: grade_id
+  end
 end

@@ -1,5 +1,8 @@
-<h3>创建班级</h3>
-
-<div class='span-l'>
-  <%= render 'form' %>
-</div>
+<h4 class='border'>创建班级</h4>
+<%= render 'form' %>
+<script>
+  $(document).ready(function() {
+    // Initialize the jQuery File Upload widget:
+    $('select option').removeAttr('selected');
+  });
+</script>

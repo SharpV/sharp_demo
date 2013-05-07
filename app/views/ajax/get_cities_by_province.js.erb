@@ -1,3 +1,5 @@
-$("#zone-list").empty();
-$("#school-list").empty();
-$("#city-list").empty().append("<%= escape_javascript(options_for_select(@cities.map{|i|[i.name, i.id]})) %>");
+$("#zone-list").empty().append("<option>请选择区县</option>");
+$("#school-list").empty().append("<option>请选择学校</option>");
+<%- if @cities.size > 0 %>
+  $("#city-list").empty().append("<option>请选择地市</option>").append("<%= escape_javascript(options_for_select(@cities.map{|i|[i.name, i.id]})) %>");
+<% end %>

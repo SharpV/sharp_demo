@@ -1,5 +1,7 @@
 class User::QuestionsController < UserController
 
+  before_filter :check_owner, only: [:new, :create, :update, :destroy, :edit]
+
   set_tab :questions, :user_nav
 
   def index
@@ -36,7 +38,6 @@ class User::QuestionsController < UserController
   def destroy
     @question = Question.find params [:id]
     @question.destroy
-    redirect_to params[:return] || me_questions_path
-  end
+    redirect_to params[:return] || [user, current_user, :questions]
   end
 end
