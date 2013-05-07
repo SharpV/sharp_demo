@@ -17,7 +17,7 @@ class Group < ActiveRecord::Base
   
   validates :name, :presence => true, :length => {:within => 1..30}
   validates :body, :presence => true
-  belongs_to :school
+  belongs_to :school, counter_cache: true
   has_many :messages
   has_many :folders, as: :folderable  
   has_many :categories, as: :categoryable

@@ -5,12 +5,10 @@ class MediaController < ApplicationController
   set_tab :media, :site_nav
 
   def index
-    if params[:grade_id]
-      @media = Medium.share.includes(:creator).where(grade_id: params[:grade_id]).order('downloads_count desc').page params[:page]
-    elsif params[:subject_id]
-      @media = Medium.share.includes(:creator).where(subject_id: params[:subject_id]).order('downloads_count desc').page params[:page]
+    if params[:column_id]
+      @media = Medium.share.includes(:creator, :column).where(column_id: params[:column_id]).order('downloads_count desc').page params[:page]
     else
-      @media = Medium.share.includes(:creator).order('downloads_count desc').page params[:page]
+      @media = Medium.share.includes(:creator, :column).order('downloads_count desc').page params[:page]
     end
     @top_users = Medium.top_users
     set_tab :index, :media_nav

@@ -2,7 +2,7 @@ class Post < ActiveRecord::Base
 
   paginates_per 20
 
-  scope :share, where("grade_id is not null")
+  scope :share, where("column_id is not null")
 
   acts_as_commentable
   acts_as_taggable
@@ -21,9 +21,7 @@ class Post < ActiveRecord::Base
 
   belongs_to :category, foreign_key: :category_id
 
-  belongs_to :grade
-
-  belongs_to :subject
+  belongs_to :column, counter_cache: true
   
 
   def to_param

@@ -40,3 +40,6 @@
 [submodule "lib/assets/sco"]
 	path = lib/assets/sco
 	url = git@github.com:terebentina/sco.js.git
+[submodule "lib/assets/jquery_pin"]
+	path = lib/assets/jquery_pin
+	url = git@github.com:webpop/jquery.pin.git

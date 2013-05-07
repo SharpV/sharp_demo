@@ -4,12 +4,10 @@ class PostsController < ApplicationController
 
   
   def index
-    if params[:grade_id]
-      @posts = Post.share.includes(:creator).where(grade_id: params[:grade_id]).page params[:page]
-    elsif params[:subject_id]
-      @posts = Post.share.includes(:creator).where(subject_id: params[:subject_id]).page params[:page]
+    if params[:column_id]
+      @posts = Post.share.includes(:creator, :column).where(column_id: params[:column_id]).page params[:page]
     else
-      @posts = Post.share.includes(:creator).order('comments_count').page params[:page]
+      @posts = Post.share.includes(:creator, :column).order('comments_count').page params[:page]
     end
     @top_users = Post.top_users
 

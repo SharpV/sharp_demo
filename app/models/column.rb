@@ -1,5 +1,13 @@
 class Column < ActiveRecord::Base
   # attr_accessible :title, :body
-  acts_as_list 
-  has_many :children, order: :position
+  default_scope  { order('position ASC') }
+
+  has_many :posts
+  has_many :media
+
+  class << self
+    def random
+      Column.offset(rand(Column.count)).first
+    end
+  end
 end

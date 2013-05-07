@@ -9,7 +9,7 @@ class Medium < ActiveRecord::Base
   
   scope :folder, where(mediumable_type: 'Folder')
 
-  scope :share, where("grade_id is not null")
+  scope :share, where("column_id is not null")
 
 
   include Rails.application.routes.url_helpers
@@ -18,9 +18,7 @@ class Medium < ActiveRecord::Base
 
   belongs_to :mediumable, :polymorphic => true
 
-  belongs_to :grade
-
-  belongs_to :subject
+  belongs_to :column, counter_cache: true
 
   mount_uploader :file, FileUploader
 

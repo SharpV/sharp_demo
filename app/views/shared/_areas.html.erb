@@ -1,4 +1,4 @@
-<ul id="areas_nav" class="mega-menu right">
+<ul id="areas_nav" class="mega-menu right"  data-spy="affix" data-offset-top="200">
   <%- Province.includes(:cities).all.each do |province| %>
     <li class='dc-mega-li'>
       <%= link_to [province, resource], class: 'dc-mega' do %>

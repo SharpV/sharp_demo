@@ -19,7 +19,7 @@ namespace :demo do
     def load_demo_posts
       puts "load demo posts......"
       index = "http://blog.ntjy.net/blogs"
-      (1..375).to_a.reverse.each do |page|
+      (1..175).to_a.reverse.each do |page|
         index_page = open_link(index + "?page=" + page.to_s)
         begin
           puts "load page #{page}"
@@ -36,7 +36,9 @@ namespace :demo do
 
             puts "create user #{user.name} #{user.avatar_url}"
 
-            user.remote_avatar_url ＝ "http://blog.ntjy.net#{photo}"
+            user.remote_avatar_url = "http://blog.ntjy.net#{photo}"
+
+            user.save
 
             category_name = post_page.css('#in_tablem div').first.content.split(' ')[1]
             puts "category is #{category_name}"
@@ -49,20 +51,14 @@ namespace :demo do
               title = post_page.css('#main #table #in_tablem h2 span').last.content
               content = post_page.css('.infobox').first.at('.tablecc').content
 
-              grade = Grade.random
-
-              subject = grade.random_subject
-
-              post = Post.new title: title, body: content, readings_count: rand(10000)
+              post = Post.new title: title, body: content, readings_count: rand(10000), created_at: rand(100000).hours.ago
               post.creator = user
               post.postable = category
 
-              post.grade = grade
-              post.subject = subject
-
-              post.save
-
-              puts "create post #{post.title}"
+              post.column = Column.random
+              if post.save
+                puts "create post #{post.title}"
+              end
 
             end
           end

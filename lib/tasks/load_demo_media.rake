@@ -44,21 +44,15 @@ namespace :demo do
 
             if download_link = post_page.at('#in_tablem .infobox .tablecc a')
               title = download_link.content
-              grade = Grade.random
 
-              subject = grade.random_subject
-
-              medium = Medium.new title: title, readings_count: rand(10000), remote_file_url: "http://blog.ntjy.net"+download_link[:href]
+              medium = Medium.new title: title, readings_count: rand(10000), created_at: rand(100000).hours.ago,
+              remote_file_url: "http://blog.ntjy.net"+download_link[:href], downloads_count: rand(100000)
               medium.creator = user
               medium.mediumable = user.folders.first
-
-              medium.grade = grade
-              medium.subject = subject
-
-              medium.save
-
-              puts "create medium #{medium.title} #{medium.file_url}"
-
+              medium.column = Column.random
+              if medium.save
+                puts "create medium #{medium.title} #{medium.file_url}"
+              end
             end
           end
         rescue Exception => e

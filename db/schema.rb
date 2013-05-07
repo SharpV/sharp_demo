@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130506114527) do
+ActiveRecord::Schema.define(:version => 20130507120553) do
 
   create_table "active_admin_comments", :force => true do |t|
     t.string   "resource_id",   :null => false
@@ -125,6 +125,14 @@ ActiveRecord::Schema.define(:version => 20130506114527) do
   end
 
   add_index "cities", ["province_id"], :name => "index_cities_on_province_id"
+
+  create_table "columns", :force => true do |t|
+    t.string   "name",        :limit => 30
+    t.datetime "created_at",                               :null => false
+    t.integer  "media_count",               :default => 0
+    t.integer  "posts_count",               :default => 0
+    t.integer  "position",                  :default => 0
+  end
 
   create_table "comments", :force => true do |t|
     t.string   "title",            :limit => 50, :default => ""
@@ -329,16 +337,14 @@ ActiveRecord::Schema.define(:version => 20130506114527) do
     t.string   "mediumable_type"
     t.integer  "likes_count",     :default => 0
     t.integer  "readings_count",  :default => 0
-    t.integer  "grade_id"
-    t.integer  "subject_id"
     t.string   "title"
     t.integer  "downloads_count", :default => 0
+    t.integer  "column_id"
   end
 
+  add_index "media", ["column_id"], :name => "index_media_on_column_id"
   add_index "media", ["creator_id"], :name => "index_medias_on_user_id"
-  add_index "media", ["grade_id"], :name => "index_media_on_grade_id"
   add_index "media", ["mediumable_type", "mediumable_id"], :name => "index_media_on_mediumable_type_and_mediumable_id"
-  add_index "media", ["subject_id"], :name => "index_media_on_subject_id"
 
   create_table "members", :force => true do |t|
     t.boolean  "admin",                    :default => false
@@ -391,15 +397,13 @@ ActiveRecord::Schema.define(:version => 20130506114527) do
     t.boolean  "is_public",                       :default => false
     t.integer  "creator_id",                                         :null => false
     t.boolean  "is_delete",                       :default => false
-    t.integer  "grade_id"
-    t.integer  "subject_id"
+    t.integer  "column_id"
   end
 
   add_index "posts", ["category_id"], :name => "index_posts_on_category_id"
-  add_index "posts", ["grade_id"], :name => "index_posts_on_grade_id"
+  add_index "posts", ["column_id"], :name => "index_posts_on_column_id"
   add_index "posts", ["kind"], :name => "index_posts_on_kind"
   add_index "posts", ["postable_type", "postable_id"], :name => "index_posts_on_postable_type_and_postable_id"
-  add_index "posts", ["subject_id"], :name => "index_posts_on_subject_id"
 
   create_table "profiles", :force => true do |t|
     t.integer  "user_id"

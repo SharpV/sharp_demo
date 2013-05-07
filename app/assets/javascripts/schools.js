@@ -2,9 +2,7 @@
 //= require jquery.hoverIntent.minified
 
 $(document).ready(function() {
-  $('#areas_nav').dcVerticalMegaMenu(
-  {
+  $('#areas_nav').dcVerticalMegaMenu({
     rowItems: '5'
-  }
-    );
+  });
 });

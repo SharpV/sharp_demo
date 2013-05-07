@@ -1,6 +1,6 @@
 
 <div class='span-l'>
-  <%= render partial: 'shared/subjects', locals: {resource: :media} %>
+  <%= render partial: 'shared/columns', locals: {resource: :media} %>
 </div>
  
 <div class='span-r'>
@@ -16,12 +16,7 @@
             <div class='content'>
               <h4><%= link_to medium.title, [:user, medium.creator, medium] %></h4>
               <p>
-                <%- if medium.grade %>
-                  <%= link_to medium.grade.name, [medium.grade, :media]%>
-                <% end %>
-                <%- if medium.subject %>
-                  <%= link_to medium.subject.name, [medium.subject, :media]%>
-                <% end %>
+                <%= link_to medium.column.name, [medium.column, :media], class: 'tag' %>
               </p>
               <p>
                 下载(<%= medium.downloads_count %>) 查看(<%= medium.readings_count %>)

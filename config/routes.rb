@@ -222,11 +222,13 @@ SharpLink::Application.routes.draw do
   end
 
   resources :subjects do
-    resources :posts
-    resources :media
     resources :questions
   end
-  resources :grades do
+  resources :grades  do
+    resources :questions
+  end
+  
+  resources :columns do
     resources :posts
     resources :media
     resources :questions

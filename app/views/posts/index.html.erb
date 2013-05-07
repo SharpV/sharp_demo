@@ -1,5 +1,5 @@
 <div class='span-l'>
-  <%= render partial: 'shared/subjects', locals: {resource: :posts}  %>
+  <%= render partial: 'shared/columns', locals: {resource: :posts}  %>
 </div>
  
 <div class='span-r'>
@@ -7,7 +7,7 @@
   <div class='row'>
     <div class='span-l'>
       <ul id='posts'>
-        <%= render partial: 'shared/posts/post', collection: @posts, locals: {truncate_size: 172} %>
+        <%= render partial: 'post', collection: @posts, locals: {truncate_size: 172} %>
       </ul>
       <%= paginate @posts %>
 
