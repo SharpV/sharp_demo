@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130507120553) do
+ActiveRecord::Schema.define(:version => 20130508134841) do
 
   create_table "active_admin_comments", :force => true do |t|
     t.string   "resource_id",   :null => false
@@ -108,13 +108,11 @@ ActiveRecord::Schema.define(:version => 20130507120553) do
 
   create_table "categories", :force => true do |t|
     t.string  "name"
-    t.string  "categoryable_type"
-    t.integer "categoryable_id"
-    t.integer "creator_id"
-    t.integer "posts_count",       :default => 0
+    t.integer "user_id"
+    t.integer "posts_count", :default => 0
   end
 
-  add_index "categories", ["categoryable_id", "categoryable_type"], :name => "index_categories_on_categoryable_id_and_categoryable_type"
+  add_index "categories", ["user_id"], :name => "index_categories_on_user_id"
 
   create_table "cities", :force => true do |t|
     t.integer  "province_id",                  :null => false
@@ -215,14 +213,13 @@ ActiveRecord::Schema.define(:version => 20130507120553) do
   create_table "folders", :force => true do |t|
     t.integer  "creator_id"
     t.string   "name"
-    t.integer  "folderable_id"
-    t.boolean  "is_public",       :default => false
-    t.string   "folderable_type"
-    t.integer  "media_count",     :default => 0
+    t.integer  "user_id"
+    t.boolean  "is_public",   :default => false
+    t.integer  "media_count", :default => 0
     t.datetime "created_at"
   end
 
-  add_index "folders", ["folderable_type", "folderable_id"], :name => "index_folders_on_folderable_type_and_folderable_id"
+  add_index "folders", ["user_id"], :name => "index_folders_on_user_id"
 
   create_table "followings", :force => true do |t|
     t.integer  "follower_id"
@@ -323,7 +320,7 @@ ActiveRecord::Schema.define(:version => 20130507120553) do
   add_index "lessons", ["slot_id"], :name => "index_lessons_on_slot_id"
 
   create_table "media", :force => true do |t|
-    t.integer  "creator_id"
+    t.integer  "user_id"
     t.string   "file_name"
     t.integer  "file_size"
     t.string   "content_type"
@@ -333,18 +330,20 @@ ActiveRecord::Schema.define(:version => 20130507120553) do
     t.datetime "updated_at",                         :null => false
     t.boolean  "is_public",       :default => false
     t.integer  "comments_count",  :default => 0
-    t.integer  "mediumable_id"
-    t.string   "mediumable_type"
+    t.integer  "group_id"
     t.integer  "likes_count",     :default => 0
     t.integer  "readings_count",  :default => 0
     t.string   "title"
     t.integer  "downloads_count", :default => 0
     t.integer  "column_id"
+    t.integer  "folder_id"
   end
 
   add_index "media", ["column_id"], :name => "index_media_on_column_id"
-  add_index "media", ["creator_id"], :name => "index_medias_on_user_id"
-  add_index "media", ["mediumable_type", "mediumable_id"], :name => "index_media_on_mediumable_type_and_mediumable_id"
+  add_index "media", ["folder_id"], :name => "index_media_on_folder_id"
+  add_index "media", ["group_id"], :name => "index_media_on_group_id"
+  add_index "media", ["user_id"], :name => "index_media_on_user_id"
+  add_index "media", ["user_id"], :name => "index_medias_on_user_id"
 
   create_table "members", :force => true do |t|
     t.boolean  "admin",                    :default => false
@@ -390,20 +389,19 @@ ActiveRecord::Schema.define(:version => 20130507120553) do
     t.integer  "comments_count",                  :default => 0
     t.integer  "likes_count",                     :default => 0
     t.integer  "collections_count",               :default => 0
-    t.integer  "postable_id"
-    t.string   "postable_type"
+    t.integer  "group_id"
     t.string   "slug"
     t.integer  "category_id"
     t.boolean  "is_public",                       :default => false
-    t.integer  "creator_id",                                         :null => false
+    t.integer  "user_id",                                            :null => false
     t.boolean  "is_delete",                       :default => false
     t.integer  "column_id"
   end
 
   add_index "posts", ["category_id"], :name => "index_posts_on_category_id"
   add_index "posts", ["column_id"], :name => "index_posts_on_column_id"
+  add_index "posts", ["group_id"], :name => "index_posts_on_group_id"
   add_index "posts", ["kind"], :name => "index_posts_on_kind"
-  add_index "posts", ["postable_type", "postable_id"], :name => "index_posts_on_postable_type_and_postable_id"
 
   create_table "profiles", :force => true do |t|
     t.integer  "user_id"
@@ -612,6 +610,10 @@ ActiveRecord::Schema.define(:version => 20130507120553) do
     t.integer  "zone_id"
     t.integer  "city_id"
     t.integer  "province_id"
+    t.integer  "posts_count",                           :default => 0
+    t.integer  "media_count",                           :default => 0
+    t.integer  "questions_count",                       :default => 0
+    t.integer  "answers_count",                         :default => 0
   end
 
   add_index "users", ["city_id"], :name => "index_users_on_city_id"

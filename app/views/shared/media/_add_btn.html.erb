@@ -1,13 +1,4 @@
-<div class="btn-group pull-right">
-  <a class="btn dropdown-toggle btn-success btn-small span" data-toggle="dropdown" href="#">
-    添加文件
-    <span class="caret"></span>
-  </a>
-  <ul class="dropdown-menu">
-    <%- @folders.each do |folder| %>
-      <li>
-        <%=link_to folder.name, [:new, @current_namespace, folder, :medium].flatten %>
-      </li>
-    <% end %>
-  </ul>
-</div>
+<%=link_to [:new, @current_namespace, :medium].flatten, class: 'btn btn-small btn-success pull-right' do %>
+  <i class="icon-plus icon-white"></i>
+  <span>添加文件</span>
+<% end %>

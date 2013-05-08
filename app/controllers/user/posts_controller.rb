@@ -1,4 +1,7 @@
 class User::PostsController < UserController
+
+  before_filter :check_owner, except: [:index, :show]
+
   set_tab :posts, :user_nav
   set_tab :index, :post_nav
 
@@ -10,6 +13,7 @@ class User::PostsController < UserController
   def show
     @categories = @current_user.categories
     @post = Post.find(params[:id])
+    @comments = @post.comments
   end
 
   def new
@@ -23,8 +27,7 @@ class User::PostsController < UserController
 
   def create
     @post = Post.new params[:post]
-    @post.creator = current_user
-    @post.postable = current_user
+    @post.user = current_user
     if @post.save
       redirect_to [:user, current_user, @post]
     else
@@ -51,10 +54,5 @@ class User::PostsController < UserController
   def destroy
     @post = Post.find(params[:id])
     @post.destroy
-
-    respond_to do |format|
-      format.html { redirect_to me_notes_url }
-      format.json { head :no_content }
-    end
   end
 end

@@ -5,9 +5,9 @@ class PostsController < ApplicationController
   
   def index
     if params[:column_id]
-      @posts = Post.share.includes(:creator, :column).where(column_id: params[:column_id]).page params[:page]
+      @posts = Post.share.includes(:user, :column).where(column_id: params[:column_id]).page params[:page]
     else
-      @posts = Post.share.includes(:creator, :column).order('comments_count').page params[:page]
+      @posts = Post.share.includes(:user, :column).order('comments_count').page params[:page]
     end
     @top_users = Post.top_users
 
@@ -19,7 +19,7 @@ class PostsController < ApplicationController
   end
 
   def latest
-    @posts = Post.share.includes(:creator).order('created_at desc').page params[:page]
+    @posts = Post.share.includes(:user, :column).order('created_at desc').page params[:page]
     @top_users = Post.top_users
 
     set_tab :latest, :posts_nav
@@ -31,7 +31,7 @@ class PostsController < ApplicationController
   end
   
   def hot
-    @posts = Post.share.includes(:creator).order('readings_count desc').page params[:page]
+    @posts = Post.share.includes(:user, :column).order('readings_count desc').page params[:page]
     @top_users = Post.top_users
 
     set_tab :hot, :posts_nav

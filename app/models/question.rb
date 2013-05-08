@@ -9,7 +9,7 @@ class Question < ActiveRecord::Base
 
   scope :share, where("grade_id is not null")
 
-  belongs_to :user
+  belongs_to :user, counter_cache: true
   has_many :answers
 
   belongs_to :grade

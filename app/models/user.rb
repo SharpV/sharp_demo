@@ -32,10 +32,10 @@ class User < ActiveRecord::Base
   has_many :bookmarks
   has_many :messages, as: :sender
   has_many :messages, as: :recipient
-  has_many :posts, as: :postable
-  has_many :media, :foreign_key => :creator_id
-  has_many :categories, as: :categoryable
-  has_many :folders, as: :folderable
+  has_many :posts
+  has_many :media
+  has_many :categories
+  has_many :folders
   has_many :comments
   # Setup accessible (or protected) attributes for your model
   attr_accessible :name, :email, :password, :password_confirmation, :login, :remember_me, :avatar, :nickname, :role

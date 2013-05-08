@@ -8,23 +8,7 @@
   <div class='row'>
     <div class='span-l'>
       <ul id='media' class='inline image-text-list clearfix'>
-        <%- @media.each do |medium| %>
-          <li class='hover'>
-            <div class='image'>
-              <%= link_to image_tag(medium.thumbnail_url), [:user, medium.creator, medium] %>
-            </div>
-            <div class='content'>
-              <h4><%= link_to medium.title, [:user, medium.creator, medium] %></h4>
-              <p>
-                <%= link_to medium.column.name, [medium.column, :media], class: 'tag' %>
-              </p>
-              <p>
-                下载(<%= medium.downloads_count %>) 查看(<%= medium.readings_count %>)
-              </p>
-              <p>上传日期(<%= format_datetime(medium.created_at) %>)</p>
-            </div>
-          </li>
-        <% end %>
+        <%= render partial: 'shared/media/medium', collection: @media %>
       </ul>
       <%= paginate @media %>
     </div>

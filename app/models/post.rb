@@ -7,19 +7,15 @@ class Post < ActiveRecord::Base
   acts_as_commentable
   acts_as_taggable
 
-  default_scope where("postable_id is not null and slug is not null and postable_type is not null")
-
   validates :title, :slug, :presence => true
 
   validates :body, :length => { :minimum => 5 }
 
   before_validation :generate_slug
 
-  belongs_to :creator, class_name: 'User', foreign_key: :creator_id
+  belongs_to :user, counter_cache: true
 
-  belongs_to :postable, :polymorphic => true
-
-  belongs_to :category, foreign_key: :category_id
+  belongs_to :category, counter_cache: true
 
   belongs_to :column, counter_cache: true
   

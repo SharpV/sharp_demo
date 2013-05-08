@@ -1,5 +1,5 @@
-ul#posts{
-  li .left{
+ul.post-list, ul.comment-list{
+  li .avatar{
       float:left;
       width: 60px;
       margin-right: 10px;

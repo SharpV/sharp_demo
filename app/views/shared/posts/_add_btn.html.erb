@@ -1,14 +1,4 @@
-<div class="btn-group pull-right">
-  <a class="btn dropdown-toggle btn-success btn-small" data-toggle="dropdown" href="#">
-    <i class="icon-plus icon-white"></i>
-    <span>添加文章</span>
-    <span class="caret"></span>
-  </a>
-  <ul class="dropdown-menu">
-    <%- categories.each do |category| %>
-      <li>
-        <%=link_to category.name, [:new, @current_namespace, category, :post].flatten %>
-      </li>
-    <% end %>
-  </ul>
-</div>
+<%=link_to [:new, @current_namespace, :post].flatten, class: 'btn btn-small btn-success pull-right' do %>
+  <i class="icon-plus icon-white"></i>
+  <span>添加文章</span>
+<% end %>

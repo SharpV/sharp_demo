@@ -1,15 +1,10 @@
 class Folder < ActiveRecord::Base
 
-  default_scope where("folderable_id is not null and name!='' and folderable_type is not null")
-
-
-  attr_accessible :name, :folderable
+  attr_accessible :name
 
   belongs_to :creator, class_name: 'User'
-
-  belongs_to :folderable, :polymorphic => true
   
-  has_many :media, as: :mediumable
+  has_many :media
 
   validates :name, :presence => true
       

@@ -4,20 +4,19 @@ class Medium < ActiveRecord::Base
   paginates_per 20
 
   default_scope  { order('created_at DESC') }
-
-  default_scope where("mediumable_id is not null and mediumable_type is not null")
   
-  scope :folder, where(mediumable_type: 'Folder')
+  scope :not_group, where('group_id is null')
+
+  scope :group, where('group_id is not null')
 
   scope :share, where("column_id is not null")
 
 
   include Rails.application.routes.url_helpers
   # attr_accessible :title, :body
-  belongs_to :creator, class_name: 'User', foreign_key: :creator_id
-
-  belongs_to :mediumable, :polymorphic => true
-
+  belongs_to :user, counter_cache: true
+  belongs_to :group, counter_cache: true
+  belongs_to :folder, counter_cache: true
   belongs_to :column, counter_cache: true
 
   mount_uploader :file, FileUploader
