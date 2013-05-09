@@ -23,14 +23,14 @@ class UsersController < ApplicationController
       redirect_to [:me, :users]
     else
       @current_user = User.find params[:id]
-      @webclasses = @current_user.groups.webclass
-      @groups = @current_user.groups.webgroup
       render layout: 'user'
     end
   end
 
   def me
     @current_user = current_user
+    @webclasses = @current_user.groups.webclass
+    @groups = @current_user.groups.webgroup
     if current_user.followings_count < 10
       @recommand_users = User.includes(:follows).where("id not in (?)", current_user.followings.map(&:actor_id)).limit(18)
     else

@@ -1,12 +1,13 @@
 class User::QuestionsController < UserController
 
-  before_filter :check_owner, only: [:new, :create, :update, :destroy, :edit]
+  before_filter :check_owner#, only: [:new, :create, :update, :destroy, :edit]
 
   set_tab :questions, :user_nav
 
   def index
-    @questions = current_user.questions.page params[:page]
-
+    @questions = current_user.questions.includes(:user).order('created_at desc').page params[:page]
+    @top_users = Question.top_users
+    set_tab :my, :questions_nav
   end
 
   def new

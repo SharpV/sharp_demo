@@ -9,10 +9,10 @@
       <div class="row">
         <div class='span-l'>
           <%= avatar_tag(@current_group, 'b') %>
+          <h4><%= @current_group.name %></h4>
           <%- if @current_group.is_class %>
             <p><%= @current_group.school_name %></p>
           <% end %>
-          <h4><%= @current_group.name %></h4>
           <p><%= @current_group.body %></p>
           <%= render 'groups/left' %>
         </div>

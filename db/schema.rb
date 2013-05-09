@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130508134841) do
+ActiveRecord::Schema.define(:version => 20130509091242) do
 
   create_table "active_admin_comments", :force => true do |t|
     t.string   "resource_id",   :null => false
@@ -29,14 +29,21 @@ ActiveRecord::Schema.define(:version => 20130508134841) do
   add_index "active_admin_comments", ["resource_type", "resource_id"], :name => "index_admin_notes_on_resource_type_and_resource_id"
 
   create_table "activities", :force => true do |t|
-    t.integer  "actor_id",   :null => false
-    t.string   "actor_type", :null => false
-    t.text     "content"
-    t.datetime "created_at", :null => false
-    t.datetime "updated_at", :null => false
+    t.integer  "actor_id",       :null => false
+    t.string   "actor_type",     :null => false
+    t.text     "title"
+    t.datetime "created_at",     :null => false
+    t.datetime "updated_at",     :null => false
+    t.integer  "creator_id",     :null => false
+    t.integer  "group_id"
+    t.integer  "trackable_id"
+    t.string   "trackable_type"
   end
 
   add_index "activities", ["actor_id", "actor_type"], :name => "index_activities_on_actor_id_and_actor_type"
+  add_index "activities", ["creator_id"], :name => "index_activities_on_creator_id"
+  add_index "activities", ["group_id"], :name => "index_activities_on_group_id"
+  add_index "activities", ["trackable_id", "trackable_type"], :name => "index_activities_on_trackable_id_and_trackable_type"
 
   create_table "admin_users", :force => true do |t|
     t.string   "email",                  :default => "", :null => false
@@ -57,18 +64,18 @@ ActiveRecord::Schema.define(:version => 20130508134841) do
   add_index "admin_users", ["reset_password_token"], :name => "index_admin_users_on_reset_password_token", :unique => true
 
   create_table "albums", :force => true do |t|
-    t.integer  "creator_id"
+    t.integer  "user_id"
     t.string   "name"
-    t.integer  "albumable_id"
-    t.boolean  "is_public",      :default => true
-    t.string   "albumable_type"
-    t.integer  "images_count",   :default => 0
+    t.integer  "group_id"
+    t.boolean  "is_public",    :default => true
+    t.integer  "images_count", :default => 0
     t.datetime "created_at"
     t.integer  "image_id"
   end
 
-  add_index "albums", ["albumable_type", "albumable_id"], :name => "index_albums_on_albumable_type_and_albumable_id"
-  add_index "albums", ["creator_id"], :name => "index_albums_on_creator_id"
+  add_index "albums", ["group_id"], :name => "index_albums_on_group_id"
+  add_index "albums", ["user_id"], :name => "index_albums_on_creator_id"
+  add_index "albums", ["user_id"], :name => "index_albums_on_user_id"
 
   create_table "answers", :force => true do |t|
     t.text     "body"
@@ -166,6 +173,8 @@ ActiveRecord::Schema.define(:version => 20130508134841) do
     t.datetime "created_at", :null => false
   end
 
+  add_index "consumes", ["user_id"], :name => "index_consumes_on_user_id"
+
   create_table "courses", :force => true do |t|
     t.integer  "creator_id",                       :null => false
     t.datetime "created_at",                       :null => false
@@ -257,6 +266,8 @@ ActiveRecord::Schema.define(:version => 20130508134841) do
     t.integer "depth"
   end
 
+  add_index "grades", ["parent_id"], :name => "index_grades_on_parent_id"
+
   create_table "groups", :force => true do |t|
     t.integer  "creator_id",                        :null => false
     t.integer  "members_count",  :default => 0
@@ -269,13 +280,14 @@ ActiveRecord::Schema.define(:version => 20130508134841) do
     t.boolean  "published",      :default => false
     t.integer  "readings_count", :default => 0
     t.integer  "media_count",    :default => 0
-    t.integer  "likes_count",    :default => 0
+    t.integer  "images_count",   :default => 0
     t.integer  "posts_count",    :default => 0
     t.integer  "sections_count", :default => 0
     t.integer  "adviser_id"
     t.integer  "year",           :default => 2013
     t.boolean  "is_class",       :default => false
     t.integer  "school_id"
+    t.integer  "albums_count",   :default => 0
   end
 
   create_table "guests", :force => true do |t|
@@ -290,21 +302,25 @@ ActiveRecord::Schema.define(:version => 20130508134841) do
   add_index "guests", ["user_id"], :name => "index_guests_on_user_id"
 
   create_table "images", :force => true do |t|
-    t.integer  "creator_id"
+    t.integer  "group_id"
     t.string   "file_name"
     t.integer  "file_size"
     t.string   "content_type"
     t.string   "file"
     t.boolean  "is_public",      :default => true
-    t.integer  "imageable_id"
-    t.string   "imageable_type"
+    t.integer  "user_id"
     t.integer  "likes_count",    :default => 0
     t.integer  "comments_count", :default => 0
     t.integer  "readings_count", :default => 0
     t.datetime "created_at",                       :null => false
     t.datetime "updated_at",                       :null => false
     t.string   "title"
+    t.integer  "album_id"
   end
+
+  add_index "images", ["album_id"], :name => "index_images_on_album_id"
+  add_index "images", ["group_id"], :name => "index_images_on_group_id"
+  add_index "images", ["user_id"], :name => "index_images_on_user_id"
 
   create_table "lessons", :force => true do |t|
     t.integer  "slot_id",         :null => false
@@ -375,7 +391,10 @@ ActiveRecord::Schema.define(:version => 20130508134841) do
   end
 
   add_index "messages", ["group_id"], :name => "index_messages_on_group_id"
+  add_index "messages", ["group_id"], :name => "index_messages_on_member_id"
   add_index "messages", ["parent_id"], :name => "index_messages_on_parent_id"
+  add_index "messages", ["recipient_id"], :name => "index_messages_on_recipient_id"
+  add_index "messages", ["sender_id"], :name => "index_messages_on_sender_id"
 
   create_table "posts", :force => true do |t|
     t.text     "body"
@@ -402,6 +421,7 @@ ActiveRecord::Schema.define(:version => 20130508134841) do
   add_index "posts", ["column_id"], :name => "index_posts_on_column_id"
   add_index "posts", ["group_id"], :name => "index_posts_on_group_id"
   add_index "posts", ["kind"], :name => "index_posts_on_kind"
+  add_index "posts", ["user_id"], :name => "index_posts_on_user_id"
 
   create_table "profiles", :force => true do |t|
     t.integer  "user_id"
@@ -460,11 +480,14 @@ ActiveRecord::Schema.define(:version => 20130508134841) do
   add_index "questions", ["user_id"], :name => "index_asks_on_user_id"
 
   create_table "readings", :force => true do |t|
-    t.integer  "readable_id",   :null => false
-    t.string   "readable_type", :null => false
+    t.integer  "readable_id",                                      :null => false
+    t.string   "readable_type",                                    :null => false
     t.integer  "user_id"
-    t.datetime "created_at",    :null => false
+    t.datetime "created_at",                                       :null => false
+    t.datetime "read_at",       :default => '2013-05-09 07:20:02'
   end
+
+  add_index "readings", ["readable_id", "readable_type"], :name => "index_readings_on_readable_id_and_readable_type"
 
   create_table "reports", :force => true do |t|
     t.integer  "course_id",  :null => false
@@ -547,6 +570,8 @@ ActiveRecord::Schema.define(:version => 20130508134841) do
     t.integer "questions_count", :default => 0
   end
 
+  add_index "subjects", ["grade_id"], :name => "index_subjects_on_grade_id"
+
   create_table "taggings", :force => true do |t|
     t.integer  "tag_id"
     t.integer  "taggable_id"
@@ -614,6 +639,8 @@ ActiveRecord::Schema.define(:version => 20130508134841) do
     t.integer  "media_count",                           :default => 0
     t.integer  "questions_count",                       :default => 0
     t.integer  "answers_count",                         :default => 0
+    t.integer  "albums_count",                          :default => 0
+    t.integer  "images_count",                          :default => 0
   end
 
   add_index "users", ["city_id"], :name => "index_users_on_city_id"

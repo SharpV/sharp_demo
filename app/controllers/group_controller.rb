@@ -17,13 +17,11 @@ class GroupController < ApplicationController
       set_tab "groups", :site_nav
     end
     @current_namespace = [:group, @current_group]
+    current_user.read(@current_group)
   rescue    
     @current_group = nil
     @current_group_member = nil
     redirect_to root_path
   end
 
-  unless @current_webclass_member 
-    #redirect_to @current_webclass
-  end
 end

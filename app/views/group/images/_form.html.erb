@@ -1,0 +1,8 @@
+<div class='content'>
+  <%= simple_form_for @image, url: [@current_namespace, :images].flatten, :html => { :multipart => true, :id => "fileupload"  } do |f| %>
+    <%= f.association :album, as: :select, collection: @albums, label: '相册', prompt: '请选择相册' %>    
+    <%= render 'shared/file_upload_buttons' %>
+  <% end %>
+</div>
+<%= render 'shared/file_upload_template' %>
+<%= render 'shared/file_download_template' %>

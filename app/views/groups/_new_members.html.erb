@@ -1,8 +1,11 @@
+<%- if @readings.size > 0 %>
+  <h4 class='border'>最近来访</h4>
+<% end %>
 <ul class='inline'>
-  <%- @new_members.each do |member| %>
+  <%- @readings.each do |reading| %>
     <li>
-      <%= link_to avatar_tag(member.user, 's'), member.user %>
-      <p><%= member.user.name %></p>
+      <%= link_to avatar_tag(reading.user, 's'), reading.user %>
+      <p><%= reading.user.name %></p>
     </li>
   <% end %>
 </ul>

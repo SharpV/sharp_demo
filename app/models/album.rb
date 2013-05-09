@@ -1,11 +1,10 @@
 class Album < ActiveRecord::Base
   # attr_accessible :title, :body
 
-  belongs_to :creator, class_name: 'User'
-
-  belongs_to :albumable, :polymorphic => true
+  belongs_to :user, counter_cache: true
+  belongs_to :group, counter_cache: true
   
-  has_many :images, as: :imageable
+  has_many :images
 
   belongs_to :image
 

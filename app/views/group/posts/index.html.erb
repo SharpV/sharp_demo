@@ -7,7 +7,7 @@
         <span>发表话题</span>
       <% end %>
     </h4>
-    <ul id='posts'>
+    <ul class='post-list'>
       <%= render partial: 'shared/posts/post', collection: @posts, locals: {truncate_size: 172} %>
     </ul>
   </div>

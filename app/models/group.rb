@@ -2,6 +2,8 @@
 
 class Group < ActiveRecord::Base
   # attr_accessible :title, :body
+  acts_as_actor
+
   mount_uploader :avatar, ImageUploader
 
   paginates_per 18
@@ -19,30 +21,32 @@ class Group < ActiveRecord::Base
   validates :body, :presence => true
   belongs_to :school, counter_cache: true
   has_many :messages
-  has_many :folders, as: :folderable  
-  has_many :categories, as: :categoryable
+  has_many :folders 
+  has_many :readings, as: :readable
   has_many :exams
   has_many :members
   has_many :users, through: :members
   has_many :courses
   has_many :assignments
-  has_many :posts, as: :postable
+  has_many :posts
   has_many :terms
-  has_many :media, as: :mediumable
+  has_many :media
   has_many :slots
-  has_many :albums, as: :albumable
+  has_many :albums
   belongs_to :creator, foreign_key: "creator_id", class_name: 'User'
   before_validation :set_webclass
 
-  after_create :create_admin, :create_default_category_and_folder, :current_term
+  after_create :create_admin, :current_term
 
   def current_term
-    if Date.current > Date.new(Time.now.year, 3, 1) and Date.current <= Date.new(Time.now.year, 8, 1)
-      find_or_create_current_term(Time.now.year, 0)
-    elsif Date.current > Date.new(Time.now.year, 8, 1) and Date.current <= Date.new(Time.now.year, 12, 31)
-      find_or_create_current_term(Time.now.year, 1)
-    else
-      find_or_create_current_term(Time.now.year-1, 1)
+    if is_class
+      if Date.current > Date.new(Time.now.year, 3, 1) and Date.current <= Date.new(Time.now.year, 8, 1)
+        find_or_create_current_term(Time.now.year, 0)
+      elsif Date.current > Date.new(Time.now.year, 8, 1) and Date.current <= Date.new(Time.now.year, 12, 31)
+        find_or_create_current_term(Time.now.year, 1)
+      else
+        find_or_create_current_term(Time.now.year-1, 1)
+      end
     end
   end
 
@@ -62,17 +66,18 @@ class Group < ActiveRecord::Base
     school ? school.name : ''
   end
 
+  def has_album? album_id
+    albums.map(&:id).include? album_id
+  end
+
+  def has_folder? folder_id
+    folders.map(&:id).include? folder_id
+  end
+
   private
 
   def find_or_create_current_term(year, part)
     terms.where(year:Time.now.year, part:0).first || Term.create(group: self, year: year, part: 0, creator: self.creator)
-  end
-
-
-  def create_default_category_and_folder
-    folder = self.folders.build name: '默认目录'
-    category = self.categories.build name: '默认分类'
-    folder.save and category.save
   end
 
   def create_admin

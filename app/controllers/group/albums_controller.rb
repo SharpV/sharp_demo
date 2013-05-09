@@ -33,8 +33,8 @@ class Group::AlbumsController < GroupController
 
   def create
     @album = Album.new params[:album]
-    @album.albumable = @current_group
-    @album.creator = current_user
+    @album.group = @current_group
+    @album.user = current_user
     if @album.save
       render 'shared/albums/create'
     end

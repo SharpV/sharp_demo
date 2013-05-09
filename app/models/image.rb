@@ -3,9 +3,11 @@ class Image < ActiveRecord::Base
   include Rails.application.routes.url_helpers
   mount_uploader :file, ImageUploader 
 
-  belongs_to :creator, class_name: 'User'
+  belongs_to :user
 
-  belongs_to :imageable, :polymorphic => true
+  belongs_to :group, counter_cache: true
+
+  belongs_to :album, counter_cache: true
 
   before_save :update_file_attributes
 

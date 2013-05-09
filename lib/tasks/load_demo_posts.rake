@@ -44,16 +44,15 @@ namespace :demo do
             puts "category is #{category_name}"
 
             category = Category.new name: category_name
-            category.categoryable = user
-            category.creator = user
+            category.user = user
 
             if category.save
               title = post_page.css('#main #table #in_tablem h2 span').last.content
               content = post_page.css('.infobox').first.at('.tablecc').content
 
               post = Post.new title: title, body: content, readings_count: rand(10000), created_at: rand(100000).hours.ago
-              post.creator = user
-              post.postable = category
+              post.user = user
+              post.category = category
 
               post.column = Column.random
               if post.save

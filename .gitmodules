@@ -1,12 +1,9 @@
-[submodule "app/assets/javascripts/bootstrap-multiselect"]
-	path = app/assets/javascripts/bootstrap-multiselect
+[submodule "lib/assets/bootstrap-multiselect"]
+	path = lib/assets/bootstrap-multiselect
 	url = git@github.com:davidstutz/bootstrap-multiselect.git
-[submodule "app/assets/javascripts/jquery.autosize"]
-	path = app/assets/javascripts/jquery.autosize
+[submodule "lib/assets/jquery.autosize"]
+	path = lib/assets/jquery.autosize
 	url = git@github.com:melvynhills/jquery.autosize.git
-[submodule "lib/assets/file_uploader"]
-	path = lib/assets/file_uploader
-	url = git@github.com:valums/file-uploader.git
 [submodule "lib/assets/tag-it"]
 	path = lib/assets/tag-it
 	url = git@github.com:aehlke/tag-it.git
@@ -19,9 +16,6 @@
 [submodule "lib/sharp_social"]
 	path = lib/sharp_social
 	url = git@github.com:SharpV/sharp_social.git
-[submodule "lib/mutil_select"]
-	path = lib/mutil_select
-	url = git@github.com:lou/multi-select.git
 [submodule "lib/assets/mutil_select"]
 	path = lib/assets/mutil_select
 	url = git@github.com:lou/multi-select.git

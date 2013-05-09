@@ -85,7 +85,6 @@ gem 'settingslogic'
 gem 'ruby_parser'
 gem 'hpricot'
 gem 'sharp_social', :path => './lib/sharp_social'
-gem 'sharp_zones', :path => './lib/sharp_zones'
 
 group :test, :development do
   gem "rspec-rails", "~> 2.12.0"

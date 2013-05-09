@@ -13,11 +13,17 @@ class Post < ActiveRecord::Base
 
   before_validation :generate_slug
 
+  after_create :create_activity
+
   belongs_to :user, counter_cache: true
+
+  belongs_to :group
 
   belongs_to :category, counter_cache: true
 
   belongs_to :column, counter_cache: true
+
+  has_many :activities, as: :trackable
   
 
   def to_param
@@ -28,8 +34,13 @@ class Post < ActiveRecord::Base
     self.slug = Hz2py.do(self.title, :join_with => '-', :to_simplified => true).gsub(/\W/, "-").gsub(/(-){2,}/, '-').to_s
   end
 
-  def belongs? actor
-    postable_id == actor.id && postable_type == actor.class.to_s.classify
+  def create_activity
+    if group_id and user_id
+      Activity.create title: "创建了话题 #{title}", creator_id: user_id, group_id: group_id, 
+      trackable_type: self.class.name, trackable_id: self.id
+    elsif user_id
+      Activity.create title: "创建了话题 #{title}", creator_id: user_id, trackable_type: self.class.name, trackable_id: self.id
+    end
   end
 
   class << self

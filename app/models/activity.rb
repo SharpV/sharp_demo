@@ -1,2 +1,6 @@
-class Activity < SharpSocial::Models::Activity
+class Activity < ActiveRecord::Base
+
+  belongs_to :trackable
+  belongs_to :creator, foreign_key: "creator_id", class_name: 'User'
+
 end

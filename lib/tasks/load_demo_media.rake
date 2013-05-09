@@ -45,10 +45,10 @@ namespace :demo do
             if download_link = post_page.at('#in_tablem .infobox .tablecc a')
               title = download_link.content
 
-              medium = Medium.new title: title, readings_count: rand(10000), created_at: rand(100000).hours.ago,
+              medium = Medium.new title: title, readings_count: rand(100000), created_at: rand(100000).hours.ago,
               remote_file_url: "http://blog.ntjy.net"+download_link[:href], downloads_count: rand(100000)
-              medium.creator = user
-              medium.mediumable = user.folders.first
+              medium.user = user
+              medium.folder = user.folders.first
               medium.column = Column.random
               if medium.save
                 puts "create medium #{medium.title} #{medium.file_url}"

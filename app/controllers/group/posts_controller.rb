@@ -6,7 +6,7 @@ class Group::PostsController < GroupController
     if params[:tag]
       @posts = Post.tagged_with(params[:tag], :on => :tags, :owned_by => @current_group).page params[:page]
     else
-      @posts = @current_group.posts.includes(:creator).page params[:page]
+      @posts = @current_group.posts.includes(:user).page params[:page]
     end
   end
 
@@ -25,7 +25,7 @@ class Group::PostsController < GroupController
 
   def update
     @post = Post.find params[:id]
-    if @post.creator_id == current_user.id and @post.update_attributes params[:post] 
+    if @post.user_id == current_user.id and @post.update_attributes params[:post] 
       if @post.tag_list.size > 0
         @current_group.tag_list.add(@post.tag_list) 
         @current_group.save
@@ -39,8 +39,8 @@ class Group::PostsController < GroupController
   def create
     tag_list = params[:post].delete(:tag_list)
     @post = Post.new params[:post]
-    @post.creator = current_user
-    @post.postable = @current_group
+    @post.group = @current_group
+    @post.user = current_user
     if @post.save
       if tag_list
         @current_group.tag(@post, :with => tag_list, on: :tags) 
@@ -54,10 +54,10 @@ class Group::PostsController < GroupController
 
   def destroy
     @post = Post.find params[:id]
-    if @post.creator_id == current_user.id and @post.destroy
-      redirect_to [:webclass, @current_group, :posts]
+    if @post.user_id == current_user.id and @post.destroy
+      redirect_to [@current_namespace, :posts].flatten
     else
-      redirect_to [:webclass, @current_group, @post]
+      redirect_to [@current_namespace, @post].flatten
     end
   end
 end

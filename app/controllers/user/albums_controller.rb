@@ -25,8 +25,7 @@ class User::AlbumsController < UserController
 
   def create
     @album = Album.new params[:album]
-    @album.albumable = current_user
-    @album.creator = current_user
+    @album.user = current_user
     if @album.save
       render 'shared/albums/create'
     end

@@ -21,15 +21,16 @@ class User < ActiveRecord::Base
   # Setup accessible (or protected) attributes for your model
   attr_accessible :email, :password, :password_confirmation, :remember_me, :description, :nickname
   
-  has_many :connects, dependent: :destroy
-  has_many :albums, as: :albumable
+  has_many :activities, as: :creator
+  has_many :readings
+  has_many :albums
   has_many :questions
   has_many :answers
   has_many :members
   has_many :groups, through: :members
   has_many :exams, as: :creator
   has_many :courses, through: :courses_members
-  has_many :bookmarks
+  has_many :images
   has_many :messages, as: :sender
   has_many :messages, as: :recipient
   has_many :posts
@@ -77,14 +78,17 @@ class User < ActiveRecord::Base
     Member.where(group_id: group.id, user_id: self.id).first
   end
   
-  def flow
-    #tag_ids = subscriptions.select(:tag_id).to_sql
-    user_ids = friends.select(:followed_user_id).to_sql
-    conditions = []
-    conditions << "posts.user_id = #{id}"
-    #conditions << "taggings.tag_id in (#{tag_ids}) and posts.is_private = 'f'"
-    conditions << "posts.user_id in (#{user_ids}) and posts.is_private = 'f'"
-    Post.joins(:comments).where(conditions.join(' or ')).uniq
+  def read(record)
+    reading = Reading.where(user_id: id, readable_id: record.id, readable_type: record.class.name).first 
+    if reading and reading.created_at < 1.hours.ago
+      record.update_attributes(readings_count: record.readings_count+1)
+      reading.update_attributes(read_at: Time.now, created_at: Time.now)
+    elsif reading
+      reading.update_attributes read_at: Time.now
+    else
+      record.update_attributes(readings_count: record.readings_count+1)
+      Reading.create(user_id: id, readable_id: record.id, readable_type: record.class.name, read_at: Time.now) 
+    end
   end
     
   def to_param

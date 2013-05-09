@@ -4,7 +4,7 @@ class Group::MediaController < GroupController
 
   def index
     @folders = @current_group.folders
-    @media = Medium.where(mediumable_type: Folder.to_s, mediumable_id: @folders.map(&:id)).page params[:page]
+    @media = Medium.where(folder_id: @folders.map(&:id)).page params[:page]
   end
 
   def new

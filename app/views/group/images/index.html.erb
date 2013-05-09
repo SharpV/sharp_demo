@@ -8,8 +8,12 @@
   </div>
   <div class='span-r pull-right'>
     <%- if @current_group_member.admin? %>
-      <%= link_to "相册管理", [@current_namespace, :albums].flatten, class: 'btn btn-info btn-small' %>
+    <div  class='clearfix'>
+      <%= link_to "相册管理", [@current_namespace, :albums].flatten, class: 'btn btn-info btn-small pull-right clearfix' %>
+    </div>
     <% end %>
-    <%= render partial: 'shared/albums/list' %>
+    <div  class='clearfix'>
+      <%= render partial: 'shared/albums/list' %>
+    </div>
   </div>
 </div>

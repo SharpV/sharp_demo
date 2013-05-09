@@ -36,6 +36,7 @@ class GroupsController < ApplicationController
     @current_group = Group.find params[:id]
     @apply_members = @current_group.members.apply
     if current_user
+      current_user.read(@current_group)
       @current_group_member = current_user.member(@current_group)
     else
       @current_group__member = nil
@@ -46,8 +47,7 @@ class GroupsController < ApplicationController
     else
       set_tab "groups", :site_nav
     end
-    @new_members = @current_group.members.order('created_at desc')
-    #@sections = @current_group.current_term.sections.order(:start_at)
+    @readings = @current_group.readings.includes(:user).order('read_at desc').limit(10)
 
     render layout: 'group'
   end
