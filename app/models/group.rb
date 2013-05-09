@@ -1,4 +1,4 @@
- # encoding: utf-8
+ #encoding: utf-8
 
 class Group < ActiveRecord::Base
   # attr_accessible :title, :body
@@ -99,11 +99,11 @@ class Group < ActiveRecord::Base
     end
 
     def hot_topics
-      Post.where(postable_type: Group.to_s).order('comments_count desc').limit(10)
+      Post.with_group.order('comments_count desc').limit(10)
     end
 
     def hot_media
-      Medium.where(mediumable_type: Group.to_s).order('downloads_count desc').limit(10)
+      Medium.with_group.order('downloads_count desc').limit(10)
     end
 
     def hot_webclasses

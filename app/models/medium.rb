@@ -1,19 +1,22 @@
+#encoding: utf-8
 
 class Medium < ActiveRecord::Base
 
-  paginates_per 20
+  paginates_per 24
 
   default_scope  { order('created_at DESC') }
   
-  scope :not_group, where('group_id is null')
+  scope :without_group, where('group_id is null')
 
-  scope :group, where('group_id is not null')
+  scope :with_group, where('group_id is not null')
+
 
   scope :share, where("column_id is not null")
 
 
   include Rails.application.routes.url_helpers
   # attr_accessible :title, :body
+  
   belongs_to :user, counter_cache: true
   belongs_to :group, counter_cache: true
   belongs_to :folder, counter_cache: true
@@ -65,8 +68,16 @@ class Medium < ActiveRecord::Base
   end
 
   class << self
-    def top_users 
-      @users = User.order("media_value").limit(10)
+    def top_users_by_week
+      User.order("posts_value").limit(10)
+    end
+
+    def top_users_by_month
+      User.order("posts_value").limit(10)
+    end
+
+    def top_users_by_year
+      User.order("posts_value").limit(10)
     end
   end
 end

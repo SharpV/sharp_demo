@@ -1,3 +1,5 @@
+#encoding: utf-8
+
 class Course < ActiveRecord::Base
 
   default_scope where("group_id is not null and term_id is not null")

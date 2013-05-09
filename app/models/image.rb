@@ -1,3 +1,5 @@
+#encoding: utf-8
+
 class Image < ActiveRecord::Base
 
   include Rails.application.routes.url_helpers

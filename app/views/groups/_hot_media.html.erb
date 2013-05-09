@@ -2,8 +2,10 @@
 <ul>
   <%- @hot_media.each do |medium| %>
     <li class='dashed'>
-      <span class="badge badge-success"><%= medium.downloads_count %></span>
-      <%= link_to medium.title, [:group, medium.mediumable, medium] %>
+      <span class="badge badge-success">
+        <%= medium.downloads_count %>
+      </span>
+      <%= link_to medium.title, [:group, medium.group, medium] if medium.group %>
     </li>
   <% end %>
 </ul>

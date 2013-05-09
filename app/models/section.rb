@@ -1,3 +1,5 @@
+#encoding: utf-8
+
 class Section < ActiveRecord::Base
   attr_accessible :title, :start_at, :end_at
   default_scope where("group_id is not null and term_id is not null")

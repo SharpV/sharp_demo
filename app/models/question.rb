@@ -1,3 +1,5 @@
+#encoding: utf-8
+
 class Question < ActiveRecord::Base
 
   paginates_per 20

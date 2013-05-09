@@ -1,3 +1,5 @@
+#encoding: utf-8
+
 class Exam < ActiveRecord::Base
   # attr_accessible :title, :body
   belongs_to :webclass

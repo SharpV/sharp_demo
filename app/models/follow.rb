@@ -1,3 +1,5 @@
+#encoding: utf-8
+
 class Follow < SharpSocial::Models::Follow
 
   belongs_to :actor, polymorphic: true

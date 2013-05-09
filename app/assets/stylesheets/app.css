@@ -20,6 +20,10 @@ body{
     padding-top: 50px; 
 }
 
+table td{
+    padding: 5px;
+}
+
 #site_nav{
     margin-left: 20px;
 }
@@ -191,6 +195,15 @@ ul.inline > li, ol.inline > li {
 
 .feature h3{
     color: #00B9CA;
+}
+
+#clients_download img{
+    width: 100px;
+    height: 40px;
+}
+
+#clients_download td{
+    padding: 10px 5px; 
 }
 
 .footer{

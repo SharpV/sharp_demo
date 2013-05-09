@@ -1,3 +1,5 @@
+#encoding: utf-8
+
 class Following < ActiveRecord::Base
   attr_accessible :followed_user_id
   

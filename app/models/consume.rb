@@ -1,4 +1,5 @@
 #encoding: utf-8
+
 class Consume < ActiveRecord::Base
   belongs_to :user
 

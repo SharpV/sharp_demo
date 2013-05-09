@@ -1,3 +1,5 @@
+#encoding: utf-8
+
 # Convenience class for managing like activities
 class Like
   attr_reader :object

@@ -1,3 +1,5 @@
+#encoding: utf-8
+
 class Message < ActiveRecord::Base
   attr_accessible :send_to_parent, :recipient_id, :title, :body, :read, :parent_id
 

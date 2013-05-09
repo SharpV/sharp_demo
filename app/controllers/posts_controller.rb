@@ -9,8 +9,6 @@ class PostsController < ApplicationController
     else
       @posts = Post.share.includes(:user, :column).order('comments_count').page params[:page]
     end
-    @top_users = Post.top_users
-
     set_tab :index, :posts_nav
   end
   
@@ -20,8 +18,6 @@ class PostsController < ApplicationController
 
   def latest
     @posts = Post.share.includes(:user, :column).order('created_at desc').page params[:page]
-    @top_users = Post.top_users
-
     set_tab :latest, :posts_nav
     render template: 'posts/index'
   end
@@ -32,19 +28,15 @@ class PostsController < ApplicationController
   
   def hot
     @posts = Post.share.includes(:user, :column).order('readings_count desc').page params[:page]
-    @top_users = Post.top_users
-
     set_tab :hot, :posts_nav
     render template: 'posts/index'
   end
 
   def top
-    @post = Post.find(params[:id])
-    if @post.update_attributes(params[:post])
-      redirect_to group_post_path(@current_group, @post) 
-    else
-      render :action => :edit
-    end
+    @top_users = User.order('posts_value desc').page(params[:page]).per(28) 
+    
+    set_tab :top, :posts_nav
+
   end
 
 end

@@ -1,8 +1,14 @@
+#encoding: utf-8
+
 class Post < ActiveRecord::Base
 
-  paginates_per 20
+  paginates_per 10
 
   scope :share, where("column_id is not null")
+
+  scope :without_group, where('group_id is null')
+
+  scope :with_group, where('group_id is not null')
 
   acts_as_commentable
   acts_as_taggable
@@ -44,8 +50,16 @@ class Post < ActiveRecord::Base
   end
 
   class << self
-    def top_users 
-      @users = User.order("posts_value").limit(10)
+    def top_users_by_week
+      User.order("posts_value").limit(10)
+    end
+
+    def top_users_by_month
+      User.order("posts_value").limit(10)
+    end
+
+    def top_users_by_year
+      User.order("posts_value").limit(10)
     end
   end
 

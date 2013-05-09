@@ -1,6 +1,7 @@
-<h4 class='border'>月度资源专家</h4>
+<h4 class='border'>本周资源专家</h4>
+
 <ul id='top_users'>
-  <%- @top_users.each do |user| %>
+  <%- Medium.top_users_by_week.each do |user| %>
     <li>
       <div class='avatar'>
         <%= link_to user_avatar_tag(user, 's'), user %>
@@ -9,7 +10,42 @@
       <div class='content'>
         <%= link_to user.name, user %>
         <p>
-          <%= user.media_value %>
+          <%= user.posts_value %>
+        </p>
+      </div>
+    </li>
+  <% end %>
+</ul>
+<h4 class='border'>月度资源专家</h4>
+<ul id='top_users'>
+  <%- Medium.top_users_by_month.each do |user| %>
+    <li>
+      <div class='avatar'>
+        <%= link_to user_avatar_tag(user, 's'), user %>
+      </div>
+
+      <div class='content'>
+        <%= link_to user.name, user %>
+        <p>
+          <%= user.posts_value %>
+        </p>
+      </div>
+    </li>
+  <% end %>
+</ul>
+
+<h4 class='border'>年度资源专家</h4>
+<ul id='top_users'>
+  <%- Medium.top_users_by_year.each do |user| %>
+    <li>
+      <div class='avatar'>
+        <%= link_to user_avatar_tag(user, 's'), user %>
+      </div>
+
+      <div class='content'>
+        <%= link_to user.name, user %>
+        <p>
+          <%= user.posts_value %>
         </p>
       </div>
     </li>

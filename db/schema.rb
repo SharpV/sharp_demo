@@ -173,8 +173,6 @@ ActiveRecord::Schema.define(:version => 20130509091242) do
     t.datetime "created_at", :null => false
   end
 
-  add_index "consumes", ["user_id"], :name => "index_consumes_on_user_id"
-
   create_table "courses", :force => true do |t|
     t.integer  "creator_id",                       :null => false
     t.datetime "created_at",                       :null => false
@@ -265,8 +263,6 @@ ActiveRecord::Schema.define(:version => 20130509091242) do
     t.integer "rgt"
     t.integer "depth"
   end
-
-  add_index "grades", ["parent_id"], :name => "index_grades_on_parent_id"
 
   create_table "groups", :force => true do |t|
     t.integer  "creator_id",                        :null => false
@@ -391,10 +387,7 @@ ActiveRecord::Schema.define(:version => 20130509091242) do
   end
 
   add_index "messages", ["group_id"], :name => "index_messages_on_group_id"
-  add_index "messages", ["group_id"], :name => "index_messages_on_member_id"
   add_index "messages", ["parent_id"], :name => "index_messages_on_parent_id"
-  add_index "messages", ["recipient_id"], :name => "index_messages_on_recipient_id"
-  add_index "messages", ["sender_id"], :name => "index_messages_on_sender_id"
 
   create_table "posts", :force => true do |t|
     t.text     "body"
@@ -421,7 +414,6 @@ ActiveRecord::Schema.define(:version => 20130509091242) do
   add_index "posts", ["column_id"], :name => "index_posts_on_column_id"
   add_index "posts", ["group_id"], :name => "index_posts_on_group_id"
   add_index "posts", ["kind"], :name => "index_posts_on_kind"
-  add_index "posts", ["user_id"], :name => "index_posts_on_user_id"
 
   create_table "profiles", :force => true do |t|
     t.integer  "user_id"
@@ -484,10 +476,8 @@ ActiveRecord::Schema.define(:version => 20130509091242) do
     t.string   "readable_type",                                    :null => false
     t.integer  "user_id"
     t.datetime "created_at",                                       :null => false
-    t.datetime "read_at",       :default => '2013-05-09 07:20:02'
+    t.datetime "read_at",       :default => '2013-05-09 10:55:38'
   end
-
-  add_index "readings", ["readable_id", "readable_type"], :name => "index_readings_on_readable_id_and_readable_type"
 
   create_table "reports", :force => true do |t|
     t.integer  "course_id",  :null => false
@@ -569,8 +559,6 @@ ActiveRecord::Schema.define(:version => 20130509091242) do
     t.integer "media_count",     :default => 0
     t.integer "questions_count", :default => 0
   end
-
-  add_index "subjects", ["grade_id"], :name => "index_subjects_on_grade_id"
 
   create_table "taggings", :force => true do |t|
     t.integer  "tag_id"

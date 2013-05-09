@@ -1,3 +1,5 @@
+#encoding: utf-8
+
 class Grade < ActiveRecord::Base
   default_scope order("parent_id, position")
 

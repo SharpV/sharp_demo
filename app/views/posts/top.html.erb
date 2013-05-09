@@ -1,0 +1,17 @@
+<div class='span-l'>
+  <%= render partial: 'shared/columns', locals: {resource: :posts}  %>
+</div>
+ 
+<div class='span-r'>
+  <%= render 'nav' %>
+  <div class='row'>
+    <br />
+    <div class='span'>
+      <ul id='users' class='inline'>
+        <%= render partial: 'users/follow', collection: @top_users, as: :user %>
+      </ul>
+      <%= paginate @top_users %>
+    </div>
+  </div>
+</div>
+

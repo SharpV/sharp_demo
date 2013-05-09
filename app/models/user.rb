@@ -7,6 +7,8 @@ require 'open-uri'
 
 class User < ActiveRecord::Base
 
+  paginates_per 20
+  
   include Role
   
   acts_as_actor

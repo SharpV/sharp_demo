@@ -1,3 +1,5 @@
+#encoding: utf-8
+
 class Slot < ActiveRecord::Base
   attr_accessible :name, :section_id, :week, :term_id, :course_id
   validates :name, :course_id, :section_id, :presence => true

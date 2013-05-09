@@ -5,7 +5,37 @@
 <div class='span-r pull-right'>
 	<div class='login-form'>
 		<%= render "form" %>
-	</div>
+    <%= render 'social_connect' %>
+  </div>
+  <h4 class='border'>
+    班级通客户端下载
+    <span>(敬请期待...)</span>
+  </h4>
+  <table id='clients_download'>
+    <tr>
+      <td>
+        <%= link_to image_tag('client_ios.png'), "#" %>
+      </td>
+      <td>
+        支持iOS 5.0及以上操作系统
+      </td>
+    </tr>
+    <tr>
+      <td>
+        <%= link_to image_tag('client_android.png'), "#" %>
+      </td>
+      <td>
+        支持安卓 2.3及以上操作系统
+      </td>
+    <tr>
+      <td>
+        <%= link_to image_tag('client_windows.png'), "#" %>
+      </td>
+      <td>
+        支持XP/Win7/Win8
+      </td>
+    </tr>
+  </table>
 </div>
 
 <div clsss='clearfix'></div>

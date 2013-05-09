@@ -1,3 +1,5 @@
+#encoding: utf-8
+
 class Folder < ActiveRecord::Base
 
   attr_accessible :name

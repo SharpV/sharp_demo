@@ -1,3 +1,5 @@
+#encoding: utf-8
+
 class Answer < ActiveRecord::Base
   make_voteable
 
