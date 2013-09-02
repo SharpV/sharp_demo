@@ -6,8 +6,6 @@ class Category < ActiveRecord::Base
   
   validates :name, :presence => true
 
-  belongs_to :user
-
-  has_many :posts
+  acts_as_nested_set
 
 end
