@@ -35,12 +35,12 @@ namespace :demo do
               third_category_page.css('.catItem').each do |product_box|
                 product_link = product_box.at('a.catImg')
                 product_page = open_link(index + product_link['href'])
-                product = Product.where(name: product_page.at('#prodName').content).first_or_create(description: product_page.at('#prodDesc').content
+                product = Product.where(name: product_page.at('#prodName').content).first_or_create(description: product_page.at('#prodDesc').content)
               end
             end
           end
-        #rescue Exception => e
-          #puts "----- #{e.inspect}"
+        rescue Exception => e
+          puts "----- #{e.inspect}"
         end
       end
     end

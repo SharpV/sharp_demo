@@ -1,14 +1,5 @@
 <%= tabs_tag(:namespace => :site_nav, :open_tabs => {:id => "site_nav", :class => "nav" }, :builder => MenuTabBuilder) do |tab| %>
-  <%= tab.index user_signed_in? ? '我的空间' : '首页', root_path %>
-  <%= tab.posts '文章', posts_path %>
-  <%= tab.media '资源', media_path %>
-  <%= tab.questions '问答', questions_path %>
-  <%= tab.groups '群组', groups_path %>
-  <%= tab.webclasses '班级', webclasses_path %>
-  <%= tab.schools '学校', schools_path %>
+  <%= tab.index 'products', root_path %>
 <% end %>
 
-<form class="navbar-search pull-left">
-  <input type="text" class="search-query" placeholder="输入您感兴趣的关键字">
-</form>
 

@@ -1,9 +1,0 @@
-<h4 class='border'>热点学校<h4>
-<ul>
-  <%- @hot_schools.each do |school| %>
-    <li>
-      <%= link_to avatar_tag(school), school %>
-      <p><%= link_to school.name, school %></p>
-    </li>
-  <% end %>
-</ul>

@@ -1,9 +1,0 @@
-<h4 class='border'>我的班级<h4>
-<ul>
-  <%- current_user.groups.webclass.each do |group| %>
-    <li>
-      <%= link_to avatar_tag(group), group %>
-      <p><%= link_to group.name, group %></p>
-    </li>
-  <% end %>
-</ul>

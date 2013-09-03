@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130902081228) do
+ActiveRecord::Schema.define(:version => 20130903014924) do
 
   create_table "active_admin_comments", :force => true do |t|
     t.string   "resource_id",   :null => false
@@ -412,39 +412,26 @@ ActiveRecord::Schema.define(:version => 20130902081228) do
   add_index "messages", ["recipient_id"], :name => "index_messages_on_recipient_id"
   add_index "messages", ["sender_id"], :name => "index_messages_on_sender_id"
 
-  create_table "posts", :force => true do |t|
-    t.text     "body"
-    t.string   "kind",              :limit => 10
-    t.string   "title"
-    t.string   "url"
-    t.datetime "created_at"
-    t.datetime "updated_at"
-    t.datetime "edited_at"
-    t.integer  "readings_count",                  :default => 0
-    t.integer  "comments_count",                  :default => 0
-    t.integer  "likes_count",                     :default => 0
-    t.integer  "collections_count",               :default => 0
-    t.integer  "group_id"
-    t.string   "slug"
-    t.integer  "category_id"
-    t.boolean  "is_public",                       :default => false
-    t.integer  "user_id",                                            :null => false
-    t.boolean  "is_delete",                       :default => false
-    t.integer  "skill_id"
+  create_table "product_images", :force => true do |t|
+    t.string   "file"
+    t.integer  "product_id"
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
   end
 
-  add_index "posts", ["category_id"], :name => "index_posts_on_category_id"
-  add_index "posts", ["group_id"], :name => "index_posts_on_group_id"
-  add_index "posts", ["kind"], :name => "index_posts_on_kind"
-  add_index "posts", ["skill_id"], :name => "index_posts_on_column_id"
-  add_index "posts", ["user_id"], :name => "index_posts_on_user_id"
+  add_index "product_images", ["product_id"], :name => "index_product_images_on_product_id"
 
   create_table "products", :force => true do |t|
     t.string   "name"
     t.text     "description"
     t.integer  "category_id"
-    t.datetime "created_at",  :null => false
-    t.datetime "updated_at",  :null => false
+    t.datetime "created_at",                                                      :null => false
+    t.datetime "updated_at",                                                      :null => false
+    t.text     "recommended_items"
+    t.text     "related_items"
+    t.text     "coordinating_items"
+    t.decimal  "price",              :precision => 8, :scale => 2
+    t.integer  "reviews_count",                                    :default => 0
   end
 
   add_index "products", ["category_id"], :name => "index_products_on_category_id"
@@ -530,6 +517,33 @@ ActiveRecord::Schema.define(:version => 20130902081228) do
   add_index "reports", ["group_id"], :name => "index_reports_on_group_id"
   add_index "reports", ["group_id"], :name => "index_reports_on_webclass_id"
   add_index "reports", ["term_id"], :name => "index_reports_on_term_id"
+
+  create_table "reviews", :force => true do |t|
+    t.text     "body"
+    t.string   "kind",              :limit => 10
+    t.string   "title"
+    t.string   "url"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+    t.datetime "edited_at"
+    t.integer  "readings_count",                  :default => 0
+    t.integer  "comments_count",                  :default => 0
+    t.integer  "likes_count",                     :default => 0
+    t.integer  "collections_count",               :default => 0
+    t.integer  "product_id"
+    t.string   "slug"
+    t.integer  "category_id"
+    t.boolean  "is_public",                       :default => false
+    t.integer  "user_id",                                            :null => false
+    t.boolean  "is_delete",                       :default => false
+    t.integer  "skill_id"
+  end
+
+  add_index "reviews", ["category_id"], :name => "index_posts_on_category_id"
+  add_index "reviews", ["kind"], :name => "index_posts_on_kind"
+  add_index "reviews", ["product_id"], :name => "index_posts_on_group_id"
+  add_index "reviews", ["skill_id"], :name => "index_posts_on_column_id"
+  add_index "reviews", ["user_id"], :name => "index_posts_on_user_id"
 
   create_table "roles", :force => true do |t|
     t.string   "name"
