@@ -1,4 +1,0 @@
-<%= simple_form_for @album, url: [@current_namespace, @album].flatten, validate: true, remote: true, :html => {:class => 'form-horizontal', id: 'album-form', data: {type: "script"}} do |f| %>
-  <%= f.input :name, label: '名称' %>
-  <%= f.submit value: '创建', class: 'btn btn-primary', disable_with: "正在提交..." %>
-<% end %>

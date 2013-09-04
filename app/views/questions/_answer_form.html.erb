@@ -1,8 +1,0 @@
-<h4>我来回答</h4>
-<%= simple_form_for [@question, @answer], :validate => true, :html => {:class => 'form-horizontal'} do |f| %>
-  <% @answer.errors.full_messages.each do |msg| %>
-      <p><%= msg %></p>
-    <% end %>
-    <%= f.input :body, as: :kindeditor, label: false, input_html: {simple_mode: true, width: 500, height: 200 }, :validate => {presence: true}  %>
-    <%= f.submit disable_with: "正在提交...", class: 'btn btn-primary' %>
-<% end %>

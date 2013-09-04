@@ -1,6 +1,0 @@
-<h4 class='border clearfix'>标签分类</h4>
-<ul>
-  <%- @current_group.owned_tags.each do |tag| %>
-    <li><%= link_to tag.name, group_group_posts_path(@current_group, tag: tag.name) %></li>
-  <% end %>
-</ul>

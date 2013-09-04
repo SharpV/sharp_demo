@@ -1,7 +1,0 @@
-<h4 class='border'></h4>
-<%= simple_form_for Comment.new, remote: true, validate: true, :html => {id: 'comment-form', data: {type: "script"}} do |f| -%> 
-    <%= f.input :commentable_id, as: :hidden, input_html: {value: record.id} %>
-    <%= f.input :commentable_type, as: :hidden, input_html: {value: record.class.name} %>
-    <%= f.input :comment, as: :kindeditor, label: false, editor_id: 'comment_editor', input_html: {simple_mode: true, width: 550, height: 200 } %> 
-    <%= f.submit '回复', :class=>'btn btn-primary', disable_with: "正在提交..." %>
-<% end %>

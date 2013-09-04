@@ -1,3 +1,0 @@
-$('#albums').append("<%= escape_javascript render('shared/albums/album', album: @album) %>");
-$('#album-<%= @album.id %>').effect("highlight", {}, 2000);
-$('#album-form').trigger('reset');

@@ -1,7 +1,0 @@
-<tr id='album-<%= album.id %>'>
-  <td><%= album.name %></td>
-  <td>
-    <%= link_to "编辑", [:edit, @current_namespace, album].flatten, remote: true, data: {type: 'script'}, class: 'btn btn-small btn-info span' %>
-    <%= link_to "删除", [@current_namespace, album].flatten, method: :delete, remote: true, data: {type: 'script'}, confirm: "是否确定删除 #{album.name}", class: 'btn btn-small btn-danger span' %>
-  </td>
-</tr>

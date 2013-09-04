@@ -1,7 +1,0 @@
-<td><%= section.title %></td>
-<td><%= format_time section.start_at %></td>
-<td><%= format_time section.end_at %></td>
-<td>
-  <%= link_to '修改', [:edit, :group, @current_group, section], remote: true, data: {type: "script"} %>
-  <%= link_to '删除', [:group, @current_group, section], remote: true, method: :delete, data: {type: "script"} %>
-</td>

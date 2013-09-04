@@ -1,7 +1,0 @@
-<h1><%= link_to(enki_config[:title], '/') %></h1>
-<% if flash[:error] %><p><%= flash[:error] %></p><% end %>
-<%= form_tag(admin_session_path) do -%>
-  <h2>请输入管理密码</h2>
-  <p><%= password_field_tag 'login' %></p>
-  <p><%= submit_tag("Login") %></p>
-<% end -%>

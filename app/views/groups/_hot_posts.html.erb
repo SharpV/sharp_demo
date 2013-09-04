@@ -1,9 +1,0 @@
-<h4 class='border'>热点话题</h4>
-<ul>
-  <%- @hot_topics.each do |post| %>
-    <li class='dashed'>
-      <span class="badge badge-info"><%= post.comments_count %></span>
-      <%= link_to post.title, [:group, post.group, post] %>
-    </li>
-  <% end %>
-</ul>
