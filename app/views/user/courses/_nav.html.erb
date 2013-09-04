@@ -1,7 +1,0 @@
-<%= tabs_tag(:namespace => :course_nav, :open_tabs => {:class => "nav nav-tabs" }, :builder => MenuTabBuilder) do |tab| %>
-  <%= tab.index '我的课程', me_courses_path %>
-  <%= tab.manage '我创建的课程', admin_me_courses_path %>
-  <%= link_to '创建课程', new_me_course_path, :class => 'btn btn-success pull-right span' %>
-<% end %>
-
-

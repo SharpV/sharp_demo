@@ -1,9 +1,0 @@
-<%= simple_form_for(current_user, url: user_user_setting_path(current_user, current_user), validate: true) do |f| %>
-  <%= f.error_notification %>
-
-  <%= f.input :nickname, :required => true, label: '真实姓名' %>
-  <%= f.input :avatar, label: '头像' %>
-  <%= f.input :description, label: '一句话介绍自己' %>
-  <%= f.button :submit, "更新", class: 'btn btn-primary', disable_with: '更新中...' %>
-
-<% end %>

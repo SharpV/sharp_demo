@@ -1,6 +1,0 @@
-<%= tabs_tag(:namespace => :user_activities_nav, :open_tabs => { :id => "activity_nav", :class => "nav nav-tabs" }, :builder => MenuTabBuilder) do |tab| %>
-  <%= tab.followings_activities raw("好友动态"), [:activities, :user, current_user, :followings] %>
-  <%= tab.activities raw("我的动态"), [:user, current_user, :activities] %>
-  <%= tab.followings raw("我关注的人"), [:user, current_user, :followings] %>
-  <%= tab.followers raw("关注我的人"), [:user, current_user, :followers] %>
-<% end %>

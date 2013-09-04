@@ -1,8 +1,0 @@
-<%= tabs_tag(:namespace => :setting_nav, :open_tabs => {:class => "nav nav-tabs" }, :builder => MenuTabBuilder) do |tab| %>
-  <%= tab.basic "基本信息", [@current_namespace, :settings].flatten %>
-  <%= tab.password '修改密码', [@current_namespace, :passwords].flatten %>
-  <%= tab.certification "申请认证", [@current_namespace, :certifications].flatten %>
-<% end %>
-
-<br />
-<br />
