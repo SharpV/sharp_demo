@@ -35,7 +35,10 @@ namespace :demo do
               third_category_page.css('.catItem').each do |product_box|
                 product_link = product_box.at('a.catImg')
                 product_page = open_link(index + product_link['href'])
-                product = Product.where(name: product_page.at('#prodName').content).first_or_create(description: product_page.at('#prodDesc').content)
+                price = product_page.at('#divPrice').content.match(/\d+.\d/).to_s.to_f
+                recommend = product_page.at("span[itemprop='ratingValue']").content
+                pic_url = product_page.at("#divMainImg img").src
+                product = Product.where(name: product_page.at('#prodName').content).first_or_create(description: product_page.at('#prodDesc').content, category_id: third_category.id, price: price )
               end
             end
           end
