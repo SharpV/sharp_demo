@@ -6,7 +6,7 @@ class HomeController < ApplicationController
   #set_tab :timeline, :user_timeline_menus
   
   def index
-    @products = Product.includes(:category).order('created_at desc').page params[:page]
+    @products = Product.display.includes(:category).order('created_at desc').page params[:page]
   end
     
 end

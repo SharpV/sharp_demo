@@ -10,6 +10,9 @@ class Product < ActiveRecord::Base
   has_many :product_images
   has_many :product_manuals
 
+
+  scope :display, where("category_id is not null")
+
   def catelog
     str = ""
     return str unless category

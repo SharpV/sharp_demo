@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130906123836) do
+ActiveRecord::Schema.define(:version => 20130906124838) do
 
   create_table "categories", :force => true do |t|
     t.string  "name"
@@ -58,6 +58,7 @@ ActiveRecord::Schema.define(:version => 20130906123836) do
     t.string   "file_content_type"
     t.integer  "file_file_size"
     t.datetime "file_updated_at"
+    t.string   "name"
   end
 
   add_index "product_manuals", ["product_id"], :name => "index_manuals_on_product_id"

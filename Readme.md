@@ -1,6 +1,6 @@
 ### Get Start
 
-1、Go to Rails Root Dir
+1、Go to Rails Root Dir, You can run the code directly by `ruby lib/crawler/boot.rb lowes.ca`
 
 2、sudo bluepill load lib/crawler/config.pill 
 
