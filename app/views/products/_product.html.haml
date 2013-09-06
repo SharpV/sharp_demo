@@ -1,0 +1,7 @@
+.content
+  %h4= 'Manuals'
+  - @product.product_manuals.each do |manual|
+    .pull-left= link_to manual.name, manual.file.url
+  %h4= 'Images'
+  - @product.product_images.each do |image|
+    .pull-left= image_tag image.file.url

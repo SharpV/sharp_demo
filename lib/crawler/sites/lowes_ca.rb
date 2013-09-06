@@ -9,6 +9,7 @@ module Crawler
         raise
       rescue Exception => e
         CrawlerLogger.error "#{e.inspect}"
+        CrawlerLogger.error "Backtrace:\n\t#{e.backtrace.join("\n\t")}"
       end
 
       def start
@@ -39,20 +40,25 @@ module Crawler
             end
           rescue Exception => e
             CrawlerLogger.error "#{e.inspect}"
+            CrawlerLogger.error "Backtrace:\n\t#{e.backtrace.join("\n\t")}"
           end
         end
       end
 
       def load_product_page(category, link)
+        return if CrawlerMeta.where(url: link, status: 2).first
         product_page = open_link(link)
         price = product_page.at('#divPrice').content.match(/\d+.\d/).to_s.to_f
         #recommend = product_page.at("span[itemprop='ratingValue']").content
         #pic_url = product_page.at("#divMainImg img")['src']
-
         product = Product.where(name: product_page.at('#prodName').content).first_or_create(description: product_page.at('#prodDesc').content, category_id: category.id)        
         load_recommended_product(product, product_page)
         load_coordinating_product(product, product_page)
         load_related_product(product, product_page)
+        product.price = price
+        if product.save
+          CrawlerMeta.create url: link, status: 2
+        end
       end 
 
       def load_product_reviews(product, product_page)
@@ -77,8 +83,10 @@ module Crawler
           recommend_product = Product.where(name: product_box.at('img')['alt']).first_or_create
           ids << recommend_product.id
         end
-        product.recommended_items = ids.to_json
+
+        product.recommended_items = ids
         product.save
+        
       end
 
       def load_coordinating_product(product, product_page, ids=[])
