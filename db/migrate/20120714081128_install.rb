@@ -26,7 +26,7 @@ class Install < ActiveRecord::Migration
       t.datetime "created_at",                                                      :null => false
       t.datetime "updated_at",                                                      :null => false
       t.text     "recommended_items"
-      t.text     "additional_info"
+      t.text     "related_items"
       t.text     "coordinating_items"
       t.decimal  "price",              :precision => 8, :scale => 2
       t.integer  "reviews_count",                                    :default => 0

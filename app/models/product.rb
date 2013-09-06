@@ -3,12 +3,11 @@ class Product < ActiveRecord::Base
   belongs_to :category
   has_many :reviews
 
-  serialize :recommended_items, JSON
-  serialize :coordinating_items, JSON
-  serialize :additional_info, JSON
+  serialize :recommended_items, Array
+  serialize :coordinating_items, Array
+  serialize :additional_info, Array
 
   has_many :product_images
-
   has_many :product_manuals
 
   def catelog

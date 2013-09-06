@@ -4,14 +4,12 @@ module Crawler
       Index = 'http://www.lowes.ca'
 
       def load
-        #product_url = 'http://www.lowes.ca/wall-mount-bathroom-sinks/cantrio-koncepts-ps-009-ceramic-series-vitreous-china-hung-wall-mount-bathroom-sink_g417194.html?isku=3970286&linkloc=cataLogProductItemsImage'
-        #category = Category.first
-        #load_product_page(category, product_url)
         start
       rescue SystemExit, Interrupt
         raise
       rescue Exception => e
         CrawlerLogger.error "#{e.inspect}"
+        CrawlerLogger.error "Backtrace:\n\t#{e.backtrace.join("\n\t")}"
       end
 
       def start
@@ -42,19 +40,26 @@ module Crawler
             end
           rescue Exception => e
             CrawlerLogger.error "#{e.inspect}"
+            CrawlerLogger.error "Backtrace:\n\t#{e.backtrace.join("\n\t")}"
           end
         end
       end
 
       def load_product_page(category, link)
+        return if CrawlerMeta.where(url: link, status: 2).first
         product_page = open_link(link)
         price = product_page.at('#divPrice').content.match(/\d+.\d/).to_s.to_f
-        product = Product.where(name: product_page.at('h1#prodName').content).first_or_create(description: product_page.at('#prodDesc').content, category_id: category.id, price: price)
-        #load_recommended_product(product, product_page)
-        #load_coordinating_product(product, product_page)
+        product_params = {description: product_page.at('#prodDesc').content,  price: price}
+        product = Product.where(name: product_page.at('h1#prodName').content).first_or_create(product_params)
+        load_recommended_product(product, product_page)
+        load_coordinating_product(product, product_page)
         load_additional_info(product, product_page)
-        #load_product_manuals(product, product_page)
-        #load_product_reviews(product, product_page)
+        load_product_reviews(product, product_page)
+        load_product_manuals(product, product_page)
+        load_product_images(product, product_page)
+        if product.save
+          CrawlerMeta.create url: link, status: 2
+        end
       end 
 
       def load_product_reviews(product, product_page)
@@ -96,6 +101,14 @@ module Crawler
           product_img.file = open(img_url)
           product_img.save
         end
+        if ProductImage.find_all_by_product_id(product.id).size == 0
+          product_img = ProductImage.new
+          product_img.product_id = product.id
+          product_img.file = open('http:' + product_page.at("#divMainImg img")['src'])
+          product_img.save
+        end
+      rescue Exception => e
+        CrawlerLogger.error "opps.........#{e.inspect}"
       end
 
       def load_product_manuals(product, product_page)
@@ -105,6 +118,8 @@ module Crawler
           manual.file = open(pdf_link['href'])
           manual.save
         end
+      rescue Exception => e
+        CrawlerLogger.error "opps.........#{e.inspect}"
       end
 
       def load_recommended_product(product, product_page, ids=[])
@@ -112,20 +127,17 @@ module Crawler
           recommend_product = Product.where(name: product_box.at('img')['alt']).first_or_create
           ids << recommend_product.id
         end
-        product.recommended_items = ids.to_json
-        product.save
+        product.update_attributes(recommended_items: ids) unless ids.blank?
       end
 
       def load_coordinating_product(product, product_page, ids=[])
-        p product.inspect
         product_page.css('.gutOut .gb6 .cfl').each do |product_box|
           pro_link = product_box.at('a[class="tBox l"]')['href']
           c_p = open_link(Index + pro_link)
           coordinating_product = Product.where(name: c_p.at('h1#prodName').content).first_or_create
           ids << coordinating_product.id
         end
-        product.coordinating_items = ids.to_json
-        product.save
+        product.update_attributes(coordinating_items: ids) unless ids.blank?
       end
 
       def load_additional_info(product, product_page, additional_infos=[])
@@ -136,24 +148,8 @@ module Crawler
           end
           additional_infos << arr_temp
         end
-        product.additional_info = additional_infos.to_json
-        product.save
+        product.update_attributes(additional_info: additional_infos) unless additional_infos.blank?
       end
-
-      private
-
-      def file_from_url(url)
-        extname = File.extname(url)
-        basename = File.basename(url, extname)
-        file = Tempfile.new([basename, extname])
-        file.binmode
-        open(url) do |data|
-          file.write data.read
-        end
-        file.rewind
-        file
-      end
-
     end
   end
 end

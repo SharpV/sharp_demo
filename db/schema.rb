@@ -11,15 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130906062400) do
-
-  create_table "categories", :force => true do |t|
-    t.string  "name"
-    t.integer "lft"
-    t.integer "parent_id"
-    t.integer "depth",     :default => 0
-    t.integer "rgt"
-  end
+ActiveRecord::Schema.define(:version => 20130906101002) do
 
   create_table "active_admin_comments", :force => true do |t|
     t.string   "resource_id",   :null => false
@@ -123,14 +115,11 @@ ActiveRecord::Schema.define(:version => 20130906062400) do
 
   create_table "categories", :force => true do |t|
     t.string  "name"
-    t.integer "parent_id"
-    t.integer "children_count", :default => 0
     t.integer "lft"
+    t.integer "parent_id"
+    t.integer "depth",     :default => 0
     t.integer "rgt"
-    t.integer "depth"
   end
-
-  add_index "categories", ["parent_id"], :name => "index_categories_on_user_id"
 
   create_table "cities", :force => true do |t|
     t.integer  "province_id",                  :null => false
@@ -445,11 +434,11 @@ ActiveRecord::Schema.define(:version => 20130906062400) do
     t.integer  "category_id"
     t.datetime "created_at",                                                      :null => false
     t.datetime "updated_at",                                                      :null => false
-    t.text     "recommended_items"
-    t.text     "related_items"
-    t.text     "coordinating_items"
     t.decimal  "price",              :precision => 8, :scale => 2
     t.integer  "reviews_count",                                    :default => 0
+    t.string   "recommended_items"
+    t.string   "coordinating_items"
+    t.string   "additional_info"
   end
 
   add_index "products", ["category_id"], :name => "index_products_on_category_id"
