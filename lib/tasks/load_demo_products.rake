@@ -15,10 +15,6 @@ namespace :demo do
       Category.delete_all
     end
     
-    
-      end
-    end
-    
     def open_link(link)
       puts "open link #{link}..."
       Nokogiri::HTML(open(link))
