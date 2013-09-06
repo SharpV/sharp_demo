@@ -57,6 +57,7 @@ module Crawler
         load_product_reviews(product, product_page)
         load_product_manuals(product, product_page)
         load_product_images(product, product_page)
+        product.category = category
         if product.save
           CrawlerMeta.create url: link, status: 2
         end
@@ -98,13 +99,7 @@ module Crawler
           img_url = 'http:' + img['src'].gsub('/t/','/x/')
           product_img = ProductImage.new
           product_img.product_id = product.id
-          product_img.file = open(img_url)
-          product_img.save
-        end
-        if ProductImage.find_all_by_product_id(product.id).size == 0
-          product_img = ProductImage.new
-          product_img.product_id = product.id
-          product_img.file = open('http:' + product_page.at("#divMainImg img")['src'])
+          product_img.image = open(img_url)
           product_img.save
         end
       rescue Exception => e

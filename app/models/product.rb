@@ -11,6 +11,13 @@ class Product < ActiveRecord::Base
   has_many :product_manuals
 
   def catelog
-    category.parent.parent.name + "/" +  category.parent.name + "/" + category.name
+    str = ""
+    return str unless category
+    if category.parent and category.parent.parent
+      str += category.parent.parent.name + "/" 
+    end
+    if category.parent  
+      str +=  category.parent.name + "/" + category.name
+    end
   end
 end

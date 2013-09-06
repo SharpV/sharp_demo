@@ -1,11 +1,11 @@
 development:
   adapter: postgresql
   encoding: utf8
-  database: sharp_k12_development
+  database: app
   pool: 5
   host: 127.0.0.1
-  username: frank
-  password: frank123
+  username: postgres
+  password: 123456
 
 
 # Warning: The database defined as "test" will be erased and

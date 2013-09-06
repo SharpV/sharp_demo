@@ -19,7 +19,6 @@ require_rel 'sites/**/*.rb'
 
 CrawlerLogger = Logger.new("#{RailsRoot}/log/crawler.log")
 
-ActiveRecord::Base.logger = CrawlerLogger
 ActiveRecord::Base.configurations = YAML::load(IO.read("#{RailsRoot}/config/database.yml"))
 ActiveRecord::Base.establish_connection(RailsEnv)
 

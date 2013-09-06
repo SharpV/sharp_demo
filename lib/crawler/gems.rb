@@ -6,7 +6,7 @@ require 'mini_magick'
 require 'open-uri'
 require 'fileutils'
 require 'json'
-
+require 'sanitize'
 require "#{RailsRoot}/app/models/product.rb"
 require "#{RailsRoot}/app/models/product_image.rb"
 require "#{RailsRoot}/app/models/category.rb"

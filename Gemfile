@@ -1,5 +1,5 @@
-#source 'http://ruby.taobao.org/'  
-source 'http://rubygems.org'
+source 'http://ruby.taobao.org/'  
+#source 'http://rubygems.org'
 
 gem 'rails', '~> 3.2.13'
 gem "therubyracer", "0.10.2", :require => 'v8'
@@ -73,7 +73,7 @@ gem 'redis-rack'
 gem 'redis-rack-cache'
 gem 'resque'
 gem 'settingslogic'
-gem 'ruby_parser'
+gem 'unicorn'
 
 group :test, :development do
   gem "rspec-rails", "~> 2.12.0"

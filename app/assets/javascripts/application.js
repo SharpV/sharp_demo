@@ -10,7 +10,6 @@
 //= require lazybox
 //= require rails.validations
 //= require rails.validations.simple_form
-//= require sco/js/sco.tooltip
 //= bootstrap-dropdown
 //= require rails-timeago
 //= require locales/jquery.timeago.zh-CN.js
