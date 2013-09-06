@@ -9,7 +9,7 @@ require 'logger'
 require 'pg'
 require 'optparse'
 require 'pp'
-require 'require_all' 
+require 'require_all'
 
 require_rel 'gems', 'site'
 require_rel 'sites/**/*.rb' 

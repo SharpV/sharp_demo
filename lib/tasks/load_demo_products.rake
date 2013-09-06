@@ -1,4 +1,4 @@
-#encoding: utf-8 
+#encoding: utf-8
 require 'rubygems'
 require 'nokogiri'
 require 'open-uri'
@@ -14,10 +14,6 @@ namespace :demo do
       Product.delete_all
       Category.delete_all
     end
-    
-    def open_link(link)
-      puts "open link #{link}..."
-      Nokogiri::HTML(open(link))
-    end
   end
 end
+
