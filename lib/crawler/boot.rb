@@ -2,7 +2,7 @@
 
 
 RailsRoot = File.expand_path("../../../", __FILE__)
-RailsEnv = ENV['RAILS_ENV'] || 'development'
+RailsEnv = ARGV[1] || 'development'
 
 require 'active_record'
 require 'active_support'
