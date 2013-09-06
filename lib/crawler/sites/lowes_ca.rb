@@ -64,7 +64,12 @@ module Crawler
       end
 
       def load_product_manuals(product, product_page)
-
+        product_page.css('#Main_productPage_manuals .advSpecLink').each do |pdf_link|
+          manual = ProductManual.where(name: Sanitize.clean(pdf_link.content), product_id: product.id).first_or_create
+          manual.cover = open(pdf_link.at('img')['src'])
+          manual.file = open(pdf_link['href'])
+          manual.save
+        end
       end
 
       def load_recommended_product(product, product_page, ids=[])

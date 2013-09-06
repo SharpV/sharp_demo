@@ -11,7 +11,7 @@ gem 'mini_magick'
 gem 'resque'
 gem 'pg'
 gem "rolify"
-gem 'rest_in_place'
+gem 'sanitize'
 gem 'acts-as-taggable-on'
 gem 'rails-i18n'
 gem 'rails_autolink'
@@ -40,9 +40,6 @@ gem "recaptcha", :require => "recaptcha/rails"
 gem 'whenever'
 gem 'bootstrap_form'
 gem 'uuid'
-
-gem 'activerecord-reputation-system'
-gem 'merit'
 gem 'make_voteable'
 gem 'wicked'
 gem 'lazybox', '~> 0.2.5'
