@@ -10,7 +10,7 @@
     - @products.each do |product|
       %tr
         %td
-          = link_to product.name, [:detail, product], remote: true, data: {type: 'script'}
+          = product.name
         %td= product.catelog
         %td= product.price
         %td{width: 160}
