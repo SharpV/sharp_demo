@@ -47,6 +47,7 @@ module Crawler
 
       def load_product_page(category, link)
         return if CrawlerMeta.where(url: link, status: 2).first
+        CrawlerLogger.info "load product page......"
         product_page = open_link(link)
         price = product_page.at('#divPrice').content.match(/\d+.\d/).to_s.to_f
         product_params = {description: product_page.at('#prodDesc').content,  price: price}
@@ -95,11 +96,11 @@ module Crawler
       end
 
       def load_product_images(product, product_page)
-        product_page.css("#divAltImg img").each do |img|
-          img_url = 'http:' + img['src'].gsub('/t/','/x/')
+        product_page.css("#divMainImg img").each do |img|
+          img_url = img['src'].gsub('/t/','/x/').gsub(/http:/, '')
           product_img = ProductImage.new
           product_img.product_id = product.id
-          product_img.image = open(img_url)
+          product_img.image_url = 'http:' + img_url
           product_img.save
         end
       rescue Exception => e
@@ -110,8 +111,8 @@ module Crawler
       def load_product_manuals(product, product_page)
         product_page.css('#Main_productPage_manuals .advSpecLink').each do |pdf_link|
           manual = ProductManual.where(name: Sanitize.clean(pdf_link.content), product_id: product.id).first_or_create
-          manual.cover = open('http:' + pdf_link.at('img')['src'])
-          manual.file = open(pdf_link['href'])
+          manual.cover_url = 'http:' + pdf_link.at('img')['src']
+          manual.file_url = pdf_link['href']
           manual.save
         end
       rescue Exception => e

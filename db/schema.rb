@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130906124838) do
+ActiveRecord::Schema.define(:version => 20130906133416) do
 
   create_table "categories", :force => true do |t|
     t.string  "name"
@@ -32,7 +32,7 @@ ActiveRecord::Schema.define(:version => 20130906124838) do
   add_index "crawler_meta", ["url"], :name => "index_crawler_meta_on_url"
 
   create_table "product_images", :force => true do |t|
-    t.string   "file"
+    t.string   "image_url"
     t.integer  "product_id"
     t.datetime "created_at",         :null => false
     t.datetime "updated_at",         :null => false
@@ -46,8 +46,8 @@ ActiveRecord::Schema.define(:version => 20130906124838) do
 
   create_table "product_manuals", :force => true do |t|
     t.integer  "product_id"
-    t.string   "file"
-    t.string   "cover"
+    t.string   "file_url"
+    t.string   "cover_url"
     t.datetime "created_at",         :null => false
     t.datetime "updated_at",         :null => false
     t.string   "cover_file_name"

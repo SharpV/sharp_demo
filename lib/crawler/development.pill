@@ -1,0 +1,19 @@
+BootFile = File.expand_path("boot.rb", File.dirname(__FILE__))
+RailsRoot = File.expand_path("../../", __FILE__)
+
+Bluepill.application("crawler") do |app|
+  ["lowes.ca"].each do |domain|
+    app.process(domain) do |process|
+      process.start_command = "ruby #{BootFile} #{domain} development"
+      process.pid_file = "/tmp/#{domain}.pid"
+      process.daemonize = true
+    end
+  end
+  app.process('load_file_job') do |process|
+    process.working_dir = "#{RailsRoot}"
+    process.start_command = "bundle exec rake demo:files:load"
+    process.pid_file = "/var/rake.pid"
+    process.stop_command = "kill -QUIT {{PID}}"
+    process.daemonize = true
+  end
+end
