@@ -1,5 +1,6 @@
 #!/usr/bin/env ruby
 
+
 RailsRoot = File.expand_path("../../../", __FILE__)
 RailsEnv = ENV['RAILS_ENV'] || 'development'
 

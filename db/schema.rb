@@ -11,7 +11,15 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130906014724) do
+ActiveRecord::Schema.define(:version => 20130906041127) do
+
+  create_table "categories", :force => true do |t|
+    t.string  "name"
+    t.integer "lft"
+    t.integer "parent_id"
+    t.integer "depth",     :default => 0
+    t.integer "rgt"
+  end
 
   create_table "crawler_meta", :force => true do |t|
     t.string   "url"

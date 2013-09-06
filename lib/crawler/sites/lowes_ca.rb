@@ -72,7 +72,7 @@ module Crawler
           recommend_product = Product.where(name: product_box.at('img')['alt']).first_or_create
           ids << recommend_product.id
         end
-        product.recommend_items = ids.to_json
+        product.recommended_items = ids.to_json
         product.save
       end
 

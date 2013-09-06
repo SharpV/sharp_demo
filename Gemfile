@@ -28,7 +28,7 @@ gem 'devise', '~> 2.2.2'
 gem 'acts_as_list'
 gem 'public_activity'
 gem "jquery-scrollto-rails"
-gem 'jack_up'
+gem 'bluepill'
 gem 'underscore-rails'
 gem 'rack-raw-upload'
 gem 'streamio-ffmpeg'
