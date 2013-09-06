@@ -11,7 +11,15 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130906014724) do
+ActiveRecord::Schema.define(:version => 20130906062400) do
+
+  create_table "categories", :force => true do |t|
+    t.string  "name"
+    t.integer "lft"
+    t.integer "parent_id"
+    t.integer "depth",     :default => 0
+    t.integer "rgt"
+  end
 
   create_table "active_admin_comments", :force => true do |t|
     t.string   "resource_id",   :null => false
@@ -426,6 +434,7 @@ ActiveRecord::Schema.define(:version => 20130906014724) do
     t.string   "file"
     t.datetime "created_at", :null => false
     t.datetime "updated_at", :null => false
+    t.string   "cover"
   end
 
   add_index "product_manuals", ["product_id"], :name => "index_manuals_on_product_id"

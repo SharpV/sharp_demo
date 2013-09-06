@@ -2,13 +2,12 @@ module Crawler
   module Sites
     class LowesCa < Site
       Index = 'http://www.lowes.ca'
-      FILE_DIR = "#{RailsRoot}/public/products"
 
       def load
         #product_url = 'http://www.lowes.ca/wall-mount-bathroom-sinks/cantrio-koncepts-ps-009-ceramic-series-vitreous-china-hung-wall-mount-bathroom-sink_g417194.html?isku=3970286&linkloc=cataLogProductItemsImage'
         #category = Category.first
         #load_product_page(category, product_url)
-        start()
+        start
       rescue SystemExit, Interrupt
         raise
       rescue Exception => e
@@ -52,8 +51,8 @@ module Crawler
         price = product_page.at('#divPrice').content.match(/\d+.\d/).to_s.to_f
         product = Product.where(name: product_page.at('h1#prodName').content).first_or_create(description: product_page.at('#prodDesc').content, category_id: category.id, price: price)
         #load_recommended_product(product, product_page)
-        load_coordinating_product(product, product_page)
-        #load_related_product(product, product_page)
+        #load_coordinating_product(product, product_page)
+        load_additional_info(product, product_page)
         #load_product_manuals(product, product_page)
         #load_product_reviews(product, product_page)
       end 
@@ -94,24 +93,17 @@ module Crawler
           img_url = 'http:' + img['src'].gsub('/t/','/x/')
           product_img = ProductImage.new
           product_img.product_id = product.id
-          puts img_url
-          product_img.file = file_from_url(img_url)
+          product_img.file = open(img_url)
           product_img.save
         end
       end
 
       def load_product_manuals(product, product_page)
-        begin
-          manual_link = product_page.at("#Main_productPage_manuals div.cBlock a")['href']
-          dir = FILE_DIR + '/pdf'
-          name = manual_link.split('/')[-1]
-          FileUtils.makedirs(dir) unless File.exists? dir
-          open(manual_link) do |data|
-            File.open("#{dir}/#{name}", 'wb'){|f| f.write data.read}
-          end
-          ProductManual.create(product_id: product.id, file: "/products/pdf/#{name}")
-        rescue Exception => e
-          CrawlerLogger.error "Product Manual doesn't exist---#{e.inspect}"
+        product_page.css('#Main_productPage_manuals .advSpecLink').each do |pdf_link|
+          manual = ProductManual.where(name: Sanitize.clean(pdf_link.content), product_id: product.id).first_or_create
+          manual.cover = open(pdf_link.at('img')['src'])
+          manual.file = open(pdf_link['href'])
+          manual.save
         end
       end
 
@@ -132,11 +124,20 @@ module Crawler
           coordinating_product = Product.where(name: c_p.at('h1#prodName').content).first_or_create
           ids << coordinating_product.id
         end
-        product.update_attributes({coordinating_items: ids.to_json})
+        product.coordinating_items = ids.to_json
+        product.save
       end
 
-      def load_related_product(product, product_page, ids=[])
-
+      def load_additional_info(product, product_page, additional_infos=[])
+        product_page.css("#Main_productPage_pnlExtraData div.gb24 table tr").each do |additional_info_body|
+          arr_temp = []
+          additional_info_body.css('td').each do |a_i|
+            arr_temp << a_i.content
+          end
+          additional_infos << arr_temp
+        end
+        product.additional_info = additional_infos.to_json
+        product.save
       end
 
       private

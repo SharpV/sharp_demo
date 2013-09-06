@@ -5,7 +5,11 @@ class Product < ActiveRecord::Base
 
   serialize :recommended_items, JSON
   serialize :coordinating_items, JSON
-  serialize :related_items, JSON
+  serialize :additional_info, JSON
+
+  has_many :product_images
+
+  has_many :product_manuals
 
   def catelog
     category.parent.parent.name + "/" +  category.parent.name + "/" + category.name

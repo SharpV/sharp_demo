@@ -1,6 +1,10 @@
-.table
-  - @products.each do |product|
-    %tr
-      %td= product.name
-      %td= product.catelog
-      %td= product.created_at
+.content
+  %h4= "Product List (#{Product.count})"
+  %table.table
+    - @products.each do |product|
+      %tr
+        %td= product.name
+        %td= product.catelog
+        %td{width: 160}
+          = timeago_tag product.created_at, :nojs => true
+  = paginate @products

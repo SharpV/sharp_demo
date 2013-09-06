@@ -12,11 +12,7 @@ html, body, p, table, dl, ul, section{
 }
 
 body{
-    background-image: url("/assets/bg.jpg");
-    background-position: center center;
-    background-repeat: repeat;
     position: relative;
-    background-color: #DEDDE3;
     padding-top: 50px; 
 }
 
@@ -66,16 +62,6 @@ table td{
 #header{
     padding-left: 7px;
     padding-right: 7px;
-}
-
-#user-page, #index-page, #group-page {
-    background-color: #F6F6F6;
-    background-image: -moz-linear-gradient(center bottom , rgba(0, 0, 0, 0.1) 0%, rgba(255, 255, 255, 0.1) 100%);
-    border-bottom: 1px solid #8A94A0;
-    border-radius: 5px 5px 0 0;
-    box-shadow: 0 4px 4px rgba(0, 0, 0, 0.11);
-    min-height: 520px;
-    padding: 7px;
 }
 
 .feature .tile{

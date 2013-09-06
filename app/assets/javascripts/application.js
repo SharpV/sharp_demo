@@ -5,10 +5,8 @@
 // the compiled file.
 //
 //= require jquery
-//= require jquery-ui
 //= require jquery_ujs
 //= require twitter/bootstrap
-//= require kindeditor
 //= require lazybox
 //= require rails.validations
 //= require rails.validations.simple_form

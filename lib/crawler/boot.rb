@@ -1,5 +1,6 @@
 #!/usr/bin/env ruby
 
+
 RailsRoot = File.expand_path("../../../", __FILE__)
 RailsEnv = ENV['RAILS_ENV'] || 'development'
 
@@ -10,8 +11,10 @@ require 'pg'
 require 'optparse'
 require 'pp'
 require 'require_all'
+require File.expand_path('../gems', __FILE__)
+require File.expand_path('../site', __FILE__)
 
-require_rel 'gems', 'site'
+
 require_rel 'sites/**/*.rb' 
 
 CrawlerLogger = Logger.new("#{RailsRoot}/log/crawler.log")

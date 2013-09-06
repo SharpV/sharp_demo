@@ -3,13 +3,12 @@ class Install < ActiveRecord::Migration
     create_table "manuals", :force => true do |t|
       t.integer  "product_id"
       t.string   "file"
+      t.string   "cover"
       t.datetime "created_at", :null => false
       t.datetime "updated_at", :null => false
     end
   
     add_index "manuals", ["product_id"], :name => "index_manuals_on_product_id"
-  
-  
   
     create_table "product_images", :force => true do |t|
       t.string   "file"
@@ -27,7 +26,7 @@ class Install < ActiveRecord::Migration
       t.datetime "created_at",                                                      :null => false
       t.datetime "updated_at",                                                      :null => false
       t.text     "recommended_items"
-      t.text     "related_items"
+      t.text     "additional_info"
       t.text     "coordinating_items"
       t.decimal  "price",              :precision => 8, :scale => 2
       t.integer  "reviews_count",                                    :default => 0
