@@ -46,7 +46,7 @@ module Crawler
       end
 
       def load_product_page(category, link)
-        return if CrawlerMeta.where(url: link, status: 2).first
+        return if CrawlerMeta.where(url: link, status: CrawlerMeta::STATUS[:HAVE_SYN]).first
         CrawlerLogger.info "load product page......"
         product_page = open_link(link)
         price = product_page.at('#divPrice').content.match(/\d+.\d/).to_s.to_f
@@ -60,7 +60,7 @@ module Crawler
         load_product_images(product, product_page)
         product.category = category
         if product.save
-          CrawlerMeta.create url: link, status: 2
+          CrawlerMeta.create url: link, status: CrawlerMeta::STATUS[:HAVE_SYN], product_id: product.id
         end
       end 
 
@@ -96,12 +96,17 @@ module Crawler
       end
 
       def load_product_images(product, product_page)
-        product_page.css("#divMainImg img").each do |img|
-          img_url = img['src'].gsub('/t/','/x/').gsub(/http:/, '')
-          product_img = ProductImage.new
-          product_img.product_id = product.id
-          product_img.image_url = 'http:' + img_url
-          product_img.save
+        scorll_imgs = product_page.css("#altImageScrollbar .altImg img")
+        if scorll_imgs and scorll_imgs.size > 0
+          scorll_imgs.each do |img|
+            img_url = img['src'].gsub('/t/','/x/').gsub(/http:/, '')
+            ProductImage.create!(product_id: product.id, image_url: 'http:'+img_url)
+          end
+        else
+          product_page.css("#divMainImg img").each do |img|
+            img_url = img['src'].gsub('/t/','/x/').gsub(/http:/, '')
+            ProductImage.create!(product_id: product.id, image_url: 'http:'+img_url)
+          end
         end
       rescue Exception => e
         CrawlerLogger.error e.inspect

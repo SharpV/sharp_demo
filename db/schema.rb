@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130906133416) do
+ActiveRecord::Schema.define(:version => 20130909070818) do
 
   create_table "categories", :force => true do |t|
     t.string  "name"
@@ -26,6 +26,7 @@ ActiveRecord::Schema.define(:version => 20130906133416) do
     t.integer  "status"
     t.datetime "created_at", :null => false
     t.datetime "updated_at", :null => false
+    t.integer  "product_id"
   end
 
   add_index "crawler_meta", ["status"], :name => "index_crawler_meta_on_status"
