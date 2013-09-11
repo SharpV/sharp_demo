@@ -9,3 +9,7 @@
 4、sudo bluepill start/stop/restart lowes.ca
 
 5、view log in log/crawler.log, you can quit bluepill by `sudo bluepill quit`, and reload the config.
+
+### For New Requirement
+
+Go to Rails root dir, run 'rake demo:new:load zipcode=90019', you can change the zip code.
