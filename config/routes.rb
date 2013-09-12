@@ -16,6 +16,9 @@ SharpLink::Application.routes.draw do
     member do
       get :detail
     end
+    collection do
+      get :zip_code, :get_images
+    end
   end
   
   root :to => 'home#index'

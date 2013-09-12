@@ -8,5 +8,5 @@ class HomeController < ApplicationController
   def index
     @products = Product.display.includes(:category).order('created_at desc').page params[:page]
   end
-    
+
 end

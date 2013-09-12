@@ -12,4 +12,4 @@
 
 ### For New Requirement
 
-Go to Rails root dir, run 'rake demo:new:load zipcode=90019', you can change the zip code.
+Go to Rails root dir, run `rake demo:new:load zipcode=90019`, you can change the zip code.

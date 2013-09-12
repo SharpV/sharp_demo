@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130909070818) do
+ActiveRecord::Schema.define(:version => 20130912064658) do
 
   create_table "categories", :force => true do |t|
     t.string  "name"
@@ -176,5 +176,18 @@ ActiveRecord::Schema.define(:version => 20130909070818) do
   add_index "votings", ["voteable_type", "voteable_id", "voter_type", "voter_id"], :name => "unique_voters", :unique => true
   add_index "votings", ["voteable_type", "voteable_id"], :name => "index_votings_on_voteable_type_and_voteable_id"
   add_index "votings", ["voter_type", "voter_id"], :name => "index_votings_on_voter_type_and_voter_id"
+
+  create_table "zip_images", :force => true do |t|
+    t.string   "zipcode"
+    t.string  "image_url"
+    t.string   "image_file_name"
+    t.string   "image_content_type"
+    t.integer  "image_file_size"
+    t.datetime "image_updated_at"
+    t.datetime "created_at",         :null => false
+    t.datetime "updated_at",         :null => false
+  end
+
+  add_index "zip_images", ["zipcode"], :name => "index_zip_images_on_zipcode"
 
 end

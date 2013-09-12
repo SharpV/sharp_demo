@@ -1,0 +1,3 @@
+- @zip_images.each do |zi|
+  -  if zi.image and zi.image_url.blank?
+    %image.img-polaroid{src: zi.image}

@@ -24,9 +24,9 @@ namespace :demo do
       uri = INDEX + "getpromotionpages.aspx?campaignid=e3ee194dc40221d8&storeid=#{storeid}&promotionid=#{promotionid}&pageimagewidth=740&languageid=1"
       ads = open_uri_and_return_json(uri)
       ads["content"]["collection"][0]["data"].each do |ad|
-        p ad["imageurl"]
-        #TODO: save the images to disk
+        ZipImage.create(image_url: ad["imageurl"], zipcode: ENV['zipcode'])
       end
+      ZipImage.create(image_url: "exit_flag", zipcode: ENV['zipcode'])
     end
 
     def get_store_info
